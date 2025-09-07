@@ -20,7 +20,7 @@ jobs:
 
       - name: Install Jekyll and dependencies
         run: |
-          gem install jekyll bundler jekyll-minima jekyll-feed jekyll-remote-theme
+          gem install jekyll bundler jekyll-feed jekyll-remote-theme
 
       - name: Build Jekyll site
         run: jekyll build
