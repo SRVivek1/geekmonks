@@ -1,0 +1,20 @@
+# Ignore Jekyll build artifacts
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ignore Ruby dependencies and temporary files
+Gemfile.lock
+vendor/
+.bundle/
+
+# Ignore a few common OS files
+.DS_Store
+.vscode/
+
+# Ignore custom log files or other files you might create locally
+# /some_log_file.log
+
+# other files
+nohup.out
