@@ -11,9 +11,18 @@ exclude:
   - node_modules
   - vendor
 
+
+# Relse config
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+
 # Tell Jekyll not to use a theme
 # This is crucial for builds to work with your custom layout.
 theme: null
+
 
 # 
 collections:
