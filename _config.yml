@@ -14,3 +14,24 @@ exclude:
 # Tell Jekyll not to use a theme
 # This is crucial for builds to work with your custom layout.
 theme: null
+
+# 
+collection:
+  authors:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "authors"
+    values:
+      layout: "author"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
