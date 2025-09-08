@@ -40,10 +40,24 @@
 * e.g. - Create your first post at ***_posts/2018-08-20-bananas.md***.
 
 
-## index\.md / index.html
+## index\.md / index.html:
 * intial file to load by default.
 
 
-## 
+## Configuration [_config.yml]:
+* Jekyll configuration happens in a file called _config.yml (by default).
+* Create _config.yml in the root.
 
+### Collection:
+  * To set up a collection you need to tell Jekyll about it.
+  * _config.yml:
+    ```yml 
+        collections:
+          authors:
+            output: true
+    ```
+  * Documents (the items in a collection) live in a folder in the root of the site named **_*collection_name***. 
+    * In this case, **_authors**.
+  * By default, collections do not output a page for documents. 
+  * In this case we want each author to have their own page so let’s tweak the collection configuration.
 
