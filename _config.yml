@@ -16,7 +16,7 @@ exclude:
 theme: null
 
 # 
-collection:
+collections:
   authors:
     output: true
 
