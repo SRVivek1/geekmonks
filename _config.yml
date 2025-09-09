@@ -4,12 +4,17 @@ email: no-reply@geekmonks.com
 description: >- # this means to ignore newlines until "baseurl:"
   Learn, share and grow together.
 
-
 # By using `site.baseurl` in your navigation links, you ensure that all URLs are correctly 
 # prefixed for your GitHub Pages site. This also makes your project more portable if you 
 # ever decide to host it somewhere else.
 baseurl: "/geekmonks"
 
+# The base hostname & protocol for your site, e.g. http://example.com
+url: "https://www.google.com/search?q=https://srvivek1.github.io/geekmonks/"
+
+# This sets your URL structure.
+# 023-10-27-getting-started-with-jekyll.md --> https://your-blog-domain.com/getting-started-with-jekyll/
+permalink: /:title/ 
 
 
 # Exclude from processing

@@ -1,5 +1,12 @@
 <nav>
   {% for item in site.data.navigation %}
-    <a href="{{ item.link | relative_url }}"{% if page.url == item.link %} class="current"{% endif %}>{{ item.name }}</a>
+  {% assign current_url = page.url | remove: 'index.html' %}
+  {% assign item_link_with_slash = item.link | append: '/' %}
+  <a href="{{ item.link | relative_url }}"
+     {% if page.url == item.link or page.url == item_link_with_slash %}
+     class="current"
+     {% endif %}>
+      {{ item.name }}
+  </a>
   {% endfor %}
 </nav>
