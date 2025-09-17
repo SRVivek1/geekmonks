@@ -15,7 +15,7 @@
             {% if item.submenu %}
               <!-- Dropdown with submenu -->
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="{{ item.url | relative_url }}" role="button" aria-expanded="false">
+                <a class="nav-link dropdown-toggle fw-bold text-white" href="{{ item.url | relative_url }}" role="button" aria-expanded="false">
                   {{ item.title }}
                 </a>
                 <ul class="dropdown-menu">
@@ -30,7 +30,7 @@
               </li>
             {% else %}
               <!-- Simple nav item -->
-              <li class="nav-item">
+              <li class="nav-item fw-bold text-white">
                 <a class="nav-link" href="{{ item.url | relative_url }}">{{ item.title }}</a>
               </li>
             {% endif %}
