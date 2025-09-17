@@ -1,0 +1,7 @@
+- title: Blog
+  url: /blog/
+  submenu:
+    - title: Post 1
+      url: /blog/post1/
+    - title: Post 2
+      url: /blog/post2/

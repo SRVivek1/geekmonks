@@ -1,5 +1,11 @@
 - name: Home
   link: /
+- name: Blog
+  link: /blog
+- name: About
+  link: /abouts
+- name: Staff
+  link: /staff
 - name: Github
   link: https://github.com/SRVivek1/
 - name: LinkedIn

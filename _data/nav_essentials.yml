@@ -1,0 +1,30 @@
+- title: Essentials
+  url: #
+  submenu:
+    - title: Product Hunt
+      url: https://www.producthunt.com/
+    - title: Codewars
+      url: https://www.codewars.com/
+    - title: Leetcode
+      url: https://leetcode.com/problems/
+    - title: Cline - AI Coding
+      url: https://cline.bot/
+    - title: Stellarium
+      url: https://stellarium-web.org/
+    - title: Web - Color themes
+      url: https://colorhunt.co/
+    - title: Google Fonts
+      url: https://fonts.google.com/
+    - title: CSS Art
+      url: https://diana-adrianne.com/
+    - title: CSS Tricks
+      url: https://css-tricks.com/guides/
+    - title: SS Grid Quiz
+      url: https://appbrewery.github.io/gridgarden/
+    - title: Flexbox Froggy
+      url: https://flexboxfroggy.com/
+    - title: Can I use
+      url: https://caniuse.com/
+    - title: Font Awesome
+      url: https://fontawesome.com/
+

@@ -1,0 +1,11 @@
+# Each file represents a menu and contains a list of sub-menus.
+files:
+  - nav_essentials
+  - nav_coding
+  - nav_interview_skills
+  - nav_dsa
+  - nav_algorithms
+  - nav_design_patterns
+  - nav_spring
+  - nav_cloud 
+  - nav_blog

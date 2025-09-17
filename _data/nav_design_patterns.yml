@@ -1,0 +1,11 @@
+- title: Design Patterns
+  url: #
+  submenu:
+    - title: GoF Patterns
+      url: /design-patterns/gof/
+    - title: Architectural Patterns
+      url: /design-patterns/architectural/
+    - title: Anti-Patterns
+      url: /design-patterns/anti-patterns/
+    - title: Best Practices
+      url: /design-patterns/best-practices/

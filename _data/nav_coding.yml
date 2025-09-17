@@ -1,0 +1,9 @@
+- title: Coding Practices
+  url: #
+  submenu:
+    - title: Array
+      url: /coding/arrays/
+    - title: String
+      url: /coding/strings/
+    - title: Integers
+      url: /coding/integers/

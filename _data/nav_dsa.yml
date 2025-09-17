@@ -1,0 +1,22 @@
+- title: Data Structures & Algorithms
+  url: #
+  submenu:
+    - title: Array
+      url: /algorithms/arrays/
+    - title: List
+      url: /algorithms/list/
+    - title: Set
+      url: /algorithms/set/
+    - title: Map
+      url: /algorithms/map/
+    - title: Queue
+      url: /algorithms/queue/
+    - title: Set
+      url: /algorithms/set/
+    - title: Stack
+      url: /algorithms/stack/
+    - title: Tree
+      url: /algorithms/tree/
+    - title: Graph
+      url: /algorithms/graph/
+

@@ -1,0 +1,51 @@
+- title: Spring Framework
+  url: #
+  submenu:
+    - title: Spring Core
+      url: /spring/core/
+    - title: Spring Boot
+      url: /spring/boot/
+    - title: Spring Security
+      url: /spring/security/
+    - title: Spring Data
+      url: /spring/data/
+    - title: Spring Cloud
+      url: /spring/cloud/
+    - title: Spring Testing
+      url: /spring/testing/
+    - title: Spring AOP 
+      url: /spring/aop/
+    - title: Spring Transactions
+      url: /spring/transactions/
+    - title: Spring Integration
+      url: /spring/integration/
+    - title: Spring WebFlux 
+      url: /spring/webflux/
+    - title: Spring Actuator
+      url: /spring/actuator/
+    - title: Spring REST
+      url: /spring/rest/
+    - title: Spring JMS
+      url: /spring/jms/
+    - title: Spring LDAP
+      url: /spring/ldap/
+    - title: Spring AMQP  
+      url: /spring/amqp/
+    - title: Spring GraphQL
+      url: /spring/graphql/
+    - title: Spring Cloud Gateway
+      url: /spring/cloud-gateway/
+    - title: Spring Cloud Config
+      url: /spring/cloud-config/
+    - title: Spring Cloud Circuit Breaker
+      url: /spring/cloud-circuit-breaker/
+    - title: Spring Cloud Kubernetes
+      url: /spring/cloud-kubernetes/
+    - title: Spring Cloud Sleuth
+      url: /spring/cloud-sleuth/
+    - title: Spring Cloud Vault
+      url: /spring/cloud-vault/
+    - title: Spring Cloud Zookeeper
+      url: /spring/cloud-zookeeper/
+    - title: Spring Cloud Consul
+      url: /spring/cloud-consul/

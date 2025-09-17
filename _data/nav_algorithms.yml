@@ -1,0 +1,19 @@
+- title: Algorithms
+  url: #
+  submenu:
+    - title: Sorting
+      url: /algorithms/sorting/
+    - title: Searching
+      url: /algorithms/searching/
+    - title: Recursion
+      url: /algorithms/recursion/
+    - title: Dynamic Programming
+      url: /algorithms/dynamic-programming/
+    - title: Greedy Algorithms
+      url: /algorithms/greedy/
+    - title: Backtracking
+      url: /algorithms/backtracking/
+    - title: Divide and Conquer
+      url: /algorithms/divide-and-conquer/
+    - title: Bit Manipulation
+      url: /algorithms/bit-manipulation/
