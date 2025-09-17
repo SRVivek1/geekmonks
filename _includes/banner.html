@@ -1,9 +1,11 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light text-white content-shadow">
   <div class="container d-flex justify-content-between">
-    <a href="#" class="navbar-brand d-flex">
+    <a href="{{site.baseurl}}/" class="navbar-brand d-flex">
       <img class="d-inline-block align-top" src="{{ '/assets/icons/laptop.svg' | relative_url }}" height="40"
         width="34" />
-      <h1 class="fs-3 px-2">Quick Revision Hub</h1>
+      <h1 class="fs-3 px-2 fw-bold">Geekmonks</h1>
+      <img class="d-inline-block align-top" src="{{ '/assets/icons/tux.svg' | relative_url }}" height="40"
+        width="34" />
     </a>
     <!-- Toggle Button to expand and collapse the nav links -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBanner"
@@ -15,7 +17,8 @@
       <ul class="navbar-nav ms-auto">
         {% for item in site.data.banner %}
         <li class="nav-item active">
-          <a href="{{ item.link | relative_url }}" class="nav-link fw-bold active">{{ item.name }}</a>
+          <a href="{{ item.link | relative_url }}" class="nav-link fw-bold active"
+            {% if item.external %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.name }}</a>
         </li>
         {% endfor %}
       </ul>
