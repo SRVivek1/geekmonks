@@ -3,7 +3,7 @@
 - name: Blog
   link: /blog
 - name: About
-  link: /abouts
+  link: /about
 - name: Staff
   link: /staff
 - name: Github
