@@ -3,28 +3,41 @@
   submenu:
     - title: Product Hunt
       url: https://www.producthunt.com/
+      external: true
     - title: Codewars
       url: https://www.codewars.com/
+      external: true
     - title: Leetcode
       url: https://leetcode.com/problems/
+      external: true
     - title: Cline - AI Coding
       url: https://cline.bot/
+      external: true
     - title: Stellarium
       url: https://stellarium-web.org/
+      external: true
     - title: Web - Color themes
       url: https://colorhunt.co/
+      external: true
     - title: Google Fonts
       url: https://fonts.google.com/
+      external: true
     - title: CSS Art
       url: https://diana-adrianne.com/
+      external: true
     - title: CSS Tricks
       url: https://css-tricks.com/guides/
+      external: true
     - title: SS Grid Quiz
       url: https://appbrewery.github.io/gridgarden/
+      external: true
     - title: Flexbox Froggy
       url: https://flexboxfroggy.com/
+      external: true
     - title: Can I use
       url: https://caniuse.com/
+      external: true
     - title: Font Awesome
       url: https://fontawesome.com/
+      external: true
 

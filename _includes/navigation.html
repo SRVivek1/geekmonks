@@ -23,7 +23,9 @@
                     {% if subitem.divider %}
                       <li><hr class="dropdown-divider"></li>
                     {% else %}
-                      <li><a class="dropdown-item" href="{{ subitem.url | relative_url }}">{{ subitem.title }}</a></li>
+                      <li><a class="dropdown-item" href="{{ subitem.url | relative_url }}"
+                          {% if subitem.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                          {{ subitem.title }}</a></li>
                     {% endif %}
                   {% endfor %}
                 </ul>
@@ -31,7 +33,8 @@
             {% else %}
               <!-- Simple nav item -->
               <li class="nav-item fw-bold text-white">
-                <a class="nav-link" href="{{ item.url | relative_url }}">{{ item.title }}</a>
+                <a class="nav-link" href="{{ item.url | relative_url }}"
+                  {% if subitem.external %}target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.title }}</a>
               </li>
             {% endif %}
           {% endfor %}
