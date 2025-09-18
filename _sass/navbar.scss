@@ -28,6 +28,11 @@
   display: block;
 }
 
+#navbarNav .nav-link {
+  text-align: center;
+  display: inline-block; /* Ensures oval shape works */
+  padding: 0.5rem 1rem; /* Consistent padding for height */
+}
 
 #navbarNav .nav-link:hover {
   border-radius: 5%;
