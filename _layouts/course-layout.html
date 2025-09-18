@@ -33,17 +33,17 @@ layout: null
                                 href="{{ course.path | relative_url }}" data-course="{{ course.path }}">
                                 {{ course.title }}
                             </a>
-                            <ul class="nav flex-column ms-3 subtopics {% unless page.path contains course.path %}collapse{% endunless %}"
+                            <ul class="nav flex-column ms-3 subtopics"
                                 id="topics-{{ course.path | slugify }}">
                                 {% for topic in course.topics %}
                                 <li class="nav-item">
                                     <a class="nav-link topic-link small" href="#"
                                         data-topic="{{ topic.url | split: '/' | last | replace: '.md', '' }}"
-                                        data-course-path="/_courses/{{ course.path }}/">
+                                        data-course-path="/{{ course.path }}">
                                         {{ topic.title }}
                                     </a>
                                 </li>
-                                {% endfor %}
+                                {% endfor %}data-course-path
                             </ul>
                         </li>
                         {% endfor %}

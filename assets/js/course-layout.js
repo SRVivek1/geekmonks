@@ -16,18 +16,19 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`${baseurl}${coursePath}/_topics/${topicId}.md`)
       .then(response => response.text())
       .then(md => {
-        contentDiv.innerHTML = `<div class="topic-content"><h1>${topicId.replace(/-/g, ' ').toUpperCase()}</h1><p>Content for ${topicId}... Last updated: 09:32 PM IST, Thursday, September 18, 2025.</p></div>`;
+        contentDiv.innerHTML = `<div class="topic-content"><h1>${topicId.replace(/-/g, ' ').toUpperCase()}</h1><p>Let's learn ${topicId}...</p></div>`;
       })
       .catch(err => console.error('Error loading topic:', err));
   }
-
+    
   links.forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       links.forEach(l => l.classList.remove('active'));
       courseLinks.forEach(cl => {
         const topicList = document.getElementById(`topics-${slugify(cl.dataset.course)}`);
-        if (topicList) topicList.classList.add('collapse');
+        /* Commenting this because submenus are auto collapsing while loading the page. */
+        if (topicList) topicList.classList.remove('collapse');
       });
       this.classList.add('active');
       const topicId = this.dataset.topic;
