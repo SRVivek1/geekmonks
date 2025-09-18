@@ -15,3 +15,24 @@
   border-bottom: 0;
   border-left: 0.3em solid transparent;
 }
+
+
+// style dropdown menu
+.dropdown-bg-green {
+  background-color: #20b17c;
+  border: none;
+}
+
+/* Hover dropdowns (from previous response) */
+.navbar .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+
+#navbarNav .nav-link:hover {
+  border-radius: 5%;
+  background-color: #28a745;
+  color: #fff;
+  text-decoration: underline;
+  /* Adds clarity */
+}

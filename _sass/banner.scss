@@ -1,0 +1,30 @@
+
+// items size and spacing
+#navbarNavBanner .nav-item {
+  //margin-right: 1rem;
+  min-width: 80px; /* Fixed width for better text fit */
+  display: inline-block; /* Ensures consistent block-level behavior */
+  vertical-align: middle; /* Aligns items vertically */
+}
+
+#navbarNavBanner .nav-link {
+  text-align: center;
+  display: inline-block; /* Ensures oval shape works */
+  padding: 0.5rem 1rem; /* Consistent padding for height */
+  border-radius: 10%; /* Starts with oval/circular base */
+  transition: all 0.3s ease; /* Smooth transition for hover */
+  text-decoration: none; /* Remove default underline */
+  //color: #fff; /* Default text color to match navbar */
+  white-space: nowrap; /* Prevents text wrapping */
+  overflow: hidden; /* Handles overflow if text is too long */
+  text-overflow: ellipsis; /* Truncates with ellipsis if needed */
+}
+
+// Link hover effects
+#navbarNavBanner .nav-link:hover {
+  border-radius: 50%;
+  background-color: #28a745;
+  color: #fff;
+  text-decoration: underline;
+  /* Adds clarity */
+}

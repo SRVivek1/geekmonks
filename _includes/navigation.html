@@ -18,12 +18,12 @@
                 <a class="nav-link dropdown-toggle fw-bold text-white" href="{{ item.url | relative_url }}" role="button" aria-expanded="false">
                   {{ item.title }}
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu dropdown-bg-green">
                   {% for subitem in item.submenu %}
                     {% if subitem.divider %}
                       <li><hr class="dropdown-divider"></li>
                     {% else %}
-                      <li><a class="dropdown-item" href="{{ subitem.url | relative_url }}"
+                      <li><a class="dropdown-item dropdown-bg-green" href="{{ subitem.url | relative_url }}"
                           {% if subitem.external %}target="_blank" rel="noopener noreferrer"{% endif %}>
                           {{ subitem.title }}</a></li>
                     {% endif %}
