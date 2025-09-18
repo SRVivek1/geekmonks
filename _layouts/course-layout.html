@@ -30,7 +30,7 @@ layout: null
                             {% for course in category.courses %}
                             <li class="nav-item">
                                 <a class="nav-link course-link {% if page.path contains course.path %}active{% endif %}"
-                                    href="/courses/{{ course.path }}/" data-course="{{ course.path }}">
+                                    href="/{{ course.path }}/" data-course="{{ course.path }}">
                                     {{ course.title }}
                                 </a>
                                 <ul class="nav flex-column ms-3 subtopics {% unless page.path contains course.path %}collapse{% endunless %}"
@@ -39,7 +39,7 @@ layout: null
                                     <li class="nav-item">
                                         <a class="nav-link topic-link small" href="#"
                                             data-topic="{{ topic.url | split: '/' | last | replace: '.md', '' }}"
-                                            data-course-path="/courses/{{ course.path }}/">
+                                            data-course-path="/{{ course.path }}/">
                                             {{ topic.title }}
                                         </a>
                                     </li>

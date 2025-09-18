@@ -19,6 +19,7 @@
     * Once the dependencies are installed, you can start the Jekyll server. 
     * The serve command builds your site and hosts it on a local server, and the --livereload flag automatically refreshes your browser when you save changes.
       * ***bundle exec jekyll serve --livereload***
+      * ***bundle exec jekyll serve --livereload --verbose***
     * This command will start a local server, usually at - ***http://localhost:4000***.
 
 -----

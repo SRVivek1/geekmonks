@@ -1,7 +1,7 @@
 ---
 layout: course-layout
 title: AWS Cloud Guide
-permalink: /courses/cloud/aws/
+permalink: /cloud/aws/
 default_topic: ec2
 ---
 
