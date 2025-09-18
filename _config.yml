@@ -23,6 +23,7 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
+  - courses/**/_topics/  # Exclude all _topics/ dirs under courses/
 
 
 # Relse config
@@ -43,6 +44,9 @@ collections:
     output: true
   blog:
     output: true
+  courses:
+    output: true
+    permalink: /:path/  # Maps to /courses/cloud/aws/, etc.
   
 
 defaults:

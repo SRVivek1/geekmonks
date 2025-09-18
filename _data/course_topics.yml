@@ -1,0 +1,33 @@
+# _data/course_topics.yml
+courses:
+  - category: cloud
+    courses:
+      - title: AWS
+        path: cloud/aws
+        topics:
+          - title: EC2 Basics
+            url: cloud/aws/_topics/ec2.md
+            children:
+              - title: Instances
+                url: /courses/cloud/aws/_topics/ec2-instances.md
+              - title: AMIs
+                url: /courses/cloud/aws/_topics/ec2-amis.md
+          - title: S3 Storage
+            url: /courses/cloud/aws/_topics/s3.md
+            children:
+              - title: Buckets
+                url: /courses/cloud/aws/_topics/s3-buckets.md
+          - title: VPC Networking
+            url: /courses/cloud/aws/_topics/vpc.md
+            children:
+              - title: Subnets
+                url: /courses/cloud/aws/_topics/vpc-subnets.md
+  - category: devops
+    courses:
+      - title: Jenkins
+        path: devops/jenkins
+        topics:
+          - title: Setup
+            url: /courses/devops/jenkins/_topics/setup.md
+          - title: Pipelines
+            url: /courses/devops/jenkins/_topics/pipelines.md
