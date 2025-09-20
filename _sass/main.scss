@@ -12,6 +12,12 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   color: #333;
+  margin: 0; /* Remove default margin */
+}
+
+/* Main content grows to push footer down */
+main {
+  flex-grow: 1;
 }
 
 /* Headings */

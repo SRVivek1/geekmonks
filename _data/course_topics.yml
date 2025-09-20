@@ -5,23 +5,29 @@ courses:
       - title: AWS
         path: cloud/aws
         topics:
-          - title: EC2 Basics
-            url: cloud/aws/_topics/ec2.md
-            children:
-              - title: Instances
-                url: cloud/aws/_topics/ec2-instances.md
-              - title: AMIs
-                url: cloud/aws/_topics/ec2-amis.md
-          - title: S3 Storage
-            url: cloud/aws/_topics/s3.md
-            children:
-              - title: Buckets
-                url: cloud/aws/_topics/s3-buckets.md
-          - title: VPC Networking
-            url: cloud/aws/_topics/vpc.md
-            children:
-              - title: Subnets
-                url: cloud/aws/_topics/vpc-subnets.md
+          # - title: EC2 Basics
+          #   url: cloud/aws/_topics/ec2.md
+            # children:
+            #   - title: Instances
+            #     url: cloud/aws/_topics/ec2-instances.md
+            #   - title: AMIs
+            #     url: cloud/aws/_topics/ec2-amis.md
+          - title: Global Infrastructure
+            url: cloud/aws/_topics/t0-aws-infrastructure.md
+          - title: Regions & AZs
+            url: cloud/aws/_topics/t1-aws-regions.md
+          - title: Services Overview
+            url: cloud/aws/_topics/t2-aws-services.md
+          - title: User, Groups and Policies
+            url: cloud/aws/_topics/t3-iam-users-and-groups.md
+          - title: EC2 Instances
+            url: cloud/aws/_topics/t4-ec2-instance-types.md
+          - title: Security Groups & Ports
+            url: cloud/aws/_topics/t5-security-groups-and-classic-ports.md
+          - title: EC2 Instance purchasing options
+            url: cloud/aws/_topics/t6-ec2-instances-purchasing-options.md
+          - title: EC2 Instance Placement Groups
+            url: cloud/aws/_topics/t7-ec2-placement-groups.md
   - category: devops
     courses:
       - title: Jenkins

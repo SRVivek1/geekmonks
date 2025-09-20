@@ -4,63 +4,56 @@ layout: null
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
-    {% feed_meta %}
-    {% seo %}
-</head>
+<!-- HTML Head-->
+{% include html-head.html %}
+
 
 <body class="container-fluid p-0 m-0">
     <header>
         {% include banner.html %}
         {% include navigation.html %}
     </header>
+    <main>
+        <div class="container-fluid">
+            <div class="row min-vh-100">
+                <!-- Left Sidebar -->
+                <nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                    <div class="position-sticky pt-3">
+                        <ul class="nav flex-column course-topics-list">
+                            {% for category in site.data.course_topics.courses %}
+                            {% for course in category.courses %}
+                            <li class="nav-item">
+                                <a class="nav-link course-link {% if page.path contains course.path %}active{% endif %}"
+                                    href="{{ course.path | relative_url }}" data-course="{{ course.path }}">
+                                    {{ course.title }}
+                                </a>
+                                <ul class="nav flex-column ms-3 subtopics" id="topics-{{ course.path | slugify }}">
+                                    {% for topic in course.topics %}
+                                    <li class="nav-item">
+                                        <a class="nav-link topic-link small" href="#"
+                                            data-topic="{{ topic.url | split: '/' | last | replace: '.md', '' }}"
+                                            data-course-path="/{{ course.path }}">
+                                            {{ topic.title }}
+                                        </a>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </nav>
 
-    <div class="container-fluid">
-        <div class="row min-vh-100">
-            <!-- Left Sidebar -->
-            <nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column course-topics-list">
-                        {% for category in site.data.course_topics.courses %}
-                        {% for course in category.courses %}
-                        <li class="nav-item">
-                            <a class="nav-link course-link {% if page.path contains course.path %}active{% endif %}"
-                                href="{{ course.path | relative_url }}" data-course="{{ course.path }}">
-                                {{ course.title }}
-                            </a>
-                            <ul class="nav flex-column ms-3 subtopics"
-                                id="topics-{{ course.path | slugify }}">
-                                {% for topic in course.topics %}
-                                <li class="nav-item">
-                                    <a class="nav-link topic-link small" href="#"
-                                        data-topic="{{ topic.url | split: '/' | last | replace: '.md', '' }}"
-                                        data-course-path="/{{ course.path }}">
-                                        {{ topic.title }}
-                                    </a>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        {% endfor %}
-                        {% endfor %}
-                    </ul>
-                </div>
-            </nav>
-
-            <!-- Right Content Panel -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div id="topic-content">
-                    {{ content }} <!-- Injects index.md content here -->
-                </div>
-            </main>
+                <!-- Right Content Panel -->
+                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                    <div id="topic-content">
+                        {{ content }} <!-- Injects index.md content here -->
+                    </div>
+                </main>
+            </div>
         </div>
-    </div>
-
+    </main>
 
     <!-- Pass dynamic data via global variable -->
     <script>
@@ -69,11 +62,11 @@ layout: null
             defaultTopic: '{{ page.default_topic | default: "ec2" }}'
         };
     </script>
-    
-    <!-- Include Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
-    
-    <!-- Include external JavaScript -->
+
+    <!-- External scripts -->
+    {% include body-external-scripts.html %}
+
+    <!-- Include internal JavaScript -->
     <script src="{{ '/assets/js/course-layout.js' | relative_url }}"></script>
 </body>
 
