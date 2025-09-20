@@ -1,6 +1,13 @@
 ---
 short_name: srvivek
 name: Vivek Singh
-position: Writer
+position: Chief Editor & Writer
 ---
-Vivek is writing code since he got introduced to computers.
+
+<hr/>
+
+<p>
+Vivek Singh is a Senior software engineer, passionate about learning and sharing skills. 
+<br/>
+He enjoys coding since he got introduced to computers.
+</p>
