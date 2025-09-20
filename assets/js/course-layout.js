@@ -16,7 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch(`${baseurl}${coursePath}/_topics/${topicId}.md`)
       .then(response => response.text())
       .then(md => {
-        contentDiv.innerHTML = `<div class="topic-content"><h1>${topicId.replace(/-/g, ' ').toUpperCase()}</h1><p>Let's learn ${topicId}...</p></div>`;
+        const topicName = topicId.replace(/-/g, ' ').toUpperCase();
+        const tContent = md;
+        //contentDiv.innerHTML = `<div class="topic-content"><h1>${topicId.replace(/-/g, ' ').toUpperCase()}</h1><p>Let's learn ${topicId}...</p></div>`;
+        contentDiv.innerHTML = tContent;
       })
       .catch(err => console.error('Error loading topic:', err));
   }

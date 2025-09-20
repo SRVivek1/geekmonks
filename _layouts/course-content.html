@@ -1,0 +1,19 @@
+---
+layout: null
+---
+<h1>{{ page.title }}</h1>
+
+<p>
+  Updated on: {{ page.date | date_to_string }}
+  
+  {% assign author = site.authors | where: 'short_name', page.author | first %}
+  {% if author %}
+    - <a href="{{ author.url | relative_url }}">{{ author.name }}</a>
+  {% endif %}
+</p>
+
+<hr/>
+
+{{ content }}
+
+<!-- TODO: add footer -->
