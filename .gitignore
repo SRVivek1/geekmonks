@@ -12,6 +12,7 @@ vendor/
 # Ignore a few common OS files
 .DS_Store
 .vscode/
+.idea/
 
 # Ignore custom log files or other files you might create locally
 # /some_log_file.log
