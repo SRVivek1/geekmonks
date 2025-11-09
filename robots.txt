@@ -1,1 +1,1 @@
-Sitemap: http://localhost:4000/geekmonks/sitemap.xml
+Sitemap: https://srvivek1.github.io/geekmonks/sitemap.xml
