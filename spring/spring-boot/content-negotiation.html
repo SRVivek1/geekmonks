@@ -1,0 +1,44 @@
+<h1>Response content negotation</h1>
+
+<p>
+  Updated on: 
+  
+  
+  
+    - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a>
+  
+</p>
+
+<hr/>
+
+<h3 id="project-ref-a5-sboot-ms-content-negotiation">Project ref: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a5-sboot-ms-content-negotiation">a5-sboot-ms-content-negotiation</a></h3>
+<ul>
+  <li><strong><ins>Maven / External dependency</ins></strong>
+    <ul>
+      <li>Add following dependency in POM.xml
+ 	<code class="language-plaintext highlighter-rouge">xml
+	&lt;!-- XML conversion --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.fasterxml.jackson.dataformat&lt;/groupId&gt;
+        &lt;artifactId&gt;jackson-dataformat-xml&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+</code></li>
+    </ul>
+  </li>
+  <li><strong><ins>Code changes</ins></strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">None</code></li>
+    </ul>
+  </li>
+  <li><strong><ins>Notes:</ins></strong>
+    <ul>
+      <li>If client requests for <code class="language-plaintext highlighter-rouge">Accept: application/xml</code> header.</li>
+      <li>
+        <h2 id="spring-willl-internally-check-jackson-dataformat-xml-api-dependency-if-found-bean-will-be-transformed-to-xml">Spring willl internally check <code class="language-plaintext highlighter-rouge">jackson-dataformat-xml</code> API dependency, if found bean will be transformed to xml.</h2>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+<!-- TODO: add footer -->

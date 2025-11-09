@@ -1,0 +1,90 @@
+<h1>Static content filtering</h1>
+
+<p>
+  Updated on: 
+  
+  
+  
+    - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a>
+  
+</p>
+
+<hr/>
+
+<h3 id="project-ref-a9-sboot-ms-static-filtering">Project ref: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a9-sboot-ms-static-filtering">a9-sboot-ms-static-filtering</a></h3>
+<ul>
+  <li><strong><ins>Purpose / Feature</ins></strong>
+    <ul>
+      <li>Content filtering refers to removing the properties from Response bean when sending back to requestor.</li>
+      <li>This feature is available in <code class="language-plaintext highlighter-rouge">jackson-annotations-x.x.jar</code>, which is added as part of <code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code> dependency.</li>
+    </ul>
+  </li>
+  <li><strong><ins>Maven / External dependency</ins></strong>
+    <ul>
+      <li>Add spring validation dependency.
+ 	```xml
+	<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency></li>
+    </ul>
+  </li>
+  <li><strong><ins>Code changes</ins></strong>
+    <ul>
+      <li>We only need to update the Java Bean properties. No change required in controller.</li>
+      <li>imports
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">import com.fasterxml.jackson.annotation.JsonIgnore;</code></li>
+          <li><code class="language-plaintext highlighter-rouge">import com.fasterxml.jackson.annotation.JsonIgnoreProperties;</code></li>
+        </ul>
+      </li>
+      <li>Annotate java properties to ignore while building the response.
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/** Ignore all specified properties from the class.  */</span>
+    <span class="nd">@JsonIgnoreProperties</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"property4"</span><span class="o">,</span> <span class="s">"property6"</span><span class="o">})</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeBean</span> <span class="o">{</span>
+
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property1</span><span class="o">;</span>
+			
+        <span class="c1">// Ignore this property</span>
+        <span class="nd">@JsonIgnore</span>
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property2</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property3</span><span class="o">;</span>
+			
+        <span class="c1">// @JsonIgnoreProperties - Ignore this</span>
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property4</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property5</span><span class="o">;</span>
+			
+        <span class="c1">// @JsonIgnoreProperties - Ignore this</span>
+        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property6</span><span class="o">;</span>
+
+        <span class="c1">// constructors, setter-getters and utility methods</span>
+    <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+  <li><strong><ins>Notes:</ins></strong>
+    <ul>
+      <li>In this approach we’re hardcoding that which properties should not be returned in response when the given bean is returned in response, irrespective of which API is using this.</li>
+      <li>Hence, this is called <code class="language-plaintext highlighter-rouge">Static Filtering</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">@JsonIgnore</code> annotation:
+        <ul>
+          <li>Marks the property, to be removed when building response from this bean.</li>
+        </ul>
+      </li>
+      <li><code class="language-plaintext highlighter-rouge">@JsonIgnoreProperties</code> annotation
+        <ul>
+          <li>Marks a list of properties inside this class, to be removed when building response from this bean.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong><ins>References:</ins></strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">TBU</code></li>
+    </ul>
+  </li>
+</ul>
+
+
+<!-- TODO: add footer -->
