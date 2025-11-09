@@ -2,11 +2,11 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://srvivek1.github.io/geekmonks/authors/srvivek/</loc>
-<lastmod>2025-11-09T14:45:45+05:30</lastmod>
+<lastmod>2025-11-09T16:01:12+05:30</lastmod>
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/blog/</loc>
-<lastmod>2025-11-09T14:45:45+05:30</lastmod>
+<lastmod>2025-11-09T16:01:12+05:30</lastmod>
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/introduction-to-llms.html</loc>
@@ -42,7 +42,7 @@
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/</loc>
-<lastmod>2025-11-09T14:45:45+05:30</lastmod>
+<lastmod>2025-11-09T16:01:12+05:30</lastmod>
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/cloud/aws/aws-infrastructure.html</loc>
@@ -78,11 +78,7 @@
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/cloud/aws/</loc>
-<lastmod>2025-11-09T14:45:45+05:30</lastmod>
-</url>
-<url>
-<loc>https://srvivek1.github.io/geekmonks/spring/spring-boot/swagger-api-doc.html</loc>
-<lastmod>2024-10-30T00:00:00+05:30</lastmod>
+<lastmod>2025-11-09T16:01:12+05:30</lastmod>
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/spring/spring-boot/getting-started.html</loc>
@@ -95,6 +91,10 @@
 <url>
 <loc>https://srvivek1.github.io/geekmonks/spring/spring-boot/swagger-api-doc.html</loc>
 <lastmod>2024-10-30T00:00:00+05:30</lastmod>
+</url>
+<url>
+<loc>https://srvivek1.github.io/geekmonks/spring/spring-boot/content-negotiation.html</loc>
+<lastmod>2024-10-31T00:00:00+05:30</lastmod>
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/spring/spring-boot/content-negotiation.html</loc>
@@ -146,7 +146,7 @@
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/spring/spring-boot/</loc>
-<lastmod>2025-11-09T14:45:45+05:30</lastmod>
+<lastmod>2025-11-09T16:01:12+05:30</lastmod>
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/apples/</loc>
