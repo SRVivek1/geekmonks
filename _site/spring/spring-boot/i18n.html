@@ -1,0 +1,81 @@
+<h1>Content Internationalization</h1>
+
+<p>
+  Updated on: 
+  
+  
+  
+    - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a>
+  
+</p>
+
+<hr/>
+
+<h2 id="5-internationalization-i18n">5. Internationalization (i18n)</h2>
+<h3 id="project-ref-a6-sboot-ms-content-i18n">Project ref: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a6-sboot-ms-content-i18n">a6-sboot-ms-content-i18n</a></h3>
+<ul>
+  <li><strong><ins>Maven / External dependency</ins></strong>
+    <ul>
+      <li>Required API is available as part of spring-context dependency.</li>
+      <li>This is imported with spring web dependency internally.
+ 	<code class="language-plaintext highlighter-rouge">xml
+	&lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+</code></li>
+    </ul>
+  </li>
+  <li><strong><ins>Code changes</ins></strong>
+    <ul>
+      <li>imports
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">import org.springframework.context.MessageSource;</code></li>
+        </ul>
+      </li>
+      <li>Autowire the MessageSource in required class.
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@RestController</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldI18n</span> <span class="o">{</span>
+
+        <span class="kd">private</span> <span class="nc">MessageSource</span> <span class="n">messageSource</span><span class="o">;</span>
+
+        <span class="c1">// autowire (constructor injection) messageSource.</span>
+        <span class="kd">public</span> <span class="nf">HelloWorldI18n</span><span class="o">(</span><span class="nc">MessageSource</span> <span class="n">messageSource</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">super</span><span class="o">();</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">messageSource</span> <span class="o">=</span> <span class="n">messageSource</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/say-hello-i18n"</span><span class="o">)</span>
+        <span class="kd">public</span> <span class="nc">String</span> <span class="nf">sayHello</span><span class="o">()</span> <span class="o">{</span>
+
+            <span class="kt">var</span> <span class="n">locale</span> <span class="o">=</span> <span class="nc">LocaleContextHolder</span><span class="o">.</span><span class="na">getLocale</span><span class="o">();</span>
+
+            <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">messageSource</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(</span><span class="s">"good.morning"</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s">"Default - Good Morning"</span><span class="o">,</span> <span class="n">locale</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>Create property files for different locale
+        <ul>
+          <li>File: <code class="language-plaintext highlighter-rouge">messages[-&lt;locale&gt;].properties</code></li>
+          <li>Here’s some examples:
+            <ul>
+              <li>Default: <code class="language-plaintext highlighter-rouge">messages.properties</code></li>
+              <li>Spanish: <code class="language-plaintext highlighter-rouge">messages_es.properties</code></li>
+              <li>German: <code class="language-plaintext highlighter-rouge">messages_ger.properties</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong><ins>Notes:</ins></strong>
+    <ul>
+      <li>Default message files name prefix is <code class="language-plaintext highlighter-rouge">messages</code> &amp; suffix is <code class="language-plaintext highlighter-rouge">.properties</code>.</li>
+      <li>Spring reads the value of <code class="language-plaintext highlighter-rouge">Accept-Language</code> Header from <code class="language-plaintext highlighter-rouge">HTTP Request</code>and replaces it with <code class="language-plaintext highlighter-rouge">&lt;locale&gt;</code> when locating <code class="language-plaintext highlighter-rouge">messsages[-&lt;locale&gt;].properties</code> file.</li>
+    </ul>
+  </li>
+</ul>
+
+
+<!-- TODO: add footer -->

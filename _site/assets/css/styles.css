@@ -1,0 +1,192 @@
+/* assets/css/style.css */
+/* Root font size for rem calculations */
+html {
+  font-size: 16px; }
+
+/* Body typography */
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+  /* Remove default margin */ }
+
+/* Main content grows to push footer down */
+main {
+  flex-grow: 1; }
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #111; }
+
+h1 {
+  font-size: 2.5rem;
+  letter-spacing: 0.02em; }
+
+h2 {
+  font-size: 2rem; }
+
+h3 {
+  font-size: 1.75rem; }
+
+h4 {
+  font-size: 1.5rem; }
+
+h5 {
+  font-size: 1.25rem; }
+
+h6 {
+  font-size: 1rem; }
+
+/* Navbar overrides */
+.navbar {
+  font-family: "Poppins", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+
+.navbar .nav-link {
+  font-size: 1rem;
+  font-weight: 500; }
+
+.navbar .dropdown-item {
+  font-size: 0.875rem;
+  font-weight: 400; }
+
+/* Code blocks */
+pre,
+code {
+  font-family: "Fira Code", "Consolas", "Monaco", monospace;
+  font-size: 0.875rem; }
+
+/* Content width */
+.navbar-custom {
+  background-color: #059862;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+
+.navbar .dropdown:hover .dropdown-menu {
+  display: block; }
+
+.navbar .dropdown:hover .dropdown-toggle::after {
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent; }
+
+.dropdown-bg-green {
+  background-color: #20b17c;
+  border: none; }
+
+/* Hover dropdowns (from previous response) */
+.navbar .dropdown:hover .dropdown-menu {
+  display: block; }
+
+#navbarNav .nav-link {
+  text-align: center;
+  display: inline-block;
+  /* Ensures oval shape works */
+  padding: 0.5rem 1rem;
+  /* Consistent padding for height */ }
+
+#navbarNav .nav-link:hover {
+  border-radius: 5%;
+  background-color: #28a745;
+  color: #fff;
+  text-decoration: underline;
+  /* Adds clarity */ }
+
+#navbarNavBanner .navbar-nav {
+  text-align: center; }
+
+#navbarNavBanner .nav-item {
+  min-width: 80px;
+  /* Fixed width for better text fit */
+  display: inline-block;
+  /* Ensures consistent block-level behavior */
+  vertical-align: middle;
+  /* Aligns items vertically */ }
+
+#navbarNavBanner .nav-link {
+  text-align: center;
+  display: inline-block;
+  /* Ensures oval shape works */
+  padding: 0.5rem 1rem;
+  /* Consistent padding for height */
+  border-radius: 10%;
+  /* Starts with oval/circular base */
+  transition: all 0.3s ease;
+  /* Smooth transition for hover */
+  text-decoration: none;
+  /* Remove default underline */
+  white-space: nowrap;
+  /* Prevents text wrapping */
+  overflow: hidden;
+  /* Handles overflow if text is too long */
+  text-overflow: ellipsis;
+  /* Truncates with ellipsis if needed */ }
+
+#navbarNavBanner .nav-link:hover {
+  border-radius: 50%;
+  background-color: #28a745;
+  color: #fff;
+  text-decoration: underline;
+  /* Adds clarity */ }
+
+/* Course Page Sidebar */
+#course-sidebar {
+  border-right: 1px solid #dee2e6;
+  overflow-y: auto; }
+
+.course-topics-list .nav-link {
+  color: #495057;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.25rem; }
+
+.course-topics-list .nav-link:hover,
+.course-topics-list .nav-link.active {
+  background-color: #28a745;
+  color: #fff; }
+
+.course-topics-list .subtopics {
+  margin-top: 0.25rem; }
+
+.course-topics-list .subtopics .nav-link {
+  font-size: 0.875rem;
+  padding-left: 2rem; }
+
+/* Right Panel */
+#topic-content {
+  padding: 2rem 0;
+  max-width: 800px; }
+
+/* Mobile: Collapse sidebar */
+@media (max-width: 768px) {
+  #course-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 1040;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out; }
+
+  #course-sidebar.show {
+    transform: translateX(0); } }
+footer {
+  background: #f8f9fa;
+  /* Matches Bootstrap bg-light */
+  color: #333;
+  font-size: 0.875rem;
+  /* Matches small text size */
+  text-align: end; }
+
+.author-position {
+  font-style: italic;
+  color: #4d4d4d;
+  font-size: large; }
