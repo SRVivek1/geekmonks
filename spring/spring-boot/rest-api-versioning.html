@@ -1,4 +1,4 @@
-<h1>Microservice API Versioning strategies</h1>
+<h1>🚀 Microservice - API Versioning Strategies</h1>
 
 <p>
   Updated on: 31 Oct 2024
@@ -11,266 +11,576 @@
 
 <hr/>
 
-<h3 id="project-ref-a7-sboot-ms-api-versioning">Project ref: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a7-sboot-ms-api-versioning">a7-sboot-ms-api-versioning</a></h3>
+<h2 id="-table-of-contents">🧭 Table of Contents</h2>
+
 <ul>
-  <li><strong><ins>Maven / External dependency</ins></strong>
+  <li><a href="#-table-of-contents">🧭 Table of Contents</a></li>
+  <li><a href="#-overview-of-api-versioning">🚀 Overview of API Versioning</a></li>
+  <li><a href="#-common-java-beans-code">💻 Common Java Beans Code</a>
     <ul>
-      <li>No dependency required.</li>
-      <li>API versioning is HTTP architectural style.
-        <ul>
-          <li><code class="language-plaintext highlighter-rouge">None</code></li>
-        </ul>
-      </li>
+      <li><a href="#personv1java-bean">PersonV1.java bean</a></li>
+      <li><a href="#personv2java-bean">PersonV2.java bean</a></li>
+      <li><a href="#namejava-bean">Name.java bean</a></li>
     </ul>
   </li>
-  <li><strong><ins>Common Java Beans Code</ins></strong>
+  <li><a href="#1--uri-versioning">1. 🔗 URI Versioning</a>
     <ul>
-      <li>Personv1.java bean
-        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonV1</span> <span class="o">{</span>
+      <li><a href="#key-points">Key Points</a></li>
+      <li><a href="#controller-code-changes-java">Controller Code changes (Java)</a></li>
+      <li><a href="#test-api-using-curl-command">Test API using CURL command</a></li>
+    </ul>
+  </li>
+  <li><a href="#2--request-parameter-versioning">2. ❓ Request Parameter Versioning</a>
+    <ul>
+      <li><a href="#key-points-1">Key Points</a></li>
+      <li><a href="#controller-code-changes-java-1">Controller Code changes (Java)</a></li>
+      <li><a href="#test-api-using-curl-command-1">Test API using CURL Command</a></li>
+    </ul>
+  </li>
+  <li><a href="#-custom-header-versioning">📧 Custom Header Versioning</a>
+    <ul>
+      <li><a href="#key-points-2">Key Points</a></li>
+      <li><a href="#controller-code-changes-java-2">Controller Code changes (Java)</a></li>
+      <li><a href="#test-api-using-curl-command-2">Test API using CURL command</a></li>
+    </ul>
+  </li>
+  <li><a href="#4--content-negotiation-media-type-versioning">4. 🎨 Content Negotiation (Media Type) Versioning</a>
+    <ul>
+      <li><a href="#key-points-3">Key Points</a></li>
+      <li><a href="#controller-code-changes-java-3">Controller Code changes (Java)</a></li>
+      <li><a href="#test-api-using-curl-command-3">Test API using CURL Command</a></li>
+    </ul>
+  </li>
+  <li><a href="#-comparative-analysis-and-selection">📊 Comparative Analysis and Selection</a>
+    <ul>
+      <li><a href="#strategy-to-choose-api-versioning-approach">Strategy to Choose API Versioning Approach</a></li>
+    </ul>
+  </li>
+  <li><a href="#-api-gateway-for-centralized-versioning-and-transformation">🌐 API Gateway for Centralized Versioning and Transformation</a>
+    <ul>
+      <li><a href="#gateways-role-in-centralizing-versioning">Gateway’s Role in Centralizing Versioning</a></li>
+      <li><a href="#role-in-transformation-non-breaking-change-scenario">Role in Transformation (Non-Breaking Change Scenario)</a></li>
+    </ul>
+  </li>
+  <li><a href="#next-steps-and-improvements">💡Next Steps and Improvements</a></li>
+</ul>
 
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+<hr />
 
-        <span class="kd">public</span> <span class="nf">PersonV1</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kd">super</span><span class="o">();</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="c1">// getter-setters</span>
+<h2 id="-overview-of-api-versioning">🚀 Overview of API Versioning</h2>
+
+<p>API versioning is a crucial strategy for managing changes to an API over time without disrupting existing clients. It’s necessary when introducing <strong>breaking changes</strong> (e.g., changing request/response formats, removing fields). A good versioning strategy ensures clients can <strong>conveniently upgrade</strong> to the latest version while clearly communicating changes.</p>
+
+<blockquote>
+  <p><strong>Note</strong></p>
+  <ul>
+    <li><strong>Maven Dependency:</strong> 
+No external dependency is required for implementing these HTTP architectural style versioning strategies in Spring Boot, as they utilize standard Spring Web annotations.</li>
+  </ul>
+</blockquote>
+
+<hr />
+
+<h2 id="-common-java-beans-code">💻 Common Java Beans Code</h2>
+
+<p>We use two versions of the <code class="language-plaintext highlighter-rouge">Person</code> class to demonstrate a breaking change in the data structure, where <code class="language-plaintext highlighter-rouge">PersonV2</code> nests the name.</p>
+
+<h3 id="personv1java-bean">PersonV1.java bean</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonV1</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">PersonV1</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
     <span class="o">}</span>
-</code></pre></div>        </div>
-      </li>
-      <li>Personv2.java bean
-        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonV2</span> <span class="o">{</span>
+    <span class="c1">// getter-setters omitted for brevity</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
-        <span class="kd">private</span> <span class="nc">Name</span> <span class="n">name</span><span class="o">;</span>
+<h3 id="personv2java-bean">PersonV2.java bean</h3>
 
-        <span class="kd">public</span> <span class="nf">PersonV2</span><span class="o">(</span><span class="nc">Name</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kd">super</span><span class="o">();</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="c1">// getter-setters</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PersonV2</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">Name</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">PersonV2</span><span class="o">(</span><span class="nc">Name</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
     <span class="o">}</span>
-</code></pre></div>        </div>
-      </li>
-      <li>Name.java bean
-        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Name</span> <span class="o">{</span>
+    <span class="c1">// getter-setters omitted for brevity</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">firstName</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">lastName</span><span class="o">;</span>
+<h3 id="namejava-bean">Name.java bean</h3>
 
-        <span class="kd">public</span> <span class="nf">Name</span><span class="o">(</span><span class="nc">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="nc">String</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kd">super</span><span class="o">();</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
-        <span class="o">}</span>
-        <span class="c1">// getters-setters</span>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Name</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">firstName</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">lastName</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Name</span><span class="o">(</span><span class="nc">String</span> <span class="n">firstName</span><span class="o">,</span> <span class="nc">String</span> <span class="n">lastName</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">firstName</span> <span class="o">=</span> <span class="n">firstName</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">lastName</span> <span class="o">=</span> <span class="n">lastName</span><span class="o">;</span>
     <span class="o">}</span>
-</code></pre></div>        </div>
-      </li>
+    <span class="c1">// getters-setters omitted for brevity</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="1--uri-versioning">1. 🔗 URI Versioning</h2>
+
+<p>In this method, the API version number is embedded directly in the URL path. It’s the most straightforward and common approach.</p>
+
+<blockquote>
+  <p><strong>Enterprise Example:</strong></p>
+  <blockquote>
+    <p><strong>Twitter/X</strong> is a well-known example that uses URL versioning  strategy (<code class="language-plaintext highlighter-rouge">/v1</code>, <code class="language-plaintext highlighter-rouge">/v2</code>, etc.).</p>
+  </blockquote>
+</blockquote>
+
+<p><br /></p>
+
+<h3 id="key-points">Key Points</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Advantage:</strong></th>
+      <th style="text-align: left"><strong>Drawback:</strong></th>
+      <th style="text-align: left"><strong>Best Practice:</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Cache-friendly</strong> (versions are distinct URLs), very easy to understand and implement.</td>
+      <td style="text-align: left"><strong>Polluting the URL</strong> and requires code changes (new controller classes/methods) for every new version, leading to potential code duplication.</td>
+      <td style="text-align: left">Use it for <strong>major, breaking changes</strong>. Align with <strong>Semantic Versioning</strong> (e.g., <code class="language-plaintext highlighter-rouge">/v1</code>, <code class="language-plaintext highlighter-rouge">/v2</code>).</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="controller-code-changes-java">Controller Code changes (Java)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UriVersioningPersonController</span> <span class="o">{</span>
+
+    <span class="cm">/**
+    * Version 1: GET /v1/person
+    */</span>
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/v1/person"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">PersonV1</span> <span class="nf">getPersonV1</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV1</span><span class="o">(</span><span class="s">"URI Versioning v1"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+    * Version 2: GET /v2/person
+    */</span>
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/v2/person"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">PersonV2</span> <span class="nf">getPersonV2</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV2</span><span class="o">(</span><span class="k">new</span> <span class="nc">Name</span><span class="o">(</span><span class="s">"URI"</span><span class="o">,</span> <span class="s">"Versioning V2"</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="test-api-using-curl-command">Test API using CURL command</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Version 1</span>
+curl <span class="nt">-X</span> GET <span class="s2">"http://localhost:8080/v1/person"</span>
+
+<span class="c"># Version 2</span>
+curl <span class="nt">-X</span> GET <span class="s2">"http://localhost:8080/v2/person"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="2--request-parameter-versioning">2. ❓ Request Parameter Versioning</h2>
+
+<p>In this approach the API version is passed as a query parameter in the URL. The base URL remains constant across versions.</p>
+
+<blockquote>
+  <p><strong>Enterprise Example:</strong></p>
+  <blockquote>
+    <p><strong>Amazon</strong> is often cited as using this strategy for some of its services.</p>
+  </blockquote>
+</blockquote>
+
+<p><br /></p>
+
+<h3 id="key-points-1">Key Points</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Advantage:</strong></th>
+      <th style="text-align: left"><strong>Drawback:</strong></th>
+      <th style="text-align: left"><strong>Best Practice:</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Clean URI</strong> (base path is constant), easy to implement and test.</td>
+      <td style="text-align: left"><strong>Polluting the URL</strong> with query parameters, less aesthetically pleasing, and not always considered <strong>RESTful</strong> as the version is not part of the resource identifier.</td>
+      <td style="text-align: left"><strong>Best Practice:</strong> Useful when the client is a browser or when <strong>URI cleanliness is a priority</strong>, but less suitable for public-facing APIs.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="controller-code-changes-java-1">Controller Code changes (Java)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RequestParamVersioningController</span> <span class="o">{</span>
+
+    <span class="cm">/**
+    * Version 1: GET /person/param?version=1
+    */</span>
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/param"</span><span class="o">,</span> <span class="n">params</span> <span class="o">=</span> <span class="s">"version=1"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">PersonV1</span> <span class="nf">getPersonV1</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV1</span><span class="o">(</span><span class="s">"Request Param versioning v1"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+    * Version 2: GET /person/param?version=2
+    */</span>
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/param"</span><span class="o">,</span> <span class="n">params</span> <span class="o">=</span> <span class="s">"version=2"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">PersonV2</span> <span class="nf">getPersonV2</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV2</span><span class="o">(</span><span class="k">new</span> <span class="nc">Name</span><span class="o">(</span><span class="s">"Request Parama"</span><span class="o">,</span> <span class="s">"Versioning v2"</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="test-api-using-curl-command-1">Test API using CURL Command</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Version 1</span>
+curl <span class="nt">-X</span> GET <span class="s2">"http://localhost:8080/person/param?version=1"</span>
+
+<span class="c"># Version 2</span>
+curl <span class="nt">-X</span> GET <span class="s2">"http://localhost:8080/person/param?version=2"</span>
+</code></pre></div></div>
+<hr />
+
+<h2 id="-custom-header-versioning">📧 Custom Header Versioning</h2>
+
+<p>In this strategy the version information is conveyed via a <strong>custom HTTP header</strong>, avoiding changes to the URI.</p>
+
+<blockquote>
+  <p><strong>Enterprise Example:</strong></p>
+  <blockquote>
+    <p><strong>Microsoft</strong> (Azure APIs) has used custom headers for versioning.</p>
+  </blockquote>
+</blockquote>
+
+<p><br /></p>
+
+<h3 id="key-points-2">Key Points</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Advantage:</strong></th>
+      <th style="text-align: left"><strong>Drawback:</strong></th>
+      <th style="text-align: left"><strong>Best Practice:</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Clean URLs</strong> (most RESTful in terms of URI), and versions are invisible to generic API consumers unless they inspect the headers.</td>
+      <td style="text-align: left"><strong>Drawback:</strong> <strong>Misuse of HTTP Headers</strong> (version is not standard HTTP concern), harder to test directly in a browser, and may require extra configuration for <strong>caching layers</strong>.</td>
+      <td style="text-align: left"><strong>Best Practice:</strong> Use a clear header name like <code class="language-plaintext highlighter-rouge">X-API-VERSION</code> or <code class="language-plaintext highlighter-rouge">Api-Version</code>. Ensure all client libraries handle custom headers easily.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="controller-code-changes-java-2">Controller Code changes (Java)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomHeaderVersioning</span> <span class="o">{</span>
+
+    <span class="cm">/**
+    * Version 1: GET /person/header with header X-API-VERSION=1
+    */</span>
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/header"</span><span class="o">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="s">"X-API-VERSION=1"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">PersonV1</span> <span class="nf">getPersonV1</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV1</span><span class="o">(</span><span class="s">"Custom Header Versioning v1"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+    * Version 2: GET /person/header with header X-API-VERSION=2
+    */</span>
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/header"</span><span class="o">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="s">"X-API-VERSION=2"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">PersonV2</span> <span class="nf">getPersonV2</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV2</span><span class="o">(</span><span class="k">new</span> <span class="nc">Name</span><span class="o">(</span><span class="s">"Custom Header"</span><span class="o">,</span> <span class="s">"Versioning v2"</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="test-api-using-curl-command-2">Test API using CURL command</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Version 1</span>
+curl <span class="nt">-X</span> GET <span class="s2">"http://localhost:8080/person/header"</span> <span class="nt">-H</span> <span class="s2">"X-API-VERSION: 1"</span>
+
+<span class="c"># Version 2</span>
+curl <span class="nt">-X</span> GET <span class="s2">"http://localhost:8080/person/header"</span> <span class="nt">-H</span> <span class="s2">"X-API-VERSION: 2"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="4--content-negotiation-media-type-versioning">4. 🎨 Content Negotiation (Media Type) Versioning</h2>
+
+<p>Also known as <strong>Accept Header Versioning</strong>. The version is specified within the <strong><code class="language-plaintext highlighter-rouge">Accept</code> HTTP header</strong> using a custom media type (e.g., <code class="language-plaintext highlighter-rouge">application/vnd.comp.app-v1+json</code>).</p>
+
+<blockquote>
+  <p><strong>Enterprise Example:</strong></p>
+  <blockquote>
+    <p><strong>GitHub</strong> is a prominent example utilizing this strategy.</p>
+  </blockquote>
+</blockquote>
+
+<p><br /></p>
+
+<h3 id="key-points-3">Key Points</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Advantage:</strong></th>
+      <th style="text-align: left"><strong>Drawback:</strong></th>
+      <th style="text-align: left"><strong>Best Practice:</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Most RESTful</strong> approach according to some purists, as it uses standard HTTP negotiation mechanisms. Clean URLs.</td>
+      <td style="text-align: left"><strong>Drawback:</strong> <strong>Complex to implement</strong> and can be confusing for developers. Misuse of headers, similar to custom header approach.</td>
+      <td style="text-align: left"><strong>Best Practice:</strong> Follow the standard format: <code class="language-plaintext highlighter-rouge">application/vnd.&lt;vendor&gt;.&lt;resource&gt;-v&lt;version&gt;+json/xml</code>. Use it when <strong>resource representation</strong> changes fundamentally.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="controller-code-changes-java-3">Controller Code changes (Java)</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MediaTypeVersioning</span> <span class="o">{</span>
+
+    <span class="cm">/**
+    * Version 1: GET /person/accept with Accept: application/vnd.comp.app-v1+json
+    */</span>
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/accept"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="s">"application/vnd.comp.app-v1+json"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">PersonV1</span> <span class="nf">getPersonV1</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV1</span><span class="o">(</span><span class="s">"Mediatype Versioning v1."</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+    * Version 2: GET /person/accept with Accept: application/vnd.comp.app-v2+json
+    */</span>
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/accept"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="s">"application/vnd.comp.app-v2+json"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">PersonV2</span> <span class="nf">getPersonV2</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV2</span><span class="o">(</span><span class="k">new</span> <span class="nc">Name</span><span class="o">(</span><span class="s">"Media type"</span><span class="o">,</span> <span class="s">"Versioning v2"</span><span class="o">));</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="test-api-using-curl-command-3">Test API using CURL Command</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Version 1</span>
+curl <span class="nt">-X</span> GET <span class="s2">"http://localhost:8080/person/accept"</span> <span class="nt">-H</span> <span class="s2">"Accept: application/vnd.comp.app-v1+json"</span>
+
+<span class="c"># Version 2</span>
+curl <span class="nt">-X</span> GET <span class="s2">"http://localhost:8080/person/accept"</span> <span class="nt">-H</span> <span class="s2">"Accept: application/vnd.comp.app-v2+json"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-comparative-analysis-and-selection">📊 Comparative Analysis and Selection</h2>
+
+<p>Choosing the right approach depends on your API’s <strong>audience, update frequency, and caching needs</strong>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Strategy</th>
+      <th style="text-align: left">Advantages</th>
+      <th style="text-align: left">Drawbacks</th>
+      <th style="text-align: left">Best For</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>URI</strong></td>
+      <td style="text-align: left">Highly visible, cache-friendly, simple.</td>
+      <td style="text-align: left">Pollutes URL, high maintenance (code duplication).</td>
+      <td style="text-align: left">Public APIs, major breaking changes.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Request Param</strong></td>
+      <td style="text-align: left">Clean URI base, simple to implement.</td>
+      <td style="text-align: left">Pollutes URL (query string), less RESTful, not cache-friendly by default.</td>
+      <td style="text-align: left">Internal APIs, simple versioning needs.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Custom Header</strong></td>
+      <td style="text-align: left">Clean URLs, version is out of the URI.</td>
+      <td style="text-align: left">Not browser-testable, potential misuse of headers, complex caching.</td>
+      <td style="text-align: left">APIs with frequent, minor updates.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Media Type</strong></td>
+      <td style="text-align: left">Most RESTful, clean URLs, resource-level versioning.</td>
+      <td style="text-align: left">Most complex to implement, developer confusion, complex caching.</td>
+      <td style="text-align: left">APIs with strong REST adherence, internal services.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h3 id="strategy-to-choose-api-versioning-approach">Strategy to Choose API Versioning Approach</h3>
+
+<p>The choice of API versioning strategy should be made early in the design phase and should be based on your API’s <strong>audience</strong>, <strong>caching needs</strong>, and the <strong>frequency/complexity</strong> of anticipated changes.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>Versioning Strategy</strong></th>
+      <th style="text-align: left"><strong>Primary Audience</strong></th>
+      <th style="text-align: left"><strong>REST Purity</strong></th>
+      <th style="text-align: left"><strong>Caching</strong></th>
+      <th style="text-align: left"><strong>Implementation Complexity</strong></th>
+      <th style="text-align: left"><strong>URL Cleanliness</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">🔗 URI</td>
+      <td style="text-align: left"><strong>Public/External</strong></td>
+      <td style="text-align: left">Low (Pollutes URL)</td>
+      <td style="text-align: left"><strong>High</strong> (Natively Cacheable)</td>
+      <td style="text-align: left">Low (Simple <code class="language-plaintext highlighter-rouge">@GetMapping</code>)</td>
+      <td style="text-align: left">Low (Version in URL)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Query Parameter</td>
+      <td style="text-align: left">Internal/Simple APIs</td>
+      <td style="text-align: left">Low (Uses Query Params)</td>
+      <td style="text-align: left">Low (Requires Custom Config)</td>
+      <td style="text-align: left">Low (Simple <code class="language-plaintext highlighter-rouge">params</code> attr)</td>
+      <td style="text-align: left">Medium (Base URL clean)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">📧 Custom Header</td>
+      <td style="text-align: left">Partner/Internal</td>
+      <td style="text-align: left">Medium (Custom Header)</td>
+      <td style="text-align: left">Medium (Requires Header-Aware Config)</td>
+      <td style="text-align: left">Medium (Uses <code class="language-plaintext highlighter-rouge">headers</code> attr)</td>
+      <td style="text-align: left"><strong>High</strong> (Cleanest URL)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">🎨 Media Type</td>
+      <td style="text-align: left"><strong>Strong REST Adherence</strong></td>
+      <td style="text-align: left"><strong>High</strong> (Standard HTTP Negotiation)</td>
+      <td style="text-align: left">Medium (Requires Content-Aware Config)</td>
+      <td style="text-align: left">High (Custom Media Type String)</td>
+      <td style="text-align: left"><strong>High</strong> (Cleanest URL)</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="-api-gateway-for-centralized-versioning-and-transformation">🌐 API Gateway for Centralized Versioning and Transformation</h2>
+
+<p>An <strong>API Gateway</strong> acts as a single entry point for all client requests, centralizing cross-cutting concerns like <code class="language-plaintext highlighter-rouge">security</code>, <code class="language-plaintext highlighter-rouge">rate limiting</code>, and <code class="language-plaintext highlighter-rouge">crucially</code>, <strong>API Versioning</strong>.</p>
+
+<h3 id="gateways-role-in-centralizing-versioning">Gateway’s Role in Centralizing Versioning</h3>
+
+<ul>
+  <li><strong>Centralized Routing:</strong> The gateway inspects the incoming request (URI path, query param, or header) and routes it to the <strong>correct microservice version</strong>. This shields the client from knowing the internal microservice deployment topology.</li>
+  <li><strong>Decoupling:</strong> It decouples the <strong>external API contract</strong> (the version clients see) from the <strong>internal microservice implementation version</strong>.</li>
+</ul>
+
+<h3 id="role-in-transformation-non-breaking-change-scenario">Role in Transformation (Non-Breaking Change Scenario)</h3>
+
+<p>For a <strong>non-breaking change</strong> (e.g., adding an optional field in V2, like splitting <code class="language-plaintext highlighter-rouge">name</code> into <code class="language-plaintext highlighter-rouge">firstName</code> and <code class="language-plaintext highlighter-rouge">lastName</code>), the Gateway can simplify client migration:</p>
+
+<ol>
+  <li><strong>V2 Request to V1 Microservice:</strong> 
+    * If a V2 client sends a request that is backward compatible with V1, the Gateway can <strong>add default values</strong> for the new V2 fields in the request body before routing it to the V1 service.</li>
+  <li><strong>V1 Response Transformation:</strong> 
+    * If a V1 client calls the endpoint, the Gateway routes the request to the new V2 microservice. The V2 service responds with the new, richer V2 data structure (<code class="language-plaintext highlighter-rouge">firstName</code>, <code class="language-plaintext highlighter-rouge">lastName</code>). The Gateway then performs a <strong>response transformation</strong> (e.g., concatenating <code class="language-plaintext highlighter-rouge">firstName</code> and <code class="language-plaintext highlighter-rouge">lastName</code> back into a single <code class="language-plaintext highlighter-rouge">name</code> field) to match the expected V1 schema before sending it back to the V1 client.</li>
+</ol>
+
+<p><br /></p>
+
+<p>This <strong>transformation capability</strong> allows the backend microservice to <strong>evolve faster</strong> (implementing V2) while the Gateway maintains <strong>backward compatibility</strong> for older V1 clients without requiring a full parallel V1 and V2 deployment.</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+    participant C as Client
+    participant G as API Gateway
+    participant S2 as Microservice V2
+    participant S1 as Microservice V1
+
+    C-&gt;&gt;G: Request V1 (GET /person/header, X-API-VERSION=1)
+    alt Response Transformation for Non-Breaking Change
+        Note over G: Route to latest version S2
+        G-&gt;&gt;S2: Transform Request (if needed) &amp; Forward
+        S2-&gt;&gt;G: Response V2 (with firstName, lastName)
+        Note over G: Transform Response (concat to name) to V1 Schema
+        G-&gt;&gt;C: Response V1 (with name)
+    else Breaking Change
+        Note over G: Route to appropriate version S1
+        G-&gt;&gt;S1: Forward Request V1
+        S1-&gt;&gt;G: Response V1
+        G-&gt;&gt;C: Response V1
+    end
+</code></pre>
+
+<hr />
+
+<h2 id="next-steps-and-improvements">💡Next Steps and Improvements</h2>
+
+<ul>
+  <li><strong>Documentation Tooling:</strong>
+    <ul>
+      <li>Integrate an API documentation tool like <strong>OpenAPI (Swagger)</strong>.</li>
+      <li>Ensure the documentation tool clearly shows how to access each version (via URI, header, or parameter).</li>
     </ul>
   </li>
-  <li><strong><ins>URI Versioning</ins></strong>
+  <li><strong>Custom Annotations:</strong>
     <ul>
-      <li>In this versioning style, a version number is appended in URL to create new URL version.</li>
-      <li><strong>Twitter</strong> also follows same versoning strrateegy.
-        <ul>
-          <li><strong>Ref:</strong> https://developer.x.com/en/docs/x-ads-api/versioning</li>
-        </ul>
-      </li>
-      <li><strong><ins>Drawback</ins></strong>
-        <ul>
-          <li>Polluting URL</li>
-        </ul>
-      </li>
-      <li><strong><ins>Controller Code changes</ins></strong>
-        <ul>
-          <li>imports
-            <ul>
-              <li><code class="language-plaintext highlighter-rouge">import org.springframework.web.bind.annotation.GetMapping;</code></li>
-            </ul>
-          </li>
-          <li>Here’s two versions of API defined.
-            <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="nd">@RestController</span>
-      <span class="kd">public</span> <span class="kd">class</span> <span class="nc">UriVersioningPersonController</span> <span class="o">{</span>
-
-          <span class="cm">/**
-          * Version 1
-          * @return
-          */</span>
-          <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/v1/person"</span><span class="o">)</span>
-          <span class="kd">public</span> <span class="nc">PersonV1</span> <span class="nf">getPersonV1</span><span class="o">()</span> <span class="o">{</span>
-              <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV1</span><span class="o">(</span><span class="s">"URI Versioning v1"</span><span class="o">);</span>
-          <span class="o">}</span>
-
-          <span class="cm">/**
-          * Version 2
-          * @return
-          */</span>
-          <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/v2/person"</span><span class="o">)</span>
-          <span class="kd">public</span> <span class="nc">PersonV2</span> <span class="nf">getPersonV2</span><span class="o">()</span> <span class="o">{</span>
-              <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV2</span><span class="o">(</span><span class="k">new</span> <span class="nc">Name</span><span class="o">(</span><span class="s">"URI"</span><span class="o">,</span> <span class="s">"Versioning V2"</span><span class="o">));</span>
-          <span class="o">}</span>
-      <span class="o">}</span>
-</code></pre></div>            </div>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong><ins>Request Param Versioning</ins></strong>
-    <ul>
-      <li>In this versioning style, a request param is sent with API version number.</li>
-      <li>Base URL remains unchanged.</li>
-      <li><strong>Amazon</strong> also follows same versoning strrateegy.
-        <ul>
-          <li><strong>Ref:</strong> <em>https://</em></li>
-        </ul>
-      </li>
-      <li><strong><ins>Drawback</ins></strong>
-        <ul>
-          <li><em>Polluting URL</em></li>
-        </ul>
-      </li>
-      <li><strong><ins>Controller Code changes</ins></strong>
-        <ul>
-          <li>imports
-            <ul>
-              <li><code class="language-plaintext highlighter-rouge">import org.springframework.web.bind.annotation.GetMapping;</code></li>
-            </ul>
-          </li>
-          <li>Here’s two versions of API defined.
-            <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="nd">@RestController</span>
-      <span class="kd">public</span> <span class="kd">class</span> <span class="nc">RequestParamVersioningController</span> <span class="o">{</span>
-
-          <span class="cm">/**
-          * Version 1
-          * @return
-          */</span>
-          <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/param"</span><span class="o">,</span> <span class="n">params</span> <span class="o">=</span> <span class="s">"version=1"</span><span class="o">)</span>
-          <span class="kd">public</span> <span class="nc">PersonV1</span> <span class="nf">getPersonV1</span><span class="o">()</span> <span class="o">{</span>
-              <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV1</span><span class="o">(</span><span class="s">"Request Param versioning v1"</span><span class="o">);</span>
-          <span class="o">}</span>
-
-          <span class="cm">/**
-          * Version 2
-          * @return
-          */</span>
-          <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/param"</span><span class="o">,</span> <span class="n">params</span> <span class="o">=</span> <span class="s">"version=2"</span><span class="o">)</span>
-          <span class="kd">public</span> <span class="nc">PersonV2</span> <span class="nf">getPersonV2</span><span class="o">()</span> <span class="o">{</span>
-              <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV2</span><span class="o">(</span><span class="k">new</span> <span class="nc">Name</span><span class="o">(</span><span class="s">"Request Parama"</span><span class="o">,</span> <span class="s">"Versioning v2"</span><span class="o">));</span>
-          <span class="o">}</span>
-      <span class="o">}</span>
-</code></pre></div>            </div>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong><ins>Custom Header Versioning</ins></strong>
-    <ul>
-      <li>In this versioning style, a custom HTTP header is sent with API version number.</li>
-      <li>Base URL remains unchanged.</li>
-      <li><strong>Microsoft</strong> also follows same versoning strrateegy.
-        <ul>
-          <li><strong>Ref:</strong> https://</li>
-        </ul>
-      </li>
-      <li><strong><ins>Drawback</ins></strong>
-        <ul>
-          <li>Misuse of HTTP Headers</li>
-        </ul>
-      </li>
-      <li><strong><ins>Controller Code changes</ins></strong>
-        <ul>
-          <li>imports
-            <ul>
-              <li><code class="language-plaintext highlighter-rouge">import org.springframework.web.bind.annotation.GetMapping;</code></li>
-            </ul>
-          </li>
-          <li>Here’s two versions of API defined.
-            <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="nd">@RestController</span>
-      <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomHeaderVersioning</span> <span class="o">{</span>
-
-          <span class="cm">/**
-          * Version 1
-          * @return
-          */</span>
-          <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/header"</span><span class="o">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="s">"X-API-VERSION=1"</span><span class="o">)</span>
-          <span class="kd">public</span> <span class="nc">PersonV1</span> <span class="nf">getPersonV1</span><span class="o">()</span> <span class="o">{</span>
-              <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV1</span><span class="o">(</span><span class="s">"Custom Header Versioning v1"</span><span class="o">);</span>
-          <span class="o">}</span>
-
-          <span class="cm">/**
-          * Version 2
-          * @return
-          */</span>
-          <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/header"</span><span class="o">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="s">"X-API-VERSION=2"</span><span class="o">)</span>
-          <span class="kd">public</span> <span class="nc">PersonV2</span> <span class="nf">getPersonV2</span><span class="o">()</span> <span class="o">{</span>
-              <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV2</span><span class="o">(</span><span class="k">new</span> <span class="nc">Name</span><span class="o">(</span><span class="s">"Custom Header"</span><span class="o">,</span> <span class="s">"Versioning v2"</span><span class="o">));</span>
-          <span class="o">}</span>
-      <span class="o">}</span>
-</code></pre></div>            </div>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong><ins>Content Negotiation (Media type) Versioning</ins></strong>
-    <ul>
-      <li>a.k.a <code class="language-plaintext highlighter-rouge">Content negotiation</code> or <code class="language-plaintext highlighter-rouge">Accept header</code> versioning.</li>
-      <li>In this versioning style, a custome media type is sent in <code class="language-plaintext highlighter-rouge">Accept</code> HTTP header.</li>
-      <li>Which API matches the header value request is forwarded to it.
-        <ul>
-          <li>e.g. <code class="language-plaintext highlighter-rouge">Accept: application/vnd.comp.app-v2+json</code></li>
-        </ul>
-      </li>
-      <li>Base URL remains unchanged.</li>
-      <li><strong>Github</strong> also follows same versoning strrateegy.
-        <ul>
-          <li><strong>Ref:</strong> <em>https://</em></li>
-        </ul>
-      </li>
-      <li><strong><ins>Drawback</ins></strong>
-        <ul>
-          <li>Misuse of HTTP Headers</li>
-        </ul>
-      </li>
-      <li><strong><ins>Controller Code changes</ins></strong>
-        <ul>
-          <li>imports
-            <ul>
-              <li><code class="language-plaintext highlighter-rouge">import org.springframework.web.bind.annotation.GetMapping;</code></li>
-            </ul>
-          </li>
-          <li>Here’s two versions of API defined.
-            <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="nd">@RestController</span>
-      <span class="kd">public</span> <span class="kd">class</span> <span class="nc">MediaTypeVersioning</span> <span class="o">{</span>
-
-          <span class="cm">/**
-          * Version 1
-          * @return
-          */</span>
-          <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/accept"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="s">"application/vnd.comp.app-v1+json"</span><span class="o">)</span>
-          <span class="kd">public</span> <span class="nc">PersonV1</span> <span class="nf">getPersonV1</span><span class="o">()</span> <span class="o">{</span>
-              <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV1</span><span class="o">(</span><span class="s">"Mediatype Versioning v1."</span><span class="o">);</span>
-          <span class="o">}</span>
-
-          <span class="cm">/**
-          * Version 2
-          * @return
-          */</span>
-          <span class="nd">@GetMapping</span><span class="o">(</span><span class="n">path</span> <span class="o">=</span> <span class="s">"/person/accept"</span><span class="o">,</span> <span class="n">produces</span> <span class="o">=</span> <span class="s">"application/vnd.comp.app-v2+json"</span><span class="o">)</span>
-          <span class="kd">public</span> <span class="nc">PersonV2</span> <span class="nf">getPersonV2</span><span class="o">()</span> <span class="o">{</span>
-              <span class="k">return</span> <span class="k">new</span> <span class="nf">PersonV2</span><span class="o">(</span><span class="k">new</span> <span class="nc">Name</span><span class="o">(</span><span class="s">"Media type"</span><span class="o">,</span> <span class="s">"Versioning v2"</span><span class="o">));</span>
-          <span class="o">}</span>
-      <span class="o">}</span>
-</code></pre></div>            </div>
-            <hr />
-          </li>
-        </ul>
-      </li>
+      <li>For cleaner controller code, consider creating a custom Spring annotation (e.g., <code class="language-plaintext highlighter-rouge">@ApiVersion(version = "1")</code>) that internally handles the different versioning strategies.</li>
     </ul>
   </li>
 </ul>
+
+<p><br />
+This video provides a deep dive into implementing various API versioning strategies in Spring Boot.
+<a href="https://www.youtube.com/watch?v=ZA-MzWpKvtQ">API Versioning In Spring Framework 7 by Rossen Stoyanchev @ Spring I/O 2025</a></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
 
 
 <!-- TODO: add footer -->
