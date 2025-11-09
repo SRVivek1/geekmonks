@@ -66,6 +66,66 @@ code {
   font-size: 0.875rem; }
 
 /* Content width */
+/*
+ * Enhanced Table Styling for Markdown in Jekyll
+ * Adds borders, padding, zebra striping, and hover effects.
+ */
+/* Target all tables generated from Markdown */
+table {
+  width: 100%;
+  /* Make tables span the full width of the container */
+  border-collapse: collapse;
+  /* Collapse borders into a single line */
+  margin: 1.5em 0;
+  /* Add vertical margin for separation */
+  font-size: 0.95em;
+  /* Slightly reduce font size for compactness */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  /* Subtle shadow for depth */ }
+
+/* Style table cells and headers */
+th, td {
+  padding: 12px 15px;
+  /* Generous padding for content clarity */
+  text-align: left;
+  /* Align text to the left */
+  border: 1px solid #ddd;
+  /* Light border around all cells */ }
+
+/* Style table headers (first row) */
+th {
+  background-color: #f2f2f2;
+  /* Light gray background for headers */
+  color: #333;
+  /* Darker text color for contrast */
+  font-weight: bold;
+  /* Ensure header text is bold */
+  border-color: #ccc;
+  /* Slightly darker border for the header row */
+  text-transform: uppercase;
+  /* Use uppercase for headers */ }
+
+/* Implement Zebra Striping (Alternating row colors) for better readability */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+  /* Very light gray for even rows */ }
+
+/* Add a hover effect for engagement (optional but recommended) */
+tbody tr:hover {
+  background-color: #f0f0ff;
+  /* Light bluish tint on hover */
+  cursor: default;
+  /* Indicate the row is a unified element */
+  transition: background-color 0.2s ease;
+  /* Smooth transition */ }
+
+/* Remove border from the top of the table for a cleaner look */
+table thead th:first-child {
+  border-top-left-radius: 4px; }
+
+table thead th:last-child {
+  border-top-right-radius: 4px; }
+
 .navbar-custom {
   background-color: #059862;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
@@ -190,3 +250,55 @@ footer {
   font-style: italic;
   color: #4d4d4d;
   font-size: large; }
+
+.highlight {
+  background-color: #282828;
+  /* Dark gray background */
+  color: #ebdbb2;
+  /* Pale yellow/beige foreground text */
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1.5em 0; }
+
+/* Comments (C) - Gray */
+.highlight .c {
+  color: #928374;
+  font-style: italic; }
+
+/* Errors (E) */
+.highlight .err {
+  background-color: #cc241d;
+  color: #fbf1c7; }
+
+/* Keywords (K) - Red/Orange */
+.highlight .k {
+  color: #fb4934; }
+
+/* Numbers (M) - Purple */
+.highlight .m {
+  color: #d3869b; }
+
+/* Strings (S) - Green */
+.highlight .s {
+  color: #b8bb26; }
+
+/* Type Names (T) - Yellow */
+.highlight .t {
+  color: #fabd2f; }
+
+/* Variables (V) - Blue */
+.highlight .nv {
+  color: #83a598; }
+
+/* Functions/Methods (Nf) - Cyan */
+.highlight .nf {
+  color: #83a598; }
+
+/* HTML/XML Tags (Name) */
+.highlight .nt {
+  color: #fb4934; }
+
+/* HTML/XML Attributes (Attribute) */
+.highlight .na {
+  color: #fabd2f; }

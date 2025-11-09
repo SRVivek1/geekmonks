@@ -1,7 +1,7 @@
-<h1>Property, method param or Return type validation</h1>
+<h1>Validation of Property, method param and Return type</h1>
 
 <p>
-  Updated on: 
+  Updated on: 30 Oct 2024
   
   
   
@@ -11,89 +11,391 @@
 
 <hr/>
 
-<h3 id="project-ref-a3-sboot-ms-validation">Project ref: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a3-sboot-ms-validation">a3-sboot-ms-validation</a></h3>
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
 <ul>
-  <li><strong><ins>Maven / External dependency</ins></strong>
+  <li><a href="#-table-of-contents">📚 Table of Contents</a>
     <ul>
-      <li>Add spring validation dependency.
- 	```xml
-	<dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-validation</artifactId>
-    </dependency></li>
-    </ul>
-  </li>
-  <li><strong><ins>Code changes</ins></strong>
-    <ul>
-      <li>imports
+      <li><a href="#-required-maven-dependency">🧩 Required Maven Dependency</a></li>
+      <li><a href="#-rest-api-validation-valid-and-constraint-annotations">🔑 Rest API Validation: <code class="language-plaintext highlighter-rouge">@Valid</code> and Constraint Annotations</a>
         <ul>
-          <li><code class="language-plaintext highlighter-rouge">import jakarta.validation.Valid;</code></li>
+          <li><a href="#1-controller-implementation">1. Controller Implementation</a></li>
+          <li><a href="#2-bean-model-constraint-definition">2. Bean (Model) Constraint Definition</a>
+            <ul>
+              <li><a href="#project-reference">Project Reference:</a></li>
+            </ul>
+          </li>
         </ul>
       </li>
-      <li>Annotate the method parameter for validation.
-        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/users"</span><span class="o">)</span>
+      <li><a href="#-validation-scope-insights">💡 Validation Scope Insights</a>
+        <ul>
+          <li><a href="#1-method-parameter-validation-most-common">1. Method Parameter Validation (Most Common)</a></li>
+          <li><a href="#2-property-validation-demonstrated-above">2. Property Validation (Demonstrated Above)</a></li>
+          <li><a href="#3-method-return-type-validation">3. Method Return Type Validation</a></li>
+          <li><a href="#4-property-validation-cascading">4. Property Validation (Cascading)</a></li>
+        </ul>
+      </li>
+      <li><a href="#️-validation-flow-diagram">🛠️ Validation Flow Diagram</a></li>
+    </ul>
+  </li>
+  <li><a href="#-global-exception-handling-for-validation-errors">🛑 Global Exception Handling for Validation Errors</a>
+    <ul>
+      <li><a href="#1-the-global-exception-handler-component">1. The Global Exception Handler Component</a></li>
+      <li><a href="#2-request-and-response-examples">2. Request and Response Examples</a>
+        <ul>
+          <li><a href="#-example-client-request-invalid-data">📝 Example Client Request (Invalid Data)</a></li>
+          <li><a href="#️-example-server-response-handled-by-controlleradvice">🖥️ Example Server Response (Handled by <code class="language-plaintext highlighter-rouge">@ControllerAdvice</code>)</a></li>
+        </ul>
+      </li>
+      <li><a href="#3-error-handling-architecture">3. Error Handling Architecture</a></li>
+      <li><a href="#-enhancements-and-best-practices">🚀 Enhancements and Best Practices</a></li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="-required-maven-dependency">🧩 Required Maven Dependency</h3>
+
+<p>To enable automatic validation support in Spring Boot REST controllers and service layers, you need the following starter dependency. It bundles the required validation API and implementation (like Hibernate Validator).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Key Point</th>
+      <th style="text-align: left">Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">Integrates <strong>Jakarta Bean Validation</strong> with Spring Boot.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Artifact</strong></td>
+      <td style="text-align: left"><strong><code class="language-plaintext highlighter-rouge">spring-boot-starter-validation</code></strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Usage</strong></td>
+      <td style="text-align: left">Essential for annotations like <code class="language-plaintext highlighter-rouge">@Valid</code>, <code class="language-plaintext highlighter-rouge">@Size</code>, <code class="language-plaintext highlighter-rouge">@Past</code>, etc.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-validation<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="-rest-api-validation-valid-and-constraint-annotations">🔑 Rest API Validation: <code class="language-plaintext highlighter-rouge">@Valid</code> and Constraint Annotations</h3>
+
+<p>Validation in a Spring Boot REST API typically involves using the <code class="language-plaintext highlighter-rouge">@Valid</code> annotation on a method parameter to trigger validation on the request body (DTO/Bean).</p>
+
+<h4 id="1-controller-implementation">1. Controller Implementation</h4>
+
+<p>The <code class="language-plaintext highlighter-rouge">@Valid</code> annotation on the <code class="language-plaintext highlighter-rouge">@RequestBody</code> parameter tells Spring to check the constraints (like <code class="language-plaintext highlighter-rouge">@Size</code>, <code class="language-plaintext highlighter-rouge">@Past</code>) defined inside the <code class="language-plaintext highlighter-rouge">User</code> class <strong>before</strong> executing the method logic. If validation fails, Spring throws a <code class="language-plaintext highlighter-rouge">MethodArgumentNotValidException</code>, which is typically handled globally by a Spring Boot application to return a <strong>400 Bad Request</strong> error.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">jakarta.validation.Valid</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+<span class="c1">// ... other imports ...</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserController</span> <span class="o">{</span>
+
+    <span class="c1">// ... service and logger ...</span>
+
+    <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/users"</span><span class="o">)</span>
     <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="nf">createUser</span><span class="o">(</span><span class="nd">@Valid</span> <span class="nd">@RequestBody</span> <span class="nc">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"User to save : {}"</span><span class="o">,</span> <span class="n">user</span><span class="o">);</span>
 
         <span class="kt">var</span> <span class="n">savedUser</span> <span class="o">=</span> <span class="n">userDaoService</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
 
-        <span class="kt">var</span> <span class="n">location</span> <span class="o">=</span> <span class="nc">ServletUriComponentsBuilder</span><span class="o">.</span><span class="na">fromCurrentRequest</span><span class="o">().</span><span class="na">path</span><span class="o">(</span><span class="s">"{id}"</span><span class="o">).</span><span class="na">buildAndExpand</span><span class="o">(</span><span class="n">savedUser</span><span class="o">.</span><span class="na">getId</span><span class="o">())</span>
-                <span class="o">.</span><span class="na">toUri</span><span class="o">();</span>
+        <span class="kt">var</span> <span class="n">location</span> <span class="o">=</span> <span class="nc">ServletUriComponentsBuilder</span><span class="o">.</span><span class="na">fromCurrentRequest</span><span class="o">()</span>
+			<span class="o">.</span><span class="na">path</span><span class="o">(</span><span class="s">"{id}"</span><span class="o">)</span>
+			<span class="o">.</span><span class="na">buildAndExpand</span><span class="o">(</span><span class="n">savedUser</span><span class="o">.</span><span class="na">getId</span><span class="o">())</span>
+            <span class="o">.</span><span class="na">toUri</span><span class="o">();</span>
         <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">created</span><span class="o">(</span><span class="n">location</span><span class="o">).</span><span class="na">body</span><span class="o">(</span><span class="n">savedUser</span><span class="o">);</span>
     <span class="o">}</span>
-</code></pre></div>        </div>
-      </li>
-      <li>imports
-        <ul>
-          <li><code class="language-plaintext highlighter-rouge">import jakarta.validation.constraints.Past;</code></li>
-          <li><code class="language-plaintext highlighter-rouge">import jakarta.validation.constraints.Size;</code></li>
-        </ul>
-      </li>
-      <li>Add validation in the properties of the bean.
-        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+<span class="o">}</span>
+</code></pre></div></div>
 
-        <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">id</span><span class="o">;</span>
+<p><br /></p>
 
-        <span class="nd">@Size</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">3</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">20</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"Name must be more than 2 characters."</span><span class="o">)</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+<h4 id="2-bean-model-constraint-definition">2. Bean (Model) Constraint Definition</h4>
 
-        <span class="nd">@Past</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"Birth date should be in past."</span><span class="o">)</span>
-        <span class="nd">@JsonFormat</span><span class="o">(</span><span class="n">shape</span> <span class="o">=</span> <span class="nc">JsonFormat</span><span class="o">.</span><span class="na">Shape</span><span class="o">.</span><span class="na">STRING</span><span class="o">,</span> <span class="n">pattern</span> <span class="o">=</span> <span class="s">"yyyy-MM-dd"</span><span class="o">)</span>
-        <span class="kd">private</span> <span class="nc">LocalDate</span> <span class="n">birthDate</span><span class="o">;</span>
+<p>The constraints themselves are defined within the <code class="language-plaintext highlighter-rouge">User</code> POJO using annotations from the <strong><code class="language-plaintext highlighter-rouge">jakarta.validation.constraints.*</code></strong> package.</p>
 
-        <span class="c1">// constructors, setter-getters and other methods.</span>
-    <span class="o">}</span>
-</code></pre></div>        </div>
-      </li>
-      <li><strong><ins>Notes:</ins></strong>
-        <ul>
-          <li>Spring internally usages <code class="language-plaintext highlighter-rouge">jakarta-validation</code> API.</li>
-          <li>Check <code class="language-plaintext highlighter-rouge">jakarta.validation.constraints.*</code> for more validation classes.
-            <ul>
-              <li><code class="language-plaintext highlighter-rouge">@Valid</code> annotation:
-                <ul>
-                  <li>Marks a property, method parameter or method return type for validation cascading.</li>
-                  <li>Constraints defined on the object and its properties are validated when the property, method parameter or method return type is validated.</li>
-                </ul>
-              </li>
-              <li><code class="language-plaintext highlighter-rouge">@Size</code> annotation
-                <ul>
-                  <li>Validates property value to match defined size constraints.</li>
-                </ul>
-              </li>
-              <li><code class="language-plaintext highlighter-rouge">@Past</code> annotation
-                <ul>
-                  <li>Validates date value for must be a past date.</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Annotation</th>
+      <th style="text-align: left">Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong><code class="language-plaintext highlighter-rouge">@Size</code></strong></td>
+      <td style="text-align: left">Checks if the annotated element’s size (for Strings, Collections, Maps) is between the specified boundaries.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong><code class="language-plaintext highlighter-rouge">@Past</code></strong></td>
+      <td style="text-align: left">Checks if the annotated element (Date, Calendar, or Joda Time equivalents) is a date in the past.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.annotation.JsonFormat</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">jakarta.validation.constraints.Past</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">jakarta.validation.constraints.Size</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.time.LocalDate</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">User</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">Integer</span> <span class="n">id</span><span class="o">;</span>
+
+    <span class="nd">@Size</span><span class="o">(</span><span class="n">min</span> <span class="o">=</span> <span class="mi">3</span><span class="o">,</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">20</span><span class="o">,</span> <span class="n">message</span> <span class="o">=</span> <span class="s">"Name must be more than 2 characters."</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="nd">@Past</span><span class="o">(</span><span class="n">message</span> <span class="o">=</span> <span class="s">"Birth date should be in past."</span><span class="o">)</span>
+    <span class="nd">@JsonFormat</span><span class="o">(</span><span class="n">shape</span> <span class="o">=</span> <span class="nc">JsonFormat</span><span class="o">.</span><span class="na">Shape</span><span class="o">.</span><span class="na">STRING</span><span class="o">,</span> <span class="n">pattern</span> <span class="o">=</span> <span class="s">"yyyy-MM-dd"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="nc">LocalDate</span> <span class="n">birthDate</span><span class="o">;</span>
+
+    <span class="c1">// constructors, setter-getters and other methods.</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h5 id="project-reference">Project Reference:</h5>
+<ul>
+  <li><a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a3-sboot-ms-validation">Property Validation POC</a></li>
 </ul>
+
+<hr />
+
+<h3 id="-validation-scope-insights">💡 Validation Scope Insights</h3>
+
+<p>The Jakarta Bean Validation API, leveraged by Spring, allows validation on different scopes: <strong>Property</strong>, <strong>Method Parameter</strong>, and <strong>Method Return Type</strong>.</p>
+
+<h4 id="1-method-parameter-validation-most-common">1. Method Parameter Validation (Most Common)</h4>
+
+<ul>
+  <li><strong>Use Case:</strong> Validating the body of a <strong>POST/PUT</strong> request (as demonstrated above), or a path/query parameter.</li>
+  <li><strong>Mechanism:</strong> Use <strong><code class="language-plaintext highlighter-rouge">@Valid</code></strong> on the <code class="language-plaintext highlighter-rouge">@RequestBody</code> or use constraint annotations directly on method parameters (e.g., <code class="language-plaintext highlighter-rouge">@Min</code> on a query parameter).</li>
+</ul>
+
+<h4 id="2-property-validation-demonstrated-above">2. Property Validation (Demonstrated Above)</h4>
+
+<ul>
+  <li><strong>Use Case:</strong> Defining constraints on the <strong>fields</strong> of a bean (DTO/Model).</li>
+  <li><strong>Mechanism:</strong> Direct use of constraint annotations (e.g., <code class="language-plaintext highlighter-rouge">@Size</code>, <code class="language-plaintext highlighter-rouge">@NotNull</code>, <code class="language-plaintext highlighter-rouge">@Email</code>) on fields within the class. This is the <strong>source</strong> of the rules.</li>
+</ul>
+
+<h4 id="3-method-return-type-validation">3. Method Return Type Validation</h4>
+
+<ul>
+  <li><strong>Use Case:</strong> Validating the object returned by a method. Useful for ensuring that data retrieved from a database or another service adheres to constraints before being sent to the client. Requires using <strong><code class="language-plaintext highlighter-rouge">@Validated</code></strong> at the class level.</li>
+  <li><strong>Limitation:</strong> Less common and can add performance overhead.</li>
+</ul>
+
+<h4 id="4-property-validation-cascading">4. Property Validation (Cascading)</h4>
+
+<ul>
+  <li><strong>Use Case:</strong> When a DTO/Model contains another DTO/Model, and you want to validate the constraints on the nested object as well.</li>
+  <li><strong>Mechanism:</strong> Place <strong><code class="language-plaintext highlighter-rouge">@Valid</code></strong> on the <strong>nested property</strong> within the parent class.</li>
+</ul>
+
+<hr />
+
+<h3 id="️-validation-flow-diagram">🛠️ Validation Flow Diagram</h3>
+
+<p>The following diagram illustrates the standard validation flow for a REST API call.</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+    participant C as Client
+    participant SB as Spring Boot App
+    participant V as Validator (Jakarta)
+
+    C-&gt;&gt;SB: POST /users (Request Body)
+    SB-&gt;&gt;SB: Pre-check for @Valid on parameter
+    alt Validation Required
+        SB-&gt;&gt;V: Validate User Object
+        V-&gt;&gt;V: Check @Size, @Past constraints
+        alt Validation Fails
+            V--&gt;&gt;SB: ConstraintViolations
+            SB-&gt;&gt;SB: Handle MethodArgumentNotValidException
+            SB--&gt;&gt;C: 400 Bad Request (Error Details)
+        else Validation Success
+            V--&gt;&gt;SB: Validation Success
+            SB-&gt;&gt;SB: Execute Controller Method
+            SB-&gt;&gt;SB: Service Logic
+            SB--&gt;&gt;C: 201 Created (User)
+        end
+    else No @Valid
+        SB-&gt;&gt;SB: Execute Controller Method
+        SB-&gt;&gt;SB: Service Logic
+        SB--&gt;&gt;C: Success Response
+    end
+</code></pre>
+
+<hr />
+
+<p>That’s an excellent next step! Implementing a <strong>Global Exception Handler</strong> is a professional standard for robust microservices. It ensures that user-facing validation errors are caught, aggregated, and returned in a consistent, user-friendly <strong>400 Bad Request</strong> JSON format, instead of a generic server-side error page.</p>
+
+<p>Here is the documentation for implementing the Global Exception Handler, formatted for your Jekyll website.</p>
+
+<hr />
+
+<h2 id="-global-exception-handling-for-validation-errors">🛑 Global Exception Handling for Validation Errors</h2>
+
+<p>When a client sends an invalid request body to a Spring Boot controller annotated with <code class="language-plaintext highlighter-rouge">@Valid</code>, the framework throws a <code class="language-plaintext highlighter-rouge">MethodArgumentNotValidException</code>. We use a <strong>Global Exception Handler</strong> component (annotated with <code class="language-plaintext highlighter-rouge">@ControllerAdvice</code>) to intercept this exception and transform it into a clear, structured JSON response.</p>
+
+<h3 id="1-the-global-exception-handler-component">1. The Global Exception Handler Component</h3>
+
+<p>We define a class annotated with <strong><code class="language-plaintext highlighter-rouge">@ControllerAdvice</code></strong> to make it applicable across all controllers. The key method uses <strong><code class="language-plaintext highlighter-rouge">@ExceptionHandler(MethodArgumentNotValidException.class)</code></strong> to specifically handle validation failures.</p>
+
+<ul>
+  <li><strong>Key Action:</strong> Iterates through all field errors present in the exception object.</li>
+  <li><strong>Response Status:</strong> Uses <strong><code class="language-plaintext highlighter-rouge">@ResponseStatus(HttpStatus.BAD_REQUEST)</code></strong> to ensure the HTTP status code is correctly set to <code class="language-plaintext highlighter-rouge">400</code>.</li>
+  <li><strong>Response Body:</strong> Formats the errors into a map, typically mapping the <strong>field name</strong> to the <strong>error message</strong>, which is highly readable by API consumers.</li>
+</ul>
+
+<!-- end list -->
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.MethodArgumentNotValidException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.ControllerAdvice</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.ExceptionHandler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.ResponseStatus</span><span class="o">;</span>
+
+<span class="nd">@ControllerAdvice</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomizedResponseEntityExceptionHandler</span> <span class="o">{</span>
+
+    <span class="cm">/**
+     * Handles exceptions thrown when method argument validation fails (e.g., @Valid on @RequestBody).
+     */</span>
+    <span class="nd">@ResponseStatus</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">BAD_REQUEST</span><span class="o">)</span>
+    <span class="nd">@ExceptionHandler</span><span class="o">(</span><span class="nc">MethodArgumentNotValidException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="nf">handleValidationExceptions</span><span class="o">(</span><span class="nc">MethodArgumentNotValidException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">String</span><span class="o">&gt;</span> <span class="n">errors</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HashMap</span><span class="o">&lt;&gt;();</span>
+
+        <span class="n">ex</span><span class="o">.</span><span class="na">getBindingResult</span><span class="o">().</span><span class="na">getFieldErrors</span><span class="o">().</span><span class="na">forEach</span><span class="o">(</span><span class="n">error</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="n">errors</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">error</span><span class="o">.</span><span class="na">getField</span><span class="o">(),</span> <span class="n">error</span><span class="o">.</span><span class="na">getDefaultMessage</span><span class="o">());</span>
+        <span class="o">});</span>
+
+        <span class="c1">// Add Global Errors if any (non-field specific)</span>
+        <span class="n">ex</span><span class="o">.</span><span class="na">getBindingResult</span><span class="o">().</span><span class="na">getGlobalErrors</span><span class="o">().</span><span class="na">forEach</span><span class="o">(</span><span class="n">error</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="n">errors</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">error</span><span class="o">.</span><span class="na">getObjectName</span><span class="o">(),</span> <span class="n">error</span><span class="o">.</span><span class="na">getDefaultMessage</span><span class="o">());</span>
+        <span class="o">});</span>
+
+        <span class="k">return</span> <span class="n">errors</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="2-request-and-response-examples">2. Request and Response Examples</h3>
+
+<p>This handler ensures a clean, consistent response when the input fails the defined constraints.</p>
+
+<h4 id="-example-client-request-invalid-data">📝 Example Client Request (Invalid Data)</h4>
+
+<p>If a client sends a request that violates the <code class="language-plaintext highlighter-rouge">@Size</code> and <code class="language-plaintext highlighter-rouge">@Past</code> constraints defined in the <code class="language-plaintext highlighter-rouge">User</code> bean:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"birthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-01-01"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="️-example-server-response-handled-by-controlleradvice">🖥️ Example Server Response (Handled by <code class="language-plaintext highlighter-rouge">@ControllerAdvice</code>)</h4>
+
+<p>Instead of a bulky 500 error, the client receives a structured <code class="language-plaintext highlighter-rouge">400 Bad Request</code> with specific field issues:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name must be more than 2 characters."</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"birthDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Birth date should be in past."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="3-error-handling-architecture">3. Error Handling Architecture</h3>
+
+<p>This approach centralizes error handling, adhering to the <strong>Separation of Concerns</strong> principle. The controller focuses purely on business logic, and the advice component handles the cross-cutting concern of exception management.</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+    participant C as Client
+    participant Ctrl as Controller (@PostMapping)
+    participant EH as ExceptionHandler (@ControllerAdvice)
+
+    C-&gt;&gt;Ctrl: Invalid POST Request (User DTO)
+    Ctrl-&gt;&gt;Ctrl: Validation Triggered by @Valid
+    alt Validation Fails
+        Ctrl-&gt;&gt;EH: throws MethodArgumentNotValidException
+        EH-&gt;&gt;EH: @ExceptionHandler catches Exception
+        EH-&gt;&gt;EH: Extracts Field Errors
+        EH--&gt;&gt;C: 400 Bad Request (JSON Error Map)
+    else Validation Success
+        Ctrl-&gt;&gt;Ctrl: Business Logic Executes
+        Ctrl--&gt;&gt;C: 201 Created
+    end
+</code></pre>
+
+<blockquote>
+  <p><strong>Best Practice:</strong> For very complex microservices, you can introduce a custom <strong>Error DTO</strong> (Data Transfer Object) instead of a simple <code class="language-plaintext highlighter-rouge">Map&lt;String, String&gt;</code> to include more contextual information, such as a timestamp, a unique error code, and the request path.</p>
+</blockquote>
+
+<p>Would you like to continue documenting other aspects of microservice development, such as <strong>Custom Validation Annotations</strong> or <strong>Integration Testing</strong>?</p>
+
+<hr />
+
+<h3 id="-enhancements-and-best-practices">🚀 Enhancements and Best Practices</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Area</th>
+      <th style="text-align: left">Suggestion</th>
+      <th style="text-align: left">Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Error Handling</strong></td>
+      <td style="text-align: left">Implement a <strong>Global Exception Handler</strong>.</td>
+      <td style="text-align: left">Use <code class="language-plaintext highlighter-rouge">@ControllerAdvice</code> and <code class="language-plaintext highlighter-rouge">@ExceptionHandler</code> to uniformly catch <code class="language-plaintext highlighter-rouge">MethodArgumentNotValidException</code> and format the validation errors into a clean JSON response (e.g., listing all field errors) for better UX.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Group Validation</strong></td>
+      <td style="text-align: left">Use <strong>Validation Groups</strong>.</td>
+      <td style="text-align: left">For complex models, use groups (marker interfaces) to selectively apply validation constraints (e.g., different rules for <code class="language-plaintext highlighter-rouge">Create</code> vs. <code class="language-plaintext highlighter-rouge">Update</code> operations). Use <code class="language-plaintext highlighter-rouge">@Validated(OnCreation.class)</code> instead of just <code class="language-plaintext highlighter-rouge">@Valid</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Custom Constraints</strong></td>
+      <td style="text-align: left">Create <strong>Custom Annotations</strong>.</td>
+      <td style="text-align: left">For business-specific validation (e.g., “Must be an existing product ID”), implement a custom constraint with <code class="language-plaintext highlighter-rouge">@Constraint</code> and a corresponding <code class="language-plaintext highlighter-rouge">ConstraintValidator</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>DRY Principle</strong></td>
+      <td style="text-align: left">Separate <strong>DTOs</strong> from <strong>Entities</strong>.</td>
+      <td style="text-align: left">Always validate a <strong>Data Transfer Object (DTO)</strong> that mirrors the request structure, not the JPA Entity itself, to keep persistence logic clean from presentation concerns.</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong>Note:</strong> Spring Boot internally uses the <strong>Hibernate Validator</strong> as the default implementation of the <strong>Jakarta Bean Validation API</strong>. This is why you primarily use annotations from <code class="language-plaintext highlighter-rouge">jakarta.validation.constraints.*</code>.</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
 
 
 <!-- TODO: add footer -->

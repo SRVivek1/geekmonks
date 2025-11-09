@@ -1,7 +1,7 @@
-<h1>Spring Boot Tutorial</h1>
+<h1>Rest Controller with Spring Boot</h1>
 
 <p>
-  Updated on: 
+  Updated on: 30 Oct 2024
   
   
   
@@ -11,55 +11,247 @@
 
 <hr/>
 
-<h1 id="springboot-basics-v340">springboot Basics [v3.4.0]</h1>
-<h2 id="1-return-response-with-link-to-newly-created-resource">1. Return response with link to newly created resource</h2>
-<h3 id="project-ref-a2-sboot-ms-social-media-app">Project ref: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a2-sboot-ms-social-media-app">a2-sboot-ms-social-media-app</a></h3>
-<ul>
-  <li><strong><ins>Maven / External dependency</ins></strong>
-    <ul>
-      <li>Below required resources are available in Spring web dependency.
- 	<code class="language-plaintext highlighter-rouge">xml
-  	&lt;dependency&gt;
-      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-      &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-  &lt;/dependency&gt;
- </code></li>
-    </ul>
-  </li>
-  <li><strong><ins>Code changes</ins></strong>
-    <ul>
-      <li>imports
-        <ul>
-          <li><em><code class="language-plaintext highlighter-rouge">import org.springframework.web.servlet.support.ServletUriComponentsBuilder</code></em></li>
-        </ul>
-      </li>
-      <li>Build URL to new Resource using current request.
-        <ul>
-          <li><em><code class="language-plaintext highlighter-rouge">ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(savedUser.getId()).toUri();</code></em></li>
-        </ul>
-      </li>
-      <li>Wrap new URL and response object in <em><code class="language-plaintext highlighter-rouge">ResponseEntity</code></em> and return the <em><code class="language-plaintext highlighter-rouge">ResponseEntity</code></em> object.
-        <ul>
-          <li><em><code class="language-plaintext highlighter-rouge">return ResponseEntity.created(location).body(savedUser);</code></em></li>
-        </ul>
-      </li>
-      <li>Controller method
-        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/users"</span><span class="o">)</span>
-      <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="nf">createUser</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
+<h3 id="-spring-rest-contoller-v340">☕ Spring Rest Contoller [v3.4.0]</h3>
 
-          <span class="n">logger</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"User to save : {}"</span><span class="o">,</span> <span class="n">user</span><span class="o">);</span>
-          <span class="nc">User</span> <span class="n">savedUser</span> <span class="o">=</span> <span class="n">userDaoService</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
-	
-          <span class="no">URI</span> <span class="n">location</span> <span class="o">=</span> <span class="nc">ServletUriComponentsBuilder</span><span class="o">.</span><span class="na">fromCurrentRequest</span><span class="o">().</span><span class="na">path</span><span class="o">(</span><span class="s">"{id}"</span><span class="o">)</span>
-  			<span class="o">.</span><span class="na">buildAndExpand</span><span class="o">(</span><span class="n">savedUser</span><span class="o">.</span><span class="na">getId</span><span class="o">()).</span><span class="na">toUri</span><span class="o">();</span>
-	    
-          <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">created</span><span class="o">(</span><span class="n">location</span><span class="o">).</span><span class="na">body</span><span class="o">(</span><span class="n">savedUser</span><span class="o">);</span>
-      <span class="o">}</span>
-</code></pre></div>        </div>
-      </li>
+<hr />
+
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
+<ul>
+  <li><a href="#-table-of-contents">📚 Table of Contents</a></li>
+  <li><a href="#-rest-service-support-and-development">🌐 REST Service Support and Development</a></li>
+  <li><a href="#️-required-maven-dependency">🛠️ Required Maven Dependency</a>
+    <ul>
+      <li><a href="#maven--external-dependency">Maven / External Dependency</a></li>
     </ul>
   </li>
+  <li><a href="#-sample-rest-service-code-201-created">🚀 Sample REST Service Code: <code class="language-plaintext highlighter-rouge">201 Created</code></a>
+    <ul>
+      <li><a href="#code-changes-userresourcejava">Code Changes: <code class="language-plaintext highlighter-rouge">UserResource.java</code></a></li>
+      <li><a href="#project-reference">Project Reference:</a></li>
+    </ul>
+  </li>
+  <li><a href="#️-other-http-verbs-in-rest-controllers">⚙️ Other HTTP Verbs in REST Controllers</a>
+    <ul>
+      <li><a href="#example-controller-for-all-methods">Example Controller for All Methods</a></li>
+    </ul>
+  </li>
+  <li><a href="#-different-http-error-and-status-codes">🚦 Different HTTP Error and Status Codes</a></li>
 </ul>
+
+<hr />
+
+<h2 id="-rest-service-support-and-development">🌐 REST Service Support and Development</h2>
+
+<p>Developing <strong>RESTful services</strong> in Spring Boot is made simple using the <strong><code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code></strong> dependency.</p>
+<ul>
+  <li>This starter bundles key components like <strong>Spring MVC</strong> and an <strong>embedded Tomcat server</strong>, allowing you to quickly define <strong><code class="language-plaintext highlighter-rouge">@RestController</code></strong> classes.</li>
+  <li>The primary goal of a well-designed <code class="language-plaintext highlighter-rouge">POST</code> endpoint is to <strong>create a new resource</strong> and inform the client of its new location. This adheres to the <strong>HATEOAS</strong> (Hypermedia as the Engine of Application State) principle.</li>
+  <li>It is focused on a specific, valuable pattern in Spring Boot REST service development: <strong>returning a response with a link to a newly created resource</strong> using the <code class="language-plaintext highlighter-rouge">201 Created</code> status and the <code class="language-plaintext highlighter-rouge">Location</code> header.</li>
+</ul>
+
+<hr />
+
+<h2 id="️-required-maven-dependency">🛠️ Required Maven Dependency</h2>
+
+<p>The core functionality for creating REST services and handling the response entity is provided by the <strong><code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code></strong>.</p>
+
+<h3 id="maven--external-dependency">Maven / External Dependency</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-sample-rest-service-code-201-created">🚀 Sample REST Service Code: <code class="language-plaintext highlighter-rouge">201 Created</code></h2>
+
+<p>When a resource is successfully created via a <code class="language-plaintext highlighter-rouge">POST</code> request, the standard <strong>HTTP status code is <code class="language-plaintext highlighter-rouge">201 Created</code></strong>. Best practice dictates including a <strong><code class="language-plaintext highlighter-rouge">Location</code> header</strong> in the response, pointing to the newly created resource’s URI.</p>
+
+<h3 id="code-changes-userresourcejava">Code Changes: <code class="language-plaintext highlighter-rouge">UserResource.java</code></h3>
+
+<p>We utilize <strong><code class="language-plaintext highlighter-rouge">ServletUriComponentsBuilder</code></strong> to easily construct the new resource’s URI based on the current request’s context.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// language: java</span>
+<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PostMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.support.ServletUriComponentsBuilder</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserResource</span> <span class="o">{</span>
+
+    <span class="c1">// ... UserDaoService and Logger Autowire / initialization ...</span>
+
+    <span class="cm">/**
+     * Creates a new User and returns a 201 Created status
+     * with the new resource's URI in the Location header.
+     */</span>
+    <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/users"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">User</span><span class="o">&gt;</span> <span class="nf">createUser</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">User</span> <span class="n">user</span><span class="o">)</span> <span class="o">{</span>
+
+        <span class="c1">// 1. Save the new resource</span>
+        <span class="n">logger</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"User to save : {}"</span><span class="o">,</span> <span class="n">user</span><span class="o">);</span>
+        <span class="nc">User</span> <span class="n">savedUser</span> <span class="o">=</span> <span class="n">userDaoService</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">user</span><span class="o">);</span>
+
+        <span class="c1">// 2. Build URL to the new Resource using the current request's context</span>
+        <span class="c1">// e.g., POST http://localhost:8080/users -&gt; URI: http://localhost:8080/users/{id}</span>
+        <span class="no">URI</span> <span class="n">location</span> <span class="o">=</span> <span class="nc">ServletUriComponentsBuilder</span><span class="o">.</span><span class="na">fromCurrentRequest</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">path</span><span class="o">(</span><span class="s">"/{id}"</span><span class="o">)</span> <span class="c1">// Append the path segment</span>
+            <span class="o">.</span><span class="na">buildAndExpand</span><span class="o">(</span><span class="n">savedUser</span><span class="o">.</span><span class="na">getId</span><span class="o">())</span> <span class="c1">// Replaces {id} with the actual ID</span>
+            <span class="o">.</span><span class="na">toUri</span><span class="o">();</span>
+    
+        <span class="c1">// 3. Wrap new URL and response object in ResponseEntity</span>
+        <span class="c1">// ResponseEntity.created(location) sets the HTTP status to 201 and the Location header</span>
+        <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">created</span><span class="o">(</span><span class="n">location</span><span class="o">).</span><span class="na">body</span><span class="o">(</span><span class="n">savedUser</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="project-reference">Project Reference:</h3>
+<ul>
+  <li><a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a2-sboot-ms-social-media-app">Social Media App POC</a></li>
+</ul>
+
+<hr />
+
+<h2 id="️-other-http-verbs-in-rest-controllers">⚙️ Other HTTP Verbs in REST Controllers</h2>
+
+<p>Spring REST Controllers use specific annotations to map handler methods to different <strong>HTTP verbs</strong> (methods) and URIs. This structure is fundamental to RESTful design.</p>
+
+<h4 id="example-controller-for-all-methods">Example Controller for All Methods</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// language: java</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.DeleteMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PatchMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PathVariable</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PostMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PutMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ItemResource</span> <span class="o">{</span>
+
+    <span class="c1">// 1. GET: Retrieve a resource or a collection</span>
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/items"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;</span> <span class="nf">retrieveAllItems</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">itemDaoService</span><span class="o">.</span><span class="na">findAll</span><span class="o">();</span> <span class="c1">// Returns a list (200 OK)</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 2. GET: Retrieve a specific resource</span>
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/items/{id}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">Item</span> <span class="nf">retrieveItem</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">itemDaoService</span><span class="o">.</span><span class="na">findOne</span><span class="o">(</span><span class="n">id</span><span class="o">);</span> <span class="c1">// Returns the Item (200 OK)</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 3. POST: Create a new resource (as discussed)</span>
+    <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/items"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;</span> <span class="nf">createItem</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">Item</span> <span class="n">item</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// ... logic for 201 Created ...</span>
+        <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">created</span><span class="o">(</span><span class="n">location</span><span class="o">).</span><span class="na">body</span><span class="o">(</span><span class="n">item</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 4. PUT: Update an existing resource (full replacement)</span>
+    <span class="nd">@PutMapping</span><span class="o">(</span><span class="s">"/items/{id}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;</span> <span class="nf">updateItem</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">id</span><span class="o">,</span> <span class="nd">@RequestBody</span> <span class="nc">Item</span> <span class="n">itemDetails</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Update logic...</span>
+        <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">updatedItem</span><span class="o">);</span> <span class="c1">// 200 OK</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 5. PATCH: Partially update an existing resource (partial modification)</span>
+    <span class="nd">@PatchMapping</span><span class="o">(</span><span class="s">"/items/{id}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Item</span><span class="o">&gt;</span> <span class="nf">patchItem</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">id</span><span class="o">,</span> <span class="nd">@RequestBody</span> <span class="nc">Item</span> <span class="n">itemPatch</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// Partial update logic...</span>
+        <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">(</span><span class="n">patchedItem</span><span class="o">);</span> <span class="c1">// 200 OK</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 6. DELETE: Remove a resource</span>
+    <span class="nd">@DeleteMapping</span><span class="o">(</span><span class="s">"/items/{id}"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Void</span><span class="o">&gt;</span> <span class="nf">deleteItem</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="kt">int</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">itemDaoService</span><span class="o">.</span><span class="na">deleteById</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>
+        <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">noContent</span><span class="o">().</span><span class="na">build</span><span class="o">();</span> <span class="c1">// 204 No Content</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-different-http-error-and-status-codes">🚦 Different HTTP Error and Status Codes</h2>
+
+<p>Properly using <strong>HTTP Status Codes</strong> is vital for a clear contract between the server and the client. Spring’s <strong><code class="language-plaintext highlighter-rouge">ResponseEntity</code></strong> class makes it easy to return any status code.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Status Code</th>
+      <th style="text-align: left">Category</th>
+      <th style="text-align: left">Use Case / Meaning</th>
+      <th style="text-align: left">Spring Boot Response</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong><code class="language-plaintext highlighter-rouge">200</code></strong></td>
+      <td style="text-align: left"><strong>Success</strong></td>
+      <td style="text-align: left"><strong>OK</strong>. Standard response for successful HTTP requests (GET, PUT, DELETE).</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ResponseEntity.ok().body(...)</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong><code class="language-plaintext highlighter-rouge">201</code></strong></td>
+      <td style="text-align: left"><strong>Success</strong></td>
+      <td style="text-align: left"><strong>Created</strong>. Successful creation of a new resource (POST).</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ResponseEntity.created(uri).body(...)</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong><code class="language-plaintext highlighter-rouge">204</code></strong></td>
+      <td style="text-align: left"><strong>Success</strong></td>
+      <td style="text-align: left"><strong>No Content</strong>. Successful request, but no content to return (e.g., successful DELETE).</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ResponseEntity.noContent().build()</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong><code class="language-plaintext highlighter-rouge">400</code></strong></td>
+      <td style="text-align: left"><strong>Client Error</strong></td>
+      <td style="text-align: left"><strong>Bad Request</strong>. The server cannot process the request due to client error (e.g., malformed JSON).</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ResponseEntity.badRequest().body(...)</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong><code class="language-plaintext highlighter-rouge">401</code></strong></td>
+      <td style="text-align: left"><strong>Client Error</strong></td>
+      <td style="text-align: left"><strong>Unauthorized</strong>. Authentication is required and has failed or not been provided.</td>
+      <td style="text-align: left">Handled by Spring Security.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong><code class="language-plaintext highlighter-rouge">403</code></strong></td>
+      <td style="text-align: left"><strong>Client Error</strong></td>
+      <td style="text-align: left"><strong>Forbidden</strong>. The client is authenticated but does not have permission to access the resource.</td>
+      <td style="text-align: left">Handled by Spring Security.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong><code class="language-plaintext highlighter-rouge">404</code></strong></td>
+      <td style="text-align: left"><strong>Client Error</strong></td>
+      <td style="text-align: left"><strong>Not Found</strong>. The requested resource could not be found.</td>
+      <td style="text-align: left">Throw a custom <code class="language-plaintext highlighter-rouge">ResponseStatusException</code> or <code class="language-plaintext highlighter-rouge">NotFoundException</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong><code class="language-plaintext highlighter-rouge">500</code></strong></td>
+      <td style="text-align: left"><strong>Server Error</strong></td>
+      <td style="text-align: left"><strong>Internal Server Error</strong>. A generic error occurred on the server.</td>
+      <td style="text-align: left">Thrown by default for unhandled exceptions.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
 
 
 
