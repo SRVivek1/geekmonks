@@ -1,4 +1,4 @@
-<h1>Content Internationalization</h1>
+<h1>🌐 Internationalization (i18n) in Spring Boot</h1>
 
 <p>
   Updated on: 31 Oct 2024
@@ -11,71 +11,279 @@
 
 <hr/>
 
-<h2 id="5-internationalization-i18n">5. Internationalization (i18n)</h2>
-<h3 id="project-ref-a6-sboot-ms-content-i18n">Project ref: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a6-sboot-ms-content-i18n">a6-sboot-ms-content-i18n</a></h3>
+<h2 id="-table-of-contents">🧭 Table of Contents</h2>
 <ul>
-  <li><strong><ins>Maven / External dependency</ins></strong>
+  <li><a href="#-table-of-contents">🧭 Table of Contents</a></li>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#️-maven-dependencies">🛠️ Maven Dependencies</a>
     <ul>
-      <li>Required API is available as part of spring-context dependency.</li>
-      <li>This is imported with spring web dependency internally.
- 	<code class="language-plaintext highlighter-rouge">xml
-	&lt;dependency&gt;
-        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-    &lt;/dependency&gt;
-</code></li>
+      <li><a href="#key-point">Key Point</a></li>
+      <li><a href="#pomxml">pom.xml</a></li>
     </ul>
   </li>
-  <li><strong><ins>Code changes</ins></strong>
+  <li><a href="#-core-code-implementation">💻 Core Code Implementation</a>
     <ul>
-      <li>imports
-        <ul>
-          <li><code class="language-plaintext highlighter-rouge">import org.springframework.context.MessageSource;</code></li>
-        </ul>
-      </li>
-      <li>Autowire the MessageSource in required class.
-        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@RestController</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldI18n</span> <span class="o">{</span>
+      <li><a href="#key-point-1">Key Point</a></li>
+      <li><a href="#java-controller-example">Java Controller Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#-resource-files-for-messages">📂 Resource Files for Messages</a>
+    <ul>
+      <li><a href="#key-point-2">Key Point</a></li>
+      <li><a href="#file-structure-examples">File Structure Examples</a></li>
+      <li><a href="#content-example">Content Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#-key-observations">📝 Key Observations</a>
+    <ul>
+      <li><a href="#how-locale-is-determined">How Locale is Determined</a></li>
+      <li><a href="#example-request-header">Example Request Header</a></li>
+    </ul>
+  </li>
+  <li><a href="#-architectural-insight">📐 Architectural Insight</a>
+    <ul>
+      <li><a href="#i18n-message-resolution-flow">i18n Message Resolution Flow</a></li>
+    </ul>
+  </li>
+  <li><a href="#-benefits-and-drawbacks">✅ Benefits and Drawbacks</a></li>
+  <li><a href="#-suggested-improvements">🚀 Suggested Improvements</a></li>
+</ul>
 
-        <span class="kd">private</span> <span class="nc">MessageSource</span> <span class="n">messageSource</span><span class="o">;</span>
+<hr />
 
-        <span class="c1">// autowire (constructor injection) messageSource.</span>
-        <span class="kd">public</span> <span class="nf">HelloWorldI18n</span><span class="o">(</span><span class="nc">MessageSource</span> <span class="n">messageSource</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kd">super</span><span class="o">();</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">messageSource</span> <span class="o">=</span> <span class="n">messageSource</span><span class="o">;</span>
-        <span class="o">}</span>
+<h2 id="introduction">Introduction</h2>
+<p>Internationalization, or <strong>i18n</strong>, is the process of designing your application to adapt to various languages and regions without requiring engineering changes.</p>
+<ul>
+  <li>In a Spring Boot microservice, this is crucial for creating a global user experience. Spring’s <strong><code class="language-plaintext highlighter-rouge">MessageSource</code></strong> abstraction simplifies this process by resolving messages (text strings) based on a user’s locale.</li>
+</ul>
 
-        <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/say-hello-i18n"</span><span class="o">)</span>
-        <span class="kd">public</span> <span class="nc">String</span> <span class="nf">sayHello</span><span class="o">()</span> <span class="o">{</span>
+<hr />
 
-            <span class="kt">var</span> <span class="n">locale</span> <span class="o">=</span> <span class="nc">LocaleContextHolder</span><span class="o">.</span><span class="na">getLocale</span><span class="o">();</span>
+<h2 id="️-maven-dependencies">🛠️ Maven Dependencies</h2>
 
-            <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">messageSource</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(</span><span class="s">"good.morning"</span><span class="o">,</span> <span class="kc">null</span><span class="o">,</span> <span class="s">"Default - Good Morning"</span><span class="o">,</span> <span class="n">locale</span><span class="o">);</span>
-        <span class="o">}</span>
+<h3 id="key-point">Key Point</h3>
+
+<p>The necessary API for i18n, primarily the <strong><code class="language-plaintext highlighter-rouge">MessageSource</code></strong> interface, is part of the <code class="language-plaintext highlighter-rouge">spring-context</code> dependency. When you use the standard <strong><code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code></strong>, this is <strong>included automatically</strong>, so no explicit extra dependency is required in most cases.</p>
+
+<p><br /></p>
+
+<h3 id="pomxml">pom.xml</h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-core-code-implementation">💻 Core Code Implementation</h2>
+
+<h3 id="key-point-1">Key Point</h3>
+
+<p>The implementation involves <strong>autowiring</strong> the <strong><code class="language-plaintext highlighter-rouge">MessageSource</code></strong> bean, which Spring Boot auto-configures. The key method is <code class="language-plaintext highlighter-rouge">getMessage()</code>, where we provide the message <strong>key</strong>, optional arguments, a <strong>default message</strong>, and the desired <strong><code class="language-plaintext highlighter-rouge">Locale</code></strong>. The <code class="language-plaintext highlighter-rouge">Locale</code> is typically extracted from the incoming HTTP request’s <strong><code class="language-plaintext highlighter-rouge">Accept-Language</code></strong> header using <strong><code class="language-plaintext highlighter-rouge">LocaleContextHolder.getLocale()</code></strong>.</p>
+
+<h3 id="java-controller-example">Java Controller Example</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Locale</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.MessageSource</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.i18n.LocaleContextHolder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">HelloWorldI18n</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">final</span> <span class="nc">MessageSource</span> <span class="n">messageSource</span><span class="o">;</span>
+
+    <span class="c1">// Use constructor injection for MessageSource (Best Practice)</span>
+    <span class="kd">public</span> <span class="nf">HelloWorldI18n</span><span class="o">(</span><span class="nc">MessageSource</span> <span class="n">messageSource</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">messageSource</span> <span class="o">=</span> <span class="n">messageSource</span><span class="o">;</span>
     <span class="o">}</span>
-</code></pre></div>        </div>
-      </li>
-      <li>Create property files for different locale
-        <ul>
-          <li>File: <code class="language-plaintext highlighter-rouge">messages[-&lt;locale&gt;].properties</code></li>
-          <li>Here’s some examples:
-            <ul>
-              <li>Default: <code class="language-plaintext highlighter-rouge">messages.properties</code></li>
-              <li>Spanish: <code class="language-plaintext highlighter-rouge">messages_es.properties</code></li>
-              <li>German: <code class="language-plaintext highlighter-rouge">messages_ger.properties</code></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong><ins>Notes:</ins></strong>
+
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/say-hello-i18n"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">sayHello</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="c1">// Get the Locale from the current HTTP Request's Accept-Language header</span>
+        <span class="kt">var</span> <span class="n">locale</span> <span class="o">=</span> <span class="nc">LocaleContextHolder</span><span class="o">.</span><span class="na">getLocale</span><span class="o">();</span>
+
+        <span class="c1">// Resolve the message key based on the determined locale</span>
+        <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">messageSource</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(</span>
+                <span class="s">"good.morning"</span><span class="o">,</span> <span class="c1">// The message key</span>
+                <span class="kc">null</span><span class="o">,</span>           <span class="c1">// Arguments for parametric messages</span>
+                <span class="s">"Default - Good Morning"</span><span class="o">,</span> <span class="c1">// Fallback message if key not found</span>
+                <span class="n">locale</span>          <span class="c1">// The target locale</span>
+        <span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-resource-files-for-messages">📂 Resource Files for Messages</h2>
+
+<h3 id="key-point-2">Key Point</h3>
+
+<p>Messages are stored in standard Java <strong><code class="language-plaintext highlighter-rouge">.properties</code></strong> files following the naming convention: <strong><code class="language-plaintext highlighter-rouge">messages[-&lt;locale&gt;].properties</code></strong>. Spring Boot automatically looks for these files on the classpath (typically in <code class="language-plaintext highlighter-rouge">src/main/resources/</code>).</p>
+
+<h3 id="file-structure-examples">File Structure Examples</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">File Name</th>
+      <th style="text-align: left">Locale</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">messages.properties</code></td>
+      <td style="text-align: left">Default (Fallback)</td>
+      <td style="text-align: left">Used when no specific locale file is found.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">messages_en.properties</code></td>
+      <td style="text-align: left">English (US/UK)</td>
+      <td style="text-align: left">Used for English-speaking users.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">messages_es.properties</code></td>
+      <td style="text-align: left">Spanish</td>
+      <td style="text-align: left">Used for Spanish-speaking users.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">messages_de.properties</code></td>
+      <td style="text-align: left">German</td>
+      <td style="text-align: left">Used for German-speaking users. (Note: <code class="language-plaintext highlighter-rouge">ger</code> is non-standard)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="content-example">Content Example</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">messages_es.properties</code></strong></p>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">good.morning</span><span class="p">=</span><span class="s">Buenos días</span>
+</code></pre></div></div>
+
+<p><strong><code class="language-plaintext highlighter-rouge">messages.properties</code></strong></p>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">good.morning</span><span class="p">=</span><span class="s">Good Morning (Default)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>Project Reference:</strong> 
+You can view the source code for this setup on Github: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a6-sboot-ms-content-i18n/">Internationalization POC App</a></p>
+
+<hr />
+
+<h2 id="-key-observations">📝 Key Observations</h2>
+
+<h3 id="how-locale-is-determined">How Locale is Determined</h3>
+
+<ul>
+  <li>The mechanism relies on Spring reading the value of the <strong><code class="language-plaintext highlighter-rouge">Accept-Language</code></strong> HTTP Header sent by the client (e.g., a browser or another microservice).</li>
+  <li>Based on this header (e.g., <code class="language-plaintext highlighter-rouge">es</code>, <code class="language-plaintext highlighter-rouge">de-DE</code>, <code class="language-plaintext highlighter-rouge">en-US</code>), Spring finds the most appropriate <strong><code class="language-plaintext highlighter-rouge">messages[-&lt;locale&gt;].properties</code></strong> file.</li>
+  <li>The default message file <strong>prefix</strong> is <strong><code class="language-plaintext highlighter-rouge">messages</code></strong> and the <strong>suffix</strong> is <strong><code class="language-plaintext highlighter-rouge">.properties</code></strong>.
     <ul>
-      <li>Default message files name prefix is <code class="language-plaintext highlighter-rouge">messages</code> &amp; suffix is <code class="language-plaintext highlighter-rouge">.properties</code>.</li>
-      <li>Spring reads the value of <code class="language-plaintext highlighter-rouge">Accept-Language</code> Header from <code class="language-plaintext highlighter-rouge">HTTP Request</code>and replaces it with <code class="language-plaintext highlighter-rouge">&lt;locale&gt;</code> when locating <code class="language-plaintext highlighter-rouge">messsages[-&lt;locale&gt;].properties</code> file.</li>
+      <li>This can be customized in <code class="language-plaintext highlighter-rouge">application.properties</code> using <strong><code class="language-plaintext highlighter-rouge">spring.messages.basename</code></strong>.</li>
     </ul>
   </li>
 </ul>
+
+<h3 id="example-request-header">Example Request Header</h3>
+
+<blockquote>
+  <p><strong>Header:</strong> <code class="language-plaintext highlighter-rouge">Accept-Language: es</code></p>
+
+  <p><strong>Action:</strong> Spring resolves the message from <code class="language-plaintext highlighter-rouge">messages_es.properties</code>.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-architectural-insight">📐 Architectural Insight</h2>
+
+<h3 id="i18n-message-resolution-flow">i18n Message Resolution Flow</h3>
+
+<p>This diagram illustrates how a request’s locale determines the message resolution.</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+    participant C as Client (e.g., Browser)
+    participant A as Spring Boot Microservice
+    participant MS as MessageSource (Internal)
+    participant RF as Resource Files (.properties)
+
+    C-&gt;&gt;A: HTTP GET /say-hello-i18n (Header: Accept-Language: es)
+    A-&gt;&gt;A: Get Locale from LocaleContextHolder
+    A-&gt;&gt;MS: messageSource.getMessage("good.morning", ..., locale)
+    MS-&gt;&gt;RF: Look for messages_es.properties
+    alt File Found
+        RF--&gt;&gt;MS: Return message "Buenos días"
+    else File Not Found
+        RF--&gt;&gt;MS: Look for messages.properties (Default)
+        RF--&gt;&gt;MS: Return message "Good Morning (Default)"
+    end
+    MS--&gt;&gt;A: Resolved Message
+    A--&gt;&gt;C: HTTP Response (Body: Resolved Message)
+</code></pre>
+
+<hr />
+
+<h2 id="-benefits-and-drawbacks">✅ Benefits and Drawbacks</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Aspect</th>
+      <th style="text-align: left">Benefits 👍</th>
+      <th style="text-align: left">Drawbacks 👎</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Accessibility</strong></td>
+      <td style="text-align: left"><strong>Wider market reach</strong> and better user experience for global users.</td>
+      <td style="text-align: left"><strong>Maintenance Overhead</strong> for translating and managing numerous resource files.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Code</strong></td>
+      <td style="text-align: left"><strong>Clean separation</strong> of text content from the Java code (no hardcoded strings).</td>
+      <td style="text-align: left"><strong>Requires discipline</strong> to use message keys everywhere, not just hardcode strings.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Scalability</strong></td>
+      <td style="text-align: left">Easy to add new languages by simply adding a new <code class="language-plaintext highlighter-rouge">.properties</code> file.</td>
+      <td style="text-align: left"><strong>Context Loss</strong> during translation; translators might lack context without proper comments/guidance.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="-suggested-improvements">🚀 Suggested Improvements</h2>
+
+<p>For a robust, production-ready microservice implementation, consider these enhancements:</p>
+
+<ol>
+  <li>
+    <p><strong>Custom Base Name:</strong> Define the base name explicitly in <code class="language-plaintext highlighter-rouge">application.properties</code> to ensure future-proofing and clarity.</p>
+
+    <div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="py">spring.messages.basename</span><span class="p">=</span><span class="s">i18n/messages</span>
+</code></pre></div>    </div>
+
+    <p><em>(This would require placing files in a sub-directory, e.g., <code class="language-plaintext highlighter-rouge">src/main/resources/i18n/</code>)</em></p>
+  </li>
+  <li>
+    <p><strong>Parametric Messages:</strong> Use placeholders in messages for dynamic content, e.g., <code class="language-plaintext highlighter-rouge">good.morning.user=Buenos días, {0}</code>. The <code class="language-plaintext highlighter-rouge">getMessage</code> method can then pass the argument: <code class="language-plaintext highlighter-rouge">messageSource.getMessage("good.morning.user", new Object[]{"Vivek"}, ...)</code></p>
+  </li>
+  <li>
+    <p><strong>Externalizing MessageSource:</strong> For large microservice deployments or applications requiring real-time updates, consider implementing a <strong>custom <code class="language-plaintext highlighter-rouge">MessageSource</code></strong> that loads messages from a <strong>centralized database</strong> or a <strong>configuration service</strong> (e.g., Consul, Spring Cloud Config).</p>
+  </li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
 
 
 <!-- TODO: add footer -->
