@@ -11,46 +11,193 @@
 
 <hr/>
 
-<h3 id="project-ref-a4-sboot-ms-springdoc-swagger-openapi">Project ref: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a4-sboot-ms-springdoc-swagger-openapi">a4-sboot-ms-springdoc-swagger-openapi</a></h3>
+<blockquote>
+  <p>💡 In this section we will cover the simplest way to integrate <strong>Swagger UI</strong> into a <strong>Spring Boot</strong> application using the <strong><code class="language-plaintext highlighter-rouge">springdoc-openapi</code></strong> library for automatic <strong>OpenAPI</strong> specification generation. This is essential for robust, well-documented microservices.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-table-of-contents">🧭 Table of Contents</h2>
+
 <ul>
-  <li><strong><ins>Maven / External dependency</ins></strong>
+  <li><a href="#-table-of-contents">🧭 Table of Contents</a></li>
+  <li><a href="#️-maven-dependency-setup">🛠️ Maven Dependency Setup</a></li>
+  <li><a href="#️-automatic-configuration">⚙️ Automatic Configuration</a></li>
+  <li><a href="#-accessing-the-swagger-ui">🔗 Accessing the Swagger UI</a></li>
+  <li><a href="#️-conceptual-architecture">🏗️ Conceptual Architecture</a>
     <ul>
-      <li>Add spring validation dependency.
- 	<code class="language-plaintext highlighter-rouge">xml
-	&lt;dependency&gt;
-        &lt;groupId&gt;org.springdoc&lt;/groupId&gt;
-        &lt;artifactId&gt;springdoc-openapi-starter-webmvc-ui&lt;/artifactId&gt;
-        &lt;version&gt;2.7.0&lt;/version&gt;
-    &lt;/dependency&gt;
-</code></li>
+      <li><a href="#️-architecture-diagram">🖼️ Architecture Diagram</a></li>
     </ul>
   </li>
-  <li><strong><ins>Code changes</ins></strong>
+  <li><a href="#-engineering-insights--next-steps">✨ Engineering Insights \&amp; Next Steps</a>
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">None</code>.</li>
-    </ul>
-  </li>
-  <li><strong><ins>Swagger URL:</ins></strong>
-    <ul>
-      <li>http://localhost:8080/swagger-ui</li>
-      <li>http://localhost:8080/swagger-ui/index.html</li>
-    </ul>
-  </li>
-  <li><strong><ins>Notes:</ins></strong>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">No code change required to enable swagger documentation</code>.</li>
-      <li>It’s enabled by default if the ependency is present in <code class="language-plaintext highlighter-rouge">POM.xml</code></li>
-    </ul>
-  </li>
-  <li><strong><ins>References:</ins></strong>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">https://github.com/springdoc/springdoc-openapi/blob/main/springdoc-openapi-starter-webmvc-ui</code></li>
-      <li>
-        <h2 id="httpsspringdocorggetting-started"><code class="language-plaintext highlighter-rouge">https://springdoc.org/#getting-started</code></h2>
+      <li><a href="#1-customizing-the-documentation">1. <strong>Customizing the Documentation</strong></a>
+        <ul>
+          <li><a href="#example-poc-code-snippet-java-controller">Example POC Code Snippet (Java Controller)</a></li>
+        </ul>
       </li>
+      <li><a href="#2-configuration-customization">2. <strong>Configuration Customization</strong></a>
+        <ul>
+          <li><a href="#example-configuration-snippet-yaml"><strong>Example Configuration Snippet (YAML)</strong></a></li>
+        </ul>
+      </li>
+      <li><a href="#3-security-awareness">3. <strong>Security Awareness</strong></a></li>
     </ul>
   </li>
+  <li><a href="#-key-takeaways">🔑 Key Takeaways</a></li>
+  <li><a href="#-references">📖 References</a></li>
 </ul>
+
+<hr />
+
+<h2 id="️-maven-dependency-setup">🛠️ Maven Dependency Setup</h2>
+
+<p>To enable OpenAPI documentation and the interactive Swagger UI, you need to add the following dependency to your <code class="language-plaintext highlighter-rouge">pom.xml</code>. This single dependency handles all required libraries.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springdoc<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>springdoc-openapi-starter-webmvc-ui<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>2.7.0<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-automatic-configuration">⚙️ Automatic Configuration</h2>
+
+<p>One of the greatest features of <code class="language-plaintext highlighter-rouge">springdoc-openapi</code> is its reliance on Spring Boot’s <strong>auto-configuration</strong>.</p>
+
+<ul>
+  <li><strong>No code change required to enable swagger documentation.</strong></li>
+  <li>The library automatically scans your <strong>Spring MVC controllers</strong> (<code class="language-plaintext highlighter-rouge">@RestController</code>) and their methods to generate the <strong>OpenAPI JSON/YAML specification</strong> at runtime.</li>
+  <li>This specification is then used by the bundled <strong>Swagger UI</strong> to display the API documentation.</li>
+</ul>
+
+<hr />
+
+<h2 id="-accessing-the-swagger-ui">🔗 Accessing the Swagger UI</h2>
+
+<p>Once the application is running (e.g., on port 8080), you can access the interactive documentation via the following URLs:</p>
+
+<ul>
+  <li><strong>Primary Access URL:</strong> <code class="language-plaintext highlighter-rouge">http://localhost:8080/swagger-ui.html</code> (or simply <code class="language-plaintext highlighter-rouge">http://localhost:8080/swagger-ui</code>)</li>
+  <li><strong>Alternative URL:</strong> <code class="language-plaintext highlighter-rouge">http://localhost:8080/swagger-ui/index.html</code></li>
+  <li><strong>OpenAPI Specification URL (JSON):</strong> <code class="language-plaintext highlighter-rouge">http://localhost:8080/v3/api-docs</code></li>
+  <li><strong>OpenAPI Specification URL (YAML):</strong> <code class="language-plaintext highlighter-rouge">http://localhost:8080/v3/api-docs.yaml</code></li>
+</ul>
+
+<hr />
+
+<h2 id="️-conceptual-architecture">🏗️ Conceptual Architecture</h2>
+
+<p>The integration involves the <code class="language-plaintext highlighter-rouge">springdoc-openapi</code> library intercepting the running application context to generate the OpenAPI document, which is then served by the Swagger UI interface.</p>
+
+<h3 id="️-architecture-diagram">🖼️ Architecture Diagram</h3>
+
+<p>This diagram illustrates how the components interact in your Spring Boot application.</p>
+
+<pre><code class="language-mermaid">graph TD
+    A[Spring Boot Application] --&gt; B(Spring MVC Controllers);
+    subgraph Springdoc OpenAPI
+        C(OpenAPI Specification Generator)
+        D(Swagger UI Web Assets)
+    end
+    B --&gt; C;
+    C --&gt; E[OpenAPI JSON/YAML /v3/api-docs];
+    E --&gt; D;
+    D --&gt; F[User Browser Click to open /swagger-ui.html];
+    style D fill:#f9f,stroke:#333
+    style F fill:#ccf,stroke:#333
+    style C fill:#ddf,stroke:#333
+    style A fill:#dfd,stroke:#333
+    click F "http://localhost:8080/swagger-ui.html" "Swagger UI URL"
+</code></pre>
+
+<hr />
+
+<h2 id="-engineering-insights--next-steps">✨ Engineering Insights &amp; Next Steps</h2>
+
+<h3 id="1-customizing-the-documentation">1. <strong>Customizing the Documentation</strong></h3>
+
+<p>While basic documentation is automatic, a robust microservice needs detailed descriptions. Use <strong>OpenAPI Annotations</strong> (e.g., from <code class="language-plaintext highlighter-rouge">io.swagger.v3.oas.annotations</code>) on your controllers and models for rich documentation.</p>
+
+<h4 id="example-poc-code-snippet-java-controller">Example POC Code Snippet (Java Controller)</h4>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">io.swagger.v3.oas.annotations.Operation</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">io.swagger.v3.oas.annotations.tags.Tag</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="nd">@RequestMapping</span><span class="o">(</span><span class="s">"/api/v1/users"</span><span class="o">)</span>
+<span class="nd">@Tag</span><span class="o">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">"User Management"</span><span class="o">,</span> <span class="n">description</span> <span class="o">=</span> <span class="s">"Operations for managing application users."</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserController</span> <span class="o">{</span>
+
+    <span class="nd">@Operation</span><span class="o">(</span><span class="n">summary</span> <span class="o">=</span> <span class="s">"Get a list of all active users"</span><span class="o">,</span> 
+               <span class="n">description</span> <span class="o">=</span> <span class="s">"Returns a comprehensive list of all users currently active in the system."</span><span class="o">)</span>
+    <span class="nd">@GetMapping</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAllUsers</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"List of Users"</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="2-configuration-customization">2. <strong>Configuration Customization</strong></h3>
+
+<p>You can customize the OpenAPI globally by adding properties in your <code class="language-plaintext highlighter-rouge">application.properties</code> or <code class="language-plaintext highlighter-rouge">application.yml</code>.</p>
+
+<h4 id="example-configuration-snippet-yaml"><strong>Example Configuration Snippet (YAML)</strong></h4>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># application.yml</span>
+<span class="na">springdoc</span><span class="pi">:</span>
+  <span class="c1"># General API Information</span>
+  <span class="na">swagger-ui</span><span class="pi">:</span>
+    <span class="na">path</span><span class="pi">:</span> <span class="s">/custom-api-docs</span> <span class="c1"># Change the UI access path</span>
+    <span class="na">disable-swagger-default-url</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">display-operation-id</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">info</span><span class="pi">:</span>
+    <span class="na">title</span><span class="pi">:</span> <span class="s">My Secure Microservice API</span>
+    <span class="na">description</span><span class="pi">:</span> <span class="s">A robust and scalable microservice for user data processing.</span>
+    <span class="na">version</span><span class="pi">:</span> <span class="s">v1.0.1</span>
+    <span class="na">contact</span><span class="pi">:</span>
+      <span class="na">name</span><span class="pi">:</span> <span class="s">SRE Team</span>
+      <span class="na">url</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">https</span><span class="pi">:</span><span class="nv">//your-company.com/sre</span><span class="pi">]</span><span class="s">(https://your-company.com/sre)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="3-security-awareness">3. <strong>Security Awareness</strong></h3>
+
+<p><strong>Improvement Suggestion:</strong> By default, Swagger UI is accessible to everyone and <code class="language-plaintext highlighter-rouge">in a production microservice, it's a security risk</code>.</p>
+
+<ul>
+  <li><strong>Actionable Step:</strong> Implement <strong>Spring Security</strong> to secure the <code class="language-plaintext highlighter-rouge">/swagger-ui.html</code> and <code class="language-plaintext highlighter-rouge">/v3/api-docs</code> endpoints, restricting access to authorized personnel only (e.g., developers, QA).</li>
+</ul>
+
+<hr />
+
+<h2 id="-key-takeaways">🔑 Key Takeaways</h2>
+
+<ul>
+  <li>The <strong><code class="language-plaintext highlighter-rouge">springdoc-openapi-starter-webmvc-ui</code></strong> is the <strong>minimalistic dependency</strong> required to integrate Swagger UI.</li>
+  <li>It <strong>auto-configures</strong> both the <strong>OpenAPI specification</strong> generation and the <strong>Swagger UI</strong> frontend.</li>
+  <li><strong>No manual code changes</strong> (like adding configuration classes or annotations) are typically needed for basic documentation.</li>
+  <li>The generated documentation conforms to the latest <strong>OpenAPI 3</strong> specification.</li>
+</ul>
+
+<hr />
+
+<h2 id="-references">📖 References</h2>
+
+<ul>
+  <li><strong>springdoc-openapi GitHub:</strong> <code class="language-plaintext highlighter-rouge">https://github.com/springdoc/springdoc-openapi/blob/main/springdoc-openapi-starter-webmvc-ui</code></li>
+  <li><strong>springdoc Official Documentation:</strong> <code class="language-plaintext highlighter-rouge">https://springdoc.org/#getting-started</code></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
 
 
 <!-- TODO: add footer -->
