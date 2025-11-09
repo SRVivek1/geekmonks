@@ -1,0 +1,176 @@
+<h1>📅 Microservice - API Retirement Strategies</h1>
+
+<p>
+  Updated on: 09 Nov 2024
+  
+  
+  
+    - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a>
+  
+</p>
+
+<hr/>
+
+<h2 id="-table-of-contents">🧭 Table of Contents</h2>
+
+<ul>
+  <li><a href="#-table-of-contents">🧭 Table of Contents</a></li>
+  <li><a href="#-the-api-retirement-lifecycle">📅 The API Retirement Lifecycle</a></li>
+  <li><a href="#-best-practices-for-communication">📢 Best Practices for Communication</a>
+    <ul>
+      <li><a href="#1-early-and-multi-channel-notification">1. Early and Multi-Channel Notification</a></li>
+      <li><a href="#2-technical-communication-via-http-headers">2. Technical Communication via HTTP Headers</a></li>
+    </ul>
+  </li>
+  <li><a href="#-technical-and-operational-steps">📈 Technical and Operational Steps</a>
+    <ul>
+      <li><a href="#monitor-and-track-usage">Monitor and Track Usage</a></li>
+      <li><a href="#update-documentation-and-sdks">Update Documentation and SDKs</a></li>
+      <li><a href="#post-sunset-action">Post-Sunset Action</a></li>
+    </ul>
+  </li>
+  <li><a href="#next-steps-and-improvements">💡Next Steps and Improvements</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-the-api-retirement-lifecycle">📅 The API Retirement Lifecycle</h2>
+
+<p>The retirement of an API version follows two distinct, sequential phases: <strong>Deprecation</strong> and <strong>Sunsetting</strong>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Phase</th>
+      <th style="text-align: left">Definition</th>
+      <th style="text-align: left">Goal</th>
+      <th style="text-align: left">Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Deprecation</strong></td>
+      <td style="text-align: left">The version is <strong>no longer recommended</strong> for use, and development/new features stop. It remains fully functional.</td>
+      <td style="text-align: left">Stop new client adoption and encourage existing clients to plan their migration.</td>
+      <td style="text-align: left">Long (e.g., <strong>6 to 12 months</strong>).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Sunsetting</strong></td>
+      <td style="text-align: left">The final phase where the version is scheduled to be <strong>permanently disabled</strong> (retired).</td>
+      <td style="text-align: left">Ensure all remaining clients have migrated before the API stops responding.</td>
+      <td style="text-align: left">Shorter, ending on the final <strong>Retirement/EoL Date</strong>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="-best-practices-for-communication">📢 Best Practices for Communication</h2>
+
+<p>Effective communication is the most critical component of a successful deprecation policy.</p>
+
+<h3 id="1-early-and-multi-channel-notification">1. Early and Multi-Channel Notification</h3>
+
+<ul>
+  <li><strong>Initial Announcement:</strong> As soon as the decision is made, announce it via <strong><code class="language-plaintext highlighter-rouge">email newsletters</code></strong>, <strong><code class="language-plaintext highlighter-rouge">developer portals/blogs</code></strong>, and your <strong><code class="language-plaintext highlighter-rouge">change log</code></strong>.</li>
+  <li><strong>Clear Timelines:</strong> Specify the <strong>Deprecation Date</strong> and the final <strong>Sunset Date</strong> (EoL). A grace period of at least <strong>6-12 months</strong> is highly recommended, especially for public APIs with large user bases.</li>
+  <li><strong>Reasoning and Alternatives:</strong> Always explain <em>why</em> the version is being retired (e.g., security, performance, new features) and provide <strong>clear migration guides</strong> to the new version.</li>
+</ul>
+
+<h3 id="2-technical-communication-via-http-headers">2. Technical Communication via HTTP Headers</h3>
+
+<p>Utilize standard HTTP response headers for machine-readable communication, enabling clients to automatically detect and log deprecation status.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Header</th>
+      <th style="text-align: left">Purpose</th>
+      <th style="text-align: left">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong><code class="language-plaintext highlighter-rouge">Deprecation</code></strong> (RFC 9745)</td>
+      <td style="text-align: left">Indicates the resource has been or will be deprecated. The value is a <strong>Unix timestamp</strong>.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Deprecation: @1688169599</code> (Timestamp for Jun 30, 2023)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong><code class="language-plaintext highlighter-rouge">Sunset</code></strong> (RFC 8594)</td>
+      <td style="text-align: left">Indicates the date the resource is expected to become <strong>unresponsive/retired</strong>.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Sunset: Sat, 31 Dec 2025 23:59:59 GMT</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong><code class="language-plaintext highlighter-rouge">Link</code></strong></td>
+      <td style="text-align: left">Provides a link to human-readable documentation about the deprecation.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Link: &lt;https://dev.example.com/v1-eol&gt;; rel="deprecation"</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<p><strong>Implementation Example (Spring Boot Concept):</strong>
+You would intercept requests to the old endpoint (<code class="language-plaintext highlighter-rouge">/v1/person</code>) and add the headers:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Example of setting Headers in a Spring Boot Controller (V1 endpoint)</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+
+<span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/v1/person"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">PersonV1</span><span class="o">&gt;</span> <span class="nf">getPersonV1</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">ok</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Deprecation"</span><span class="o">,</span> <span class="s">"true"</span><span class="o">)</span> <span class="c1">// A simple boolean/date</span>
+            <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Sunset"</span><span class="o">,</span> <span class="s">"Sat, 31 Dec 2025 23:59:59 GMT"</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">header</span><span class="o">(</span><span class="s">"Link"</span><span class="o">,</span> <span class="s">"&lt;https://docs.yourcompany.com/v1-migration&gt;; rel=\"deprecation\""</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">body</span><span class="o">(</span><span class="k">new</span> <span class="nc">PersonV1</span><span class="o">(</span><span class="s">"Deprecated V1 Data"</span><span class="o">));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-technical-and-operational-steps">📈 Technical and Operational Steps</h2>
+
+<h3 id="monitor-and-track-usage">Monitor and Track Usage</h3>
+
+<ul>
+  <li>Use API Gateway logs or internal metrics to <strong>monitor traffic</strong> to the deprecated version.</li>
+  <li>The goal is to see usage <strong>gradually drop</strong> over the deprecation period. If usage remains high close to the Sunset Date, you may need to reach out to specific high-volume users.</li>
+</ul>
+
+<h3 id="update-documentation-and-sdks">Update Documentation and SDKs</h3>
+
+<ul>
+  <li>Mark the old version as <strong><code class="language-plaintext highlighter-rouge">deprecated: true</code></strong> in your <strong>OpenAPI (Swagger)</strong> specification.</li>
+  <li>Add a prominent, non-dismissible <strong>banner</strong> on the deprecated version’s documentation page, linking directly to the new version’s documentation and the migration guide.</li>
+  <li>Update any official <strong>SDKs or client libraries</strong> to target the new API version by default and emit warnings if they are still configured to use the old version.</li>
+</ul>
+
+<h3 id="post-sunset-action">Post-Sunset Action</h3>
+
+<ul>
+  <li><strong>Retire:</strong> On the <strong>Sunset Date</strong>, disable the API endpoint. You should serve a <strong>410 Gone</strong> HTTP status code to clearly signal that the resource is permanently unavailable, rather than a 404 Not Found, which implies it never existed.</li>
+  <li><strong>Code Cleanup:</strong> Only after the Sunset Date should you proceed to safely remove the deprecated code from your microservice, realizing the operational cost savings.</li>
+</ul>
+
+<blockquote>
+  <p><strong>Note:</strong>
+By formalizing these steps, you build a consistent process that respects your clients’ time and protects your reputation.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="next-steps-and-improvements">💡Next Steps and Improvements</h2>
+
+<ul>
+  <li><strong>Deprecation Policy:</strong>
+    <ul>
+      <li>Add a formal <strong>deprecation strategy</strong> (e.g., set a <code class="language-plaintext highlighter-rouge">Deprecation</code> or <code class="language-plaintext highlighter-rouge">Sunset</code> HTTP header) to communicate when an old version will be retired.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+
+
+<!-- TODO: add footer -->
