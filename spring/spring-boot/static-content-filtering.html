@@ -1,7 +1,7 @@
-<h1>Static content filtering</h1>
+<h1>🛡️ Content Filtering (Static)</h1>
 
 <p>
-  Updated on: 01 Nov 2024
+  Updated on: 10 Nov 2024
   
   
   
@@ -11,80 +11,221 @@
 
 <hr/>
 
-<h3 id="project-ref-a9-sboot-ms-static-filtering">Project ref: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a9-sboot-ms-static-filtering">a9-sboot-ms-static-filtering</a></h3>
+<h2 id="table-of-contents">Table of Contents</h2>
+
 <ul>
-  <li><strong><ins>Purpose / Feature</ins></strong>
+  <li><a href="#table-of-contents">Table of Contents</a></li>
+  <li><a href="#-overview-what-is-content-filtering">🌟 Overview: What is Content Filtering?</a></li>
+  <li><a href="#-scope-purpose-use-case-benefits-and-drawbacks">🎯 Scope, Purpose, Use Case, Benefits, and Drawbacks</a></li>
+  <li><a href="#key-technology">Key Technology</a></li>
+  <li><a href="#️-dependency-details">🛠️ Dependency Details</a>
     <ul>
-      <li>Content filtering refers to removing the properties from Response bean when sending back to requestor.</li>
-      <li>This feature is available in <code class="language-plaintext highlighter-rouge">jackson-annotations-x.x.jar</code>, which is added as part of <code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code> dependency.</li>
+      <li><a href="#maven-dependency-spring-boot-web-starter">Maven Dependency (Spring Boot Web Starter)</a></li>
     </ul>
   </li>
-  <li><strong><ins>Maven / External dependency</ins></strong>
+  <li><a href="#-code-implementation-static-filtering">💻 Code Implementation (Static Filtering)</a>
     <ul>
-      <li>Add spring validation dependency.
- 	```xml
-	<dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency></li>
+      <li><a href="#-java-bean-annotations">👩‍💻 Java Bean Annotations</a></li>
+      <li><a href="#project-poc">Project POC</a></li>
     </ul>
   </li>
-  <li><strong><ins>Code changes</ins></strong>
+  <li><a href="#-observations-and-static-filtering-notes">💡 Observations and Static Filtering Notes</a></li>
+  <li><a href="#️-engineering-insights-and-best-practices">🖼️ Engineering Insights and Best Practices</a>
     <ul>
-      <li>We only need to update the Java Bean properties. No change required in controller.</li>
-      <li>imports
-        <ul>
-          <li><code class="language-plaintext highlighter-rouge">import com.fasterxml.jackson.annotation.JsonIgnore;</code></li>
-          <li><code class="language-plaintext highlighter-rouge">import com.fasterxml.jackson.annotation.JsonIgnoreProperties;</code></li>
-        </ul>
-      </li>
-      <li>Annotate java properties to ignore while building the response.
-        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/** Ignore all specified properties from the class.  */</span>
-    <span class="nd">@JsonIgnoreProperties</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"property4"</span><span class="o">,</span> <span class="s">"property6"</span><span class="o">})</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeBean</span> <span class="o">{</span>
+      <li><a href="#1-the-need-for-dynamic-filtering">1. The Need for Dynamic Filtering</a></li>
+      <li><a href="#2-separation-of-concerns-soc">2. Separation of Concerns (SoC)</a></li>
+      <li><a href="#3-security-implications">3. Security Implications</a></li>
+    </ul>
+  </li>
+  <li><a href="#-suggested-improvement">🚀 Suggested Improvement</a></li>
+</ul>
 
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property1</span><span class="o">;</span>
-			
-        <span class="c1">// Ignore this property</span>
-        <span class="nd">@JsonIgnore</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property2</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property3</span><span class="o">;</span>
-			
-        <span class="c1">// @JsonIgnoreProperties - Ignore this</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property4</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property5</span><span class="o">;</span>
-			
-        <span class="c1">// @JsonIgnoreProperties - Ignore this</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">property6</span><span class="o">;</span>
+<hr />
 
-        <span class="c1">// constructors, setter-getters and utility methods</span>
-    <span class="o">}</span>
-</code></pre></div>        </div>
-      </li>
-    </ul>
-  </li>
-  <li><strong><ins>Notes:</ins></strong>
+<h2 id="-overview-what-is-content-filtering">🌟 Overview: What is Content Filtering?</h2>
+
+<p>Content filtering, specifically <strong>Static Filtering</strong> in this context, refers to the process of <strong>removing or omitting certain properties</strong> from a Java Response Bean before it is serialized (converted) into the final response format (e.g., JSON or XML) and sent back to the requestor. This is a crucial step in securing and optimizing API responses.</p>
+
+<blockquote>
+  <p>💡 <strong>In short:</strong> It’s about ensuring <strong>only necessary and authorized data</strong> leaves your application and reaches the client.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="-scope-purpose-use-case-benefits-and-drawbacks">🎯 Scope, Purpose, Use Case, Benefits, and Drawbacks</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Aspect</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Scope</strong></td>
+      <td style="text-align: left">Applies to <strong>Response Beans</strong> (POJOs) used by Spring Controllers for serialization, primarily using the <strong>Jackson</strong> library.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Purpose</strong></td>
+      <td style="text-align: left">To <strong>control the data exposure</strong> to the client. This is essential for security and compliance.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Use Case</strong></td>
+      <td style="text-align: left">Hiding sensitive fields like <strong>passwords, internal IDs, or credit card numbers</strong> from non-administrative API consumers.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Benefits</strong></td>
+      <td style="text-align: left"><strong>Security:</strong> Reduces the risk of accidental data leakage. <strong>Performance:</strong> Smaller response payload size, leading to faster data transfer.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Drawbacks</strong></td>
+      <td style="text-align: left"><strong>Hardcoding:</strong> Filters are fixed on the bean itself, making them <strong>inflexible</strong> across different API endpoints (Static Filtering). <strong>Maintenance:</strong> Requires updates to the bean class for every property change.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="key-technology">Key Technology</h2>
+
+<p>This feature is provided by the <strong>Jackson</strong> library, specifically via <strong><code class="language-plaintext highlighter-rouge">jackson-annotations-${version}.jar</code></strong>, which is <strong>automatically included</strong> as a transitive dependency when you use the standard <strong><code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code></strong> in your project.</p>
+
+<hr />
+
+<h2 id="️-dependency-details">🛠️ Dependency Details</h2>
+
+<p>The core functionality for content filtering is provided by the <strong>Jackson Annotations</strong> library.</p>
+
+<ul>
+  <li><strong>Artifact ID:</strong> <code class="language-plaintext highlighter-rouge">jackson-annotations-${version}.jar</code></li>
+</ul>
+
+<h3 id="maven-dependency-spring-boot-web-starter">Maven Dependency (Spring Boot Web Starter)</h3>
+
+<p>The necessary Jackson libraries, including <code class="language-plaintext highlighter-rouge">jackson-annotations</code>, are transitively brought in by the standard Spring Web Starter. No explicit addition of Jackson annotations is typically needed.</p>
+
+<p><strong>XML</strong></p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-code-implementation-static-filtering">💻 Code Implementation (Static Filtering)</h2>
+
+<p>The implementation of static filtering is straightforward and only requires changes within the <strong>Java Bean (POJO)</strong> itself. No modifications are typically needed in the Controller layer.</p>
+
+<h3 id="-java-bean-annotations">👩‍💻 Java Bean Annotations</h3>
+
+<p>We use two primary Jackson annotations to enforce static filtering:</p>
+
+<ol>
+  <li><strong><code class="language-plaintext highlighter-rouge">@JsonIgnore</code></strong>: Marks a <strong>single property</strong> to be ignored during serialization.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">@JsonIgnoreProperties</code></strong>: Marks a <strong>list of properties</strong> (by name) within the class to be ignored.</li>
+</ol>
+
+<!-- end list -->
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">com.fasterxml.jackson.annotation.JsonIgnore</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.annotation.JsonIgnoreProperties</span><span class="o">;</span>
+
+<span class="cm">/** * Ignore 'property4' and 'property5' for any API response using this bean. 
+ */</span>
+<span class="nd">@JsonIgnoreProperties</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="o">{</span><span class="s">"property4"</span><span class="o">,</span> <span class="s">"property5"</span><span class="o">})</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeBean</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">property1</span><span class="o">;</span>
+    
+    <span class="c1">// Ignore the property property2</span>
+    <span class="nd">@JsonIgnore</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">property2</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">property3</span><span class="o">;</span>
+    
+    <span class="c1">// Ignored</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">property4</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">property5</span><span class="o">;</span>
+    
+    
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">property6</span><span class="o">;</span>
+
+    <span class="c1">// constructors, setter-getters and utility methods</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="project-poc">Project POC</h3>
+
+<ul>
+  <li>You can refer to the following GitHub application for a practical demonstration of static content filtering: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a9-sboot-ms-static-filtering">Spring Boot POC App - Static Filtering</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-observations-and-static-filtering-notes">💡 Observations and Static Filtering Notes</h2>
+
+<ul>
+  <li><strong>Hardcoded Nature:</strong> The core takeaway is that this approach <strong>hardcodes</strong> the filtering logic directly onto the bean. Every API that returns this <code class="language-plaintext highlighter-rouge">SomeBean</code> will have the same properties filtered out.</li>
+  <li><strong>Static Filtering:</strong> Due to this inflexible, bean-level hardcoding, this mechanism is explicitly termed <strong>Static Filtering</strong>.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">@JsonIgnore</code> annotation:</strong> Applied to a <strong>specific property</strong> (field/getter) to completely exclude it from both serialization (output) and deserialization (input).</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">@JsonIgnoreProperties</code> annotation:</strong> Applied at the <strong>class level</strong> to specify a list of properties by name that should be ignored during serialization. It’s useful for ignoring multiple fields without cluttering the individual properties.</li>
+  <li><strong>Response Effect:</strong> When the Spring Controller returns an instance of <code class="language-plaintext highlighter-rouge">SomeBean</code>, the Jackson serialization process will omit <code class="language-plaintext highlighter-rouge">property2</code>, <code class="language-plaintext highlighter-rouge">property4</code>, and <code class="language-plaintext highlighter-rouge">property6</code> from the final JSON/XML output.</li>
+</ul>
+
+<hr />
+
+<h2 id="️-engineering-insights-and-best-practices">🖼️ Engineering Insights and Best Practices</h2>
+
+<p>While <strong>Static Filtering</strong> is simple, engineers should be aware of its limitations and the superior alternative: <strong>Dynamic Filtering</strong>.</p>
+
+<h3 id="1-the-need-for-dynamic-filtering">1. The Need for Dynamic Filtering</h3>
+
+<p>The primary drawback of Static Filtering is its <strong>lack of flexibility</strong>. What if <code class="language-plaintext highlighter-rouge">API-A</code> needs property <code class="language-plaintext highlighter-rouge">X</code> exposed, but <code class="language-plaintext highlighter-rouge">API-B</code> (for a different user role) does not? Static filtering fails here because the rule is fixed on the bean.</p>
+
+<ul>
+  <li><strong>Dynamic Filtering</strong> (using <code class="language-plaintext highlighter-rouge">@JsonFilter</code> and <code class="language-plaintext highlighter-rouge">FilterProvider</code>): Allows the developer to define <strong>runtime rules</strong> for filtering. The controller can specify <em>which fields to include/exclude</em> for a given request, providing fine-grained control for different use cases or user roles. This is the <strong>preferred approach for complex, multi-role APIs</strong>.
     <ul>
-      <li>In this approach we’re hardcoding that which properties should not be returned in response when the given bean is returned in response, irrespective of which API is using this.</li>
-      <li>Hence, this is called <code class="language-plaintext highlighter-rouge">Static Filtering</code>.</li>
-      <li><code class="language-plaintext highlighter-rouge">@JsonIgnore</code> annotation:
-        <ul>
-          <li>Marks the property, to be removed when building response from this bean.</li>
-        </ul>
-      </li>
-      <li><code class="language-plaintext highlighter-rouge">@JsonIgnoreProperties</code> annotation
-        <ul>
-          <li>Marks a list of properties inside this class, to be removed when building response from this bean.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong><ins>References:</ins></strong>
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">TBU</code></li>
+      <li>For cases where <strong>different APIs need different fields</strong> from the <em>same</em> bean (e.g., an <code class="language-plaintext highlighter-rouge">/admin/users</code> API shows <em>all</em> fields, but a <code class="language-plaintext highlighter-rouge">/users/self</code> API only shows <em>public</em> fields)</li>
     </ul>
   </li>
 </ul>
+
+<h3 id="2-separation-of-concerns-soc">2. Separation of Concerns (SoC)</h3>
+
+<p>A robust application adheres to <strong>SoC</strong>. Annotating a <strong>Domain Model</strong> (the object that represents data in the database) with <code class="language-plaintext highlighter-rouge">@JsonIgnore</code> couples the database structure with the API response format.</p>
+
+<ul>
+  <li><strong>Best Practice:</strong> <strong>Always use DTOs (Data Transfer Objects)</strong> for API responses.
+    <ul>
+      <li><strong>Domain Model:</strong> Stays clean, focused on business logic and persistence.</li>
+      <li><strong>Response DTO:</strong> Used solely for the API response. Use <strong>Static Filtering</strong> on the <strong>DTO</strong> properties that are <em>never</em> needed by the client (e.g., version IDs). For fields that <em>sometimes</em> need filtering, use <strong>Dynamic Filtering</strong> on the DTO.</li>
+      <li><strong>Choose the Right Tool:</strong> Only use <strong>Static Filtering</strong> for properties that should <strong>NEVER</strong> be exposed by <strong>ANY</strong> API endpoint (e.g., the hashed password field in a <code class="language-plaintext highlighter-rouge">User</code> entity).</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Static filtering is a simple and effective solution, but an experienced engineer must be aware of its limitations and alternatives:</p>
+
+<h3 id="3-security-implications">3. Security Implications</h3>
+
+<p>Relying solely on filtering is not a complete security solution.</p>
+
+<ul>
+  <li><strong>Always validate user roles/permissions</strong> in the controller/service layer <em>before</em> fetching or returning sensitive data, as filtering is merely a presentation layer safeguard.</li>
+</ul>
+
+<hr />
+
+<h2 id="-suggested-improvement">🚀 Suggested Improvement</h2>
+
+<p>While static filtering is useful for absolute exclusion of sensitive fields, I strongly suggest you also create a separate note on <strong>Dynamic Filtering</strong> (<code class="language-plaintext highlighter-rouge">@JsonFilter</code>) and, ideally, a note on using <strong>DTOs</strong> (Data Transfer Objects). These approaches are <strong>more scalable and maintainable</strong> for enterprise-level applications where a single entity might need to be represented differently across various APIs.</p>
+
+<p>Would you like me to generate a similar detailed note on <strong>Dynamic Content Filtering</strong> for your next post?</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
 
 
 <!-- TODO: add footer -->
