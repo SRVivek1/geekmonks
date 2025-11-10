@@ -1,7 +1,7 @@
-<h1>Dynamic content filtering</h1>
+<h1>🛡️ Dynamic Response Filtering</h1>
 
 <p>
-  Updated on: 01 Nov 2024
+  Updated on: 18 Nov 2024
   
   
   
@@ -11,128 +11,299 @@
 
 <hr/>
 
-<h3 id="project-ref-a9-sboot-ms-static-filtering">Project ref: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a9-sboot-ms-static-filtering">a9-sboot-ms-static-filtering</a></h3>
+<h2 id="-table-of-contents">📑 Table of Contents</h2>
+
 <ul>
-  <li><strong><ins>Purpose / Feature</ins></strong>
+  <li><a href="#-table-of-contents">📑 Table of Contents</a></li>
+  <li><a href="#-introduction-to-dynamic-response-filtering">🚀 Introduction to Dynamic Response Filtering</a></li>
+  <li><a href="#-purpose-use-case-features-benefits-and-drawbacks">🌟 Purpose, Use Case, Features, Benefits, and Drawbacks</a></li>
+  <li><a href="#-security-concerns">🔒 Security Concerns</a></li>
+  <li><a href="#-best-practices-and-suggestions">🏆 Best Practices and Suggestions</a></li>
+  <li><a href="#-alternative-approach">🔄 Alternative Approach</a></li>
+  <li><a href="#️-maven-dependency">🛠️ Maven Dependency</a>
     <ul>
-      <li>Content filtering refers to removing the properties from Response bean when sending back to requestor.</li>
-      <li>This feature is available in <code class="language-plaintext highlighter-rouge">jackson-annotations-x.x.jar</code>, which is added as part of <code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code> dependency.</li>
+      <li><a href="#pomxml"><code class="language-plaintext highlighter-rouge">pom.xml</code></a></li>
     </ul>
   </li>
-  <li><strong><ins>Maven / External dependency</ins></strong>
+  <li><a href="#-code-implementation">💻 Code Implementation</a>
     <ul>
-      <li>Add spring validation dependency.
- 	```xml
-	<dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency></li>
+      <li><a href="#data-bean-jsonfilter">Data Bean (<code class="language-plaintext highlighter-rouge">@JsonFilter</code>)</a></li>
+      <li><a href="#somebeandynamicfilterjava"><code class="language-plaintext highlighter-rouge">SomeBeanDynamicFilter.java</code></a></li>
+      <li><a href="#rest-controller-mappingjacksonvalue">REST Controller (<code class="language-plaintext highlighter-rouge">MappingJacksonValue</code>)</a></li>
+      <li><a href="#dynamicfilteringcontrollerjava"><code class="language-plaintext highlighter-rouge">DynamicFilteringController.java</code></a></li>
     </ul>
   </li>
-  <li><strong><ins>Code changes</ins></strong>
-    <ul>
-      <li>Bean
-        <ul>
-          <li>Update the Java Bean class with the <code class="language-plaintext highlighter-rouge">filter name</code> create inside controller.</li>
-          <li>All controller APIs should update the filter with same <code class="language-plaintext highlighter-rouge">filter name</code>.</li>
-          <li>imports
-            <ul>
-              <li><code class="language-plaintext highlighter-rouge">import com.fasterxml.jackson.annotation.JsonFilter;</code></li>
-            </ul>
-          </li>
-          <li>Annotate java properties to ignore while building the response.
-            <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="cm">/** Dynamically exclude properties as per the specified filter set by the API. */</span>
-    <span class="nd">@JsonFilter</span><span class="o">(</span><span class="s">"dyna-filter-for-somebean"</span><span class="o">)</span>
-  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeBeanDynamicFilter</span> <span class="o">{</span>
-
-      <span class="kd">private</span> <span class="nc">String</span> <span class="n">field1</span><span class="o">;</span>
-      <span class="kd">private</span> <span class="nc">String</span> <span class="n">field2</span><span class="o">;</span>
-      <span class="kd">private</span> <span class="nc">String</span> <span class="n">field3</span><span class="o">;</span>
-      <span class="kd">private</span> <span class="nc">String</span> <span class="n">field4</span><span class="o">;</span>
-      <span class="kd">private</span> <span class="nc">String</span> <span class="n">field5</span><span class="o">;</span>
-      <span class="kd">private</span> <span class="nc">String</span> <span class="n">field6</span><span class="o">;</span>
-
-        <span class="c1">// constructors, setter-getters and utility methods</span>
-    <span class="o">}</span>
-</code></pre></div>            </div>
-          </li>
-        </ul>
-      </li>
-      <li>Controller
-        <ul>
-          <li>Create instace of `` and mention the properties to be excluded and add it with a unique name in filter provider.</li>
-          <li>imports
-            <ul>
-              <li><code class="language-plaintext highlighter-rouge">import com.fasterxml.jackson.databind.ser.FilterProvider;</code></li>
-              <li><code class="language-plaintext highlighter-rouge">import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;</code></li>
-              <li><code class="language-plaintext highlighter-rouge">import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;</code></li>
-              <li><code class="language-plaintext highlighter-rouge">import com.srvivek.sboot.mservices.bean.SomeBeanDynamicFilter;</code></li>
-            </ul>
-          </li>
-          <li>Create filter.
-            <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@RestController</span>
-  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">DynamicFilteringController</span> <span class="o">{</span>
-
-      <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/dyna-filtering"</span><span class="o">)</span>
-      <span class="kd">public</span> <span class="nc">MappingJacksonValue</span> <span class="nf">filtering</span><span class="o">()</span> <span class="o">{</span>
-
-          <span class="c1">// Dynamic filtering</span>
-          <span class="kd">final</span> <span class="nc">SimpleBeanPropertyFilter</span> <span class="n">simpleBeanPropertyFilter</span> <span class="o">=</span> <span class="nc">SimpleBeanPropertyFilter</span><span class="o">.</span><span class="na">filterOutAllExcept</span><span class="o">(</span><span class="s">"field2"</span><span class="o">,</span>
-                  <span class="s">"field4"</span><span class="o">,</span> <span class="s">"field6"</span><span class="o">);</span>
-
-          <span class="kd">final</span> <span class="nc">SimpleFilterProvider</span> <span class="n">simpleFilterProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleFilterProvider</span><span class="o">()</span>
-                  <span class="o">.</span><span class="na">addFilter</span><span class="o">(</span><span class="s">"dyna-filter-for-somebean"</span><span class="o">,</span> <span class="n">simpleBeanPropertyFilter</span><span class="o">);</span>
-
-          <span class="c1">// Construct resposnse bean</span>
-          <span class="kd">final</span> <span class="nc">SomeBeanDynamicFilter</span> <span class="nc">SomeBeanDynamicFilter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SomeBeanDynamicFilter</span><span class="o">(</span><span class="s">"Value-1"</span><span class="o">,</span> <span class="s">"Value-2"</span><span class="o">,</span> <span class="s">"Value-3"</span><span class="o">,</span>
-                  <span class="s">"Value-4"</span><span class="o">,</span> <span class="s">"Value-5"</span><span class="o">,</span> <span class="s">"Value-6"</span><span class="o">);</span>
-          <span class="kd">final</span> <span class="nc">MappingJacksonValue</span> <span class="n">mappingJacksonValue</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MappingJacksonValue</span><span class="o">(</span><span class="nc">SomeBeanDynamicFilter</span><span class="o">);</span>
-          <span class="n">mappingJacksonValue</span><span class="o">.</span><span class="na">setFilters</span><span class="o">(</span><span class="n">simpleFilterProvider</span><span class="o">);</span>
-
-          <span class="k">return</span> <span class="n">mappingJacksonValue</span><span class="o">;</span>
-      <span class="o">}</span>
-
-      <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/dyna-filtering-list"</span><span class="o">)</span>
-      <span class="kd">public</span> <span class="nc">MappingJacksonValue</span> <span class="nf">filteringList</span><span class="o">()</span> <span class="o">{</span>
-
-          <span class="c1">// Dynamic filtering</span>
-          <span class="nc">SimpleBeanPropertyFilter</span> <span class="n">simpleBeanPropertyFilter</span> <span class="o">=</span> <span class="nc">SimpleBeanPropertyFilter</span><span class="o">.</span><span class="na">filterOutAllExcept</span><span class="o">(</span><span class="s">"field1"</span><span class="o">,</span>
-                  <span class="s">"field3"</span><span class="o">,</span> <span class="s">"field5"</span><span class="o">,</span> <span class="s">"field6"</span><span class="o">);</span>
-          <span class="nc">FilterProvider</span> <span class="n">simpleFilterProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleFilterProvider</span><span class="o">().</span><span class="na">addFilter</span><span class="o">(</span><span class="s">"dyna-filter-for-somebean"</span><span class="o">,</span>
-                  <span class="n">simpleBeanPropertyFilter</span><span class="o">);</span>
-
-          <span class="c1">// Construct list of resposnse beans</span>
-          <span class="nc">List</span><span class="o">&lt;</span><span class="nc">SomeBeanDynamicFilter</span><span class="o">&gt;</span> <span class="nc">SomeBeanDynamicFilterList</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span>
-                  <span class="k">new</span> <span class="nf">SomeBeanDynamicFilter</span><span class="o">(</span><span class="s">"Value-1"</span><span class="o">,</span> <span class="s">"Value-2"</span><span class="o">,</span> <span class="s">"Value-3"</span><span class="o">,</span> <span class="s">"Value-4"</span><span class="o">,</span> <span class="s">"Value-5"</span><span class="o">,</span> <span class="s">"Value-6"</span><span class="o">),</span>
-                  <span class="k">new</span> <span class="nf">SomeBeanDynamicFilter</span><span class="o">(</span><span class="s">"Value-11"</span><span class="o">,</span> <span class="s">"Value-22"</span><span class="o">,</span> <span class="s">"Value-33"</span><span class="o">,</span> <span class="s">"Value-44"</span><span class="o">,</span> <span class="s">"Value-55"</span><span class="o">,</span> <span class="s">"Value-66"</span><span class="o">),</span>
-                  <span class="k">new</span> <span class="nf">SomeBeanDynamicFilter</span><span class="o">(</span><span class="s">"Value-111"</span><span class="o">,</span> <span class="s">"Value-222"</span><span class="o">,</span> <span class="s">"Value-333"</span><span class="o">,</span> <span class="s">"Value-444"</span><span class="o">,</span> <span class="s">"Value-555"</span><span class="o">,</span>
-                          <span class="s">"Value-666"</span><span class="o">));</span>
-
-          <span class="kd">final</span> <span class="nc">MappingJacksonValue</span> <span class="n">mappingJacksonValue</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MappingJacksonValue</span><span class="o">(</span><span class="nc">SomeBeanDynamicFilterList</span><span class="o">);</span>
-          <span class="n">mappingJacksonValue</span><span class="o">.</span><span class="na">setFilters</span><span class="o">(</span><span class="n">simpleFilterProvider</span><span class="o">);</span>
-
-          <span class="k">return</span> <span class="n">mappingJacksonValue</span><span class="o">;</span>
-      <span class="o">}</span>
-  <span class="o">}</span>
-</code></pre></div>            </div>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong><ins>Notes:</ins></strong>
-    <ul>
-      <li>In this approach we’re dynamically marking the properties which should not be returned in response when the given bean is returned in response, for the API which is returring this bean.</li>
-      <li>Hence, this is called <code class="language-plaintext highlighter-rouge">Dynamic Filtering</code>.</li>
-      <li><code class="language-plaintext highlighter-rouge">@JsonFilter</code> annotation:
-        <ul>
-          <li>Defines a filter name, which should be evaluated and applied every time when object of this bean is returned in response.</li>
-          <li>The given filter name <code class="language-plaintext highlighter-rouge">dyna-filter-for-somebean</code> is created and update in API method of controller class.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
+  <li><a href="#-observations-and-insights">🔍 Observations and Insights</a></li>
+  <li><a href="#-expert-advice-what-engineers-should-be-aware-of">💡 Expert Advice: What Engineers Should Be Aware Of</a></li>
+  <li><a href="#️-architecture-diagram">🏗️ Architecture Diagram</a></li>
 </ul>
+
+<hr />
+
+<h2 id="-introduction-to-dynamic-response-filtering">🚀 Introduction to Dynamic Response Filtering</h2>
+
+<p>In modern microservices, <strong>Content Filtering</strong> is vital for security and performance. This technique, leveraging <strong>Jackson’s <code class="language-plaintext highlighter-rouge">@JsonFilter</code></strong> in Spring Boot, allows you to <strong>dynamically control</strong> which properties of a Java Bean are included in the JSON response. By using the Spring utility <strong><code class="language-plaintext highlighter-rouge">MappingJacksonValue</code></strong>, we can apply specific filters per API endpoint at <strong>runtime</strong>. This approach is crucial for preventing <strong>data over-fetching</strong> and exposing sensitive internal fields.</p>
+
+<hr />
+
+<h2 id="-purpose-use-case-features-benefits-and-drawbacks">🌟 Purpose, Use Case, Features, Benefits, and Drawbacks</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Aspect</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Purpose / Feature</strong></td>
+      <td style="text-align: left"><strong>Content Filtering</strong> refers to dynamically selecting or removing specific properties from a JSON response object before sending it to the client. This is achieved using <strong>Jackson’s <code class="language-plaintext highlighter-rouge">@JsonFilter</code></strong> mechanism.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Use Case</strong></td>
+      <td style="text-align: left">Ideal for APIs where <strong>different endpoints</strong> need to return the <strong>same Java Bean</strong> but with <strong>varying subsets of fields</strong> (e.g., an <code class="language-plaintext highlighter-rouge">/users</code> list endpoint needs <em>name</em> and <em>ID</em>, but a <code class="language-plaintext highlighter-rouge">/users/{id}</code> detail endpoint also needs <em>address</em> and <em>roles</em>).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Benefits</strong></td>
+      <td style="text-align: left"><strong>Security</strong> (Prevents exposure of sensitive internal fields), <strong>Performance</strong> (Reduces payload size, thus reducing network bandwidth and processing time), <strong>Flexibility</strong> (Allows filtering logic to be determined at runtime per API request).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Drawbacks</strong></td>
+      <td style="text-align: left"><strong>Code Complexity</strong> (Requires extra setup in the Controller using <code class="language-plaintext highlighter-rouge">MappingJacksonValue</code> and filter providers, making the controller code less clean), <strong>Maintainability</strong> (Requires diligent management of filter names and fields across multiple endpoints).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Prerequisite</strong></td>
+      <td style="text-align: left">This feature is part of <code class="language-plaintext highlighter-rouge">jackson-annotations-${version}.jar</code>, implicitly included via the <code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code> dependency.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="-security-concerns">🔒 Security Concerns</h2>
+
+<ul>
+  <li><strong>Accidental Data Exposure:</strong> The primary risk is forgetting to apply a filter or applying an incorrect filter, leading to the <strong>unintentional exposure of sensitive fields</strong> (like passwords, internal IDs, or financial data) to an unauthorized client.</li>
+  <li><strong>Filter Name Mismatch:</strong> A mismatch between the <strong><code class="language-plaintext highlighter-rouge">@JsonFilter</code> name</strong> on the Bean and the name registered in the <strong><code class="language-plaintext highlighter-rouge">SimpleFilterProvider</code></strong> will result in the entire bean being serialized, potentially bypassing all filtering logic.</li>
+  <li><strong>Security by Obscurity:</strong> Relying solely on filtering for security is discouraged. Response filtering should complement <strong>robust authentication and authorization</strong> mechanisms, and not to replace them.</li>
+</ul>
+
+<hr />
+
+<h2 id="-best-practices-and-suggestions">🏆 Best Practices and Suggestions</h2>
+
+<ol>
+  <li><strong>Prioritize Static Filtering:</strong>
+    <ul>
+      <li>For fields that <strong>should <em>never</em> be exposed</strong> (e.g., <code class="language-plaintext highlighter-rouge">passwordHash</code>), use <strong>Static Filtering</strong> (<code class="language-plaintext highlighter-rouge">@JsonIgnore</code>, <code class="language-plaintext highlighter-rouge">@JsonIgnoreProperties</code>). Dynamic filtering should only be used for fields whose inclusion depends on the specific API call.</li>
+    </ul>
+  </li>
+  <li><strong>Use Enums/Constants:</strong>
+    <ul>
+      <li>Define the filter names (e.g., <code class="language-plaintext highlighter-rouge">"dyna-filter-for-somebean"</code>) as <strong>public static final constants</strong> in a utility class or the Bean itself to prevent spelling mistakes.</li>
+    </ul>
+  </li>
+  <li><strong>Create a Utility Method:</strong>
+    <ul>
+      <li>Encapsulate the filter creation and application logic (<code class="language-plaintext highlighter-rouge">SimpleBeanPropertyFilter</code>, <code class="language-plaintext highlighter-rouge">SimpleFilterProvider</code>, <code class="language-plaintext highlighter-rouge">MappingJacksonValue</code>) into a <strong>reusable utility method</strong> or a custom <code class="language-plaintext highlighter-rouge">HttpMessageConverter</code> to keep Controller methods cleaner.</li>
+    </ul>
+  </li>
+  <li><strong>Documentation:</strong>
+    <ul>
+      <li>Clearly document which fields are returned by each API endpoint, especially when dynamic filtering is in use, for better API consumer understanding.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="-alternative-approach">🔄 Alternative Approach</h2>
+
+<p>An alternative to dynamic Jackson filtering is to use <strong>Data Transfer Objects (DTOs)</strong>.</p>
+
+<ul>
+  <li><strong>DTO Approach:</strong> For each required subset of fields, create a separate, dedicated DTO class (e.g., <code class="language-plaintext highlighter-rouge">UserSummaryDTO</code>, <code class="language-plaintext highlighter-rouge">UserDetailsDTO</code>).</li>
+  <li><strong>Mapping:</strong> The Controller maps the full JPA Entity/Service Bean to the appropriate DTO before returning the response.</li>
+  <li><strong>Trade-off:</strong> This approach offers <strong>compile-time safety</strong> and <strong>cleaner controller code</strong> (no <code class="language-plaintext highlighter-rouge">MappingJacksonValue</code> logic) but involves <strong>more boilerplate code</strong> (creating and maintaining multiple DTO classes and mapping logic).</li>
+</ul>
+
+<hr />
+
+<h2 id="️-maven-dependency">🛠️ Maven Dependency</h2>
+
+<p>The dynamic filtering feature is provided by Jackson, which is included by default with the <strong><code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code></strong>.</p>
+
+<h3 id="pomxml"><code class="language-plaintext highlighter-rouge">pom.xml</code></h3>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-code-implementation">💻 Code Implementation</h2>
+
+<h3 id="data-bean-jsonfilter">Data Bean (<code class="language-plaintext highlighter-rouge">@JsonFilter</code>)</h3>
+
+<p>The Java Bean is annotated with <code class="language-plaintext highlighter-rouge">@JsonFilter</code> to link it to a named filter.</p>
+
+<h3 id="somebeandynamicfilterjava"><code class="language-plaintext highlighter-rouge">SomeBeanDynamicFilter.java</code></h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.srvivek.sboot.mservices.bean</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.annotation.JsonFilter</span><span class="o">;</span>
+
+<span class="cm">/** Dynamically exclude properties as per the specified filter set by the API. */</span>
+<span class="nd">@JsonFilter</span><span class="o">(</span><span class="s">"dyna-filter-for-somebean"</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SomeBeanDynamicFilter</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">field1</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">field2</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">field3</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">field4</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">field5</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">field6</span><span class="o">;</span>
+
+    <span class="c1">// constructors, setter-getters and utility methods</span>
+    <span class="c1">// (Assuming public constructor SomeBeanDynamicFilter(String... fields) exists)</span>
+    <span class="kd">public</span> <span class="nf">SomeBeanDynamicFilter</span><span class="o">(</span><span class="nc">String</span> <span class="n">field1</span><span class="o">,</span> <span class="nc">String</span> <span class="n">field2</span><span class="o">,</span> <span class="nc">String</span> <span class="n">field3</span><span class="o">,</span> <span class="nc">String</span> <span class="n">field4</span><span class="o">,</span> <span class="nc">String</span> <span class="n">field5</span><span class="o">,</span> <span class="nc">String</span> <span class="n">field6</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">field1</span> <span class="o">=</span> <span class="n">field1</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">field2</span> <span class="o">=</span> <span class="n">field2</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">field3</span> <span class="o">=</span> <span class="n">field3</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">field4</span> <span class="o">=</span> <span class="n">field4</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">field5</span> <span class="o">=</span> <span class="n">field5</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">field6</span> <span class="o">=</span> <span class="n">field6</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// ... Getters and Setters omitted for brevity</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="rest-controller-mappingjacksonvalue">REST Controller (<code class="language-plaintext highlighter-rouge">MappingJacksonValue</code>)</h3>
+
+<p>The controller creates the filter, specifies the included/excluded fields, registers the filter by name, and applies it using <code class="language-plaintext highlighter-rouge">MappingJacksonValue</code>.</p>
+
+<h3 id="dynamicfilteringcontrollerjava"><code class="language-plaintext highlighter-rouge">DynamicFilteringController.java</code></h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.srvivek.sboot.mservices.controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.http.converter.json.MappingJacksonValue</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ser.FilterProvider</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.srvivek.sboot.mservices.bean.SomeBeanDynamicFilter</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">DynamicFilteringController</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">FILTER_NAME</span> <span class="o">=</span> <span class="s">"dyna-filter-for-somebean"</span><span class="o">;</span>
+
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/dyna-filtering"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">MappingJacksonValue</span> <span class="nf">filtering</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="c1">// 1. Define fields to keep (filterOutAllExcept)</span>
+        <span class="kd">final</span> <span class="nc">SimpleBeanPropertyFilter</span> <span class="n">simpleBeanPropertyFilter</span> <span class="o">=</span> <span class="nc">SimpleBeanPropertyFilter</span><span class="o">.</span><span class="na">filterOutAllExcept</span><span class="o">(</span><span class="s">"field2"</span><span class="o">,</span>
+                <span class="s">"field4"</span><span class="o">,</span> <span class="s">"field6"</span><span class="o">);</span>
+
+        <span class="c1">// 2. Register filter with the name defined in the Bean</span>
+        <span class="kd">final</span> <span class="nc">SimpleFilterProvider</span> <span class="n">simpleFilterProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleFilterProvider</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">addFilter</span><span class="o">(</span><span class="no">FILTER_NAME</span><span class="o">,</span> <span class="n">simpleBeanPropertyFilter</span><span class="o">);</span>
+
+        <span class="c1">// 3. Construct response bean</span>
+        <span class="kd">final</span> <span class="nc">SomeBeanDynamicFilter</span> <span class="n">someBeanDynamicFilter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SomeBeanDynamicFilter</span><span class="o">(</span><span class="s">"Value-1"</span><span class="o">,</span> <span class="s">"Value-2"</span><span class="o">,</span> <span class="s">"Value-3"</span><span class="o">,</span>
+                <span class="s">"Value-4"</span><span class="o">,</span> <span class="s">"Value-5"</span><span class="o">,</span> <span class="s">"Value-6"</span><span class="o">);</span>
+
+        <span class="c1">// 4. Apply the filter provider to the response bean</span>
+        <span class="kd">final</span> <span class="nc">MappingJacksonValue</span> <span class="n">mappingJacksonValue</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MappingJacksonValue</span><span class="o">(</span><span class="n">someBeanDynamicFilter</span><span class="o">);</span>
+        <span class="n">mappingJacksonValue</span><span class="o">.</span><span class="na">setFilters</span><span class="o">(</span><span class="n">simpleFilterProvider</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="n">mappingJacksonValue</span><span class="o">;</span> <span class="c1">// Returns only field2, field4, field6</span>
+    <span class="o">}</span>
+
+    <span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/dyna-filtering-list"</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="nc">MappingJacksonValue</span> <span class="nf">filteringList</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="c1">// 1. Define a different set of fields to keep for this API</span>
+        <span class="nc">SimpleBeanPropertyFilter</span> <span class="n">simpleBeanPropertyFilter</span> <span class="o">=</span> <span class="nc">SimpleBeanPropertyFilter</span><span class="o">.</span><span class="na">filterOutAllExcept</span><span class="o">(</span><span class="s">"field1"</span><span class="o">,</span>
+                <span class="s">"field3"</span><span class="o">,</span> <span class="s">"field5"</span><span class="o">,</span> <span class="s">"field6"</span><span class="o">);</span>
+
+        <span class="c1">// 2. Register filter</span>
+        <span class="nc">FilterProvider</span> <span class="n">simpleFilterProvider</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SimpleFilterProvider</span><span class="o">().</span><span class="na">addFilter</span><span class="o">(</span><span class="no">FILTER_NAME</span><span class="o">,</span>
+                <span class="n">simpleBeanPropertyFilter</span><span class="o">);</span>
+
+        <span class="c1">// 3. Construct list of response beans</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">SomeBeanDynamicFilter</span><span class="o">&gt;</span> <span class="nc">SomeBeanDynamicFilterList</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span>
+                <span class="k">new</span> <span class="nf">SomeBeanDynamicFilter</span><span class="o">(</span><span class="s">"Value-1"</span><span class="o">,</span> <span class="s">"Value-2"</span><span class="o">,</span> <span class="s">"Value-3"</span><span class="o">,</span> <span class="s">"Value-4"</span><span class="o">,</span> <span class="s">"Value-5"</span><span class="o">,</span> <span class="s">"Value-6"</span><span class="o">),</span>
+                <span class="k">new</span> <span class="nf">SomeBeanDynamicFilter</span><span class="o">(</span><span class="s">"Value-11"</span><span class="o">,</span> <span class="s">"Value-22"</span><span class="o">,</span> <span class="s">"Value-33"</span><span class="o">,</span> <span class="s">"Value-44"</span><span class="o">,</span> <span class="s">"Value-55"</span><span class="o">,</span> <span class="s">"Value-66"</span><span class="o">),</span>
+                <span class="k">new</span> <span class="nf">SomeBeanDynamicFilter</span><span class="o">(</span><span class="s">"Value-111"</span><span class="o">,</span> <span class="s">"Value-222"</span><span class="o">,</span> <span class="s">"Value-333"</span><span class="o">,</span> <span class="s">"Value-444"</span><span class="o">,</span> <span class="s">"Value-555"</span><span class="o">,</span>
+                        <span class="s">"Value-666"</span><span class="o">));</span>
+
+        <span class="c1">// 4. Apply the filter provider to the list</span>
+        <span class="kd">final</span> <span class="nc">MappingJacksonValue</span> <span class="n">mappingJacksonValue</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MappingJacksonValue</span><span class="o">(</span><span class="nc">SomeBeanDynamicFilterList</span><span class="o">);</span>
+        <span class="n">mappingJacksonValue</span><span class="o">.</span><span class="na">setFilters</span><span class="o">(</span><span class="n">simpleFilterProvider</span><span class="o">);</span>
+
+        <span class="k">return</span> <span class="n">mappingJacksonValue</span><span class="o">;</span> <span class="c1">// Returns only field1, field3, field5, field6</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-observations-and-insights">🔍 Observations and Insights</h2>
+
+<ul>
+  <li><strong>Dynamic Filtering Defined:</strong> This approach is called <strong>Dynamic Filtering</strong> because the set of properties to include/exclude is determined at <strong>runtime</strong> within the controller method for the specific API call.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">@JsonFilter</code> Annotation:</strong> It serves as a <strong>marker</strong> on the Java Bean, defining a unique <code class="language-plaintext highlighter-rouge">filter name</code> (<code class="language-plaintext highlighter-rouge">"dyna-filter-for-somebean"</code>). Jackson will look for a <code class="language-plaintext highlighter-rouge">FilterProvider</code> registered with this exact name when serializing this bean.</li>
+  <li><strong><code class="language-plaintext highlighter-rouge">MappingJacksonValue</code>:</strong> This Spring utility class is essential. It wraps the response object (Bean/List) and allows the attachment of a <strong><code class="language-plaintext highlighter-rouge">FilterProvider</code></strong> to be used specifically for the serialization of <em>that</em> response, overriding the default serialization behavior.</li>
+</ul>
+
+<hr />
+
+<h2 id="-expert-advice-what-engineers-should-be-aware-of">💡 Expert Advice: What Engineers Should Be Aware Of</h2>
+
+<p>Engineers should consider <strong>request-based filtering</strong> as a better long-term solution. Allowing clients to specify which fields they need (e.g., using a <strong><code class="language-plaintext highlighter-rouge">fields</code> query parameter</strong> like <code class="language-plaintext highlighter-rouge">/api/users?fields=id,name</code>) puts the burden of filtering on the client, which is ideal for high-traffic, generic APIs. This involves:</p>
+
+<ol>
+  <li>Reading the <code class="language-plaintext highlighter-rouge">fields</code> query parameter in the controller.</li>
+  <li>Dynamically creating the <code class="language-plaintext highlighter-rouge">SimpleBeanPropertyFilter</code> based on the requested fields.</li>
+  <li>Applying the filter via <code class="language-plaintext highlighter-rouge">MappingJacksonValue</code>, as shown above.</li>
+</ol>
+
+<p>This makes your API more <strong>performant</strong> and allows consumers to prevent <strong>over-fetching</strong> data.</p>
+
+<hr />
+
+<h2 id="️-architecture-diagram">🏗️ Architecture Diagram</h2>
+
+<p>This sequence diagram illustrates how the dynamic filtering process works when a request is made to a filtered endpoint.</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+    participant Client
+    participant Controller
+    participant JacksonMapper
+    participant ResponseBean
+
+    Client-&gt;&gt;Controller: GET /dyna-filtering
+    Controller-&gt;&gt;Controller: 1. Create SimpleBeanPropertyFilter (e.g., keep field2, field4, field6)
+    Controller-&gt;&gt;Controller: 2. Create SimpleFilterProvider &amp; register filter ("dyna-filter-for-somebean")
+    Controller-&gt;&gt;ResponseBean: 3. Instantiate SomeBeanDynamicFilter
+    Controller-&gt;&gt;Controller: 4. Wrap Bean in MappingJacksonValue &amp; set Filters
+    Controller-&gt;&gt;JacksonMapper: Serialize(MappingJacksonValue)
+    JacksonMapper-&gt;&gt;JacksonMapper: Check @JsonFilter on ResponseBean
+    JacksonMapper-&gt;&gt;JacksonMapper: Retrieve filter from SimpleFilterProvider
+    JacksonMapper-&gt;&gt;Client: 5. Return Filtered JSON Response (only field2, field4, field6)
+</code></pre>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
 
 
 <!-- TODO: add footer -->
