@@ -1,7 +1,7 @@
-<h1>Exception / Error Handling and Custom Exceptions</h1>
+<h1>🔄 Exception Handling and Custom Exceptions</h1>
 
 <p>
-  Updated on: 02 Nov 2024
+  Updated on: 24 Nov 2024
   
   
   
@@ -11,157 +11,378 @@
 
 <hr/>
 
-<h3 id="project-ref-a2-sboot-ms-social-media-app">Project ref: <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a2-sboot-ms-social-media-app">a2-sboot-ms-social-media-app</a></h3>
+<h2 id="-table-of-contents">🧭 Table of Contents</h2>
+
 <ul>
-  <li><strong><ins>Purpose / Feature</ins></strong>
+  <li><a href="#-table-of-contents">🧭 Table of Contents</a></li>
+  <li><a href="#-introduction">💡 Introduction</a></li>
+  <li><a href="#-use-case">🎯 Use Case</a></li>
+  <li><a href="#️-features">🛠️ Features</a></li>
+  <li><a href="#-advantage">➕ Advantage</a></li>
+  <li><a href="#-drawbacks">➖ Drawbacks</a></li>
+  <li><a href="#-maven-dependency">📦 Maven Dependency</a></li>
+  <li><a href="#-code-implementation">📝 Code Implementation</a>
     <ul>
-      <li>Spring boot provides mechanism to handle and customize the exceptions thrown by the applications.</li>
+      <li><a href="#1-java-bean-errordetails">1. Java Bean: ErrorDetails</a></li>
+      <li><a href="#2-custom-exception-usernotfoundexception">2. Custom Exception: <code class="language-plaintext highlighter-rouge">UserNotFoundException</code></a></li>
+      <li><a href="#3-global-exception-handler-controlleradvice">3. Global Exception Handler: <code class="language-plaintext highlighter-rouge">@ControllerAdvice</code></a></li>
     </ul>
   </li>
-  <li><strong><ins>Maven / External dependency</ins></strong>
+  <li><a href="#-exception-handling-flow">🔄 Exception Handling Flow</a></li>
+  <li><a href="#-project-poc">🔗 Project POC</a></li>
+  <li><a href="#️-key-observations">👁️ Key Observations</a></li>
+  <li><a href="#-best-practices-for-exception-handling">⭐ Best Practices for Exception Handling</a></li>
+  <li><a href="#-security-considerations">🔒 Security Considerations</a></li>
+  <li><a href="#-suggested-improvements">🚀 Suggested Improvements</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-introduction">💡 Introduction</h2>
+
+<p>Spring Boot provides a powerful and <strong><code class="language-plaintext highlighter-rouge">centralized mechanism</code></strong> for <strong>handling and customizing exceptions</strong> thrown by the application. This is typically achieved using the <strong><code class="language-plaintext highlighter-rouge">@ControllerAdvice</code></strong> annotation. This approach decouples error handling logic from individual controller methods, leading to cleaner and more maintainable code. The goal is to return a <strong>standardized, meaningful error response</strong> (e.g., JSON) to the client instead of a raw stack trace.</p>
+
+<hr />
+
+<h2 id="-use-case">🎯 Use Case</h2>
+
+<p>The primary use case is to provide a <strong>consistent and reliable API contract</strong> for error reporting. When a resource is not found (<code class="language-plaintext highlighter-rouge">404</code>), an input is invalid (<code class="language-plaintext highlighter-rouge">400</code>), or an internal server error occurs (<code class="language-plaintext highlighter-rouge">500</code>), the client should receive a predictable JSON payload containing a timestamp, a clear message, and request details. This is crucial for microservices interacting with various consumers.</p>
+
+<hr />
+
+<h2 id="️-features">🛠️ Features</h2>
+
+<ul>
+  <li><strong>Centralized Handling:</strong>
     <ul>
-      <li>Add spring validation dependency.
- 	```xml
-	<dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency></li>
+      <li>Use <strong><code class="language-plaintext highlighter-rouge">@ControllerAdvice</code></strong> to globalize exception handling across all controllers.</li>
     </ul>
   </li>
-  <li><strong><ins>Code changes</ins></strong>
+  <li><strong>Exception Mapping:</strong>
     <ul>
-      <li>Java Bean
-        <ul>
-          <li>Java Bean to standarized the error message returned to requestor/cient.</li>
-          <li>ErrorDetails.java
-            <ul>
-              <li>imports
-                <ul>
-                  <li><code class="language-plaintext highlighter-rouge">None</code></li>
-                </ul>
-              </li>
-              <li>Class with required properties
-                <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">ErrorDetails</span> <span class="o">{</span>
-
-        <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">timestamp</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span><span class="o">;</span>
-        <span class="kd">private</span> <span class="nc">String</span> <span class="n">details</span><span class="o">;</span>
-
-        <span class="c1">// Constructor, setter-getters</span>
-    <span class="o">}</span>
-</code></pre></div>                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>Custom Exception class
-        <ul>
-          <li>Create a custom exception class to determine the type of error that has occured.</li>
-          <li>UserNotFoundException.java
-            <ul>
-              <li>imports
-                <ul>
-                  <li><code class="language-plaintext highlighter-rouge">import org.springframework.http.HttpStatus;</code></li>
-                  <li><code class="language-plaintext highlighter-rouge">import org.springframework.web.bind.annotation.ResponseStatus;</code></li>
-                </ul>
-              </li>
-              <li>Override required constructors and can have fields if any info need to be stored.
-                <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@ResponseStatus</span><span class="o">(</span><span class="n">code</span> <span class="o">=</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NOT_FOUND</span><span class="o">)</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserNotFoundException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span> <span class="o">{</span>
-
-        <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">4882099180124262207L</span><span class="o">;</span>
-
-        <span class="kd">public</span> <span class="nf">UserNotFoundException</span><span class="o">(</span><span class="nc">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-</code></pre></div>                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>Controller Advice class
-        <ul>
-          <li>Create a custom Controller advice class to determine the type of error that has occured.</li>
-          <li>UserNotFoundException.java
-            <ul>
-              <li>imports
-                <ul>
-                  <li><code class="language-plaintext highlighter-rouge">import org.springframework.core.annotation.Order;</code></li>
-                  <li><code class="language-plaintext highlighter-rouge">import org.springframework.http.HttpStatus;</code></li>
-                  <li><code class="language-plaintext highlighter-rouge">import org.springframework.http.ResponseEntity;</code></li>
-                  <li><code class="language-plaintext highlighter-rouge">import org.springframework.web.bind.annotation.ControllerAdvice;</code></li>
-                  <li><code class="language-plaintext highlighter-rouge">import org.springframework.web.bind.annotation.ExceptionHandler;</code></li>
-                  <li><code class="language-plaintext highlighter-rouge">import org.springframework.web.bind.annotation.RestControllerAdvice;</code></li>
-                  <li><code class="language-plaintext highlighter-rouge">import org.springframework.web.context.request.WebRequest;</code></li>
-                  <li><code class="language-plaintext highlighter-rouge">import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;</code></li>
-                  <li><code class="language-plaintext highlighter-rouge">import jakarta.annotation.Priority;</code></li>
-                </ul>
-              </li>
-              <li>Override required required method and process the exception.
-                <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nd">@ControllerAdvice</span>
-    <span class="c1">//@ControllerAdvice(basePackages = "com.srvivek.x.y.z") //for specific package</span>
-    <span class="c1">//@Order(value = 1) // for defining ordering</span>
-    <span class="c1">//@Priority(value = 1) // for defining ordering</span>
-    <span class="c1">//@RestControllerAdvice(basePackages = "com.srvivek.x.y.z") // @ControllerAdvice + @ResponseBody</span>
-    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomizedResponseEntityExceptionHandler</span> <span class="kd">extends</span> <span class="nc">ResponseEntityExceptionHandler</span> <span class="o">{</span>
-
-        <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="nc">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="nc">CustomizedResponseEntityExceptionHandler</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-
-        <span class="cm">/**
-        * Generic exception handling.
-        * @param ex
-        * @param request
-        * @return
-        * @throws Exception
-        */</span>
-        <span class="nd">@ExceptionHandler</span><span class="o">(</span><span class="n">exception</span> <span class="o">=</span> <span class="nc">Exception</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-        <span class="kd">public</span> <span class="kd">final</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">ErrorDetails</span><span class="o">&gt;</span> <span class="nf">handleAllException</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">,</span> <span class="nc">WebRequest</span> <span class="n">request</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-
-            <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Error stacktrace: {}"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
-
-            <span class="nc">ErrorDetails</span> <span class="n">errorDetails</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ErrorDetails</span><span class="o">(</span><span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">(),</span> <span class="n">ex</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span>
-                    <span class="n">request</span><span class="o">.</span><span class="na">getDescription</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-
-            <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">ErrorDetails</span><span class="o">&gt;(</span><span class="n">errorDetails</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">INTERNAL_SERVER_ERROR</span><span class="o">);</span>
-        <span class="o">}</span>
-
-        <span class="cm">/**
-        * Return HTTP 404 for UserNotFoundException.
-        * @param ex
-        * @param request
-        * @return
-        * @throws Exception
-        */</span>
-        <span class="nd">@ExceptionHandler</span><span class="o">(</span><span class="n">exception</span> <span class="o">=</span> <span class="nc">UserNotFoundException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
-        <span class="kd">public</span> <span class="kd">final</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">ErrorDetails</span><span class="o">&gt;</span> <span class="nf">handleUserNotFoundException</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">,</span> <span class="nc">WebRequest</span> <span class="n">request</span><span class="o">)</span>
-                <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
-
-            <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Error stacktrace: {}"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
-
-            <span class="nc">ErrorDetails</span> <span class="n">errorDetails</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ErrorDetails</span><span class="o">(</span><span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">(),</span> <span class="n">ex</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span>
-                    <span class="n">request</span><span class="o">.</span><span class="na">getDescription</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
-
-            <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">ErrorDetails</span><span class="o">&gt;(</span><span class="n">errorDetails</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NOT_FOUND</span><span class="o">);</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-</code></pre></div>                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
+      <li>Use <strong><code class="language-plaintext highlighter-rouge">@ExceptionHandler</code></strong> to map specific exception classes to handler methods.</li>
     </ul>
   </li>
-  <li><strong><ins>Notes:</ins></strong>
+  <li><strong>Status Mapping:</strong>
     <ul>
-      <li>We can define controller advice for specific package.</li>
-      <li>While handling exceptions, also log the error explicitly or else it will not be logged in log files.</li>
+      <li>Use <strong><code class="language-plaintext highlighter-rouge">@ResponseStatus</code></strong> on custom exceptions or set the status explicitly in the <code class="language-plaintext highlighter-rouge">ResponseEntity</code>.</li>
+    </ul>
+  </li>
+  <li><strong>Standardized Payload:</strong>
+    <ul>
+      <li>Define a custom <code class="language-plaintext highlighter-rouge">ErrorDetails</code> bean to ensure a consistent structure for error responses.</li>
+    </ul>
+  </li>
+  <li><strong>Separation of Concerns:</strong>
+    <ul>
+      <li>Keeps business logic and error handling distinctly separated.</li>
     </ul>
   </li>
 </ul>
+
+<hr />
+
+<h2 id="-advantage">➕ Advantage</h2>
+
+<p>Centralized exception handling significantly improves <strong>API consistency</strong> and <strong>developer experience (DX)</strong>.</p>
+<ul>
+  <li>It eliminates redundant <code class="language-plaintext highlighter-rouge">try-catch</code> blocks in controllers, <code class="language-plaintext highlighter-rouge">reduces boilerplate code</code>, and ensures that clients always receive well-structured error messages, simplifying debugging and integration.</li>
+  <li>The use of <code class="language-plaintext highlighter-rouge">custom exceptions</code> clearly defines application-specific errors.</li>
+</ul>
+
+<hr />
+
+<h2 id="-drawbacks">➖ Drawbacks</h2>
+
+<p>While beneficial, the setup involves initial overhead by requiring the creation of custom exception classes and the global handler.</p>
+<ul>
+  <li>Over-reliance on too many highly specific custom exceptions can lead to <strong><code class="language-plaintext highlighter-rouge">exception proliferation</code></strong>, making the code harder to navigate.</li>
+  <li>Moreover, incorrectly configuring the handler can unintentionally expose sensitive internal details.</li>
+</ul>
+
+<hr />
+
+<h2 id="-maven-dependency">📦 Maven Dependency</h2>
+
+<p>The core functionalities for web applications, including exception handling via <code class="language-plaintext highlighter-rouge">@ControllerAdvice</code> and support for <code class="language-plaintext highlighter-rouge">ResponseEntity</code>, are provided by the <code class="language-plaintext highlighter-rouge">spring-boot-starter-web</code> dependency.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-code-implementation">📝 Code Implementation</h2>
+
+<p><br /></p>
+
+<h3 id="1-java-bean-errordetails">1. Java Bean: ErrorDetails</h3>
+
+<p>This class defines the <strong>standard structure</strong> for the error response payload sent back to the client. It typically includes temporal and context information.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">ErrorDetails.java</code></strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.time.LocalDateTime</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ErrorDetails</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="nc">LocalDateTime</span> <span class="n">timestamp</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">message</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">details</span><span class="o">;</span>
+
+    <span class="c1">// Default Constructor</span>
+    <span class="kd">public</span> <span class="nf">ErrorDetails</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Parametrized Constructor</span>
+    <span class="kd">public</span> <span class="nf">ErrorDetails</span><span class="o">(</span><span class="nc">LocalDateTime</span> <span class="n">timestamp</span><span class="o">,</span> <span class="nc">String</span> <span class="n">message</span><span class="o">,</span> <span class="nc">String</span> <span class="n">details</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">timestamp</span> <span class="o">=</span> <span class="n">timestamp</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">message</span> <span class="o">=</span> <span class="n">message</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">details</span> <span class="o">=</span> <span class="n">details</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Constructor, setter-getters... (Assuming these are implemented for brevity)</span>
+    <span class="c1">// Getter and Setter methods for timestamp, message, and details should be present.</span>
+    <span class="c1">// Example Getter:</span>
+    <span class="kd">public</span> <span class="nc">LocalDateTime</span> <span class="nf">getTimestamp</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">timestamp</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="c1">// Example Setter:</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setTimestamp</span><span class="o">(</span><span class="nc">LocalDateTime</span> <span class="n">timestamp</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">timestamp</span> <span class="o">=</span> <span class="n">timestamp</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="2-custom-exception-usernotfoundexception">2. Custom Exception: <code class="language-plaintext highlighter-rouge">UserNotFoundException</code></h3>
+
+<p>A custom exception class is used to clearly signal an application-specific error. The <strong><code class="language-plaintext highlighter-rouge">@ResponseStatus(code = HttpStatus.NOT_FOUND)</code></strong> annotation is a convenient way to automatically map this exception to a specific HTTP status code, even without a <code class="language-plaintext highlighter-rouge">@ControllerAdvice</code>.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">UserNotFoundException.java</code></strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.ResponseStatus</span><span class="o">;</span>
+
+<span class="nd">@ResponseStatus</span><span class="o">(</span><span class="n">code</span> <span class="o">=</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NOT_FOUND</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">UserNotFoundException</span> <span class="kd">extends</span> <span class="nc">RuntimeException</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="mi">4882099180124262207L</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">UserNotFoundException</span><span class="o">(</span><span class="nc">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kd">super</span><span class="o">(</span><span class="n">message</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="3-global-exception-handler-controlleradvice">3. Global Exception Handler: <code class="language-plaintext highlighter-rouge">@ControllerAdvice</code></h3>
+
+<p>The <strong><code class="language-plaintext highlighter-rouge">@ControllerAdvice</code></strong> (or <code class="language-plaintext highlighter-rouge">@RestControllerAdvice</code>) is the central component. It uses <strong><code class="language-plaintext highlighter-rouge">@ExceptionHandler</code></strong> methods to intercept and process exceptions across the entire application, allowing us to return a standardized <code class="language-plaintext highlighter-rouge">ResponseEntity&lt;ErrorDetails&gt;</code>.</p>
+
+<p><strong><code class="language-plaintext highlighter-rouge">CustomizedResponseEntityExceptionHandler.java</code></strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.time.LocalDateTime</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.slf4j.Logger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.slf4j.LoggerFactory</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.ControllerAdvice</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.ExceptionHandler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.context.request.WebRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler</span><span class="o">;</span>
+
+<span class="nd">@ControllerAdvice</span>
+<span class="c1">//@ControllerAdvice(basePackages = "com.srvivek.x.y.z") //for specific package</span>
+<span class="c1">//@Order(value = 1) // for defining ordering</span>
+<span class="c1">//@Priority(value = 1) // for defining ordering</span>
+<span class="c1">//@RestControllerAdvice(basePackages = "com.srvivek.x.y.z") // @ControllerAdvice + @ResponseBody</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomizedResponseEntityExceptionHandler</span> <span class="kd">extends</span> <span class="nc">ResponseEntityExceptionHandler</span> <span class="o">{</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">Logger</span> <span class="n">logger</span> <span class="o">=</span> <span class="nc">LoggerFactory</span><span class="o">.</span><span class="na">getLogger</span><span class="o">(</span><span class="nc">CustomizedResponseEntityExceptionHandler</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+
+    <span class="cm">/**
+    * Generic exception handling (Fallback for all unhandled exceptions).
+    * Returns HTTP 500 INTERNAL_SERVER_ERROR.
+    * @param ex
+    * @param request
+    * @return
+    * @throws Exception
+    */</span>
+    <span class="nd">@ExceptionHandler</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="nc">Exception</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">ErrorDetails</span><span class="o">&gt;</span> <span class="nf">handleAllException</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">,</span> <span class="nc">WebRequest</span> <span class="n">request</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Error stacktrace: {}"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+
+        <span class="nc">ErrorDetails</span> <span class="n">errorDetails</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ErrorDetails</span><span class="o">(</span><span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">(),</span> <span class="n">ex</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span>
+                <span class="n">request</span><span class="o">.</span><span class="na">getDescription</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">ErrorDetails</span><span class="o">&gt;(</span><span class="n">errorDetails</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">INTERNAL_SERVER_ERROR</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="cm">/**
+    * Specific exception handling for UserNotFoundException.
+    * Returns HTTP 404 NOT_FOUND.
+    * @param ex
+    * @param request
+    * @return
+    * @throws Exception
+    */</span>
+    <span class="nd">@ExceptionHandler</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="nc">UserNotFoundException</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">ErrorDetails</span><span class="o">&gt;</span> <span class="nf">handleUserNotFoundException</span><span class="o">(</span><span class="nc">Exception</span> <span class="n">ex</span><span class="o">,</span> <span class="nc">WebRequest</span> <span class="n">request</span><span class="o">)</span>
+            <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"Error stacktrace: {}"</span><span class="o">,</span> <span class="n">ex</span><span class="o">);</span>
+
+        <span class="nc">ErrorDetails</span> <span class="n">errorDetails</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ErrorDetails</span><span class="o">(</span><span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">(),</span> <span class="n">ex</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span>
+                <span class="n">request</span><span class="o">.</span><span class="na">getDescription</span><span class="o">(</span><span class="kc">false</span><span class="o">));</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">ErrorDetails</span><span class="o">&gt;(</span><span class="n">errorDetails</span><span class="o">,</span> <span class="nc">HttpStatus</span><span class="o">.</span><span class="na">NOT_FOUND</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-exception-handling-flow">🔄 Exception Handling Flow</h2>
+
+<p>The diagram illustrates how an exception is captured and processed by the global handler before a standardized response is returned to the client.</p>
+
+<pre><code class="language-mermaid">sequenceDiagram
+    participant C as Client
+    participant A as Controller
+    participant S as Service
+    participant E as Exception
+    participant H as @ControllerAdvice
+    participant L as Logger
+    C-&gt;&gt;A: API Request (e.g., GET /users/100)
+    A-&gt;&gt;S: Call Service Method (findUser(100))
+    alt User Not Found
+        S--&gt;E: Throws UserNotFoundException
+        E-&gt;&gt;H: Exception Interception
+        H-&gt;&gt;L: Log Error Stacktrace
+        H--&gt;&gt;C: Standardized Error Response (404 NOT FOUND)
+    else User Found
+        S--&gt;&gt;A: User Object
+        A--&gt;&gt;C: HTTP 200 OK Response
+    end
+</code></pre>
+
+<hr />
+
+<p><br /></p>
+
+<h2 id="-project-poc">🔗 Project POC</h2>
+
+<p>The implementation discussed above is demonstrated in the following sample project:</p>
+
+<p><strong>Project reference:</strong> <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a2-sboot-ms-social-media-app/">Exception Handing POC</a></p>
+
+<hr />
+
+<h2 id="️-key-observations">👁️ Key Observations</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Feature</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Example / Annotation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Scoping</strong></td>
+      <td style="text-align: left">Allows the exception handler to apply only to <strong>controllers within specific packages</strong>, providing modularity.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">@ControllerAdvice(basePackages = "com.srvivek.x.y.z")</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Ordering</strong></td>
+      <td style="text-align: left">Defines the <strong>precedence</strong> when multiple <code class="language-plaintext highlighter-rouge">@ControllerAdvice</code> classes exist, ensuring predictable exception resolution.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">@Order(value = 1)</code> or <code class="language-plaintext highlighter-rouge">@Priority(value = 1)</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Logging</strong></td>
+      <td style="text-align: left">It is <strong>critical</strong> to explicitly log the exception within the handler, as Spring Boot doesn’t automatically log the intercepted exception’s details.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">logger.error("Error stacktrace: {}", ex);</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Convenience</strong></td>
+      <td style="text-align: left">A specialized annotation that is equivalent to combining <strong><code class="language-plaintext highlighter-rouge">@ControllerAdvice</code></strong> and <strong><code class="language-plaintext highlighter-rouge">@ResponseBody</code></strong>, streamlining REST API development.</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">@RestControllerAdvice</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="-best-practices-for-exception-handling">⭐ Best Practices for Exception Handling</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Practice</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Key Action / Benefit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Log Explicitly</strong></td>
+      <td style="text-align: left">Always ensure the full exception stack trace is captured and recorded on the server side.</td>
+      <td style="text-align: left">Use <code class="language-plaintext highlighter-rouge">logger.error(ex.getMessage(), ex);</code> in the handler method.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Specific to Generic</strong></td>
+      <td style="text-align: left">Structure your <code class="language-plaintext highlighter-rouge">@ExceptionHandler</code> methods to catch the most specific exceptions first, with a fallback to the generic <code class="language-plaintext highlighter-rouge">Exception.class</code>.</td>
+      <td style="text-align: left">Ensures the correct HTTP status and custom message is returned for known errors.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Avoid Exposing Details</strong></td>
+      <td style="text-align: left">Never include sensitive server-side information (like stack traces or internal paths) in the API error response sent to the client.</td>
+      <td style="text-align: left">Sanitize the error message and use a simple <code class="language-plaintext highlighter-rouge">details</code> field.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Leverage Spring’s Built-in</strong></td>
+      <td style="text-align: left">Extend <code class="language-plaintext highlighter-rouge">ResponseEntityExceptionHandler</code> to customize handling of common Spring exceptions (e.g., validation failures, method not allowed).</td>
+      <td style="text-align: left">Provides easy overrides for exceptions like <code class="language-plaintext highlighter-rouge">MethodArgumentNotValidException</code>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Use Problem Detail Standard</strong></td>
+      <td style="text-align: left">Adopt the <strong>RFC 7807</strong> standard (<code class="language-plaintext highlighter-rouge">type</code>, <code class="language-plaintext highlighter-rouge">title</code>, <code class="language-plaintext highlighter-rouge">status</code>, <code class="language-plaintext highlighter-rouge">detail</code>, <code class="language-plaintext highlighter-rouge">instance</code>) for your error response structure.</td>
+      <td style="text-align: left">Enhances API maturity, consistency, and client-side error processing.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="-security-considerations">🔒 Security Considerations</h2>
+
+<ul>
+  <li><strong>No Stack Traces in Response:</strong> Ensure the client-facing error message <strong>never</strong> contains server-side stack traces, internal configuration, or sensitive class names.</li>
+  <li><strong>Generic Messages for 5xx:</strong> For <code class="language-plaintext highlighter-rouge">500 INTERNAL_SERVER_ERROR</code> or other unexpected errors, provide a generic message like “An unexpected error occurred” and use a unique <strong>correlation ID</strong> (logged server-side) that the client can reference when reporting the issue.</li>
+  <li><strong>Input Validation:</strong> Implement proper input validation <em>before</em> the exception handler to prevent common injection attacks or unexpected behaviour.</li>
+</ul>
+
+<hr />
+
+<h2 id="-suggested-improvements">🚀 Suggested Improvements</h2>
+
+<p>The current implementation is solid for basic REST error handling. A key improvement would be:</p>
+
+<ul>
+  <li><strong>Validation Handling:</strong> Add a dedicated <code class="language-plaintext highlighter-rouge">@ExceptionHandler</code> for <strong><code class="language-plaintext highlighter-rouge">MethodArgumentNotValidException</code></strong> (thrown when <code class="language-plaintext highlighter-rouge">@Valid</code> fails). This allows for a structured response listing all field validation errors, which is crucial for REST APIs. You can achieve this by overriding the relevant method from <code class="language-plaintext highlighter-rouge">ResponseEntityExceptionHandler</code>.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
 
 
 <!-- TODO: add footer -->
