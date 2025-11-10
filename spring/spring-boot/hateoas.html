@@ -1,7 +1,7 @@
-<h1>💡 HATEOAS in Spring Boot Microservices</h1>
+<h1>💡 HATEOAS in Spring Boot</h1>
 
 <p>
-  Updated on: 01 Nov 2024
+  Updated on: 10 Nov 2024
   
   
   
@@ -12,7 +12,7 @@
 <hr/>
 
 <blockquote>
-  <p>Note:
+  <p><strong>Note:</strong>
 As a seasoned software engineer, we should leverage <strong>HATEOAS (Hypermedia as the Engine of Application State)</strong> extensively to build truly <strong>RESTful APIs</strong> that are self-discoverable and decoupled. This is a critical principle for robust, scalable microservices.</p>
 </blockquote>
 
@@ -26,7 +26,11 @@ As a seasoned software engineer, we should leverage <strong>HATEOAS (Hypermedia 
   <li><a href="#-purpose-and-use-case">🎯 Purpose and Use Case</a></li>
   <li><a href="#-benefits-and--drawbacks">📈 Benefits and 🚧 Drawbacks</a></li>
   <li><a href="#️-maven-dependency">🛠️ Maven Dependency</a></li>
-  <li><a href="#-core-implementation-in-spring-hateoas">💻 Core Implementation in Spring HATEOAS</a></li>
+  <li><a href="#-core-implementation-in-spring-hateoas">💻 Core Implementation in Spring HATEOAS</a>
+    <ul>
+      <li><a href="#project-poc">Project POC</a></li>
+    </ul>
+  </li>
   <li><a href="#️-hateoas-concept-diagram">🏗️ HATEOAS Concept Diagram</a></li>
   <li><a href="#-engineers-awareness-beyond-the-basics">🧐 Engineer’s Awareness: Beyond the Basics</a></li>
   <li><a href="#-suggested-improvements">🚀 Suggested Improvements</a></li>
@@ -122,6 +126,11 @@ As a seasoned software engineer, we should leverage <strong>HATEOAS (Hypermedia 
   <li><strong><code class="language-plaintext highlighter-rouge">EntityModel.of(user)</code></strong> wraps the domain object (<code class="language-plaintext highlighter-rouge">User</code>) to hold the hypermedia links.</li>
   <li><strong><code class="language-plaintext highlighter-rouge">entityModel.add(link.withRel("all-users"))</code></strong> adds the generated link to the response with the relation <strong><code class="language-plaintext highlighter-rouge">all-users</code></strong>, which describes what the link points to.</li>
 </ol>
+
+<h3 id="project-poc">Project POC</h3>
+<ul>
+  <li>Check this app for reference - <a href="https://github.com/SRVivek1/springboot-microservices-2024/tree/main/a8-sboot-ms-hateoas">SpringBoot HATEOAS POC</a></li>
+</ul>
 
 <hr />
 
