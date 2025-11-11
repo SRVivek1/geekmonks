@@ -1,17 +1,334 @@
-<h1>🛡️ Content Filtering (Static)</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<p>
-  Updated on: 15 Nov 2024
-  
-  
-  
-    - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a>
-  
-</p>
+<!-- HTML Head-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/geekmonks/assets/css/styles.css">
+    <link type="application/atom+xml" rel="alternate" href="https://srvivek1.github.io/geekmonks/feed.xml" title="Geekmonks Blog" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>🛡️ Content Filtering (Static) | Geekmonks Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="🛡️ Content Filtering (Static)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Table of Contents" />
+<meta property="og:description" content="Table of Contents" />
+<link rel="canonical" href="https://srvivek1.github.io/geekmonks/spring/spring-boot/static-content-filtering.html" />
+<meta property="og:url" content="https://srvivek1.github.io/geekmonks/spring/spring-boot/static-content-filtering.html" />
+<meta property="og:site_name" content="Geekmonks Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-11-15T00:00:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="🛡️ Content Filtering (Static)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2024-11-15T00:00:00+05:30","datePublished":"2024-11-15T00:00:00+05:30","description":"Table of Contents","headline":"🛡️ Content Filtering (Static)","mainEntityOfPage":{"@type":"WebPage","@id":"https://srvivek1.github.io/geekmonks/spring/spring-boot/static-content-filtering.html"},"url":"https://srvivek1.github.io/geekmonks/spring/spring-boot/static-content-filtering.html"}</script>
+<!-- End Jekyll SEO tag -->
 
-<hr/>
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-48XEHMVSEC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-<h2 id="table-of-contents">Table of Contents</h2>
+  gtag('config', 'G-48XEHMVSEC');
+</script>
+</head>
+
+<body class="container-fluid p-0 m-0">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light text-white content-shadow">
+  <div class="container d-flex justify-content-between">
+    <a href="/geekmonks/" class="navbar-brand d-flex">
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/laptop.svg" height="40"
+        width="34" />
+      <h1 class="fs-3 px-2 fw-bold">Geekmonks</h1>
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/tux.svg" height="40"
+        width="34" />
+    </a>
+    <!-- Toggle Button to expand and collapse the nav links -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBanner"
+      aria-controls="navbarNavBanner" aria-expanded="false" aria-label="Toggle Navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbarNavBanner" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/" class="nav-link fw-bold active"
+            >Home</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/blog" class="nav-link fw-bold active"
+            >Blog</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/about" class="nav-link fw-bold active"
+            >About</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/staff" class="nav-link fw-bold active"
+            >Staff</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://github.com/SRVivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">Github</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://www.linkedin.com/in/srvivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+        <nav class="navbar navbar-expand-xl navbar-custom p-0">
+  <div class="container-fluid">
+
+    <!-- Toggler for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible nav items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        
+          
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/ai-ml/llm-engineering/"
+                  >AI-ML</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/cloud/aws/"
+                  >AWS</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/spring/spring-boot/"
+                  >Spring Boot</a>
+              </li>
+            
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+            <!-- Left Sidebar -->
+            <nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column course-topics-list">
+                        
+                        
+                        
+                        
+                        <a class="nav-link course-link active"
+                            href="/geekmonks/spring/spring-boot" data-course="spring/spring-boot">
+                            Spring Boot
+                        </a>
+                        <!-- Debug - Submenu links are broken -->
+                        
+                        <ul class="nav flex-column ms-3 subtopics" id="topics-spring-spring-boot">
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="getting-started.html"
+                                    data-topic="getting-started.html"
+                                    data-course-path="/spring/spring-boot">
+                                    Controllers - Getting Started
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="rest-api-validation.html"
+                                    data-topic="rest-api-validation.html"
+                                    data-course-path="/spring/spring-boot">
+                                    API Validation
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="swagger-api-doc.html"
+                                    data-topic="swagger-api-doc.html"
+                                    data-course-path="/spring/spring-boot">
+                                    Swagger API Documentation
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="content-negotiation.html"
+                                    data-topic="content-negotiation.html"
+                                    data-course-path="/spring/spring-boot">
+                                    Content Negotiation
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="i18n.html"
+                                    data-topic="i18n.html"
+                                    data-course-path="/spring/spring-boot">
+                                    Internationalization (i18n)
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="rest-api-versioning.html"
+                                    data-topic="rest-api-versioning.html"
+                                    data-course-path="/spring/spring-boot">
+                                    Rest API Versioning
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="rest-api-retirement.html"
+                                    data-topic="rest-api-retirement.html"
+                                    data-course-path="/spring/spring-boot">
+                                    API Retirement Strategy
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="hateoas.html"
+                                    data-topic="hateoas.html"
+                                    data-course-path="/spring/spring-boot">
+                                    HATEOAS
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="static-content-filtering.html"
+                                    data-topic="static-content-filtering.html"
+                                    data-course-path="/spring/spring-boot">
+                                    Static Content Filtering
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="dynamic-content-filtering.html"
+                                    data-topic="dynamic-content-filtering.html"
+                                    data-course-path="/spring/spring-boot">
+                                    Dynamic Content Filtering
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="client-driven-filtering.html"
+                                    data-topic="client-driven-filtering.html"
+                                    data-course-path="/spring/spring-boot">
+                                    Client-Driven Filtering
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="exception-error-handling.html"
+                                    data-topic="exception-error-handling.html"
+                                    data-course-path="/spring/spring-boot">
+                                    Controller Error Handling
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="hal-explorer.html"
+                                    data-topic="hal-explorer.html"
+                                    data-course-path="/spring/spring-boot">
+                                    HAL Explorer
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="jpa-with-h2-db.html"
+                                    data-topic="jpa-with-h2-db.html"
+                                    data-course-path="/spring/spring-boot">
+                                    JPA with H2 DB
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="jpa-with-mysql-db.html"
+                                    data-topic="jpa-with-mysql-db.html"
+                                    data-course-path="/spring/spring-boot">
+                                    JPA with MySQL DB
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="jpa-jdbc-template.html"
+                                    data-topic="jpa-jdbc-template.html"
+                                    data-course-path="/spring/spring-boot">
+                                    JPA & JDBC Teamplate
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link topic-link small" href="spring-security-basics.html"
+                                    data-topic="spring-security-basics.html"
+                                    data-course-path="/spring/spring-boot">
+                                    Spring Security
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Right Content Panel -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Mobile: toggle sidebar button -->
+                <button id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-md-none mb-2"
+                    aria-label="Toggle topics" aria-controls="course-sidebar">
+                    ☰ Topics
+                </button>
+
+
+
+                <div id="topic-content">
+                    <div id="pageTitle">
+                        <h1>🛡️ Content Filtering (Static)</h1>
+                        <p>
+                            Updated on: 15 Nov 2024
+
+                            
+                            
+                            - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a>
+                            
+                        </p>
+
+                        <hr class="stylish-hr"/>
+                    </div>
+
+                    <h2 id="table-of-contents">Table of Contents</h2>
 
 <ul>
   <li><a href="#table-of-contents">Table of Contents</a></li>
@@ -226,6 +543,28 @@
 <p>Would you like me to generate a similar detailed note on <strong>Dynamic Content Filtering</strong> for your next post?</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+ <!-- Injects index.md content here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- External scripts -->
+    <!-- bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
+<!-- Mermaid JS: render diagrams client-side. We convert fenced code blocks
+		 with class `language-mermaid` into <div class="mermaid"> so existing
+		 markdown files don't need editing. -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<!-- Include internal JavaScript -->
+ <script src="/geekmonks/assets/js/mermaid-diagram-render.js"></script>
 
 
-<!-- TODO: add footer -->
+ <!-- Submenu toggle nav on small screen-->
+<script src="/geekmonks/assets/js/submenu-togle.js"></script>
+
+
+</body>
+
+</html>
