@@ -47,6 +47,16 @@ h5 {
 h6 {
   font-size: 1rem; }
 
+p {
+  text-align: justify;
+  /* Optional: Improves justified text readability */
+  hyphens: auto; }
+
+li {
+  text-align: justify;
+  hyphens: auto;
+  /* Allows the browser to hyphenate words */ }
+
 /* Navbar overrides */
 .navbar {
   font-family: "Poppins", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
@@ -125,6 +135,22 @@ table thead th:first-child {
 
 table thead th:last-child {
   border-top-right-radius: 4px; }
+
+/* Attractive hr ruling */
+.stylish-hr {
+  /* Remove the default border that browsers apply */
+  border: none;
+  /* Use the 'height' property to set the thickness */
+  height: 5px;
+  /* Adjust this value for desired thickness */
+  /* Set the background color to gray */
+  background-color: #292828;
+  /* DarkGray or use any preferred gray hex code */
+  /* Optional: Center the HR if a specific width is set */
+  margin-left: auto;
+  margin-right: auto;
+  /* Optional: Add a subtle rounded corner for a softer look */
+  border-radius: 3px; }
 
 .navbar-custom {
   background-color: #059862;
@@ -223,7 +249,10 @@ table thead th:last-child {
 
 /* Right Panel */
 #topic-content {
-  padding: 2rem 0;
+  border-right: none;
+  overflow-y: auto;
+  box-shadow: 3px 0 6px -2px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.5rem 0rem 0rem;
   max-width: 800px; }
 
 /* Mobile: Collapse sidebar */
