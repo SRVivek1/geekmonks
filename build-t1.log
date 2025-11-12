@@ -1,0 +1,58 @@
+  Logging at level: debug
+Configuration file: /home/srvivek/wrkspace/geekmonks-source/_config.yml
+         Requiring: jekyll-seo-tag
+         Requiring: jekyll-minifier
+            Source: /home/srvivek/wrkspace/geekmonks-source
+       Destination: /home/srvivek/wrkspace/geekmonks-source/_site
+ Incremental build: disabled. Enable with --incremental
+      Generating... 
+       EntryFilter: excluded /Gemfile.lock
+       EntryFilter: excluded /Gemfile
+           Reading: _posts/2025-09-07-apples.md
+           Reading: _posts/2025-09-07-kiwifruit.md
+           Reading: _posts/2025-09-08-bananas.md
+           Reading: _authors/srvivek.md
+           Reading: _blog/index.html
+           Reading: _courses/ai-ml/llm-engineering/_topics/a1-t0-introduction-to-llms.md
+           Reading: _courses/ai-ml/llm-engineering/_topics/a1-t1-frontier-llms-arch-ccapabilities-operational-risks.md
+           Reading: _courses/ai-ml/llm-engineering/_topics/a1-t2-foundaion-and-evolution.md
+           Reading: _courses/ai-ml/llm-engineering/_topics/a1-t3-advance-concepts-toknization-and-scaling.md
+           Reading: _courses/ai-ml/llm-engineering/_topics/a1-t4-scaling-reasoning-inference.md
+           Reading: _courses/ai-ml/llm-engineering/_topics/a1-t5-tokenization.md
+           Reading: _courses/ai-ml/llm-engineering/_topics/a1-t7-advance-conectps-models-deployments.md
+           Reading: _courses/ai-ml/llm-engineering/_topics/a1-t9-prompt-caching.md
+           Reading: _courses/ai-ml/llm-engineering/index.md
+           Reading: _courses/cloud/aws/_topics/t0-aws-infrastructure.md
+           Reading: _courses/cloud/aws/_topics/t1-aws-regions.md
+           Reading: _courses/cloud/aws/_topics/t2-aws-services.md
+           Reading: _courses/cloud/aws/_topics/t3-iam-users-and-groups.md
+           Reading: _courses/cloud/aws/_topics/t4-ec2-instance-types.md
+           Reading: _courses/cloud/aws/_topics/t5-security-groups-and-classic-ports.md
+           Reading: _courses/cloud/aws/_topics/t6-ec2-instances-purchasing-options.md
+           Reading: _courses/cloud/aws/_topics/t7-ec2-placement-groups.md
+           Reading: _courses/cloud/aws/index.md
+           Reading: _courses/spring/spring-boot/_topics/01-getting-started.md
+           Reading: _courses/spring/spring-boot/_topics/02-api-validation.md
+           Reading: _courses/spring/spring-boot/_topics/03-api-docs-swagger-ui.md
+           Reading: _courses/spring/spring-boot/_topics/04-content-negotiation.md
+           Reading: _courses/spring/spring-boot/_topics/05-i18n.md
+           Reading: _courses/spring/spring-boot/_topics/06-a-api-retirement.md
+           Reading: _courses/spring/spring-boot/_topics/06-api-versioning.md
+           Reading: _courses/spring/spring-boot/_topics/07-hateoas.md
+           Reading: _courses/spring/spring-boot/_topics/08-static-response-contetnt-filtering.md
+           Reading: _courses/spring/spring-boot/_topics/09-dynamic-response-content-filtering.md
+           Reading: _courses/spring/spring-boot/_topics/10-client-driven-filtering.md
+           Reading: _courses/spring/spring-boot/_topics/11-exception-error-handling.md
+           Reading: _courses/spring/spring-boot/_topics/12-hal-explorer.md
+           Reading: _courses/spring/spring-boot/_topics/13-h2-jpa.md
+           Reading: _courses/spring/spring-boot/_topics/14-mysql-jpa.md
+           Reading: _courses/spring/spring-boot/_topics/15-jpa-jdbc-template.md
+           Reading: _courses/spring/spring-boot/_topics/16-spring-basic-authentication.md
+           Reading: _courses/spring/spring-boot/index.md
+         Rendering: _posts/2025-09-07-apples.md
+  Pre-Render Hooks: _posts/2025-09-07-apples.md
+  Rendering Markup: _posts/2025-09-07-apples.md
+         Requiring: kramdown-parser-gfm
+  Rendering Layout: _posts/2025-09-07-apples.md
+     Layout source: site
+jekyll 3.10.0 | Error:  Liquid syntax error (/home/srvivek/wrkspace/geekmonks-source/_includes/html-head.html line 7): Unknown tag 'feed_meta' included 
