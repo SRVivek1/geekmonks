@@ -10,20 +10,21 @@
     <link rel="stylesheet" href="/geekmonks/assets/css/styles.css">
     <link type="application/atom+xml" rel="alternate" href="https://srvivek1.github.io/geekmonks/feed.xml" title="Geekmonks Blog" />
     <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>AI/ML - LLM Engineering Mastery | Geekmonks Blog</title>
+<title>Lab - LLM and app integration | Geekmonks Blog</title>
 <meta name="generator" content="Jekyll v3.10.0" />
-<meta property="og:title" content="AI/ML - LLM Engineering Mastery" />
+<meta property="og:title" content="Lab - LLM and app integration" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Learn, share and grow together." />
-<meta property="og:description" content="Learn, share and grow together." />
-<link rel="canonical" href="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/" />
-<meta property="og:url" content="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/" />
+<meta name="description" content="🚀 Getting Started with Local LLMs" />
+<meta property="og:description" content="🚀 Getting Started with Local LLMs" />
+<link rel="canonical" href="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html" />
+<meta property="og:url" content="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html" />
 <meta property="og:site_name" content="Geekmonks Blog" />
-<meta property="og:type" content="website" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-11-13T00:00:00+05:30" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="AI/ML - LLM Engineering Mastery" />
+<meta property="twitter:title" content="Lab - LLM and app integration" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Learn, share and grow together.","headline":"AI/ML - LLM Engineering Mastery","url":"https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-13T00:00:00+05:30","datePublished":"2025-11-13T00:00:00+05:30","description":"🚀 Getting Started with Local LLMs","headline":"Lab - LLM and app integration","mainEntityOfPage":{"@type":"WebPage","@id":"https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html"},"url":"https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html"}</script>
 <!-- End Jekyll SEO tag -->
 
     <!-- Google Analytics -->
@@ -266,9 +267,9 @@
 
                 <div id="topic-content">
                     <div id="pageTitle">
-                        <h1>AI/ML - LLM Engineering Mastery</h1>
+                        <h1>Lab - LLM and app integration</h1>
                         <p>
-                            Updated on: 
+                            Updated on: 13 Nov 2025
 
                             
                             
@@ -279,79 +280,162 @@
                         <hr class="stylish-hr"/>
                     </div>
 
-                    <p><br /></p>
+                    <h2 id="-getting-started-with-local-llms">🚀 Getting Started with Local LLMs</h2>
 
-<h2 id="hello-learners-">Hello Learners! 👋</h2>
-
-<p><br /></p>
-
-<h2 id="-welcome-to-llm-engineering-mastery">🚀 Welcome to LLM Engineering Mastery!</h2>
-
-<h3 id="stop-guessing-start-building">Stop Guessing. Start Building.</h3>
-
-<p>Are you excited by the power of models like GPT-4, Llama, and Mistral, but feel lost when it comes to <strong>reliably</strong> putting them into production?</p>
-
-<p>You’re not alone. The gap between a fun notebook experiment and a scalable, cost-effective LLM-powered application is huge.</p>
-
-<p><strong>This blog is your dedicated roadmap to becoming an elite LLM Engineer.</strong></p>
-
-<hr />
-
-<h3 id="-what-you-will-learn-here">💡 What You Will Learn Here</h3>
-
-<p>We go beyond basic prompt templates and dive deep into the essential, production-ready skills that companies are desperately seeking.</p>
-
+<p>We’ve covered the concepts and visualizations—now it’s time to build! This hands-on guide walks you through developing your very first application to <code class="language-plaintext highlighter-rouge">integrate</code> <strong>Large Language Models (LLMs)</strong> using <code class="language-plaintext highlighter-rouge">Ollama</code> within a <code class="language-plaintext highlighter-rouge">Python</code> environment.</p>
 <ul>
-  <li><strong>🛠️ Production-Ready Tooling:</strong> Master frameworks like <strong>LangChain</strong>, <strong>LlamaIndex</strong>, and <strong>Pydantic</strong> for structured, reliable LLM workflows.</li>
-  <li><strong>🧠 Advanced Prompt Engineering:</strong> Learn techniques like Chain-of-Thought (CoT), Tree-of-Thought (ToT), and self-correction to dramatically improve model output quality.</li>
-  <li><strong>📈 RAG System Excellence:</strong> Build highly-performant Retrieval-Augmented Generation (RAG) pipelines, covering vector database selection, chunking strategies, and re-ranking.</li>
-  <li><strong>💸 Cost &amp; Latency Optimization:</strong> Techniques for model selection, caching, batching, and distillation to keep your APIs fast and your cloud bill low.</li>
-  <li><strong>🛡️ Evaluation &amp; Safety:</strong> Implement robust metrics, A/B testing, and guardrails to ensure your LLM applications are accurate, safe, and maintainable.</li>
+  <li>Critically, we will leverage the familiar <code class="language-plaintext highlighter-rouge">OpenAI</code> client library to maintain a consistent and efficient interface.</li>
 </ul>
 
 <hr />
 
-<h3 id="-who-is-this-for">🎯 Who Is This For?</h3>
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Persona</th>
-      <th style="text-align: left">Why This Blog Is Essential</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><strong>Data Scientists / ML Engineers</strong></td>
-      <td style="text-align: left">Transition from traditional ML to the new era of generative AI with a focus on deployment and infrastructure.</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><strong>Software Developers</strong></td>
-      <td style="text-align: left">Learn how to integrate, manage, and scale LLM APIs effectively within your existing application stack.</td>
-    </tr>
-    <tr>
-      <td style="text-align: left"><strong>Technical Leaders / Architects</strong></td>
-      <td style="text-align: left">Understand the fundamental trade-offs and best practices for designing reliable, enterprise-grade LLM solutions.</td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li><a href="#-getting-started-with-local-llms">🚀 Getting Started with Local LLMs</a></li>
+  <li><a href="#-table-of-contents">📚 Table of Contents</a></li>
+  <li><a href="#️-setup-imports--resources">🛠️ Setup: Imports \&amp; Resources</a></li>
+  <li><a href="#-load-api-keys">🔑 Load API Keys</a></li>
+  <li><a href="#️-build-the-ollama-client">⚙️ Build the Ollama Client</a>
+    <ul>
+      <li><a href="#-request-flow-diagram">🧠 Request Flow Diagram</a></li>
+    </ul>
+  </li>
+  <li><a href="#-test-the-connection">💬 Test the Connection</a></li>
+  <li><a href="#-key-points">✨ Key points</a></li>
+</ul>
 
 <hr />
 
+<h2 id="️-setup-imports--resources">🛠️ Setup: Imports &amp; Resources</h2>
+
+<p>We start by setting up the application environment and importing the necessary libraries.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Import utilities for environment setup
+</span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="c1"># Import the OpenAI client library
+</span><span class="kn">from</span> <span class="nn">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-load-api-keys">🔑 Load API Keys</h2>
+
+<p>To maintain compatibility with the OpenAI library, an <code class="language-plaintext highlighter-rouge">OPENAI_API_KEY</code> environment variable must be defined, even when connecting to a local Ollama server.</p>
+
 <blockquote>
-  <p>“The true skill in LLM Engineering isn’t writing a good prompt—it’s building a resilient, scalable system around it.”</p>
+  <p><strong>Note:</strong> If you are using Ollama locally, you can set a <strong>dummy value</strong> for <code class="language-plaintext highlighter-rouge">OPENAI_API_KEY</code>, such as <code class="language-plaintext highlighter-rouge">sk-proj-dummy-key</code>.</p>
 </blockquote>
 
-<h3 id="-ready-to-elevate-your-skills">🔥 Ready to Elevate Your Skills?</h3>
+<blockquote>
+  <p>The code below loads the variables from a local <code class="language-plaintext highlighter-rouge">.env</code> file and performs a basic check on the key format.</p>
+</blockquote>
 
-<p>Don’t let the complexity of new frameworks hold you back. We break down complex concepts into clear, actionable tutorials with code you can copy and deploy <em>today</em>.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load environment variables from .env file
+</span><span class="n">load_dotenv</span><span class="p">(</span><span class="n">override</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">'OPENAI_API_KEY'</span><span class="p">)</span>
 
-<p><strong>Start Your Journey to Mastery:</strong></p>
+<span class="c1"># Basic key validation logic
+</span><span class="k">if</span> <span class="ow">not</span> <span class="n">api_key</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"No API key was found - please head over to the troubleshooting notebook in this folder to identify &amp; fix!"</span><span class="p">)</span>
+<span class="k">elif</span> <span class="ow">not</span> <span class="n">api_key</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">"sk-proj-"</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"An API key was found, but it doesn't start sk-proj-; please check you're using the right key - see troubleshooting notebook"</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">api_key</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="n">api_key</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"An API key was found, but it looks like it might have space or tab characters at the start or end - please remove them - see troubleshooting notebook"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"API key found and looks good so far!"</span><span class="p">)</span>
+</code></pre></div></div>
 
-<ol>
-  <li><strong>Read Our Foundational Post:</strong> [Link to your first/best post, e.g., “The 3 Pillars of a Production RAG System”]</li>
-  <li><strong>Browse by Topic:</strong> [Link to your main Categories/Tags page]</li>
-</ol>
+<p><strong>Output Stream:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>API key found and looks good so far!
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-build-the-ollama-client">⚙️ Build the Ollama Client</h2>
+
+<p>To connect to a local LLM running via Ollama, we initialize the standard <code class="language-plaintext highlighter-rouge">OpenAI</code> client but override the default connection endpoint with the <strong>Ollama base URL</strong>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define the local Ollama API endpoint
+</span><span class="n">OLLAMA_BASE_URL</span> <span class="o">=</span> <span class="s">"http://localhost:11434/v1"</span>
+<span class="c1"># if doesn't work try using - "http://localhost:11434"
+</span>
+<span class="c1"># Initialize OpenAI client with the custom base URL for Ollama
+</span><span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="n">OLLAMA_BASE_URL</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="-request-flow-diagram">🧠 Request Flow Diagram</h3>
+
+<p>This architecture illustrates how the application uses the standard OpenAI library to connect to the local Ollama server.</p>
+
+<pre><code class="language-mermaid">graph TD
+    A[Application Python Script] -- Uses OpenAI Client --&gt; B(OpenAI Class)
+    B -- Connects to Custom Base URL --&gt; C(Ollama Server @ http://localhost:11434/v1)
+    C -- Hosts Local Models --&gt; D(Local LLM e.g., gemma3:1b)
+    D -- Generates Response --&gt; C
+    C -- Returns Response --&gt; A
+</code></pre>
+
+<hr />
+
+<h2 id="-test-the-connection">💬 Test the Connection</h2>
+
+<p>Below code is a base minimum application, which connects with the local Ollama LLMs, sends a prompt, and receives a response.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define the model to use and the user's prompt
+</span><span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s">"gemma3:1b"</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="p">[{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"user"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="s">"Tell me a fun fact about programmers."</span><span class="p">}]</span>
+
+<span class="c1"># Send the request and read the response from the LLM model
+</span><span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">chat</span><span class="p">.</span><span class="n">completions</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">MODEL_NAME</span><span class="p">,</span> <span class="n">messages</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+
+<span class="c1"># Print the generated content
+</span><span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">message</span><span class="p">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Output Stream:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Okay, here’s a fun fact about programmers:
+
+**Computers don’t truly *understand* code. They simply translate it into instructions that their hardware can execute.**
+
+Think of it like a very complex robot. The robot follows the instructions we give it, but it doesn't *know* what it's doing. Programming is all about crafting those instructions in a way that a computer can follow effectively! 
+
+---
+
+Want to know another fun fact?
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-key-points">✨ Key points</h2>
+
+<p><strong>Configuration Management:</strong>
+For more robust and scalable applications, always manage the configurations eg. <code class="language-plaintext highlighter-rouge">OLLAMA_BASE_URL</code> and <code class="language-plaintext highlighter-rouge">MODEL_NAME</code> as environment variables in <code class="language-plaintext highlighter-rouge">.env</code> file, similar to the <code class="language-plaintext highlighter-rouge">OPENAI_API_KEY</code>.</p>
+<ul>
+  <li>This makes switching between local (Ollama) and cloud (OpenAI) environments or LLM Models much cleaner without modifying the working and tested application code.</li>
+</ul>
+
+<p><strong>Example Change:</strong></p>
+
+<p>In <code class="language-plaintext highlighter-rouge">.env</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OPENAI_API_KEY="sk-proj-dummy-key"
+LLM_BASE_URL="http://localhost:11434/v1"
+DEFAULT_MODEL="gemma3:1b"
+</code></pre></div></div>
+
+<p>In Python:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load from environment variables
+</span><span class="n">OLLAMA_BASE_URL</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">"LLM_BASE_URL"</span><span class="p">,</span> <span class="s">"http://localhost:11434/v1"</span><span class="p">)</span> <span class="c1"># Use default if not found
+</span><span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">"DEFAULT_MODEL"</span><span class="p">,</span> <span class="s">"gemma3:1b"</span><span class="p">)</span> 
+<span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="n">OLLAMA_BASE_URL</span><span class="p">)</span>
+<span class="c1"># ... use MODEL_NAME in the completions call
+</span></code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
  <!-- Injects index.md content here -->
