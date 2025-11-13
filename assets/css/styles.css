@@ -267,6 +267,13 @@ table thead th:last-child {
 
   #course-sidebar.show {
     transform: translateX(0); } }
+/* No underline in tool tags*/
+.tool-tags {
+  text-align: center; }
+
+.tool-tags > a {
+  text-decoration: none; }
+
 footer {
   background: #f8f9fa;
   /* Matches Bootstrap bg-light */
