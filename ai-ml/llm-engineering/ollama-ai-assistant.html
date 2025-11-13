@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Head-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/geekmonks/assets/css/styles.css">
+    <link type="application/atom+xml" rel="alternate" href="https://srvivek1.github.io/geekmonks/feed.xml" title="Geekmonks Blog" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Ollama LLMs - Connect with IDE | Geekmonks Blog</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Ollama LLMs - Connect with IDE" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Learn, share and grow together." />
+<meta property="og:description" content="Learn, share and grow together." />
+<link rel="canonical" href="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/ollama-ai-assistant.html" />
+<meta property="og:url" content="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/ollama-ai-assistant.html" />
+<meta property="og:site_name" content="Geekmonks Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-11-12T00:00:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Ollama LLMs - Connect with IDE" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-11-12T00:00:00+05:30","datePublished":"2025-11-12T00:00:00+05:30","description":"Learn, share and grow together.","headline":"Ollama LLMs - Connect with IDE","mainEntityOfPage":{"@type":"WebPage","@id":"https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/ollama-ai-assistant.html"},"url":"https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/ollama-ai-assistant.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-48XEHMVSEC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-48XEHMVSEC');
+</script>
+</head>
+
+<body class="container-fluid p-0 m-0">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light text-white content-shadow">
+  <div class="container d-flex justify-content-between">
+    <a href="/geekmonks/" class="navbar-brand d-flex">
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/laptop.svg" height="40"
+        width="34" />
+      <h1 class="fs-3 px-2 fw-bold">Geekmonks</h1>
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/tux.svg" height="40"
+        width="34" />
+    </a>
+    <!-- Toggle Button to expand and collapse the nav links -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBanner"
+      aria-controls="navbarNavBanner" aria-expanded="false" aria-label="Toggle Navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbarNavBanner" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/" class="nav-link fw-bold active"
+            >Home</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/blog" class="nav-link fw-bold active"
+            >Blog</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/about" class="nav-link fw-bold active"
+            >About</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/staff" class="nav-link fw-bold active"
+            >Staff</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://github.com/SRVivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">Github</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://www.linkedin.com/in/srvivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+        <nav class="navbar navbar-expand-xl navbar-custom p-0">
+  <div class="container-fluid">
+
+    <!-- Toggler for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible nav items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        
+          
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/ai-ml/llm-engineering/"
+                  >AI-ML</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/cloud/aws/"
+                  >AWS</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/spring/spring-boot/"
+                  >Spring Boot</a>
+              </li>
+            
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+            <!-- Left Sidebar -->
+            <nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column course-topics-list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a class="nav-link course-link active"
+                            href="/geekmonks/ai-ml/llm-engineering" data-course="ai-ml/llm-engineering">
+                            AI/ML
+                        </a>
+                        <!-- Debug - Submenu links are broken -->
+                        
+                        <ul class="nav flex-column ms-3 subtopics" id="topics-ai-ml-llm-engineering">
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small" href="introduction-to-llms.html"
+                                    data-topic="introduction-to-llms.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    LLM Fundamentals
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small" href="ollama-local-setup.html"
+                                    data-topic="ollama-local-setup.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Ollama Local Lab
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small" href="ollama-ai-assistant.html"
+                                    data-topic="ollama-ai-assistant.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Lab - Local AI Assistant
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small" href="frontier-models-capabilities-operational-risks.html"
+                                    data-topic="frontier-models-capabilities-operational-risks.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Architecture & capabilities
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small" href="foundaion-and-evolution.html"
+                                    data-topic="foundaion-and-evolution.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Foundation and Evaluation
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small" href="advance-concepts-toknization-and-scaling.html"
+                                    data-topic="advance-concepts-toknization-and-scaling.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Tokens, Scaling
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small" href="scaling-reasoning-inference.html"
+                                    data-topic="scaling-reasoning-inference.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Reasoning, Interference
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small" href="payload-tokenization.html"
+                                    data-topic="payload-tokenization.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Payload Tokenization
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small" href="advance-conectps-models-deployments.html"
+                                    data-topic="advance-conectps-models-deployments.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced Concepts & Deployment
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small" href="advance-prompt-caching.html"
+                                    data-topic="advance-prompt-caching.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Prompt Caching
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        
+                        
+                        
+                        
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Right Content Panel -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Mobile: toggle sidebar button -->
+                <button id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-md-none mb-2"
+                    aria-label="Toggle topics" aria-controls="course-sidebar">
+                    ☰ Topics
+                </button>
+
+
+
+                <div id="topic-content">
+                    <div id="pageTitle">
+                        <h1>Ollama LLMs - Connect with IDE</h1>
+                        <p>
+                            Updated on: 12 Nov 2025
+
+                            
+                            
+                            - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a>
+                            
+                        </p>
+
+                        <hr class="stylish-hr"/>
+                    </div>
+
+                    <div id="tool-tags" class="tool-tags">
+  <a href="https://code.visualstudio.com/">
+    <img src="https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&amp;logo=visual-studio-code&amp;logoColor=white" alt="Spring Boot Badge" />
+  </a>
+  <a href="https://ollama.com/">
+    <img src="https://img.shields.io/badge/Ollama-FF6B35?style=for-the-badge&amp;logo=ollama&amp;logoColor=white" alt="Microservices Badge" />
+  </a>
+  <a href="https://continue.dev">
+    <img src="https://img.shields.io/badge/Continue-0E1116?style=for-the-badge&amp;logo=continue&amp;logoColor=white" alt="Continue" />
+  </a>
+</div>
+
+<p><br /></p>
+
+<p>Welcome to this fully <strong>local, private, and offline</strong> AI coding assistatnt setup! 🚀 Using the <a href="https://continue.dev/">Continue extension</a> in VS Code paired with <a href="https://ollama.com/">Ollama</a> for lightweight LLMs, you’ll get autocomplete, chat, editing, and more—without cloud dependencies. Perfect for developers prioritizing speed, privacy, and customization.</p>
+
+<p>This guide is battle-tested for macOS, Linux, and Windows. Expect setup in ~15-30 minutes, depending on model downloads.</p>
+
+<hr />
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><a href="#table-of-contents">Table of Contents</a></li>
+  <li><a href="#prerequisites">Prerequisites</a></li>
+  <li><a href="#step-1-install-continue-extension">Step 1: Install Continue Extension</a></li>
+  <li><a href="#step-2-install-and-start-ollama">Step 2: Install and Start Ollama</a>
+    <ul>
+      <li><a href="#installation-commands">Installation Commands</a></li>
+      <li><a href="#verify-and-start">Verify and Start</a></li>
+    </ul>
+  </li>
+  <li><a href="#step-3-download-local-models">Step 3: Download Local Models</a>
+    <ul>
+      <li><a href="#key-commands">Key Commands</a></li>
+    </ul>
+  </li>
+  <li><a href="#step-4-configure-continue-with-ollama">Step 4: Configure Continue with Ollama</a>
+    <ul>
+      <li><a href="#base-config-example">Base Config Example</a></li>
+      <li><a href="#apply-changes">Apply Changes</a></li>
+    </ul>
+  </li>
+  <li><a href="#step-5-select-and-use-your-models">Step 5: Select and Use Your Models</a></li>
+  <li><a href="#model-recommendations">Model Recommendations</a></li>
+  <li><a href="#tips-for-performance">Tips for Performance</a></li>
+  <li><a href="#troubleshooting">Troubleshooting</a></li>
+  <li><a href="#next-steps">Next Steps</a></li>
+</ul>
+
+<hr />
+
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before diving in, ensure your setup meets these basics. Use this checklist for a smooth ride! ✅</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Requirement</th>
+      <th>Details</th>
+      <th>Why It Matters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>RAM</strong></td>
+      <td>8GB minimum (16GB+ recommended)</td>
+      <td>Handles model inference</td>
+    </tr>
+    <tr>
+      <td><strong>Storage</strong></td>
+      <td>10GB+ free</td>
+      <td>For model files (e.g., 4-8GB each)</td>
+    </tr>
+    <tr>
+      <td><strong>OS</strong></td>
+      <td>macOS, Linux, or Windows</td>
+      <td>Ollama compatibility</td>
+    </tr>
+    <tr>
+      <td><strong>Terminal Access</strong></td>
+      <td>Basic command-line skills</td>
+      <td>For Ollama setup</td>
+    </tr>
+    <tr>
+      <td><strong>VS Code</strong></td>
+      <td>Install Latest version</td>
+      <td>Core IDE for the extension</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>💡 <strong>Pro Tip</strong>: If you’re on a laptop, plug-in for downloads—models can be hefty!</p>
+</blockquote>
+
+<hr />
+
+<h2 id="step-1-install-continue-extension">Step 1: Install Continue Extension</h2>
+<p>Get the AI brains into VS Code.</p>
+
+<ol>
+  <li><strong>Install</strong> latest VSCode.</li>
+  <li><strong>Open</strong> VS Code.</li>
+  <li><strong>Hit</strong> <code class="language-plaintext highlighter-rouge">Ctrl+Shift+X</code> (Windows/Linux) or <code class="language-plaintext highlighter-rouge">Cmd+Shift+X</code> (macOS) to open Extensions.</li>
+  <li><strong>Search</strong> for <strong><code class="language-plaintext highlighter-rouge">Continue</code></strong>.</li>
+  <li><strong>Install</strong> the official extension from <a href="https://continue.dev/">Continue.dev</a>.<br />
+<!-- ![Continue Icon](https://cdn.prod.website-files.com/663e06c56841363663ffbbcf/663e1b9fb023f0b622ad3608_log-text.svg) --></li>
+  <li><strong>Reload</strong> VS Code after install.
+    <ul>
+      <li>You’ll see a new <strong>Continue</strong> icon in the activity bar (left sidebar).</li>
+    </ul>
+  </li>
+</ol>
+
+<blockquote>
+  <p>💡 <strong>Follow the same</strong> to install Continue plugin in IntelliJ IDE and cofigure ollama models to integrate them.</p>
+
+</blockquote>
+
+<hr />
+
+<h2 id="step-2-install-and-start-ollama">Step 2: Install and Start Ollama</h2>
+<p>Ollama is your local LLM server—think of it as a lightweight OpenAI API alternative.</p>
+
+<h3 id="installation-commands">Installation Commands</h3>
+<p>Run these in your terminal:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>OS</th>
+      <th>Command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>macOS</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">brew install ollama</code></td>
+    </tr>
+    <tr>
+      <td><strong>Linux</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">curl -fsSL https://ollama.com/install.sh \| sh</code></td>
+    </tr>
+    <tr>
+      <td><strong>Windows</strong></td>
+      <td>Download installer from <a href="https://ollama.com/download">ollama.com</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="verify-and-start">Verify and Start</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Check version</span>
+ollama <span class="nt">--version</span>
+
+<span class="c"># Start the server (runs in background)</span>
+ollama serve
+
+<span class="c"># Test connection (should echo "Ollama is running")</span>
+curl http://localhost:11434
+</code></pre></div></div>
+
+<blockquote>
+  <p>⚠️ <strong>Warning</strong>: Keep the terminal open or run <code class="language-plaintext highlighter-rouge">ollama serve</code> as a service (e.g., via systemd on Linux) for persistent use.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="step-3-download-local-models">Step 3: Download Local Models</h2>
+<p>Pull models from Ollama’s library. Start small for testing!</p>
+
+<h3 id="key-commands">Key Commands</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># General coding (balanced)</span>
+ollama pull llama3.2:3b
+
+<span class="c"># Code-focused autocomplete</span>
+ollama pull qwen2.5-coder:1.5b-base
+
+<span class="c"># Embeddings for search (RAG)</span>
+ollama pull nomic-embed-text:latest
+
+<span class="c"># List all installed models</span>
+ollama list
+</code></pre></div></div>
+
+<blockquote>
+  <p>🔍 <strong>Quick Note</strong>: Use <code class="language-plaintext highlighter-rouge">ollama run &lt;model_name&gt;</code> for interactive testing, butthis internally first <code class="language-plaintext highlighter-rouge">pulls</code> the model in local. Tags like <code class="language-plaintext highlighter-rouge">:1b</code>, <code class="language-plaintext highlighter-rouge">:3b</code> etc. specify size of model. <br />
+I will recommend to stick to 1.5B - 8B for everyday hardware.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="step-4-configure-continue-with-ollama">Step 4: Configure Continue with Ollama</h2>
+<p>Continue uses <code class="language-plaintext highlighter-rouge">~/.continue/config.yaml</code> (YAML for readability).</p>
+<ul>
+  <li>Open it via “<code class="language-plaintext highlighter-rouge">Continue sidebar</code>” &gt; “<code class="language-plaintext highlighter-rouge">Settings gear</code>” &gt; “<code class="language-plaintext highlighter-rouge">Open config.yaml</code>”.</li>
+</ul>
+
+<h3 id="base-config-example">Base Config Example</h3>
+<p>Here’s a starter config with role-separated models for efficiency:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#config</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">Local Config</span>
+<span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+<span class="na">schema</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">models</span><span class="pi">:</span>
+  <span class="c1"># Chats, edits, and apply changes (default for interactions)</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Llama 3.2 3B</span>
+    <span class="na">provider</span><span class="pi">:</span> <span class="s">ollama</span>
+    <span class="na">model</span><span class="pi">:</span> <span class="s">llama3.2:3b</span>
+    <span class="na">roles</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">chat</span>
+      <span class="pi">-</span> <span class="s">edit</span>
+      <span class="pi">-</span> <span class="s">apply</span>
+    <span class="na">default</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">completionOptions</span><span class="pi">:</span>
+      <span class="na">temperature</span><span class="pi">:</span> <span class="m">0.2</span>  <span class="c1"># Low for consistent code</span>
+      <span class="na">maxTokens</span><span class="pi">:</span> <span class="m">2048</span>   <span class="c1"># Balanced length</span>
+
+  <span class="c1"># Lightweight autocomplete</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Qwen2.5-Coder 1.5B</span>
+    <span class="na">provider</span><span class="pi">:</span> <span class="s">ollama</span>
+    <span class="na">model</span><span class="pi">:</span> <span class="s">qwen2.5-coder:1.5b-base</span>
+    <span class="c1"># Note: Comment out below autocomplete role if facing performance issues. </span>
+    <span class="c1"># If enabled it will keep running the configured model.</span>
+    <span class="c1"># Resulting in consuming a lot of CPU and RAM, specially if you have limited resources.</span>
+    <span class="na">roles</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">autocomplete</span>
+    <span class="na">completionOptions</span><span class="pi">:</span>
+      <span class="na">temperature</span><span class="pi">:</span> <span class="m">0.1</span>  <span class="c1"># Focused predictions</span>
+      <span class="na">topP</span><span class="pi">:</span> <span class="m">0.9</span>
+
+  <span class="c1"># Embeddings for @codebase searches</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Nomic Embed</span>
+    <span class="na">provider</span><span class="pi">:</span> <span class="s">ollama</span>
+    <span class="na">model</span><span class="pi">:</span> <span class="s">nomic-embed-text:latest</span>
+    <span class="na">roles</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">embed</span>
+
+  <span class="c1"># Auto-detect new models</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Autodetect</span>
+    <span class="na">provider</span><span class="pi">:</span> <span class="s">ollama</span>
+    <span class="na">model</span><span class="pi">:</span> <span class="s">AUTODETECT</span>
+
+<span class="c1"># Global tweaks</span>
+<span class="na">contextProviders</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">code</span>
+    <span class="na">params</span><span class="pi">:</span>
+      <span class="na">nRetrieve</span><span class="pi">:</span> <span class="m">5</span>  <span class="c1"># Fast searches</span>
+      <span class="na">useReranking</span><span class="pi">:</span> <span class="no">false</span>
+
+<span class="na">tabAutocompleteOptions</span><span class="pi">:</span>
+  <span class="na">enabled</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">model</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Qwen2.5-Coder</span><span class="nv"> </span><span class="s">1.5B"</span>
+</code></pre></div></div>
+
+<h3 id="apply-changes">Apply Changes</h3>
+<ul>
+  <li><strong>Save</strong> the file.</li>
+  <li><strong>Reload</strong>: <code class="language-plaintext highlighter-rouge">Cmd/Ctrl+Shift+P</code> &gt; “Continue: Reload Config”.</li>
+  <li><strong>Auto-detects</strong> Ollama at <code class="language-plaintext highlighter-rouge">http://localhost:11434</code>.</li>
+</ul>
+
+<blockquote>
+  <p>🎨 <strong>UX Enhancement</strong>: Use VS Code’s YAML extension for syntax highlighting and validation, install via Extensions marketplace.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="step-5-select-and-use-your-models">Step 5: Select and Use Your Models</h2>
+<p>Time to code with AI!</p>
+
+<ol>
+  <li><strong>Open</strong> the Continue form sidebar in IDE.</li>
+  <li><strong>Select Model</strong>: Dropdown at top-pick “Llama 3.2 3B” (or your default).</li>
+  <li><strong>Core Features</strong>:
+    <ul>
+      <li><strong>Chat</strong>: Highlight code &gt; <code class="language-plaintext highlighter-rouge">Cmd/Ctrl+L</code> &gt; Ask “Refactor this?”</li>
+      <li><strong>Autocomplete</strong>: As you type code-suggestions pop up (Tab to accept).</li>
+      <li><strong>Edit</strong>: Select code &gt; <code class="language-plaintext highlighter-rouge">Cmd/Ctrl+I</code> &gt; “Add error handling”.</li>
+      <li><strong>Search</strong>: In chat, type <code class="language-plaintext highlighter-rouge">@codebase What does utils.py do?</code></li>
+    </ul>
+  </li>
+  <li><strong>Agent Mode</strong>: For tools, add <code class="language-plaintext highlighter-rouge">"capabilities": ["tool_use"]</code> to a model’s config.</li>
+</ol>
+
+<blockquote>
+  <p>💫 <strong>Pro Tip</strong>: Pin your favorite model to the dropdown for one-click access.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="model-recommendations">Model Recommendations</h2>
+<p>Tailor to your workflow. Smaller = faster on CPU.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Use Case</th>
+      <th>Model Suggestion</th>
+      <th>RAM Estimate</th>
+      <th>Speed Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Code Completion</strong></td>
+      <td>qwen2.5-coder:1.5b-base</td>
+      <td>4GB</td>
+      <td>⚡ Fast</td>
+    </tr>
+    <tr>
+      <td><strong>General Coding</strong></td>
+      <td>llama3.2:3b</td>
+      <td>8GB</td>
+      <td>🚀 Quick</td>
+    </tr>
+    <tr>
+      <td><strong>Advanced Tasks</strong></td>
+      <td>codellama:7b</td>
+      <td>8-16GB</td>
+      <td>🐌 Balanced</td>
+    </tr>
+    <tr>
+      <td><strong>Heavy Reasoning</strong></td>
+      <td>mistral:7b</td>
+      <td>16GB+</td>
+      <td>🐢 Thoughtful</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Run <code class="language-plaintext highlighter-rouge">ollama pull &lt;model&gt;</code> to add more. For GPU boost (NVIDIA/AMD), Ollama auto-detects—monitor with <code class="language-plaintext highlighter-rouge">nvidia-smi</code>.</p>
+
+<hr />
+
+<h2 id="tips-for-performance">Tips for Performance</h2>
+<ul>
+  <li><strong>Monitor Loads</strong>: <code class="language-plaintext highlighter-rouge">ollama ps</code> in terminal.</li>
+  <li><strong>Tune Context</strong>: Lower <code class="language-plaintext highlighter-rouge">maxTokens</code> for speed.</li>
+  <li><strong>GPU Tweaks</strong>: In a custom Modelfile: <code class="language-plaintext highlighter-rouge">PARAMETER num_gpu 35</code>.</li>
+  <li><strong>Remote Ollama</strong>: Set <code class="language-plaintext highlighter-rouge">"apiBase": "http://your-server:11434"</code> in config.
+    <ul>
+      <li>If above url doen’t work try <code class="language-plaintext highlighter-rouge">http://your-server:11434/v1</code></li>
+    </ul>
+  </li>
+  <li><strong>Backup Config</strong>: Git-track <code class="language-plaintext highlighter-rouge">~/.continue/</code> for version control.</li>
+</ul>
+
+<blockquote>
+  <p>🌟 <strong>Enhancement</strong>: Integrate with VS Code themes—Continue respects your dark/light mode for a seamless look.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>Hit a snag? Quick fixes:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Issue</th>
+      <th>Solution</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Model 404 Error</strong></td>
+      <td><code class="language-plaintext highlighter-rouge">ollama pull &lt;exact-tag&gt;</code>; match config precisely.</td>
+    </tr>
+    <tr>
+      <td><strong>Connection Failed</strong></td>
+      <td>Restart <code class="language-plaintext highlighter-rouge">ollama serve</code>; check port 11434 (<code class="language-plaintext highlighter-rouge">netstat -an \| grep 11434</code>).</td>
+    </tr>
+    <tr>
+      <td><strong>Slow Autocomplete</strong></td>
+      <td>Switch to 1.5B model; reduce <code class="language-plaintext highlighter-rouge">contextLength</code>.</td>
+    </tr>
+    <tr>
+      <td><strong>No Embeddings</strong></td>
+      <td>Pull <code class="language-plaintext highlighter-rouge">nomic-embed-text</code>; test with <code class="language-plaintext highlighter-rouge">@files</code> in chat.</td>
+    </tr>
+    <tr>
+      <td><strong>Logs Needed</strong></td>
+      <td>Continue sidebar &gt; Debug view.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For deep dives, check <a href="https://docs.continue.dev/">Continue Docs</a> or <a href="https://ollama.com/docs">Ollama Guide</a>.</p>
+
+<hr />
+
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+  <li><strong>Experiment</strong>: Try <code class="language-plaintext highlighter-rouge">@terminal</code> for shell integration.</li>
+  <li><strong>Scale Up</strong>: Add larger models like <code class="language-plaintext highlighter-rouge">deepseek-coder:6.7b</code> once comfy.</li>
+  <li><strong>Contribute</strong>: Fork this guide on GitHub and PR enhancements!</li>
+</ul>
+
+<p>Questions? Drop a comment or ping on <a href="https://discord.gg/continue">Continue Discord</a>. Happy local coding! 🛠️✨</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+ <!-- Injects index.md content here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- External scripts -->
+    <!-- bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
+<!-- Mermaid JS: render diagrams client-side. We convert fenced code blocks
+		 with class `language-mermaid` into <div class="mermaid"> so existing
+		 markdown files don't need editing. -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<!-- Include internal JavaScript -->
+ <script src="/geekmonks/assets/js/mermaid-diagram-render.js"></script>
+
+
+ <!-- Submenu toggle nav on small screen-->
+<script src="/geekmonks/assets/js/submenu-togle.js"></script>
+
+
+</body>
+
+</html>
