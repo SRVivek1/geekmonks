@@ -2,11 +2,19 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>https://srvivek1.github.io/geekmonks/authors/srvivek/</loc>
+<<<<<<< HEAD
 <lastmod>2025-11-14T23:58:15+05:30</lastmod>
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/blog/</loc>
 <lastmod>2025-11-14T23:58:15+05:30</lastmod>
+=======
+<lastmod>2025-11-14T22:40:14+05:30</lastmod>
+</url>
+<url>
+<loc>https://srvivek1.github.io/geekmonks/blog/</loc>
+<lastmod>2025-11-14T22:40:14+05:30</lastmod>
+>>>>>>> cf1cc4419ae0e9eb0326e7b30fa033e78083a73c
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/spring/spring-boot/getting-started.html</loc>
@@ -146,6 +154,7 @@
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/</loc>
+<<<<<<< HEAD
 <lastmod>2025-11-14T23:58:15+05:30</lastmod>
 </url>
 <url>
@@ -163,6 +172,13 @@
 <url>
 <loc>https://srvivek1.github.io/geekmonks/spring/spring-boot/</loc>
 <lastmod>2025-11-14T23:58:15+05:30</lastmod>
+=======
+<lastmod>2025-11-14T22:40:14+05:30</lastmod>
+</url>
+<url>
+<loc>https://srvivek1.github.io/geekmonks/spring/spring-boot/</loc>
+<lastmod>2025-11-14T22:40:14+05:30</lastmod>
+>>>>>>> cf1cc4419ae0e9eb0326e7b30fa033e78083a73c
 </url>
 <url>
 <loc>https://srvivek1.github.io/geekmonks/apples/</loc>
