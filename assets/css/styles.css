@@ -220,9 +220,9 @@ table thead th:last-child {
 
 #navbarNavBanner .nav-link:hover {
   border-radius: 10%;
-  border-bottom: 4px solid #0e471b;
-  border-left: 1px solid #28a745;
-  border-right: 1px solid #28a745; }
+  border-bottom-color: #0e471b;
+  border-left-color: #28a745;
+  border-right-color: #28a745; }
 
 /* Course Page Sidebar */
 #course-sidebar {
