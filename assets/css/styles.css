@@ -177,14 +177,16 @@ table thead th:last-child {
   text-align: center;
   display: inline-block;
   /* Ensures oval shape works */
-  padding: 0.5rem 1rem;
-  /* Consistent padding for height */ }
+  padding: 0.25rem 1rem 0rem 1rem;
+  /* Consistent padding for height */
+  text-decoration: underline;
+  border-bottom: 4px solid transparent; }
 
 #navbarNav .nav-link:hover {
   border-radius: 5%;
-  background-color: #28a745;
+  background-color: #1dc544;
   color: #fff;
-  text-decoration: underline;
+  border-bottom-color: #063b13;
   /* Adds clarity */ }
 
 #navbarNavBanner .navbar-nav {
@@ -202,7 +204,7 @@ table thead th:last-child {
   text-align: center;
   display: inline-block;
   /* Ensures oval shape works */
-  padding: 0.5rem 1rem;
+  padding: 0.15rem 1rem;
   /* Consistent padding for height */
   transition: all 0.3s ease;
   /* Smooth transition for hover */
