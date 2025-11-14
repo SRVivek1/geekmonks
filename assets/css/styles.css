@@ -204,8 +204,6 @@ table thead th:last-child {
   /* Ensures oval shape works */
   padding: 0.5rem 1rem;
   /* Consistent padding for height */
-  border-radius: 10%;
-  /* Starts with oval/circular base */
   transition: all 0.3s ease;
   /* Smooth transition for hover */
   text-decoration: none;
@@ -215,14 +213,16 @@ table thead th:last-child {
   overflow: hidden;
   /* Handles overflow if text is too long */
   text-overflow: ellipsis;
-  /* Truncates with ellipsis if needed */ }
+  /* Truncates with ellipsis if needed */
+  border-radius: 0;
+  border: 1px solid transparent;
+  border-bottom-width: 4px; }
 
 #navbarNavBanner .nav-link:hover {
-  border-radius: 50%;
-  background-color: #28a745;
-  color: #fff;
-  text-decoration: underline;
-  /* Adds clarity */ }
+  border-radius: 10%;
+  border-bottom: 4px solid #0e471b;
+  border-left: 1px solid #28a745;
+  border-right: 1px solid #28a745; }
 
 /* Course Page Sidebar */
 #course-sidebar {
