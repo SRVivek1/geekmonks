@@ -1,1 +1,342 @@
-html{font-size:16px}body{font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.6;color:#333;margin:0}main{flex-grow:1}h1,h2,h3,h4,h5,h6{font-family:"Poppins","Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-weight:600;line-height:1.3;color:#111}h1{font-size:2.5rem;letter-spacing:.02em}h2{font-size:2rem}h3{font-size:1.75rem}h4{font-size:1.5rem}h5{font-size:1.25rem}h6{font-size:1rem}p{text-align:justify;hyphens:auto}li{text-align:justify;hyphens:auto}.navbar{font-family:"Poppins","Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}.navbar .nav-link{font-size:1rem;font-weight:500}.navbar .dropdown-item{font-size:.875rem;font-weight:400}pre,code{font-family:"Fira Code","Consolas","Monaco",monospace;font-size:.875rem}table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:.95em;box-shadow:0 4px 8px rgba(0,0,0,0.05)}th,td{padding:12px 15px;text-align:left;border:1px solid #ddd}th{background-color:#f2f2f2;color:#333;font-weight:bold;border-color:#ccc;text-transform:uppercase}tbody tr:nth-child(even){background-color:#f9f9f9}tbody tr:hover{background-color:#f0f0ff;cursor:default;transition:background-color .2s ease}table thead th:first-child{border-top-left-radius:4px}table thead th:last-child{border-top-right-radius:4px}.stylish-hr{border:0;height:5px;background-color:#292828;margin-left:auto;margin-right:auto;border-radius:3px}.navbar-custom{background-color:#059862;box-shadow:0 2px 4px rgba(0,0,0,0.1)}.navbar .dropdown:hover .dropdown-menu{display:block}.navbar .dropdown:hover .dropdown-toggle::after{border-top:.3em solid;border-right:.3em solid transparent;border-bottom:0;border-left:.3em solid transparent}.dropdown-bg-green{background-color:#20b17c;border:0}.navbar .dropdown:hover .dropdown-menu{display:block}#navbarNav .nav-link{text-align:center;display:inline-block;padding:.25rem 1rem 0rem 1rem;text-decoration:underline;border-bottom:4px solid transparent}#navbarNav .nav-link:hover{border-radius:5%;background-color:#1dc544;color:#fff;border-bottom-color:#063b13}#navbarNavBanner .navbar-nav{text-align:center}#navbarNavBanner .nav-item{min-width:80px;display:inline-block;vertical-align:middle}#navbarNavBanner .nav-link{text-align:center;display:inline-block;padding:.15rem 1rem;transition:all .3s ease;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:0;border:1px solid transparent;border-bottom-width:4px}#navbarNavBanner .nav-link:hover{border-radius:10%;border-bottom-color:#0e471b;border-left-color:#28a745;border-right-color:#28a745}#course-sidebar{border-right:1px solid #dee2e6;overflow-y:auto}.course-topics-list .nav-link{color:#495057;border-radius:.375rem;padding:.5rem 1rem;margin-bottom:.25rem}.course-topics-list .nav-link:hover,.course-topics-list .nav-link.active{background-color:#28a745;color:#fff}.course-topics-list .subtopics{margin-top:.25rem}.course-topics-list .subtopics .nav-link{font-size:.875rem;padding-left:2rem}#topic-content{border-right:0;overflow-y:auto;box-shadow:3px 0 6px -2px rgba(0,0,0,0.1);padding:1rem 1.5rem 0rem 0rem;max-width:800px}@media(max-width:768px){#course-sidebar{position:fixed;top:0;bottom:0;z-index:1040;transform:translateX(-100%);transition:transform .3s ease-in-out}#course-sidebar.show{transform:translateX(0)}}.tool-tags{text-align:center}.tool-tags>a{text-decoration:none}footer{background:#f8f9fa;color:#333;font-size:.875rem;text-align:end}.author-position{font-style:italic;color:#4d4d4d;font-size:large}.highlight{background-color:#282828;color:#ebdbb2;padding:1em;border-radius:4px;overflow-x:auto;margin:1.5em 0}.highlight .c{color:#928374;font-style:italic}.highlight .err{background-color:#cc241d;color:#fbf1c7}.highlight .k{color:#fb4934}.highlight .m{color:#d3869b}.highlight .s{color:#b8bb26}.highlight .t{color:#fabd2f}.highlight .nv{color:#83a598}.highlight .nf{color:#83a598}.highlight .nt{color:#fb4934}.highlight .na{color:#fabd2f}
+/* assets/css/style.css */
+/* Root font size for rem calculations */
+html {
+  font-size: 16px; }
+
+/* Body typography */
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+  /* Remove default margin */ }
+
+/* Main content grows to push footer down */
+main {
+  flex-grow: 1; }
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #111; }
+
+h1 {
+  font-size: 2.5rem;
+  letter-spacing: 0.02em; }
+
+h2 {
+  font-size: 2rem; }
+
+h3 {
+  font-size: 1.75rem; }
+
+h4 {
+  font-size: 1.5rem; }
+
+h5 {
+  font-size: 1.25rem; }
+
+h6 {
+  font-size: 1rem; }
+
+p {
+  text-align: justify;
+  /* Optional: Improves justified text readability */
+  hyphens: auto; }
+
+li {
+  text-align: justify;
+  hyphens: auto;
+  /* Allows the browser to hyphenate words */ }
+
+/* Navbar overrides */
+.navbar {
+  font-family: "Poppins", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+
+.navbar .nav-link {
+  font-size: 1rem;
+  font-weight: 500; }
+
+.navbar .dropdown-item {
+  font-size: 0.875rem;
+  font-weight: 400; }
+
+/* Code blocks */
+pre,
+code {
+  font-family: "Fira Code", "Consolas", "Monaco", monospace;
+  font-size: 0.875rem; }
+
+/* Content width */
+/*
+ * Enhanced Table Styling for Markdown in Jekyll
+ * Adds borders, padding, zebra striping, and hover effects.
+ */
+/* Target all tables generated from Markdown */
+table {
+  width: 100%;
+  /* Make tables span the full width of the container */
+  border-collapse: collapse;
+  /* Collapse borders into a single line */
+  margin: 1.5em 0;
+  /* Add vertical margin for separation */
+  font-size: 0.95em;
+  /* Slightly reduce font size for compactness */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  /* Subtle shadow for depth */ }
+
+/* Style table cells and headers */
+th, td {
+  padding: 12px 15px;
+  /* Generous padding for content clarity */
+  text-align: left;
+  /* Align text to the left */
+  border: 1px solid #ddd;
+  /* Light border around all cells */ }
+
+/* Style table headers (first row) */
+th {
+  background-color: #f2f2f2;
+  /* Light gray background for headers */
+  color: #333;
+  /* Darker text color for contrast */
+  font-weight: bold;
+  /* Ensure header text is bold */
+  border-color: #ccc;
+  /* Slightly darker border for the header row */
+  text-transform: uppercase;
+  /* Use uppercase for headers */ }
+
+/* Implement Zebra Striping (Alternating row colors) for better readability */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+  /* Very light gray for even rows */ }
+
+/* Add a hover effect for engagement (optional but recommended) */
+tbody tr:hover {
+  background-color: #f0f0ff;
+  /* Light bluish tint on hover */
+  cursor: default;
+  /* Indicate the row is a unified element */
+  transition: background-color 0.2s ease;
+  /* Smooth transition */ }
+
+/* Remove border from the top of the table for a cleaner look */
+table thead th:first-child {
+  border-top-left-radius: 4px; }
+
+table thead th:last-child {
+  border-top-right-radius: 4px; }
+
+/* Attractive hr ruling */
+.stylish-hr {
+  /* Remove the default border that browsers apply */
+  border: none;
+  /* Use the 'height' property to set the thickness */
+  height: 5px;
+  /* Adjust this value for desired thickness */
+  /* Set the background color to gray */
+  background-color: #292828;
+  /* DarkGray or use any preferred gray hex code */
+  /* Optional: Center the HR if a specific width is set */
+  margin-left: auto;
+  margin-right: auto;
+  /* Optional: Add a subtle rounded corner for a softer look */
+  border-radius: 3px; }
+
+.navbar-custom {
+  background-color: #059862;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+
+.navbar .dropdown:hover .dropdown-menu {
+  display: block; }
+
+.navbar .dropdown:hover .dropdown-toggle::after {
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent; }
+
+.dropdown-bg-green {
+  background-color: #20b17c;
+  border: none; }
+
+/* Hover dropdowns (from previous response) */
+.navbar .dropdown:hover .dropdown-menu {
+  display: block; }
+
+#navbarNav .nav-link {
+  text-align: center;
+  display: inline-block;
+  /* Ensures oval shape works */
+  padding: 0.25rem 1rem 0rem 1rem;
+  /* Consistent padding for height */
+  text-decoration: underline;
+  border-bottom: 4px solid transparent; }
+
+#navbarNav .nav-link:hover {
+  border-radius: 5%;
+  background-color: #1dc544;
+  color: #fff;
+  border-bottom-color: #063b13;
+  /* Adds clarity */ }
+
+#navbarNavBanner .navbar-nav {
+  text-align: center; }
+
+#navbarNavBanner .nav-item {
+  min-width: 80px;
+  /* Fixed width for better text fit */
+  display: inline-block;
+  /* Ensures consistent block-level behavior */
+  vertical-align: middle;
+  /* Aligns items vertically */ }
+
+#navbarNavBanner .nav-link {
+  text-align: center;
+  display: inline-block;
+  /* Ensures oval shape works */
+  padding: 0.15rem 1rem;
+  /* Consistent padding for height */
+  transition: all 0.3s ease;
+  /* Smooth transition for hover */
+  text-decoration: none;
+  /* Remove default underline */
+  white-space: nowrap;
+  /* Prevents text wrapping */
+  overflow: hidden;
+  /* Handles overflow if text is too long */
+  text-overflow: ellipsis;
+  /* Truncates with ellipsis if needed */
+  border-radius: 0;
+  border: 1px solid transparent;
+  border-bottom-width: 4px; }
+
+#navbarNavBanner .nav-link:hover {
+  border-radius: 10%;
+  border-bottom-color: #0e471b;
+  border-left-color: #28a745;
+  border-right-color: #28a745; }
+
+/* Course Page Sidebar */
+#course-sidebar {
+  border-right: 1px solid #dee2e6;
+  overflow-y: auto; }
+
+.course-topics-list .nav-link {
+  color: #495057;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.25rem; }
+
+.course-topics-list .nav-link:hover,
+.course-topics-list .nav-link.active {
+  background-color: #28a745;
+  color: #fff; }
+
+.course-topics-list .subtopics {
+  margin-top: 0.25rem; }
+
+.course-topics-list .subtopics .nav-link {
+  font-size: 0.875rem;
+  padding-left: 2rem; }
+
+/* Right Panel */
+#topic-content {
+  border-right: none;
+  overflow-y: auto;
+  box-shadow: 3px 0 6px -2px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.5rem 0rem 0rem;
+  max-width: 800px; }
+
+/* Mobile: Collapse sidebar */
+@media (max-width: 768px) {
+  #course-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 1040;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out; }
+
+  #course-sidebar.show {
+    transform: translateX(0); } }
+/* No underline in tool tags*/
+.tool-tags {
+  text-align: center; }
+
+.tool-tags > a {
+  text-decoration: none; }
+
+footer {
+  background: #f8f9fa;
+  /* Matches Bootstrap bg-light */
+  color: #333;
+  font-size: 0.875rem;
+  /* Matches small text size */
+  text-align: end; }
+
+.author-position {
+  font-style: italic;
+  color: #4d4d4d;
+  font-size: large; }
+
+.highlight {
+  background-color: #282828;
+  /* Dark gray background */
+  color: #ebdbb2;
+  /* Pale yellow/beige foreground text */
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1.5em 0; }
+
+/* Comments (C) - Gray */
+.highlight .c {
+  color: #928374;
+  font-style: italic; }
+
+/* Errors (E) */
+.highlight .err {
+  background-color: #cc241d;
+  color: #fbf1c7; }
+
+/* Keywords (K) - Red/Orange */
+.highlight .k {
+  color: #fb4934; }
+
+/* Numbers (M) - Purple */
+.highlight .m {
+  color: #d3869b; }
+
+/* Strings (S) - Green */
+.highlight .s {
+  color: #b8bb26; }
+
+/* Type Names (T) - Yellow */
+.highlight .t {
+  color: #fabd2f; }
+
+/* Variables (V) - Blue */
+.highlight .nv {
+  color: #83a598; }
+
+/* Functions/Methods (Nf) - Cyan */
+.highlight .nf {
+  color: #83a598; }
+
+/* HTML/XML Tags (Name) */
+.highlight .nt {
+  color: #fb4934; }
+
+/* HTML/XML Attributes (Attribute) */
+.highlight .na {
+  color: #fabd2f; }
