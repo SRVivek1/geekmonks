@@ -10,3 +10,5 @@ vendor/
 .DS_Store
 .vscode/
 .idea/
+
+app-support-docs/*
