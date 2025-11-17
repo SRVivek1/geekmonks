@@ -1,11 +1,361 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="keywords" content="geekmonks, geek, tech, geekmonks tech, free tutorial, free online tutorial"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Geekmonks Tech"><meta name="mobile-web-app-capable" content="yes"><link rel="icon" type="image/png" href="/geekmonks/assets/favicon/favicon-96x96.png" sizes="96x96"/><link rel="icon" type="image/svg+xml" href="/geekmonks/assets/favicon/favicon.svg"/><link rel="shortcut icon" href="/geekmonks/assets/favicon/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/geekmonks/assets/favicon/apple-touch-icon.png"/><link rel="manifest" href="/geekmonks/assets/favicon/site.webmanifest"/><link type="application/atom+xml" rel="alternate" href="https://srvivek1.github.io/geekmonks/feed.xml" title="Geekmonks Tech"/><title>Lab - LLM and app integration | Geekmonks Tech</title><meta name="generator" content="Jekyll v3.10.0"/><meta property="og:title" content="Lab - LLM and app integration"/><meta property="og:locale" content="en_US"/><meta name="description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, ollama, local setup, coding assistnt, code pairing, continue extension, continue extension config, pythong uv, installation, jupyter notes, jupyter kernel, vscode, gemma3, openai api, visual studio code etc. for beginners and professionals."/><meta property="og:description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, ollama, local setup, coding assistnt, code pairing, continue extension, continue extension config, pythong uv, installation, jupyter notes, jupyter kernel, vscode, gemma3, openai api, visual studio code etc. for beginners and professionals."/><link rel="canonical" href="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html"/><meta property="og:url" content="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html"/><meta property="og:site_name" content="Geekmonks Tech"/><meta property="og:type" content="article"/><meta property="article:published_time" content="2025-10-15T18:00:00+05:30"/><meta name="twitter:card" content="summary"/><meta property="twitter:title" content="Lab - LLM and app integration"/><meta name="twitter:site" content="@srvivek_"/><script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-10-15T18:00:00+05:30","datePublished":"2025-10-15T18:00:00+05:30","description":"Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, ollama, local setup, coding assistnt, code pairing, continue extension, continue extension config, pythong uv, installation, jupyter notes, jupyter kernel, vscode, gemma3, openai api, visual studio code etc. for beginners and professionals.","headline":"Lab - LLM and app integration","mainEntityOfPage":{"@type":"WebPage","@id":"https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html"},"url":"https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html"}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-48XEHMVSEC"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-48XEHMVSEC");</script><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"><link rel="stylesheet" href="/geekmonks/assets/css/styles.css?v=0.1.0"></head><body class="container-fluid p-0 m-0"><header><nav class="navbar navbar-expand-md navbar-light bg-light text-white content-shadow"><div class="container d-flex justify-content-between"><a href="/geekmonks/" class="navbar-brand d-flex"><img class="d-inline-block align-top" src="/geekmonks/assets/icons/laptop.svg" height="40" width="34" alt="banner-1 laptop icon"/><h1 class="fs-3 px-2 fw-bold">Geekmonks</h1><img class="d-inline-block align-top" src="/geekmonks/assets/icons/tux.svg" height="40" width="34" alt="banner-2 penguine icon"/></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBanner" aria-controls="navbarNavBanner" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggler-icon"></span></button><div id="navbarNavBanner" class="collapse navbar-collapse"><ul class="navbar-nav ms-auto"><li class="nav-item active"><a href="/geekmonks/" class="nav-link fw-bold active">Home</a></li><li class="nav-item active"><a href="/geekmonks/about" class="nav-link fw-bold active">About</a></li><li class="nav-item active"><a href="https://github.com/SRVivek1/" class="nav-link fw-bold active" target="_blank" rel="noopener noreferrer">Github</a></li><li class="nav-item active"><a href="https://www.linkedin.com/in/srvivek1/" class="nav-link fw-bold active" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul></div></div></nav><nav class="navbar navbar-expand-xl navbar-custom p-0"><div class="container-fluid"><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><ul class="navbar-nav mx-auto"><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/ai-ml/llm-engineering/">AI-ML</a></li><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/cloud/aws/">AWS</a></li><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/spring/spring-boot/">Spring Boot</a></li></ul></div></div></nav></header><div class="container-fluid"><div class="row min-vh-100"><nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse"><div class="position-sticky pt-3"><ul class="nav flex-column course-topics-list"><a class="nav-link course-link active" href="/geekmonks/ai-ml/llm-engineering" data-course="ai-ml/llm-engineering"> AI/ML </a><ul class="nav flex-column ms-2 subtopics" id="topics-ai-ml-llm-engineering"><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="introduction-to-llms.html" data-topic="introduction-to-llms.html" data-course-path="/ai-ml/llm-engineering"> LLM Fundamentals </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="ollama-local-setup.html" data-topic="ollama-local-setup.html" data-course-path="/ai-ml/llm-engineering"> Lab - Ollama Local LLMs </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small active" href="b1-t1-hello-world.html" data-topic="b1-t1-hello-world.html" data-course-path="/ai-ml/llm-engineering"> Lab - Python App Integration </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="ollama-ai-assistant.html" data-topic="ollama-ai-assistant.html" data-course-path="/ai-ml/llm-engineering"> Lab - Local AI Assistant </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="frontier-models-capabilities-operational-risks.html" data-topic="frontier-models-capabilities-operational-risks.html" data-course-path="/ai-ml/llm-engineering"> Architecture & capabilities </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="foundaion-and-evolution.html" data-topic="foundaion-and-evolution.html" data-course-path="/ai-ml/llm-engineering"> Foundation and Evaluation </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="advance-concepts-toknization-and-scaling.html" data-topic="advance-concepts-toknization-and-scaling.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Tokens, Scaling </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="scaling-reasoning-inference.html" data-topic="scaling-reasoning-inference.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Reasoning, Interference </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="payload-tokenization.html" data-topic="payload-tokenization.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Payload Tokenization </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="advance-conectps-models-deployments.html" data-topic="advance-conectps-models-deployments.html" data-course-path="/ai-ml/llm-engineering"> Advanced Concepts & Deployment </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="advance-prompt-caching.html" data-topic="advance-prompt-caching.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Prompt Caching </a></li></ul></ul></div></nav><main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><button id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-md-none mb-2" aria-label="Toggle topics" aria-controls="course-sidebar"> ☰ Topics </button><div id="topic-content"><div id="pageTitle"><h1>Lab - LLM and app integration</h1><p style="font-style: italic;"> Updated on: 15 Oct 2025 - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a></p><hr class="stylish-hr"/></div><h2 id="-getting-started-with-local-llms">🚀 Getting Started with Local LLMs</h2><p>We’ve covered the concepts and visualizations—now it’s time to build! This hands-on guide walks you through developing your very first application to <code class="language-plaintext highlighter-rouge">integrate</code><strong>Large Language Models (LLMs)</strong> using <code class="language-plaintext highlighter-rouge">Ollama</code> within a <code class="language-plaintext highlighter-rouge">Python</code> environment.</p><ul><li>Critically, we will leverage the familiar <code class="language-plaintext highlighter-rouge">OpenAI</code> client library to maintain a consistent and efficient interface.</li></ul><hr/><h2 id="-table-of-contents">📚 Table of Contents</h2><ul><li><a href="#-getting-started-with-local-llms">🚀 Getting Started with Local LLMs</a></li><li><a href="#-table-of-contents">📚 Table of Contents</a></li><li><a href="#️-setup-imports--resources">🛠️ Setup: Imports \&amp; Resources</a></li><li><a href="#-load-api-keys">🔑 Load API Keys</a></li><li><a href="#️-build-the-ollama-client">⚙️ Build the Ollama Client</a><ul><li><a href="#-request-flow-diagram">🧠 Request Flow Diagram</a></li></ul></li><li><a href="#-test-the-connection">💬 Test the Connection</a></li><li><a href="#-key-points">✨ Key points</a></li></ul><hr/><h2 id="️-setup-imports--resources">🛠️ Setup: Imports &amp; Resources</h2><p>We start by setting up the application environment and importing the necessary libraries.</p><div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Import utilities for environment setup
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Head-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- keyords tags is deprecated by modern search engines. -->
+    <meta name="keywords" content="geekmonks, geek, tech, geekmonks tech, free tutorial, free online tutorial">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Geekmonks Tech">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- <link rel="apple-touch-icon" href="/geekmonks/assets/images/apple-touch-icon.png"> -->
+    <link rel="icon" type="image/png" href="/geekmonks/assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/geekmonks/assets/favicon/favicon.svg" />
+
+    <link rel="shortcut icon" href="/geekmonks/assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/geekmonks/assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/geekmonks/assets/favicon/site.webmanifest" />
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/geekmonks/feed.xml" title="Geekmonks Tech" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Lab - LLM and app integration | Geekmonks Tech</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Lab - LLM and app integration" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, ollama, local setup, coding assistnt, code pairing, continue extension, continue extension config, pythong uv, installation, jupyter notes, jupyter kernel, vscode, gemma3, openai api, visual studio code etc. for beginners and professionals." />
+<meta property="og:description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, ollama, local setup, coding assistnt, code pairing, continue extension, continue extension config, pythong uv, installation, jupyter notes, jupyter kernel, vscode, gemma3, openai api, visual studio code etc. for beginners and professionals." />
+<link rel="canonical" href="http://localhost:4000/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html" />
+<meta property="og:url" content="http://localhost:4000/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html" />
+<meta property="og:site_name" content="Geekmonks Tech" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-10-15T18:00:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Lab - LLM and app integration" />
+<meta name="twitter:site" content="@srvivek_" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-10-15T18:00:00+05:30","datePublished":"2025-10-15T18:00:00+05:30","description":"Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, ollama, local setup, coding assistnt, code pairing, continue extension, continue extension config, pythong uv, installation, jupyter notes, jupyter kernel, vscode, gemma3, openai api, visual studio code etc. for beginners and professionals.","headline":"Lab - LLM and app integration","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html"},"url":"http://localhost:4000/geekmonks/ai-ml/llm-engineering/b1-t1-hello-world.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-48XEHMVSEC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-48XEHMVSEC');
+</script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/geekmonks/assets/css/styles.css?v=0.1.0">
+</head>
+
+<body class="container-fluid p-0 m-0">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light text-white content-shadow">
+  <div class="container d-flex justify-content-between">
+    <a href="/geekmonks/" class="navbar-brand d-flex">
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/laptop.svg" height="40"
+        width="34" alt="banner-1 laptop icon"/>
+      <h1 class="fs-3 px-2 fw-bold">Geekmonks</h1>
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/tux.svg" height="40"
+        width="34" alt="banner-2 penguine icon"/>
+    </a>
+    <!-- Toggle Button to expand and collapse the nav links -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBanner"
+      aria-controls="navbarNavBanner" aria-expanded="false" aria-label="Toggle Navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbarNavBanner" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/" class="nav-link fw-bold active"
+            >Home</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/about" class="nav-link fw-bold active"
+            >About</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://github.com/SRVivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">Github</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://www.linkedin.com/in/srvivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+        <nav class="navbar navbar-expand-xl navbar-custom p-0">
+  <div class="container-fluid">
+
+    <!-- Toggler for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible nav items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        
+          
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/ai-ml/llm-engineering/"
+                  >AI-ML</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/cloud/aws/"
+                  >AWS</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/spring/spring-boot/"
+                  >Spring Boot</a>
+              </li>
+            
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+            <!-- Left Sidebar -->
+            <nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column course-topics-list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a class="nav-link course-link active"
+                            href="/geekmonks/ai-ml/llm-engineering" data-course="ai-ml/llm-engineering">
+                            AI/ML
+                        </a>
+                        <!-- Debug - Submenu links are broken -->
+                        
+                        <ul class="nav flex-column ms-2 subtopics" id="topics-ai-ml-llm-engineering">
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="introduction-to-llms.html"
+                                    data-topic="introduction-to-llms.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    LLM Fundamentals
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="ollama-local-setup.html"
+                                    data-topic="ollama-local-setup.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Lab - Ollama Local LLMs
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small active"
+                                    href="b1-t1-hello-world.html"
+                                    data-topic="b1-t1-hello-world.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Lab - Python App Integration
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="ollama-ai-assistant.html"
+                                    data-topic="ollama-ai-assistant.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Lab - Local AI Assistant
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="frontier-models-capabilities-operational-risks.html"
+                                    data-topic="frontier-models-capabilities-operational-risks.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Architecture & capabilities
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="foundaion-and-evolution.html"
+                                    data-topic="foundaion-and-evolution.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Foundation and Evaluation
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="advance-concepts-toknization-and-scaling.html"
+                                    data-topic="advance-concepts-toknization-and-scaling.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Tokens, Scaling
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="scaling-reasoning-inference.html"
+                                    data-topic="scaling-reasoning-inference.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Reasoning, Interference
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="payload-tokenization.html"
+                                    data-topic="payload-tokenization.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Payload Tokenization
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="advance-conectps-models-deployments.html"
+                                    data-topic="advance-conectps-models-deployments.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced Concepts & Deployment
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="advance-prompt-caching.html"
+                                    data-topic="advance-prompt-caching.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Prompt Caching
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        
+                        
+                        
+                        
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Right Content Panel -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Mobile: toggle sidebar button -->
+                <button id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-md-none mb-2"
+                    aria-label="Toggle topics" aria-controls="course-sidebar">
+                    ☰ Topics
+                </button>
+
+                <!-- Topic Contenet -->
+                <div id="topic-content">
+                    <div id="pageTitle">
+                        <h1>Lab - LLM and app integration</h1>
+                        
+                        
+                            <p style="font-style: italic;">
+                                Updated on: 15 Oct 2025
+
+                                
+                                
+                                - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a>
+                                
+                            </p>
+                        
+
+                        <hr class="stylish-hr" />
+                    </div>
+
+                    <h2 id="-getting-started-with-local-llms">🚀 Getting Started with Local LLMs</h2>
+
+<p>We’ve covered the concepts and visualizations—now it’s time to build! This hands-on guide walks you through developing your very first application to <code class="language-plaintext highlighter-rouge">integrate</code> <strong>Large Language Models (LLMs)</strong> using <code class="language-plaintext highlighter-rouge">Ollama</code> within a <code class="language-plaintext highlighter-rouge">Python</code> environment.</p>
+<ul>
+  <li>Critically, we will leverage the familiar <code class="language-plaintext highlighter-rouge">OpenAI</code> client library to maintain a consistent and efficient interface.</li>
+</ul>
+
+<hr />
+
+<h2 id="-table-of-contents">📚 Table of Contents</h2>
+
+<ul>
+  <li><a href="#-getting-started-with-local-llms">🚀 Getting Started with Local LLMs</a></li>
+  <li><a href="#-table-of-contents">📚 Table of Contents</a></li>
+  <li><a href="#️-setup-imports--resources">🛠️ Setup: Imports \&amp; Resources</a></li>
+  <li><a href="#-load-api-keys">🔑 Load API Keys</a></li>
+  <li><a href="#️-build-the-ollama-client">⚙️ Build the Ollama Client</a>
+    <ul>
+      <li><a href="#-request-flow-diagram">🧠 Request Flow Diagram</a></li>
+    </ul>
+  </li>
+  <li><a href="#-test-the-connection">💬 Test the Connection</a></li>
+  <li><a href="#-key-points">✨ Key points</a></li>
+</ul>
+
+<hr />
+
+<h2 id="️-setup-imports--resources">🛠️ Setup: Imports &amp; Resources</h2>
+
+<p>We start by setting up the application environment and importing the necessary libraries.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Import utilities for environment setup
 </span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
 
 <span class="c1"># Import the OpenAI client library
 </span><span class="kn">from</span> <span class="nn">openai</span> <span class="kn">import</span> <span class="n">OpenAI</span>
-</code></pre></div></div><hr/><h2 id="-load-api-keys">🔑 Load API Keys</h2><p>To maintain compatibility with the OpenAI library, an <code class="language-plaintext highlighter-rouge">OPENAI_API_KEY</code> environment variable must be defined, even when connecting to a local Ollama server.</p><blockquote><p><strong>Note:</strong> If you are using Ollama locally, you can set a <strong>dummy value</strong> for <code class="language-plaintext highlighter-rouge">OPENAI_API_KEY</code>, such as <code class="language-plaintext highlighter-rouge">sk-proj-dummy-key</code>.</p></blockquote><blockquote><p>The code below loads the variables from a local <code class="language-plaintext highlighter-rouge">.env</code> file and performs a basic check on the key format.</p></blockquote><div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load environment variables from .env file
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-load-api-keys">🔑 Load API Keys</h2>
+
+<p>To maintain compatibility with the OpenAI library, an <code class="language-plaintext highlighter-rouge">OPENAI_API_KEY</code> environment variable must be defined, even when connecting to a local Ollama server.</p>
+
+<blockquote>
+  <p><strong>Note:</strong> If you are using Ollama locally, you can set a <strong>dummy value</strong> for <code class="language-plaintext highlighter-rouge">OPENAI_API_KEY</code>, such as <code class="language-plaintext highlighter-rouge">sk-proj-dummy-key</code>.</p>
+</blockquote>
+
+<blockquote>
+  <p>The code below loads the variables from a local <code class="language-plaintext highlighter-rouge">.env</code> file and performs a basic check on the key format.</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load environment variables from .env file
 </span><span class="n">load_dotenv</span><span class="p">(</span><span class="n">override</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">'OPENAI_API_KEY'</span><span class="p">)</span>
 
@@ -18,20 +368,46 @@
     <span class="k">print</span><span class="p">(</span><span class="s">"An API key was found, but it looks like it might have space or tab characters at the start or end - please remove them - see troubleshooting notebook"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="s">"API key found and looks good so far!"</span><span class="p">)</span>
-</code></pre></div></div><p><strong>Output Stream:</strong></p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>API key found and looks good so far!
-</code></pre></div></div><hr/><h2 id="️-build-the-ollama-client">⚙️ Build the Ollama Client</h2><p>To connect to a local LLM running via Ollama, we initialize the standard <code class="language-plaintext highlighter-rouge">OpenAI</code> client but override the default connection endpoint with the <strong>Ollama base URL</strong>.</p><div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define the local Ollama API endpoint
+</code></pre></div></div>
+
+<p><strong>Output Stream:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>API key found and looks good so far!
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="️-build-the-ollama-client">⚙️ Build the Ollama Client</h2>
+
+<p>To connect to a local LLM running via Ollama, we initialize the standard <code class="language-plaintext highlighter-rouge">OpenAI</code> client but override the default connection endpoint with the <strong>Ollama base URL</strong>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define the local Ollama API endpoint
 </span><span class="n">OLLAMA_BASE_URL</span> <span class="o">=</span> <span class="s">"http://localhost:11434/v1"</span>
 <span class="c1"># if doesn't work try using - "http://localhost:11434"
 </span>
 <span class="c1"># Initialize OpenAI client with the custom base URL for Ollama
 </span><span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="n">OLLAMA_BASE_URL</span><span class="p">)</span>
-</code></pre></div></div><h3 id="-request-flow-diagram">🧠 Request Flow Diagram</h3><p>This architecture illustrates how the application uses the standard OpenAI library to connect to the local Ollama server.</p><pre><code class="language-mermaid">graph TD
+</code></pre></div></div>
+
+<h3 id="-request-flow-diagram">🧠 Request Flow Diagram</h3>
+
+<p>This architecture illustrates how the application uses the standard OpenAI library to connect to the local Ollama server.</p>
+
+<pre><code class="language-mermaid">graph TD
     A[Application Python Script] -- Uses OpenAI Client --&gt; B(OpenAI Class)
     B -- Connects to Custom Base URL --&gt; C(Ollama Server @ http://localhost:11434/v1)
     C -- Hosts Local Models --&gt; D(Local LLM e.g., gemma3:1b)
     D -- Generates Response --&gt; C
     C -- Returns Response --&gt; A
-</code></pre><hr/><h2 id="-test-the-connection">💬 Test the Connection</h2><p>Below code is a base minimum application, which connects with the local Ollama LLMs, sends a prompt, and receives a response.</p><div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define the model to use and the user's prompt
+</code></pre>
+
+<hr />
+
+<h2 id="-test-the-connection">💬 Test the Connection</h2>
+
+<p>Below code is a base minimum application, which connects with the local Ollama LLMs, sends a prompt, and receives a response.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define the model to use and the user's prompt
 </span><span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s">"gemma3:1b"</span>
 <span class="n">payload</span> <span class="o">=</span> <span class="p">[{</span><span class="s">"role"</span><span class="p">:</span> <span class="s">"user"</span><span class="p">,</span> <span class="s">"content"</span><span class="p">:</span> <span class="s">"Tell me a fun fact about programmers."</span><span class="p">}]</span>
 
@@ -40,7 +416,11 @@
 
 <span class="c1"># Print the generated content
 </span><span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">message</span><span class="p">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre></div></div><p><strong>Output Stream:</strong></p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Okay, here’s a fun fact about programmers:
+</code></pre></div></div>
+
+<p><strong>Output Stream:</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Okay, here’s a fun fact about programmers:
 
 **Computers don’t truly *understand* code. They simply translate it into instructions that their hardware can execute.**
 
@@ -49,12 +429,116 @@ Think of it like a very complex robot. The robot follows the instructions we giv
 ---
 
 Want to know another fun fact?
-</code></pre></div></div><hr/><h2 id="-key-points">✨ Key points</h2><p><strong>Configuration Management:</strong> For more robust and scalable applications, always manage the configurations eg. <code class="language-plaintext highlighter-rouge">OLLAMA_BASE_URL</code> and <code class="language-plaintext highlighter-rouge">MODEL_NAME</code> as environment variables in <code class="language-plaintext highlighter-rouge">.env</code> file, similar to the <code class="language-plaintext highlighter-rouge">OPENAI_API_KEY</code>.</p><ul><li>This makes switching between local (Ollama) and cloud (OpenAI) environments or LLM Models much cleaner without modifying the working and tested application code.</li></ul><p><strong>Example Change:</strong></p><p>In <code class="language-plaintext highlighter-rouge">.env</code>:</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OPENAI_API_KEY="sk-proj-dummy-key"
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="-key-points">✨ Key points</h2>
+
+<p><strong>Configuration Management:</strong>
+For more robust and scalable applications, always manage the configurations eg. <code class="language-plaintext highlighter-rouge">OLLAMA_BASE_URL</code> and <code class="language-plaintext highlighter-rouge">MODEL_NAME</code> as environment variables in <code class="language-plaintext highlighter-rouge">.env</code> file, similar to the <code class="language-plaintext highlighter-rouge">OPENAI_API_KEY</code>.</p>
+<ul>
+  <li>This makes switching between local (Ollama) and cloud (OpenAI) environments or LLM Models much cleaner without modifying the working and tested application code.</li>
+</ul>
+
+<p><strong>Example Change:</strong></p>
+
+<p>In <code class="language-plaintext highlighter-rouge">.env</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OPENAI_API_KEY="sk-proj-dummy-key"
 LLM_BASE_URL="http://localhost:11434/v1"
 DEFAULT_MODEL="gemma3:1b"
-</code></pre></div></div><p>In Python:</p><div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load from environment variables
+</code></pre></div></div>
+
+<p>In Python:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load from environment variables
 </span><span class="n">OLLAMA_BASE_URL</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">"LLM_BASE_URL"</span><span class="p">,</span> <span class="s">"http://localhost:11434/v1"</span><span class="p">)</span> <span class="c1"># Use default if not found
 </span><span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">"DEFAULT_MODEL"</span><span class="p">,</span> <span class="s">"gemma3:1b"</span><span class="p">)</span> 
 <span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="n">OLLAMA_BASE_URL</span><span class="p">)</span>
 <span class="c1"># ... use MODEL_NAME in the completions call
-</span></code></pre></div></div><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div></div></main></div></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><script src="/geekmonks/assets/js/mermaid-diagram-render.js?v=0.1.0"></script><script src="/geekmonks/assets/js/submenu-togle.js?v=0.1.0"></script></body></html>
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+ <!-- Injects index.md content here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div>
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-4 mx-5 my-5 border-top">
+
+        <div class="col-md-4 d-flex align-items-center"> <a href="/geekmonks/"
+                class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Geekmonks">
+                <svg class="bi me-2" width="40" height="32" aria-hidden="true" viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="gradient" gradientTransform="rotate(145 0.5 0.5)">
+                            <stop offset="0%" stop-color="#f7e625"></stop>
+                            <stop offset="100%" stop-color="#e6a62c"></stop>
+                        </linearGradient>
+                    </defs>
+
+                    <rect width="200" height="200" fill="url('#gradient')"></rect>
+
+                    <g fill="#303e37"
+                        transform="matrix(12.312625250501002,0,0,12.312625250501002,16.825404661093543,187.54701945968048)"
+                        stroke="#3b8349" stroke-width="0.2">
+                        <path
+                            d="M12.71-7.60L12.71-1.76Q11.92-0.88 10.40-0.34Q8.88 0.20 7.06 0.20L7.06 0.20Q4.27 0.20 2.60-1.51Q0.93-3.22 0.81-6.27L0.81-6.27L0.80-7.50Q0.80-9.60 1.54-11.17Q2.29-12.73 3.67-13.58Q5.05-14.42 6.87-14.42L6.87-14.42Q9.52-14.42 10.99-13.21Q12.46-11.99 12.71-9.58L12.71-9.58L9.40-9.58Q9.23-10.77 8.64-11.28Q8.06-11.79 6.98-11.79L6.98-11.79Q5.69-11.79 4.99-10.69Q4.29-9.60 4.28-7.57L4.28-7.57L4.28-6.71Q4.28-4.58 5.00-3.51Q5.73-2.44 7.29-2.44L7.29-2.44Q8.63-2.44 9.29-3.04L9.29-3.04L9.29-5.24L6.90-5.24L6.90-7.60L12.71-7.60Z">
+                        </path>
+                    </g>
+                </svg>
+            </a>
+            <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span>
+        </div>
+
+        <div class="col mb-3"></div>
+        <div class="col mb-3">
+            <h5>Company</h5>
+            <ul class="nav col-md-4">
+                <li class="nav-item"><a href="/geekmonks/"
+                        class="nav-link px-2 text-body-secondary">Home</a></li>
+                <li class="nav-item"><a href="/geekmonks/about"
+                        class="nav-link px-2 text-body-secondary">About</a></li>
+                <li class="nav-item"><a href="https://github.com/SRVivek1/" target="_blank"
+                        class="nav-link px-2 text-body-secondary">Github</a></li>
+                <li class="nav-item"><a href="https://www.linkedin.com/in/srvivek1/" target="_blank"
+                        class="nav-link px-2 text-body-secondary">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="col mb-3">
+            <h5>Tutorials</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="/geekmonks/spring/spring-boot"
+                        class="nav-link p-0 text-body-secondary">Spring Boot</a></li>
+                <li class="nav-item mb-2"><a href="/geekmonks/ai-ml/llm-engineering"
+                        class="nav-link p-0 text-body-secondary">AI / ML</a></li>
+                <li class="nav-item mb-2"><a href="/geekmonks/cloud/aws"
+                        class="nav-link p-0 text-body-secondary">AWS</a></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+    
+    <!-- External scripts -->
+    <!-- bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
+<!-- Mermaid JS: render diagrams client-side. We convert fenced code blocks
+		 with class `language-mermaid` into <div class="mermaid"> so existing
+		 markdown files don't need editing. -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<!-- Include internal JavaScript -->
+ <script src="/geekmonks/assets/js/mermaid-diagram-render.js?v=0.1.0"></script>
+
+
+ <!-- Submenu toggle nav on small screen-->
+<script src="/geekmonks/assets/js/submenu-togle.js?v=0.1.0"></script>
+
+
+</body>
+
+</html>

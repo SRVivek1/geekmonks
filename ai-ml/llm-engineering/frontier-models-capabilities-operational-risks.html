@@ -1,7 +1,757 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="keywords" content="geekmonks, geek, tech, geekmonks tech, free tutorial, free online tutorial"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Geekmonks Tech"><meta name="mobile-web-app-capable" content="yes"><link rel="icon" type="image/png" href="/geekmonks/assets/favicon/favicon-96x96.png" sizes="96x96"/><link rel="icon" type="image/svg+xml" href="/geekmonks/assets/favicon/favicon.svg"/><link rel="shortcut icon" href="/geekmonks/assets/favicon/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/geekmonks/assets/favicon/apple-touch-icon.png"/><link rel="manifest" href="/geekmonks/assets/favicon/site.webmanifest"/><link type="application/atom+xml" rel="alternate" href="https://srvivek1.github.io/geekmonks/feed.xml" title="Geekmonks Tech"/><title>Frontier Models, Risk, and Best Practices | Geekmonks Tech</title><meta name="generator" content="Jekyll v3.10.0"/><meta property="og:title" content="Frontier Models, Risk, and Best Practices"/><meta property="og:locale" content="en_US"/><meta name="description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, operational risk,frontier models, chain of thoughts CoT, Few shorts prompting, finue tuning, RAG, Perplexity, BLEU (Bilingual Evaluation Understudy) matrices langchain, hugging faces, Hallucination, Bias and fairness etc. for beginners and professionals."/><meta property="og:description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, operational risk,frontier models, chain of thoughts CoT, Few shorts prompting, finue tuning, RAG, Perplexity, BLEU (Bilingual Evaluation Understudy) matrices langchain, hugging faces, Hallucination, Bias and fairness etc. for beginners and professionals."/><link rel="canonical" href="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/frontier-models-capabilities-operational-risks.html"/><meta property="og:url" content="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/frontier-models-capabilities-operational-risks.html"/><meta property="og:site_name" content="Geekmonks Tech"/><meta property="og:type" content="article"/><meta property="article:published_time" content="2025-09-12T18:00:00+05:30"/><meta name="twitter:card" content="summary"/><meta property="twitter:title" content="Frontier Models, Risk, and Best Practices"/><meta name="twitter:site" content="@srvivek_"/><script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-09-12T18:00:00+05:30","datePublished":"2025-09-12T18:00:00+05:30","description":"Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, operational risk,frontier models, chain of thoughts CoT, Few shorts prompting, finue tuning, RAG, Perplexity, BLEU (Bilingual Evaluation Understudy) matrices langchain, hugging faces, Hallucination, Bias and fairness etc. for beginners and professionals.","headline":"Frontier Models, Risk, and Best Practices","mainEntityOfPage":{"@type":"WebPage","@id":"https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/frontier-models-capabilities-operational-risks.html"},"url":"https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/frontier-models-capabilities-operational-risks.html"}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-48XEHMVSEC"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-48XEHMVSEC");</script><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"><link rel="stylesheet" href="/geekmonks/assets/css/styles.css?v=0.1.0"></head><body class="container-fluid p-0 m-0"><header><nav class="navbar navbar-expand-md navbar-light bg-light text-white content-shadow"><div class="container d-flex justify-content-between"><a href="/geekmonks/" class="navbar-brand d-flex"><img class="d-inline-block align-top" src="/geekmonks/assets/icons/laptop.svg" height="40" width="34" alt="banner-1 laptop icon"/><h1 class="fs-3 px-2 fw-bold">Geekmonks</h1><img class="d-inline-block align-top" src="/geekmonks/assets/icons/tux.svg" height="40" width="34" alt="banner-2 penguine icon"/></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBanner" aria-controls="navbarNavBanner" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggler-icon"></span></button><div id="navbarNavBanner" class="collapse navbar-collapse"><ul class="navbar-nav ms-auto"><li class="nav-item active"><a href="/geekmonks/" class="nav-link fw-bold active">Home</a></li><li class="nav-item active"><a href="/geekmonks/about" class="nav-link fw-bold active">About</a></li><li class="nav-item active"><a href="https://github.com/SRVivek1/" class="nav-link fw-bold active" target="_blank" rel="noopener noreferrer">Github</a></li><li class="nav-item active"><a href="https://www.linkedin.com/in/srvivek1/" class="nav-link fw-bold active" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul></div></div></nav><nav class="navbar navbar-expand-xl navbar-custom p-0"><div class="container-fluid"><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><ul class="navbar-nav mx-auto"><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/ai-ml/llm-engineering/">AI-ML</a></li><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/cloud/aws/">AWS</a></li><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/spring/spring-boot/">Spring Boot</a></li></ul></div></div></nav></header><div class="container-fluid"><div class="row min-vh-100"><nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse"><div class="position-sticky pt-3"><ul class="nav flex-column course-topics-list"><a class="nav-link course-link active" href="/geekmonks/ai-ml/llm-engineering" data-course="ai-ml/llm-engineering"> AI/ML </a><ul class="nav flex-column ms-2 subtopics" id="topics-ai-ml-llm-engineering"><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="introduction-to-llms.html" data-topic="introduction-to-llms.html" data-course-path="/ai-ml/llm-engineering"> LLM Fundamentals </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="ollama-local-setup.html" data-topic="ollama-local-setup.html" data-course-path="/ai-ml/llm-engineering"> Lab - Ollama Local LLMs </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="b1-t1-hello-world.html" data-topic="b1-t1-hello-world.html" data-course-path="/ai-ml/llm-engineering"> Lab - Python App Integration </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="ollama-ai-assistant.html" data-topic="ollama-ai-assistant.html" data-course-path="/ai-ml/llm-engineering"> Lab - Local AI Assistant </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small active" href="frontier-models-capabilities-operational-risks.html" data-topic="frontier-models-capabilities-operational-risks.html" data-course-path="/ai-ml/llm-engineering"> Architecture & capabilities </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="foundaion-and-evolution.html" data-topic="foundaion-and-evolution.html" data-course-path="/ai-ml/llm-engineering"> Foundation and Evaluation </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="advance-concepts-toknization-and-scaling.html" data-topic="advance-concepts-toknization-and-scaling.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Tokens, Scaling </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="scaling-reasoning-inference.html" data-topic="scaling-reasoning-inference.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Reasoning, Interference </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="payload-tokenization.html" data-topic="payload-tokenization.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Payload Tokenization </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="advance-conectps-models-deployments.html" data-topic="advance-conectps-models-deployments.html" data-course-path="/ai-ml/llm-engineering"> Advanced Concepts & Deployment </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="advance-prompt-caching.html" data-topic="advance-prompt-caching.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Prompt Caching </a></li></ul></ul></div></nav><main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><button id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-md-none mb-2" aria-label="Toggle topics" aria-controls="course-sidebar"> ☰ Topics </button><div id="topic-content"><div id="pageTitle"><h1>Frontier Models, Risk, and Best Practices</h1><p style="font-style: italic;"> Updated on: 12 Sep 2025 - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a></p><hr class="stylish-hr"/></div><h2 id="-table-of-contents">🔗 Table of Contents</h2><ul><li><a href="#-table-of-contents">🔗 Table of Contents</a></li><li><a href="#frontier-llms-architecture-capabilities-and-operation-risk">Frontier LLMs: Architecture, Capabilities and Operation Risk</a><ul><li><a href="#the-frontier-llm-landscape">The Frontier LLM Landscape</a></li><li><a href="#key-strengths-of-frontier-models">Key Strengths of Frontier Models</a></li><li><a href="#operational-risks-and-limitations">Operational Risks and Limitations</a><ul><li><a href="#1-knowledge-gaps-and-cutoffs">1. Knowledge Gaps and Cutoffs</a></li><li><a href="#2-the-hallucination-danger">2. The Hallucination Danger</a></li><li><a href="#3-llms-as-junior-analysts-the-supervision-requirement">3. LLMs as Junior Analysts: The Supervision Requirement</a></li></ul></li></ul></li><li><a href="#core-llm-engineering-concepts">Core LLM Engineering Concepts</a><ul><li><a href="#prompt-engineering-chain-of-thought-and-few-shot">Prompt Engineering: Chain-of-Thought and Few-Shot</a><ul><li><a href="#1-chain-of-thought-cot-prompting">1. Chain-of-Thought (CoT) Prompting</a></li><li><a href="#2-few-shot-prompting">2. Few-Shot Prompting</a></li></ul></li><li><a href="#fine-tuning-vs-rag">Fine-Tuning vs. RAG</a></li></ul></li><li><a href="#evaluation-metrics-for-llms">Evaluation Metrics for LLMs</a><ul><li><a href="#1-perplexity">1. Perplexity</a></li><li><a href="#2-bleu-bilingual-evaluation-understudy">2. BLEU (Bilingual Evaluation Understudy)</a></li><li><a href="#3-other-relevant-metrics">3. Other Relevant Metrics</a></li></ul></li><li><a href="#essential-llm-tools-and-frameworks">Essential LLM Tools and Frameworks</a><ul><li><a href="#1-langchain">1. LangChain</a></li><li><a href="#2-hugging-face-ecosystem">2. Hugging Face Ecosystem</a></li></ul></li><li><a href="#key-challenges-in-llm-deployment">Key Challenges in LLM Deployment</a><ul><li><a href="#1-hallucination">1. Hallucination</a></li><li><a href="#2-bias-and-fairness">2. Bias and Fairness</a></li></ul></li><li><a href="#conclusion-and-key-takeaways">Conclusion and Key Takeaways</a></li></ul><hr/><h2 id="frontier-llms-architecture-capabilities-and-operation-risk">Frontier LLMs: Architecture, Capabilities and Operation Risk</h2><p>Frontier Models represent the cutting edge of AI. These are the largest, most capable <strong>foundational models</strong> that power most modern AI applications. Understanding their specific offerings and limitations is essential for any LLM engineer.</p><h3 id="the-frontier-llm-landscape">The Frontier LLM Landscape</h3><p>The market is currently dominated by a few key players, each with a distinct product philosophy:</p><table><thead><tr><th style="text-align: left">Provider</th><th style="text-align: left">Current Model Series</th><th style="text-align: left">Key Architectures/Notes</th><th style="text-align: left">Chat Product</th></tr></thead><tbody><tr><td style="text-align: left"><strong>OpenAI</strong></td><td style="text-align: left">GPT-5, GPT-4.1</td><td style="text-align: left"><strong>GPT-5</strong> is the flagship hybrid (chat + reasoning), and <strong>GPT-4.1</strong> is a pure chat model, often faster for interactive use.</td><td style="text-align: left">ChatGPT</td></tr><tr><td style="text-align: left"><strong>Anthropic</strong></td><td style="text-align: left">Claude (Haiku, Sonnet, Opus)</td><td style="text-align: left">Differentiated by size/speed: <strong>Haiku</strong> (fastest), <strong>Sonnet</strong> (general-purpose), <strong>Opus</strong> (most capable). Focused on safety/Constitutional AI.</td><td style="text-align: left">Claude</td></tr><tr><td style="text-align: left"><strong>Google</strong></td><td style="text-align: left">Gemini 2.5 (3.0 anticipated)</td><td style="text-align: left">Integrated within the Google ecosystem. Multimodal capabilities are a core focus.</td><td style="text-align: left">Gemini (formerly Advanced)</td></tr><tr><td style="text-align: left"><strong>x.AI</strong></td><td style="text-align: left">Grok</td><td style="text-align: left">Closely linked to X (formerly Twitter) data. Known for a more “rebellious” or uncensored personality.</td><td style="text-align: left">Grok</td></tr><tr><td style="text-align: left"><strong>Open Source</strong></td><td style="text-align: left">DeepSeek, Llama, Mistral</td><td style="text-align: left"><strong>DeepSeek AI</strong> is noteworthy for open-sourcing its largest models. Strong competition driving rapid innovation.</td><td style="text-align: left">–</td></tr></tbody></table><h3 id="key-strengths-of-frontier-models">Key Strengths of Frontier Models</h3><p>Frontier LLMs have fundamentally shifted the paradigm for technical problem-solving, largely surpassing traditional resources.</p><ul><li><strong>Information Synthesis and Structuring:</strong> They possess an extraordinary ability to process complex inputs, summarize extensive content (e.g., entire web pages or documents), and provide <strong>detailed, structured, and well-researched answers</strong>. This includes generating nuanced comparisons and weighing the <strong>pros and cons</strong> of technical subjects.</li><li><strong>Content and Project Generation:</strong> LLMs are powerful tools for drafting professional content (emails, presentations, reports). Critically, they excel at generating initial <strong>project skeletons</strong> and helping engineers rapidly flesh out the initial ideas for new initiatives, accelerating the project lifecycle.</li><li><strong>Advanced Coding and Debugging:</strong> The most impactful shift is in software engineering. LLMs can <strong>write, test, and iteratively debug code</strong> in a continuous, <strong>agentic-like behavior</strong>. <ul><li>They have <strong>vastly overtaken Stack Overflow</strong> as the primary resource for engineers seeking immediate diagnosis and resolution of complex coding issues. They resolve long-standing, subtle problems with a speed and clarity often unmatched by a human in initial diagnosis.</li></ul></li></ul><h3 id="operational-risks-and-limitations">Operational Risks and Limitations</h3><p>Despite their power, LLMs are statistical models, and their “rough edges” require constant attention from the engineer.</p><h4 id="1-knowledge-gaps-and-cutoffs">1. Knowledge Gaps and Cutoffs</h4><ul><li><strong>Training Cutoff:</strong> LLMs are trained on a static dataset up to a specific date. They have no intrinsic knowledge of events, technologies, or code updates <em>beyond</em> that <strong>knowledge cutoff</strong>.</li><li><strong>Outdated Information:</strong> The model may confidently suggest an outdated library, a deprecated function, or a non-existent API. It fails to recognize the staleness of its own information.</li><li><strong>Web Search as an External Tool:</strong> Crucially, the ability of modern tools (like ChatGPT) to perform a “web search” is <strong>not an inherent feature of the core LLM</strong>. It is an <strong>extra, external engineering component</strong> (often RAG-based) that provides up-to-date data to overcome the model’s intrinsic knowledge cutoff.</li></ul><h4 id="2-the-hallucination-danger">2. The Hallucination Danger</h4><ul><li><strong>Plausibility over Truth:</strong> LLMs are trained to predict the <strong>most plausible next token/word</strong> based on statistical patterns. Their incredible conviction and confidence are a direct result of this statistical training, not from a sense of verified truth. The fact that their plausible output is often correct is simply a remarkable side effect of this training process.</li><li><strong>Danger in Conviction:</strong> When an LLM fabricates a fact (hallucinates), it does so with <strong>strong conviction</strong> and appropriate contextual formatting, making the error exceptionally difficult to spot, particularly for junior or less expert users.</li></ul><h4 id="3-llms-as-junior-analysts-the-supervision-requirement">3. LLMs as Junior Analysts: The Supervision Requirement</h4><p>LLMs are best viewed as highly capable, tirelessly working assistants who require constant supervision.</p><table><thead><tr><th style="text-align: left">User Level</th><th style="text-align: left">Usefulness</th><th style="text-align: left">Risk Factor</th><th style="text-align: left">Key Takeaway</th></tr></thead><tbody><tr><td style="text-align: left"><strong>Senior/Expert</strong></td><td style="text-align: left">Highly useful for generating and accelerating initial drafts of code/content.</td><td style="text-align: left"><strong>Low</strong> - The user possesses the domain expertise to easily spot and correct errors.</td><td style="text-align: left">Treat as a <strong>Supervisor:</strong> The human checks and validates the model’s work.</td></tr><tr><td style="text-align: left"><strong>Junior/Novice</strong></td><td style="text-align: left">Helpful for simple, defined tasks. Dangerous for complex or novel tasks.</td><td style="text-align: left"><strong>High</strong> - The user lacks the expertise to challenge the model’s confidently incorrect output.</td><td style="text-align: left">The user can be <strong>led astray</strong> by plausible, but fundamentally flawed, solutions.</td></tr></tbody></table><p>The core operational flaw is the LLM’s tendency to <strong>apply a Band-Aid and push forward</strong> rather than taking a step back to challenge the root cause of an issue. This leads to the model generating pages of sophisticated, yet unnecessary, code to fix a simple input error (e.g., a misspelled model name in the prompt), demonstrating a failure to find the simple, most elegant solution.</p><hr/><h2 id="core-llm-engineering-concepts">Core LLM Engineering Concepts</h2><p>LLM engineering is the discipline of effectively steering and augmenting LLMs to perform specific tasks reliably.</p><h3 id="prompt-engineering-chain-of-thought-and-few-shot">Prompt Engineering: Chain-of-Thought and Few-Shot</h3><p>Prompt engineering involves structuring the input to the model to elicit a desired, high-quality, and reliable output.</p><h4 id="1-chain-of-thought-cot-prompting">1. Chain-of-Thought (CoT) Prompting</h4><p>CoT is a technique that encourages the LLM to articulate its reasoning process before providing the final answer. This mimics human problem-solving.</p><ul><li><strong>Mechanism:</strong> By asking the model to “think step-by-step,” it breaks down complex problems into manageable sub-problems.</li><li><strong>Benefit:</strong> Dramatically improves performance on complex reasoning tasks (e.g., arithmetic, logical deduction) by making the internal processing visible and more robust.</li><li><strong>Example:</strong><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prompt: The user bought 5 apples for $1 each and 2 bananas for $0.50 each. 
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Head-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- keyords tags is deprecated by modern search engines. -->
+    <meta name="keywords" content="geekmonks, geek, tech, geekmonks tech, free tutorial, free online tutorial">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Geekmonks Tech">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- <link rel="apple-touch-icon" href="/geekmonks/assets/images/apple-touch-icon.png"> -->
+    <link rel="icon" type="image/png" href="/geekmonks/assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/geekmonks/assets/favicon/favicon.svg" />
+
+    <link rel="shortcut icon" href="/geekmonks/assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/geekmonks/assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/geekmonks/assets/favicon/site.webmanifest" />
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/geekmonks/feed.xml" title="Geekmonks Tech" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Frontier Models, Risk, and Best Practices | Geekmonks Tech</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Frontier Models, Risk, and Best Practices" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, operational risk,frontier models, chain of thoughts CoT, Few shorts prompting, finue tuning, RAG, Perplexity, BLEU (Bilingual Evaluation Understudy) matrices langchain, hugging faces, Hallucination, Bias and fairness etc. for beginners and professionals." />
+<meta property="og:description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, operational risk,frontier models, chain of thoughts CoT, Few shorts prompting, finue tuning, RAG, Perplexity, BLEU (Bilingual Evaluation Understudy) matrices langchain, hugging faces, Hallucination, Bias and fairness etc. for beginners and professionals." />
+<link rel="canonical" href="http://localhost:4000/geekmonks/ai-ml/llm-engineering/frontier-models-capabilities-operational-risks.html" />
+<meta property="og:url" content="http://localhost:4000/geekmonks/ai-ml/llm-engineering/frontier-models-capabilities-operational-risks.html" />
+<meta property="og:site_name" content="Geekmonks Tech" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-12T18:00:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Frontier Models, Risk, and Best Practices" />
+<meta name="twitter:site" content="@srvivek_" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-09-12T18:00:00+05:30","datePublished":"2025-09-12T18:00:00+05:30","description":"Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, operational risk,frontier models, chain of thoughts CoT, Few shorts prompting, finue tuning, RAG, Perplexity, BLEU (Bilingual Evaluation Understudy) matrices langchain, hugging faces, Hallucination, Bias and fairness etc. for beginners and professionals.","headline":"Frontier Models, Risk, and Best Practices","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/geekmonks/ai-ml/llm-engineering/frontier-models-capabilities-operational-risks.html"},"url":"http://localhost:4000/geekmonks/ai-ml/llm-engineering/frontier-models-capabilities-operational-risks.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-48XEHMVSEC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-48XEHMVSEC');
+</script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/geekmonks/assets/css/styles.css?v=0.1.0">
+</head>
+
+<body class="container-fluid p-0 m-0">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light text-white content-shadow">
+  <div class="container d-flex justify-content-between">
+    <a href="/geekmonks/" class="navbar-brand d-flex">
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/laptop.svg" height="40"
+        width="34" alt="banner-1 laptop icon"/>
+      <h1 class="fs-3 px-2 fw-bold">Geekmonks</h1>
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/tux.svg" height="40"
+        width="34" alt="banner-2 penguine icon"/>
+    </a>
+    <!-- Toggle Button to expand and collapse the nav links -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBanner"
+      aria-controls="navbarNavBanner" aria-expanded="false" aria-label="Toggle Navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbarNavBanner" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/" class="nav-link fw-bold active"
+            >Home</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/about" class="nav-link fw-bold active"
+            >About</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://github.com/SRVivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">Github</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://www.linkedin.com/in/srvivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+        <nav class="navbar navbar-expand-xl navbar-custom p-0">
+  <div class="container-fluid">
+
+    <!-- Toggler for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible nav items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        
+          
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/ai-ml/llm-engineering/"
+                  >AI-ML</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/cloud/aws/"
+                  >AWS</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/spring/spring-boot/"
+                  >Spring Boot</a>
+              </li>
+            
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+            <!-- Left Sidebar -->
+            <nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column course-topics-list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a class="nav-link course-link active"
+                            href="/geekmonks/ai-ml/llm-engineering" data-course="ai-ml/llm-engineering">
+                            AI/ML
+                        </a>
+                        <!-- Debug - Submenu links are broken -->
+                        
+                        <ul class="nav flex-column ms-2 subtopics" id="topics-ai-ml-llm-engineering">
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="introduction-to-llms.html"
+                                    data-topic="introduction-to-llms.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    LLM Fundamentals
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="ollama-local-setup.html"
+                                    data-topic="ollama-local-setup.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Lab - Ollama Local LLMs
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="b1-t1-hello-world.html"
+                                    data-topic="b1-t1-hello-world.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Lab - Python App Integration
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="ollama-ai-assistant.html"
+                                    data-topic="ollama-ai-assistant.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Lab - Local AI Assistant
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small active"
+                                    href="frontier-models-capabilities-operational-risks.html"
+                                    data-topic="frontier-models-capabilities-operational-risks.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Architecture & capabilities
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="foundaion-and-evolution.html"
+                                    data-topic="foundaion-and-evolution.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Foundation and Evaluation
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="advance-concepts-toknization-and-scaling.html"
+                                    data-topic="advance-concepts-toknization-and-scaling.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Tokens, Scaling
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="scaling-reasoning-inference.html"
+                                    data-topic="scaling-reasoning-inference.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Reasoning, Interference
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="payload-tokenization.html"
+                                    data-topic="payload-tokenization.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Payload Tokenization
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="advance-conectps-models-deployments.html"
+                                    data-topic="advance-conectps-models-deployments.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced Concepts & Deployment
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="advance-prompt-caching.html"
+                                    data-topic="advance-prompt-caching.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Prompt Caching
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        
+                        
+                        
+                        
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Right Content Panel -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Mobile: toggle sidebar button -->
+                <button id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-md-none mb-2"
+                    aria-label="Toggle topics" aria-controls="course-sidebar">
+                    ☰ Topics
+                </button>
+
+                <!-- Topic Contenet -->
+                <div id="topic-content">
+                    <div id="pageTitle">
+                        <h1>Frontier Models, Risk, and Best Practices</h1>
+                        
+                        
+                            <p style="font-style: italic;">
+                                Updated on: 12 Sep 2025
+
+                                
+                                
+                                - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a>
+                                
+                            </p>
+                        
+
+                        <hr class="stylish-hr" />
+                    </div>
+
+                    <h2 id="-table-of-contents">🔗 Table of Contents</h2>
+
+<ul>
+  <li><a href="#-table-of-contents">🔗 Table of Contents</a></li>
+  <li><a href="#frontier-llms-architecture-capabilities-and-operation-risk">Frontier LLMs: Architecture, Capabilities and Operation Risk</a>
+    <ul>
+      <li><a href="#the-frontier-llm-landscape">The Frontier LLM Landscape</a></li>
+      <li><a href="#key-strengths-of-frontier-models">Key Strengths of Frontier Models</a></li>
+      <li><a href="#operational-risks-and-limitations">Operational Risks and Limitations</a>
+        <ul>
+          <li><a href="#1-knowledge-gaps-and-cutoffs">1. Knowledge Gaps and Cutoffs</a></li>
+          <li><a href="#2-the-hallucination-danger">2. The Hallucination Danger</a></li>
+          <li><a href="#3-llms-as-junior-analysts-the-supervision-requirement">3. LLMs as Junior Analysts: The Supervision Requirement</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#core-llm-engineering-concepts">Core LLM Engineering Concepts</a>
+    <ul>
+      <li><a href="#prompt-engineering-chain-of-thought-and-few-shot">Prompt Engineering: Chain-of-Thought and Few-Shot</a>
+        <ul>
+          <li><a href="#1-chain-of-thought-cot-prompting">1. Chain-of-Thought (CoT) Prompting</a></li>
+          <li><a href="#2-few-shot-prompting">2. Few-Shot Prompting</a></li>
+        </ul>
+      </li>
+      <li><a href="#fine-tuning-vs-rag">Fine-Tuning vs. RAG</a></li>
+    </ul>
+  </li>
+  <li><a href="#evaluation-metrics-for-llms">Evaluation Metrics for LLMs</a>
+    <ul>
+      <li><a href="#1-perplexity">1. Perplexity</a></li>
+      <li><a href="#2-bleu-bilingual-evaluation-understudy">2. BLEU (Bilingual Evaluation Understudy)</a></li>
+      <li><a href="#3-other-relevant-metrics">3. Other Relevant Metrics</a></li>
+    </ul>
+  </li>
+  <li><a href="#essential-llm-tools-and-frameworks">Essential LLM Tools and Frameworks</a>
+    <ul>
+      <li><a href="#1-langchain">1. LangChain</a></li>
+      <li><a href="#2-hugging-face-ecosystem">2. Hugging Face Ecosystem</a></li>
+    </ul>
+  </li>
+  <li><a href="#key-challenges-in-llm-deployment">Key Challenges in LLM Deployment</a>
+    <ul>
+      <li><a href="#1-hallucination">1. Hallucination</a></li>
+      <li><a href="#2-bias-and-fairness">2. Bias and Fairness</a></li>
+    </ul>
+  </li>
+  <li><a href="#conclusion-and-key-takeaways">Conclusion and Key Takeaways</a></li>
+</ul>
+
+<hr />
+
+<h2 id="frontier-llms-architecture-capabilities-and-operation-risk">Frontier LLMs: Architecture, Capabilities and Operation Risk</h2>
+
+<p>Frontier Models represent the cutting edge of AI. These are the largest, most capable <strong>foundational models</strong> that power most modern AI applications. Understanding their specific offerings and limitations is essential for any LLM engineer.</p>
+
+<h3 id="the-frontier-llm-landscape">The Frontier LLM Landscape</h3>
+
+<p>The market is currently dominated by a few key players, each with a distinct product philosophy:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Provider</th>
+      <th style="text-align: left">Current Model Series</th>
+      <th style="text-align: left">Key Architectures/Notes</th>
+      <th style="text-align: left">Chat Product</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>OpenAI</strong></td>
+      <td style="text-align: left">GPT-5, GPT-4.1</td>
+      <td style="text-align: left"><strong>GPT-5</strong> is the flagship hybrid (chat + reasoning), and <strong>GPT-4.1</strong> is a pure chat model, often faster for interactive use.</td>
+      <td style="text-align: left">ChatGPT</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Anthropic</strong></td>
+      <td style="text-align: left">Claude (Haiku, Sonnet, Opus)</td>
+      <td style="text-align: left">Differentiated by size/speed: <strong>Haiku</strong> (fastest), <strong>Sonnet</strong> (general-purpose), <strong>Opus</strong> (most capable). Focused on safety/Constitutional AI.</td>
+      <td style="text-align: left">Claude</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Google</strong></td>
+      <td style="text-align: left">Gemini 2.5 (3.0 anticipated)</td>
+      <td style="text-align: left">Integrated within the Google ecosystem. Multimodal capabilities are a core focus.</td>
+      <td style="text-align: left">Gemini (formerly Advanced)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>x.AI</strong></td>
+      <td style="text-align: left">Grok</td>
+      <td style="text-align: left">Closely linked to X (formerly Twitter) data. Known for a more “rebellious” or uncensored personality.</td>
+      <td style="text-align: left">Grok</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Open Source</strong></td>
+      <td style="text-align: left">DeepSeek, Llama, Mistral</td>
+      <td style="text-align: left"><strong>DeepSeek AI</strong> is noteworthy for open-sourcing its largest models. Strong competition driving rapid innovation.</td>
+      <td style="text-align: left">–</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="key-strengths-of-frontier-models">Key Strengths of Frontier Models</h3>
+
+<p>Frontier LLMs have fundamentally shifted the paradigm for technical problem-solving, largely surpassing traditional resources.</p>
+
+<ul>
+  <li><strong>Information Synthesis and Structuring:</strong> They possess an extraordinary ability to process complex inputs, summarize extensive content (e.g., entire web pages or documents), and provide <strong>detailed, structured, and well-researched answers</strong>. This includes generating nuanced comparisons and weighing the <strong>pros and cons</strong> of technical subjects.</li>
+  <li><strong>Content and Project Generation:</strong> LLMs are powerful tools for drafting professional content (emails, presentations, reports). Critically, they excel at generating initial <strong>project skeletons</strong> and helping engineers rapidly flesh out the initial ideas for new initiatives, accelerating the project lifecycle.</li>
+  <li><strong>Advanced Coding and Debugging:</strong> The most impactful shift is in software engineering. LLMs can <strong>write, test, and iteratively debug code</strong> in a continuous, <strong>agentic-like behavior</strong>.
+    <ul>
+      <li>They have <strong>vastly overtaken Stack Overflow</strong> as the primary resource for engineers seeking immediate diagnosis and resolution of complex coding issues. They resolve long-standing, subtle problems with a speed and clarity often unmatched by a human in initial diagnosis.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="operational-risks-and-limitations">Operational Risks and Limitations</h3>
+
+<p>Despite their power, LLMs are statistical models, and their “rough edges” require constant attention from the engineer.</p>
+
+<h4 id="1-knowledge-gaps-and-cutoffs">1. Knowledge Gaps and Cutoffs</h4>
+
+<ul>
+  <li><strong>Training Cutoff:</strong> LLMs are trained on a static dataset up to a specific date. They have no intrinsic knowledge of events, technologies, or code updates <em>beyond</em> that <strong>knowledge cutoff</strong>.</li>
+  <li><strong>Outdated Information:</strong> The model may confidently suggest an outdated library, a deprecated function, or a non-existent API. It fails to recognize the staleness of its own information.</li>
+  <li><strong>Web Search as an External Tool:</strong> Crucially, the ability of modern tools (like ChatGPT) to perform a “web search” is <strong>not an inherent feature of the core LLM</strong>. It is an <strong>extra, external engineering component</strong> (often RAG-based) that provides up-to-date data to overcome the model’s intrinsic knowledge cutoff.</li>
+</ul>
+
+<h4 id="2-the-hallucination-danger">2. The Hallucination Danger</h4>
+
+<ul>
+  <li><strong>Plausibility over Truth:</strong> LLMs are trained to predict the <strong>most plausible next token/word</strong> based on statistical patterns. Their incredible conviction and confidence are a direct result of this statistical training, not from a sense of verified truth. The fact that their plausible output is often correct is simply a remarkable side effect of this training process.</li>
+  <li><strong>Danger in Conviction:</strong> When an LLM fabricates a fact (hallucinates), it does so with <strong>strong conviction</strong> and appropriate contextual formatting, making the error exceptionally difficult to spot, particularly for junior or less expert users.</li>
+</ul>
+
+<h4 id="3-llms-as-junior-analysts-the-supervision-requirement">3. LLMs as Junior Analysts: The Supervision Requirement</h4>
+
+<p>LLMs are best viewed as highly capable, tirelessly working assistants who require constant supervision.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">User Level</th>
+      <th style="text-align: left">Usefulness</th>
+      <th style="text-align: left">Risk Factor</th>
+      <th style="text-align: left">Key Takeaway</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Senior/Expert</strong></td>
+      <td style="text-align: left">Highly useful for generating and accelerating initial drafts of code/content.</td>
+      <td style="text-align: left"><strong>Low</strong> - The user possesses the domain expertise to easily spot and correct errors.</td>
+      <td style="text-align: left">Treat as a <strong>Supervisor:</strong> The human checks and validates the model’s work.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Junior/Novice</strong></td>
+      <td style="text-align: left">Helpful for simple, defined tasks. Dangerous for complex or novel tasks.</td>
+      <td style="text-align: left"><strong>High</strong> - The user lacks the expertise to challenge the model’s confidently incorrect output.</td>
+      <td style="text-align: left">The user can be <strong>led astray</strong> by plausible, but fundamentally flawed, solutions.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The core operational flaw is the LLM’s tendency to <strong>apply a Band-Aid and push forward</strong> rather than taking a step back to challenge the root cause of an issue. This leads to the model generating pages of sophisticated, yet unnecessary, code to fix a simple input error (e.g., a misspelled model name in the prompt), demonstrating a failure to find the simple, most elegant solution.</p>
+
+<hr />
+
+<h2 id="core-llm-engineering-concepts">Core LLM Engineering Concepts</h2>
+
+<p>LLM engineering is the discipline of effectively steering and augmenting LLMs to perform specific tasks reliably.</p>
+
+<h3 id="prompt-engineering-chain-of-thought-and-few-shot">Prompt Engineering: Chain-of-Thought and Few-Shot</h3>
+
+<p>Prompt engineering involves structuring the input to the model to elicit a desired, high-quality, and reliable output.</p>
+
+<h4 id="1-chain-of-thought-cot-prompting">1. Chain-of-Thought (CoT) Prompting</h4>
+
+<p>CoT is a technique that encourages the LLM to articulate its reasoning process before providing the final answer. This mimics human problem-solving.</p>
+
+<ul>
+  <li><strong>Mechanism:</strong> By asking the model to “think step-by-step,” it breaks down complex problems into manageable sub-problems.</li>
+  <li><strong>Benefit:</strong> Dramatically improves performance on complex reasoning tasks (e.g., arithmetic, logical deduction) by making the internal processing visible and more robust.</li>
+  <li><strong>Example:</strong>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Prompt: The user bought 5 apples for $1 each and 2 bananas for $0.50 each. 
 If they paid with a $10 bill, what is their change? **Think step-by-step.**
-</code></pre></div></div></li></ul><h4 id="2-few-shot-prompting">2. Few-Shot Prompting</h4><p>Few-Shot Prompting involves providing the model with a few examples of input-output pairs <em>within the prompt itself</em> to teach it the desired task format and style.</p><ul><li><strong>Mechanism:</strong> The LLM learns the task pattern and constraints from the in-context examples, rather than relying solely on its pre-training.</li><li><strong>Benefit:</strong> Essential for tasks with specific output formats, unique jargon, or subtle style requirements. It allows for rapid customization without fine-tuning.</li><li><strong>Example:</strong><pre><code class="language-markdown:disable-run">Input: "Error: File not found" -&gt; Output: "I/O Failure. Check path integrity."
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h4 id="2-few-shot-prompting">2. Few-Shot Prompting</h4>
+
+<p>Few-Shot Prompting involves providing the model with a few examples of input-output pairs <em>within the prompt itself</em> to teach it the desired task format and style.</p>
+
+<ul>
+  <li><strong>Mechanism:</strong> The LLM learns the task pattern and constraints from the in-context examples, rather than relying solely on its pre-training.</li>
+  <li><strong>Benefit:</strong> Essential for tasks with specific output formats, unique jargon, or subtle style requirements. It allows for rapid customization without fine-tuning.</li>
+  <li><strong>Example:</strong>
+    <pre><code class="language-markdown:disable-run">Input: "Error: File not found" -&gt; Output: "I/O Failure. Check path integrity."
 Input: "Memory allocation failed" -&gt; Output: "System Resource Exhaustion."
 Input: "The quick brown fox" -&gt; Output: "..." (The model completes the pattern)
-</code></pre></li></ul><h3 id="fine-tuning-vs-rag">Fine-Tuning vs. RAG</h3><p>When an application requires domain-specific knowledge, engineers must choose between two primary methods of information injection: Fine-Tuning and <strong>Retrieval-Augmented Generation (RAG)</strong>.</p><table><thead><tr><th style="text-align: left">Feature</th><th style="text-align: left">Fine-Tuning (FT)</th><th style="text-align: left">Retrieval-Augmented Generation (RAG)</th></tr></thead><tbody><tr><td style="text-align: left"><strong>Goal</strong></td><td style="text-align: left"><strong>Modify Model Weights:</strong> Teach the model new <em>skills</em>, <em>style</em>, or <em>format</em>.</td><td style="text-align: left"><strong>Augment Context:</strong> Provide the model with <em>up-to-date, external facts</em> at inference time.</td></tr><tr><td style="text-align: left"><strong>Data Type</strong></td><td style="text-align: left">High-quality, structured prompt/completion pairs.</td><td style="text-align: left">Raw, unstructured or structured documents (PDFs, docs, databases).</td></tr><tr><td style="text-align: left"><strong>Process</strong></td><td style="text-align: left"><strong>Costly/Slow:</strong> Full training loop (GPUs, time), creating a new model version.</td><td style="text-align: left"><strong>Fast/Low Cost:</strong> Real-time retrieval (vector DB lookup), adding text to the prompt.</td></tr><tr><td style="text-align: left"><strong>Knowledge</strong></td><td style="text-align: left">Becomes <strong>intrinsic</strong> (part of the weights). Overcomes the knowledge cutoff <em>permanently</em> for that model.</td><td style="text-align: left">Remains <strong>extrinsic</strong> (part of the context window). Can be updated instantly without retraining.</td></tr><tr><td style="text-align: left"><strong>Best Use</strong></td><td style="text-align: left">Changing the model’s <em>behavior</em> (e.g., tone, code style, instruction following).</td><td style="text-align: left">Injecting dynamic, frequently changing, or proprietary <em>facts</em> (e.g., company policies, daily news).</td></tr><tr><td style="text-align: left"><strong>Drawback</strong></td><td style="text-align: left">High cost, risk of catastrophic forgetting, and difficult to update knowledge.</td><td style="text-align: left">Limited by the model’s context window size and the quality of the retriever.</td></tr></tbody></table><hr/><h2 id="evaluation-metrics-for-llms">Evaluation Metrics for LLMs</h2><p>Evaluating LLM performance is complex, as judging natural language quality is subjective. Engineers rely on a blend of automated and human-based metrics.</p><h3 id="1-perplexity">1. Perplexity</h3><p><strong>Perplexity</strong> ($\text{PPL}$) is a fundamental, intrinsic metric of a language model.</p><ul><li><strong>Definition:</strong> Perplexity measures how well the model predicts a sample of text. It is the exponentiated average negative log-likelihood of a sequence, normalized by the number of words.</li><li><strong>Interpretation:</strong> A <strong>lower perplexity score</strong> indicates that the model is <strong>less “surprised”</strong> by the text and is therefore a <strong>better language model</strong>. It is a measure of the model’s fluency and its confidence in its own generated output.</li><li><strong>Use Case:</strong> Primarily used to track the progress of a model during training or fine-tuning.</li></ul><h3 id="2-bleu-bilingual-evaluation-understudy">2. BLEU (Bilingual Evaluation Understudy)</h3><p><strong>BLEU</strong> is a classic metric used to evaluate the quality of text that has been machine-translated or generated by an LLM.</p><ul><li><strong>Mechanism:</strong> It calculates the geometric mean of the modified <strong>n-gram precision</strong> (unigram, bigram, trigram, and quadgram) between the generated text and a set of human-created reference texts.</li><li><strong>Interpretation:</strong> A score closer to $1.0$ (or $100\%$) indicates a higher degree of overlap with the human reference.</li><li><strong>Limitation:</strong> It focuses purely on <strong>lexical overlap</strong> and can fail to capture semantic meaning. A grammatically perfect, meaningful sentence might score poorly if it uses different synonyms than the reference.</li></ul><h3 id="3-other-relevant-metrics">3. Other Relevant Metrics</h3><ul><li><strong>ROUGE (Recall-Oriented Understudy for Gisting Evaluation):</strong> Best suited for summarization tasks, focusing on the recall (coverage) of the reference key points in the generated summary.</li><li><strong>Human Evaluation (e.g., Win-Rate):</strong> The gold standard. Human judges rate outputs based on criteria like <strong>Helpfulness, Relevance, and Groundedness (in source material)</strong>.</li></ul><hr/><h2 id="essential-llm-tools-and-frameworks">Essential LLM Tools and Frameworks</h2><p>The modern LLM engineering stack is built around frameworks that abstract the complexity of prompt management, external tool usage, and retrieval.</p><h3 id="1-langchain">1. LangChain</h3><p><strong>LangChain</strong> is a powerful orchestration framework for developing applications powered by language models.</p><ul><li><strong>Core Concept:</strong> Chain together different components (LLMs, prompt templates, tools, databases) to create complex, goal-oriented <em>chains</em> and <em>agents</em>.</li><li><strong>Key Components:</strong><ul><li><strong>Models:</strong> Integrates with various LLM providers (OpenAI, Anthropic, Hugging Face).</li><li><strong>Prompts:</strong> Manages templates and dynamic prompt construction.</li><li><strong>Chains:</strong> Sequential calls to models and other utilities (e.g., connecting a code generator to a code execution tool).</li><li><strong>Agents:</strong> Allows the LLM to dynamically decide which tools to use to achieve a goal (e.g., using a Google search tool to answer a question).</li><li><strong>Retrievers:</strong> Essential for RAG, facilitating the lookup and injection of external documents.</li></ul></li></ul><h3 id="2-hugging-face-ecosystem">2. Hugging Face Ecosystem</h3><p>Hugging Face (HF) has become the central hub for the open-source machine learning community.</p><ul><li><strong>Models:</strong> The <strong>Hugging Face Hub</strong> is the largest repository of pre-trained LLMs (e.g., Llama, Mistral) and transformers, serving as the default place to find and download models.</li><li><strong>Datasets:</strong> A vast collection of datasets for pre-training, fine-tuning, and evaluation.</li><li><strong>Accelerate/Transformers Libraries:</strong> Provides the necessary Python libraries for loading, training, and optimizing LLMs for various hardware configurations.</li></ul><hr/><h2 id="key-challenges-in-llm-deployment">Key Challenges in LLM Deployment</h2><p>Deploying LLMs into production requires mitigating critical risks that impact safety, reliability, and fairness.</p><h3 id="1-hallucination">1. Hallucination</h3><p>As discussed, <strong>hallucination</strong> is the generation of text that is factually incorrect, misleading, or nonsensical, but is delivered with high confidence.</p><ul><li><strong>Mitigation Strategies:</strong><ol><li><strong>Grounding (RAG):</strong> The most effective strategy is to ground the model’s answer in a verified source (using RAG). The prompt instructs the model to only answer based on the provided documents.</li><li><strong>Prompt Refinement (CoT):</strong> Asking the model to cite its sources or <strong>“think step-by-step”</strong> can often reveal a flaw in its reasoning before it generates the final error.</li><li><strong>Fact-Checking Tools:</strong> Implementing external tools or APIs that can verify generated facts before the output is displayed to the user.</li></ol></li></ul><h3 id="2-bias-and-fairness">2. Bias and Fairness</h3><p>LLMs learn from the vast, diverse, and often flawed data of the internet, leading to the risk of propagating <strong>societal biases</strong> (e.g., racial, gender, or political stereotypes) in their output.</p><ul><li><strong>Source:</strong> Bias is inherent in the <strong>training data</strong>. Since the internet reflects historical and societal biases, the model learns to associate certain terms or roles with specific demographics.</li><li><strong>Mitigation Strategies:</strong><ol><li><strong>Data Curation:</strong> Carefully filtering and re-weighting the training or fine-tuning data to reduce the prevalence of biased language.</li><li><strong>Red Teaming:</strong> Continuously testing the model with adversarial prompts designed to elicit biased responses, allowing engineers to patch the model’s behavior.</li><li><strong>Constitutional AI (Anthropic’s Approach):</strong> Providing the model with a set of explicit, written principles (a ‘Constitution’) that guide its responses and prevent the generation of harmful or biased content.</li></ol></li></ul><hr/><h2 id="conclusion-and-key-takeaways">Conclusion and Key Takeaways</h2><p>The current frontier LLMs are paradigm-shifting tools, best utilized as highly effective, tireless junior analysts. The LLM engineer’s role is to act as the <strong>supervisor</strong>, utilizing advanced techniques like <strong>Chain-of-Thought (CoT)</strong> and <strong>Retrieval-Augmented Generation (RAG)</strong> to steer the model, inject proprietary context, and ensure reliability.</p><p><strong>Key Takeaways for Engineers:</strong></p><ul><li><strong>Supervise, Don’t Delegate:</strong> Always assume the LLM might hallucinate or find the most complex solution to a simple problem.</li><li><strong>RAG is for Facts, Fine-Tuning is for Style:</strong> Choose RAG for dynamic, factual knowledge updates and Fine-Tuning for changing the model’s <em>behavior</em> or <em>tone</em>.</li><li><strong>Evaluation is Multi-Modal:</strong> Rely on a blend of automated metrics ($\text{PPL}$, BLEU) and human validation to truly assess quality.</li><li><strong>Mitigate Risk Proactively:</strong> Design your application around the core challenges of <strong>hallucination</strong> and <strong>bias</strong> by implementing grounding mechanisms and safety checks.</li></ul><p>Would you like me to elaborate on a specific technique, such as providing a more detailed <strong>RAG pipeline architecture diagram</strong>?</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div></div></main></div></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><script src="/geekmonks/assets/js/mermaid-diagram-render.js?v=0.1.0"></script><script src="/geekmonks/assets/js/submenu-togle.js?v=0.1.0"></script></body></html>
+</code></pre>
+  </li>
+</ul>
+
+<h3 id="fine-tuning-vs-rag">Fine-Tuning vs. RAG</h3>
+
+<p>When an application requires domain-specific knowledge, engineers must choose between two primary methods of information injection: Fine-Tuning and <strong>Retrieval-Augmented Generation (RAG)</strong>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Feature</th>
+      <th style="text-align: left">Fine-Tuning (FT)</th>
+      <th style="text-align: left">Retrieval-Augmented Generation (RAG)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Goal</strong></td>
+      <td style="text-align: left"><strong>Modify Model Weights:</strong> Teach the model new <em>skills</em>, <em>style</em>, or <em>format</em>.</td>
+      <td style="text-align: left"><strong>Augment Context:</strong> Provide the model with <em>up-to-date, external facts</em> at inference time.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Data Type</strong></td>
+      <td style="text-align: left">High-quality, structured prompt/completion pairs.</td>
+      <td style="text-align: left">Raw, unstructured or structured documents (PDFs, docs, databases).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Process</strong></td>
+      <td style="text-align: left"><strong>Costly/Slow:</strong> Full training loop (GPUs, time), creating a new model version.</td>
+      <td style="text-align: left"><strong>Fast/Low Cost:</strong> Real-time retrieval (vector DB lookup), adding text to the prompt.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Knowledge</strong></td>
+      <td style="text-align: left">Becomes <strong>intrinsic</strong> (part of the weights). Overcomes the knowledge cutoff <em>permanently</em> for that model.</td>
+      <td style="text-align: left">Remains <strong>extrinsic</strong> (part of the context window). Can be updated instantly without retraining.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Best Use</strong></td>
+      <td style="text-align: left">Changing the model’s <em>behavior</em> (e.g., tone, code style, instruction following).</td>
+      <td style="text-align: left">Injecting dynamic, frequently changing, or proprietary <em>facts</em> (e.g., company policies, daily news).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Drawback</strong></td>
+      <td style="text-align: left">High cost, risk of catastrophic forgetting, and difficult to update knowledge.</td>
+      <td style="text-align: left">Limited by the model’s context window size and the quality of the retriever.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="evaluation-metrics-for-llms">Evaluation Metrics for LLMs</h2>
+
+<p>Evaluating LLM performance is complex, as judging natural language quality is subjective. Engineers rely on a blend of automated and human-based metrics.</p>
+
+<h3 id="1-perplexity">1. Perplexity</h3>
+
+<p><strong>Perplexity</strong> ($\text{PPL}$) is a fundamental, intrinsic metric of a language model.</p>
+
+<ul>
+  <li><strong>Definition:</strong> Perplexity measures how well the model predicts a sample of text. It is the exponentiated average negative log-likelihood of a sequence, normalized by the number of words.</li>
+  <li><strong>Interpretation:</strong> A <strong>lower perplexity score</strong> indicates that the model is <strong>less “surprised”</strong> by the text and is therefore a <strong>better language model</strong>. It is a measure of the model’s fluency and its confidence in its own generated output.</li>
+  <li><strong>Use Case:</strong> Primarily used to track the progress of a model during training or fine-tuning.</li>
+</ul>
+
+<h3 id="2-bleu-bilingual-evaluation-understudy">2. BLEU (Bilingual Evaluation Understudy)</h3>
+
+<p><strong>BLEU</strong> is a classic metric used to evaluate the quality of text that has been machine-translated or generated by an LLM.</p>
+
+<ul>
+  <li><strong>Mechanism:</strong> It calculates the geometric mean of the modified <strong>n-gram precision</strong> (unigram, bigram, trigram, and quadgram) between the generated text and a set of human-created reference texts.</li>
+  <li><strong>Interpretation:</strong> A score closer to $1.0$ (or $100\%$) indicates a higher degree of overlap with the human reference.</li>
+  <li><strong>Limitation:</strong> It focuses purely on <strong>lexical overlap</strong> and can fail to capture semantic meaning. A grammatically perfect, meaningful sentence might score poorly if it uses different synonyms than the reference.</li>
+</ul>
+
+<h3 id="3-other-relevant-metrics">3. Other Relevant Metrics</h3>
+
+<ul>
+  <li><strong>ROUGE (Recall-Oriented Understudy for Gisting Evaluation):</strong> Best suited for summarization tasks, focusing on the recall (coverage) of the reference key points in the generated summary.</li>
+  <li><strong>Human Evaluation (e.g., Win-Rate):</strong> The gold standard. Human judges rate outputs based on criteria like <strong>Helpfulness, Relevance, and Groundedness (in source material)</strong>.</li>
+</ul>
+
+<hr />
+
+<h2 id="essential-llm-tools-and-frameworks">Essential LLM Tools and Frameworks</h2>
+
+<p>The modern LLM engineering stack is built around frameworks that abstract the complexity of prompt management, external tool usage, and retrieval.</p>
+
+<h3 id="1-langchain">1. LangChain</h3>
+
+<p><strong>LangChain</strong> is a powerful orchestration framework for developing applications powered by language models.</p>
+
+<ul>
+  <li><strong>Core Concept:</strong> Chain together different components (LLMs, prompt templates, tools, databases) to create complex, goal-oriented <em>chains</em> and <em>agents</em>.</li>
+  <li><strong>Key Components:</strong>
+    <ul>
+      <li><strong>Models:</strong> Integrates with various LLM providers (OpenAI, Anthropic, Hugging Face).</li>
+      <li><strong>Prompts:</strong> Manages templates and dynamic prompt construction.</li>
+      <li><strong>Chains:</strong> Sequential calls to models and other utilities (e.g., connecting a code generator to a code execution tool).</li>
+      <li><strong>Agents:</strong> Allows the LLM to dynamically decide which tools to use to achieve a goal (e.g., using a Google search tool to answer a question).</li>
+      <li><strong>Retrievers:</strong> Essential for RAG, facilitating the lookup and injection of external documents.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="2-hugging-face-ecosystem">2. Hugging Face Ecosystem</h3>
+
+<p>Hugging Face (HF) has become the central hub for the open-source machine learning community.</p>
+
+<ul>
+  <li><strong>Models:</strong> The <strong>Hugging Face Hub</strong> is the largest repository of pre-trained LLMs (e.g., Llama, Mistral) and transformers, serving as the default place to find and download models.</li>
+  <li><strong>Datasets:</strong> A vast collection of datasets for pre-training, fine-tuning, and evaluation.</li>
+  <li><strong>Accelerate/Transformers Libraries:</strong> Provides the necessary Python libraries for loading, training, and optimizing LLMs for various hardware configurations.</li>
+</ul>
+
+<hr />
+
+<h2 id="key-challenges-in-llm-deployment">Key Challenges in LLM Deployment</h2>
+
+<p>Deploying LLMs into production requires mitigating critical risks that impact safety, reliability, and fairness.</p>
+
+<h3 id="1-hallucination">1. Hallucination</h3>
+
+<p>As discussed, <strong>hallucination</strong> is the generation of text that is factually incorrect, misleading, or nonsensical, but is delivered with high confidence.</p>
+
+<ul>
+  <li><strong>Mitigation Strategies:</strong>
+    <ol>
+      <li><strong>Grounding (RAG):</strong> The most effective strategy is to ground the model’s answer in a verified source (using RAG). The prompt instructs the model to only answer based on the provided documents.</li>
+      <li><strong>Prompt Refinement (CoT):</strong> Asking the model to cite its sources or <strong>“think step-by-step”</strong> can often reveal a flaw in its reasoning before it generates the final error.</li>
+      <li><strong>Fact-Checking Tools:</strong> Implementing external tools or APIs that can verify generated facts before the output is displayed to the user.</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="2-bias-and-fairness">2. Bias and Fairness</h3>
+
+<p>LLMs learn from the vast, diverse, and often flawed data of the internet, leading to the risk of propagating <strong>societal biases</strong> (e.g., racial, gender, or political stereotypes) in their output.</p>
+
+<ul>
+  <li><strong>Source:</strong> Bias is inherent in the <strong>training data</strong>. Since the internet reflects historical and societal biases, the model learns to associate certain terms or roles with specific demographics.</li>
+  <li><strong>Mitigation Strategies:</strong>
+    <ol>
+      <li><strong>Data Curation:</strong> Carefully filtering and re-weighting the training or fine-tuning data to reduce the prevalence of biased language.</li>
+      <li><strong>Red Teaming:</strong> Continuously testing the model with adversarial prompts designed to elicit biased responses, allowing engineers to patch the model’s behavior.</li>
+      <li><strong>Constitutional AI (Anthropic’s Approach):</strong> Providing the model with a set of explicit, written principles (a ‘Constitution’) that guide its responses and prevent the generation of harmful or biased content.</li>
+    </ol>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="conclusion-and-key-takeaways">Conclusion and Key Takeaways</h2>
+
+<p>The current frontier LLMs are paradigm-shifting tools, best utilized as highly effective, tireless junior analysts. The LLM engineer’s role is to act as the <strong>supervisor</strong>, utilizing advanced techniques like <strong>Chain-of-Thought (CoT)</strong> and <strong>Retrieval-Augmented Generation (RAG)</strong> to steer the model, inject proprietary context, and ensure reliability.</p>
+
+<p><strong>Key Takeaways for Engineers:</strong></p>
+
+<ul>
+  <li><strong>Supervise, Don’t Delegate:</strong> Always assume the LLM might hallucinate or find the most complex solution to a simple problem.</li>
+  <li><strong>RAG is for Facts, Fine-Tuning is for Style:</strong> Choose RAG for dynamic, factual knowledge updates and Fine-Tuning for changing the model’s <em>behavior</em> or <em>tone</em>.</li>
+  <li><strong>Evaluation is Multi-Modal:</strong> Rely on a blend of automated metrics ($\text{PPL}$, BLEU) and human validation to truly assess quality.</li>
+  <li><strong>Mitigate Risk Proactively:</strong> Design your application around the core challenges of <strong>hallucination</strong> and <strong>bias</strong> by implementing grounding mechanisms and safety checks.</li>
+</ul>
+
+<p>Would you like me to elaborate on a specific technique, such as providing a more detailed <strong>RAG pipeline architecture diagram</strong>?</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+ <!-- Injects index.md content here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div>
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-4 mx-5 my-5 border-top">
+
+        <div class="col-md-4 d-flex align-items-center"> <a href="/geekmonks/"
+                class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Geekmonks">
+                <svg class="bi me-2" width="40" height="32" aria-hidden="true" viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="gradient" gradientTransform="rotate(145 0.5 0.5)">
+                            <stop offset="0%" stop-color="#f7e625"></stop>
+                            <stop offset="100%" stop-color="#e6a62c"></stop>
+                        </linearGradient>
+                    </defs>
+
+                    <rect width="200" height="200" fill="url('#gradient')"></rect>
+
+                    <g fill="#303e37"
+                        transform="matrix(12.312625250501002,0,0,12.312625250501002,16.825404661093543,187.54701945968048)"
+                        stroke="#3b8349" stroke-width="0.2">
+                        <path
+                            d="M12.71-7.60L12.71-1.76Q11.92-0.88 10.40-0.34Q8.88 0.20 7.06 0.20L7.06 0.20Q4.27 0.20 2.60-1.51Q0.93-3.22 0.81-6.27L0.81-6.27L0.80-7.50Q0.80-9.60 1.54-11.17Q2.29-12.73 3.67-13.58Q5.05-14.42 6.87-14.42L6.87-14.42Q9.52-14.42 10.99-13.21Q12.46-11.99 12.71-9.58L12.71-9.58L9.40-9.58Q9.23-10.77 8.64-11.28Q8.06-11.79 6.98-11.79L6.98-11.79Q5.69-11.79 4.99-10.69Q4.29-9.60 4.28-7.57L4.28-7.57L4.28-6.71Q4.28-4.58 5.00-3.51Q5.73-2.44 7.29-2.44L7.29-2.44Q8.63-2.44 9.29-3.04L9.29-3.04L9.29-5.24L6.90-5.24L6.90-7.60L12.71-7.60Z">
+                        </path>
+                    </g>
+                </svg>
+            </a>
+            <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span>
+        </div>
+
+        <div class="col mb-3"></div>
+        <div class="col mb-3">
+            <h5>Company</h5>
+            <ul class="nav col-md-4">
+                <li class="nav-item"><a href="/geekmonks/"
+                        class="nav-link px-2 text-body-secondary">Home</a></li>
+                <li class="nav-item"><a href="/geekmonks/about"
+                        class="nav-link px-2 text-body-secondary">About</a></li>
+                <li class="nav-item"><a href="https://github.com/SRVivek1/" target="_blank"
+                        class="nav-link px-2 text-body-secondary">Github</a></li>
+                <li class="nav-item"><a href="https://www.linkedin.com/in/srvivek1/" target="_blank"
+                        class="nav-link px-2 text-body-secondary">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="col mb-3">
+            <h5>Tutorials</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="/geekmonks/spring/spring-boot"
+                        class="nav-link p-0 text-body-secondary">Spring Boot</a></li>
+                <li class="nav-item mb-2"><a href="/geekmonks/ai-ml/llm-engineering"
+                        class="nav-link p-0 text-body-secondary">AI / ML</a></li>
+                <li class="nav-item mb-2"><a href="/geekmonks/cloud/aws"
+                        class="nav-link p-0 text-body-secondary">AWS</a></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+    
+    <!-- External scripts -->
+    <!-- bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
+<!-- Mermaid JS: render diagrams client-side. We convert fenced code blocks
+		 with class `language-mermaid` into <div class="mermaid"> so existing
+		 markdown files don't need editing. -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<!-- Include internal JavaScript -->
+ <script src="/geekmonks/assets/js/mermaid-diagram-render.js?v=0.1.0"></script>
+
+
+ <!-- Submenu toggle nav on small screen-->
+<script src="/geekmonks/assets/js/submenu-togle.js?v=0.1.0"></script>
+
+
+</body>
+
+</html>

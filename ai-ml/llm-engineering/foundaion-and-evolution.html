@@ -1,2 +1,604 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="keywords" content="geekmonks, geek, tech, geekmonks tech, free tutorial, free online tutorial"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Geekmonks Tech"><meta name="mobile-web-app-capable" content="yes"><link rel="icon" type="image/png" href="/geekmonks/assets/favicon/favicon-96x96.png" sizes="96x96"/><link rel="icon" type="image/svg+xml" href="/geekmonks/assets/favicon/favicon.svg"/><link rel="shortcut icon" href="/geekmonks/assets/favicon/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/geekmonks/assets/favicon/apple-touch-icon.png"/><link rel="manifest" href="/geekmonks/assets/favicon/site.webmanifest"/><link type="application/atom+xml" rel="alternate" href="https://srvivek1.github.io/geekmonks/feed.xml" title="Geekmonks Tech"/><title>Foundations and Evolution | Geekmonks Tech</title><meta name="generator" content="Jekyll v3.10.0"/><meta property="og:title" content="Foundations and Evolution"/><meta property="og:locale" content="en_US"/><meta name="description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, transformers, transformer architecture, neural networks, LSTM, Generative models, Aentic AI etc. for beginners and professionals."/><meta property="og:description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, transformers, transformer architecture, neural networks, LSTM, Generative models, Aentic AI etc. for beginners and professionals."/><link rel="canonical" href="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/foundaion-and-evolution.html"/><meta property="og:url" content="https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/foundaion-and-evolution.html"/><meta property="og:site_name" content="Geekmonks Tech"/><meta property="og:type" content="article"/><meta property="article:published_time" content="2025-09-16T18:00:00+05:30"/><meta name="twitter:card" content="summary"/><meta property="twitter:title" content="Foundations and Evolution"/><meta name="twitter:site" content="@srvivek_"/><script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-09-16T18:00:00+05:30","datePublished":"2025-09-16T18:00:00+05:30","description":"Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, transformers, transformer architecture, neural networks, LSTM, Generative models, Aentic AI etc. for beginners and professionals.","headline":"Foundations and Evolution","mainEntityOfPage":{"@type":"WebPage","@id":"https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/foundaion-and-evolution.html"},"url":"https://srvivek1.github.io/geekmonks/ai-ml/llm-engineering/foundaion-and-evolution.html"}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-48XEHMVSEC"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-48XEHMVSEC");</script><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"><link rel="stylesheet" href="/geekmonks/assets/css/styles.css?v=0.1.0"></head><body class="container-fluid p-0 m-0"><header><nav class="navbar navbar-expand-md navbar-light bg-light text-white content-shadow"><div class="container d-flex justify-content-between"><a href="/geekmonks/" class="navbar-brand d-flex"><img class="d-inline-block align-top" src="/geekmonks/assets/icons/laptop.svg" height="40" width="34" alt="banner-1 laptop icon"/><h1 class="fs-3 px-2 fw-bold">Geekmonks</h1><img class="d-inline-block align-top" src="/geekmonks/assets/icons/tux.svg" height="40" width="34" alt="banner-2 penguine icon"/></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBanner" aria-controls="navbarNavBanner" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggler-icon"></span></button><div id="navbarNavBanner" class="collapse navbar-collapse"><ul class="navbar-nav ms-auto"><li class="nav-item active"><a href="/geekmonks/" class="nav-link fw-bold active">Home</a></li><li class="nav-item active"><a href="/geekmonks/about" class="nav-link fw-bold active">About</a></li><li class="nav-item active"><a href="https://github.com/SRVivek1/" class="nav-link fw-bold active" target="_blank" rel="noopener noreferrer">Github</a></li><li class="nav-item active"><a href="https://www.linkedin.com/in/srvivek1/" class="nav-link fw-bold active" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul></div></div></nav><nav class="navbar navbar-expand-xl navbar-custom p-0"><div class="container-fluid"><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><ul class="navbar-nav mx-auto"><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/ai-ml/llm-engineering/">AI-ML</a></li><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/cloud/aws/">AWS</a></li><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/spring/spring-boot/">Spring Boot</a></li></ul></div></div></nav></header><div class="container-fluid"><div class="row min-vh-100"><nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse"><div class="position-sticky pt-3"><ul class="nav flex-column course-topics-list"><a class="nav-link course-link active" href="/geekmonks/ai-ml/llm-engineering" data-course="ai-ml/llm-engineering"> AI/ML </a><ul class="nav flex-column ms-2 subtopics" id="topics-ai-ml-llm-engineering"><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="introduction-to-llms.html" data-topic="introduction-to-llms.html" data-course-path="/ai-ml/llm-engineering"> LLM Fundamentals </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="ollama-local-setup.html" data-topic="ollama-local-setup.html" data-course-path="/ai-ml/llm-engineering"> Lab - Ollama Local LLMs </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="b1-t1-hello-world.html" data-topic="b1-t1-hello-world.html" data-course-path="/ai-ml/llm-engineering"> Lab - Python App Integration </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="ollama-ai-assistant.html" data-topic="ollama-ai-assistant.html" data-course-path="/ai-ml/llm-engineering"> Lab - Local AI Assistant </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="frontier-models-capabilities-operational-risks.html" data-topic="frontier-models-capabilities-operational-risks.html" data-course-path="/ai-ml/llm-engineering"> Architecture & capabilities </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small active" href="foundaion-and-evolution.html" data-topic="foundaion-and-evolution.html" data-course-path="/ai-ml/llm-engineering"> Foundation and Evaluation </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="advance-concepts-toknization-and-scaling.html" data-topic="advance-concepts-toknization-and-scaling.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Tokens, Scaling </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="scaling-reasoning-inference.html" data-topic="scaling-reasoning-inference.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Reasoning, Interference </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="payload-tokenization.html" data-topic="payload-tokenization.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Payload Tokenization </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="advance-conectps-models-deployments.html" data-topic="advance-conectps-models-deployments.html" data-course-path="/ai-ml/llm-engineering"> Advanced Concepts & Deployment </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="advance-prompt-caching.html" data-topic="advance-prompt-caching.html" data-course-path="/ai-ml/llm-engineering"> Advanced - Prompt Caching </a></li></ul></ul></div></nav><main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><button id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-md-none mb-2" aria-label="Toggle topics" aria-controls="course-sidebar"> ☰ Topics </button><div id="topic-content"><div id="pageTitle"><h1>Foundations and Evolution</h1><p style="font-style: italic;"> Updated on: 16 Sep 2025 - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a></p><hr class="stylish-hr"/></div><h2 id="-table-of-contents">🧭 Table of Contents</h2><ul><li><a href="#-table-of-contents">🧭 Table of Contents</a></li><li><a href="#-core-concepts">💡 Core Concepts</a><ul><li><a href="#1-transformers">1. Transformers</a></li><li><a href="#2-neural-networks-the-foundation">2. Neural Networks: The Foundation</a></li></ul></li><li><a href="#-from-lstm-to-transformers-attention-is-all-you-need">📜 From LSTM to Transformers: Attention is All You Need</a><ul><li><a href="#summarizing-the-attention-is-all-you-need-seminal-paper">Summarizing the “Attention Is All You Need” Seminal paper</a></li><li><a href="#the-transformer-architecture">The Transformer Architecture</a></li></ul></li><li><a href="#-the-evolution-of-generative-models-gpt-series">🚀 The Evolution of Generative Models (GPT Series)</a><ul><li><a href="#drawbacks-and-capabilities-of-early-models">Drawbacks and Capabilities of Early Models</a></li><li><a href="#key-milestones-in-the-gpt-series">Key Milestones in the GPT Series</a></li></ul></li><li><a href="#-emergent-intelligence-and-the-worlds-reaction">🌍 Emergent Intelligence and the World’s Reaction</a><ul><li><a href="#the-worlds-reaction-timeline">The World’s Reaction Timeline</a></li><li><a href="#future-directions-agentic-ai">Future Directions: Agentic AI</a></li></ul></li><li><a href="#-key-takeaways">✅ Key Takeaways</a></li></ul><hr/><h2 id="-core-concepts">💡 Core Concepts</h2><h3 id="1-transformers">1. Transformers</h3><p>The <strong>Transformer</strong> architecture is arguably the most significant innovation enabling the current wave of highly capable Large Language Models (LLMs), including the GPT and BERT families.</p><ul><li><strong>Optimization for Scale:</strong> The Transformer is an ingenious optimization. It provides a <strong>highly clever and efficient approach</strong> that allows researchers and engineers to scale models, train with significantly more data, and manage billions of parameters in a computationally feasible way.</li><li><strong>The Scaling Effect:</strong> Without the Transformer’s design, reaching models like <strong>GPT-4</strong> or <strong>Claude 4.5 Sonnet</strong> would have been much slower, potentially prohibitively expensive, or even impossible within the current timeline. It dramatically reduced the <em>cost</em> and <em>time</em> required for large-scale training.</li><li><strong>Alternatives:</strong> While the Transformer dominates, research continues into alternative architectures, such as <strong>State Space Models (SSMs)</strong> and <strong>hybrid architectures</strong>. As of now, the Transformer remains the gold standard, having not been definitively surpassed in general-purpose LLM performance.</li></ul><h3 id="2-neural-networks-the-foundation">2. Neural Networks: The Foundation</h3><p>A <strong>Neural Network</strong> is the underlying computational structure for models like the Transformer.</p><ul><li><strong>Structure:</strong> It consists of a series of interconnected computational layers, often described as being analogous to biological neurons.</li><li><strong>Function:</strong> Each layer processes the input, applying a series of transformations and <strong>fine-tuning the information</strong> to extract increasingly relevant features. The goal is to progressively refine the representation of the input until the network can produce the desired output, whether it’s a classification, a prediction, or a generated sequence of text.</li></ul><hr/><h2 id="-from-lstm-to-transformers-attention-is-all-you-need">📜 From LSTM to Transformers: Attention is All You Need</h2><h3 id="summarizing-the-attention-is-all-you-need-seminal-paper">Summarizing the “Attention Is All You Need” Seminal paper</h3><p>In 2017, a team of Google scientists published the seminal paper, <strong><em>“Attention Is All You Need,”</em></strong> which introduced the <strong>Transformer</strong> architecture.</p><blockquote><p>The core innovation was the complete removal of recurrent layers (like <strong>LSTMs</strong> and <strong>GRUs</strong>) in favor of a purely attention-based mechanism. This parallelized the sequence processing, which had been a bottleneck for training very large models.</p></blockquote><p><strong>Key Concepts of the Paper:</strong></p><ul><li><strong>Self-Attention Mechanism:</strong> This is the heart of the Transformer. It allows the model to weigh the importance of different words in the input sequence relative to a given word, regardless of their distance. For example, in the sentence, “The man saw the fire and ran away because <strong>it</strong> was hot,” the attention mechanism helps the model correctly link “<strong>it</strong>” to “<strong>fire</strong>.”</li><li><strong>Parallelization:</strong> Unlike Recurrent Neural Networks (RNNs) that process tokens sequentially (word-by-word), the Transformer processes the entire input sequence <strong>in parallel</strong>. This is the key enabler for massive-scale training on modern GPUs.</li><li><strong>Positional Encoding:</strong> Since the model lost the inherent sequential order of RNNs, the authors introduced <strong>Positional Encoding</strong> to inject information about the relative or absolute position of the tokens in the sequence.</li></ul><h3 id="the-transformer-architecture">The Transformer Architecture</h3><p>The architecture primarily consists of stacked <strong>Encoder</strong> and <strong>Decoder</strong> blocks (though LLMs like GPT use a <strong>Decoder-only</strong> architecture).</p><table><thead><tr><th style="text-align: left">Component</th><th style="text-align: left">Function</th></tr></thead><tbody><tr><td style="text-align: left"><strong>Multi-Head Attention</strong></td><td style="text-align: left">Processes input by applying several parallel self-attention mechanisms, allowing the model to focus on different aspects of the sequence simultaneously.</td></tr><tr><td style="text-align: left"><strong>Feed-Forward Networks</strong></td><td style="text-align: left">Applies a simple, point-wise fully connected layer to the output of the attention sub-layer to introduce non-linearity.</td></tr><tr><td style="text-align: left"><strong>Residual Connections</strong></td><td style="text-align: left">A structure that allows information to bypass certain layers, helping to prevent the vanishing gradient problem in deep networks.</td></tr><tr><td style="text-align: left"><strong>Layer Normalization</strong></td><td style="text-align: left">A technique used to stabilize and speed up the training of deep neural networks.</td></tr></tbody></table><hr/><h2 id="-the-evolution-of-generative-models-gpt-series">🚀 The Evolution of Generative Models (GPT Series)</h2><p>The success of the Transformer led to rapid innovation, exemplified by the evolution of the Generative Pre-trained Transformer (GPT) series from OpenAI.</p><h3 id="drawbacks-and-capabilities-of-early-models">Drawbacks and Capabilities of Early Models</h3><p>When the Transformer architecture was initially invented by Google in 2017, it quickly led to both <strong>Encoder-only</strong> models (like <strong>BERT</strong>, optimized for understanding/encoding text) and <strong>Decoder-only</strong> models (like <strong>GPT</strong>, optimized for generating text).</p><table><thead><tr><th style="text-align: left">Early Models (e.g., GPT-1/2)</th><th style="text-align: left">Capabilities</th><th style="text-align: left">Drawbacks</th></tr></thead><tbody><tr><td style="text-align: left"><strong>GPT-1 (2018)</strong></td><td style="text-align: left">Demonstrated strong performance on simple language understanding tasks; proved the viability of <em>pre-training</em> followed by <em>fine-tuning</em>.</td><td style="text-align: left">Small context window; limited coherence over long text; required fine-tuning for most tasks.</td></tr><tr><td style="text-align: left"><strong>GPT-2 (2019)</strong></td><td style="text-align: left">Showed powerful zero-shot learning; could generate surprisingly coherent long text; the start of “generative AI.”</td><td style="text-align: left">Still relatively small by today’s standards (up to 1.5B parameters); frequent factual errors (hallucination).</td></tr></tbody></table><h3 id="key-milestones-in-the-gpt-series">Key Milestones in the GPT Series</h3><table><thead><tr><th style="text-align: left">Model</th><th style="text-align: left">Release Year</th><th style="text-align: left">Key Innovation</th><th style="text-align: left">Impact</th></tr></thead><tbody><tr><td style="text-align: left"><strong>GPT-3</strong></td><td style="text-align: left">2020</td><td style="text-align: left">Massive scaling (175B parameters); pioneered <strong>In-Context Learning</strong> (e.g., <strong>Few-Shot Prompting</strong>).</td><td style="text-align: left">Demonstrated that scale leads to significantly better performance across many tasks without explicit fine-tuning.</td></tr><tr><td style="text-align: left"><strong>GPT-3.5 / ChatGPT</strong></td><td style="text-align: left">2022</td><td style="text-align: left"><strong>Reinforcement Learning from Human Feedback (RLHF)</strong>; optimized for conversational chat and instruction-following.</td><td style="text-align: left">Broke into mainstream consciousness; made LLMs highly usable and safety-aligned for general chat applications.</td></tr><tr><td style="text-align: left"><strong>GPT-4</strong></td><td style="text-align: left">2023</td><td style="text-align: left">Multimodality (handling text and images); significant leaps in reasoning, complexity, and instruction adherence.</td><td style="text-align: left">Established a new benchmark for “emergent intelligence” and advanced reasoning capabilities.</td></tr><tr><td style="text-align: left"><strong>GPT-4o</strong></td><td style="text-align: left">2024</td><td style="text-align: left">“Omni-model” — native multimodality with faster speed and reduced latency, especially for audio and vision processing.</td><td style="text-align: left">Focus on real-time interaction and better integration across different modalities.</td></tr><tr><td style="text-align: left"><strong>Future (e.g., GPT-5, GPT-4.1)</strong></td><td style="text-align: left">TBD</td><td style="text-align: left">Expected to push boundaries in complex reasoning, reliability, context window size, and potentially new modalities.</td><td style="text-align: left">Continuously seeking better performance and increased reliability/safety.</td></tr></tbody></table><hr/><h2 id="-emergent-intelligence-and-the-worlds-reaction">🌍 Emergent Intelligence and the World’s Reaction</h2><p>The release of models like ChatGPT in 2022 sparked a fundamental shift in how the world viewed AI.</p><h3 id="the-worlds-reaction-timeline">The World’s Reaction Timeline</h3><ol><li><strong>First, Shock:</strong> The models surprised even experienced AI practitioners. The ability of ChatGPT to generate human-quality, coherent, and functional text on diverse topics instantly demonstrated a leap in capability.</li><li><strong>Then, Healthy Skepticism:</strong> This phase involved classifying LLMs as simply “predictive text on steroids,” or the “<strong>stochastic parrot</strong>” critique. Critics argued that models merely parrot patterns from their vast training data without true understanding. This led to a focus on the LLM’s limitations, such as <strong>hallucination</strong> and <strong>bias</strong>.</li><li><strong>Then, Emergent Intelligence:</strong> This is the current consensus. <strong>Emergent capabilities</strong> are skills or performance improvements that are <em>not</em> programmed in but <em>appear</em> as a result of model <strong>scale</strong> (increasing parameters and data). Examples include: <ul><li><strong>Chain-of-Thought (CoT) Reasoning:</strong> The ability to break down complex problems into intermediate steps, which significantly improves accuracy on logical and arithmetic tasks.</li><li><strong>In-Context Learning (ICL):</strong> The ability to learn a task from a few examples provided in the prompt, without weight updates (fine-tuning).</li></ul></li></ol><h3 id="future-directions-agentic-ai">Future Directions: Agentic AI</h3><p>The push continues toward <strong>Agentic AI</strong>—systems that can perceive their environment, execute multi-step plans, and interact with external tools (like code interpreters or search APIs) to achieve complex goals, moving beyond simple single-turn text generation.</p><hr/><h2 id="-key-takeaways">✅ Key Takeaways</h2><ul><li>The <strong>Transformer architecture</strong>, with its <strong>Self-Attention</strong> mechanism, is the fundamental enabler of modern LLMs due to its ability to parallelize training and scale efficiently.</li><li>The evolution from <strong>GPT-1</strong> to <strong>GPT-4o</strong> demonstrates that <em>scale</em> combined with <strong>RLHF</strong> (for alignment) leads to <strong>emergent intelligence</strong>.</li><li>The LLM engineering field is now focused on harnessing these <strong>emergent capabilities</strong> through advanced techniques like <strong>Chain-of-Thought</strong> prompting and developing <strong>Agentic AI</strong> systems.</li></ul><p>Would you like to refine a specific section of these notes, such as adding examples for prompt engineering techniques, or generate a separate document on LLM evaluation metrics?</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div></div></main></div></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><script src="/geekmonks/assets/js/mermaid-diagram-render.js?v=0.1.0"></script><script src="/geekmonks/assets/js/submenu-togle.js?v=0.1.0"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Head-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- keyords tags is deprecated by modern search engines. -->
+    <meta name="keywords" content="geekmonks, geek, tech, geekmonks tech, free tutorial, free online tutorial">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Geekmonks Tech">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- <link rel="apple-touch-icon" href="/geekmonks/assets/images/apple-touch-icon.png"> -->
+    <link rel="icon" type="image/png" href="/geekmonks/assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/geekmonks/assets/favicon/favicon.svg" />
+
+    <link rel="shortcut icon" href="/geekmonks/assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/geekmonks/assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/geekmonks/assets/favicon/site.webmanifest" />
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/geekmonks/feed.xml" title="Geekmonks Tech" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Foundations and Evolution | Geekmonks Tech</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="Foundations and Evolution" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, transformers, transformer architecture, neural networks, LSTM, Generative models, Aentic AI etc. for beginners and professionals." />
+<meta property="og:description" content="Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, transformers, transformer architecture, neural networks, LSTM, Generative models, Aentic AI etc. for beginners and professionals." />
+<link rel="canonical" href="http://localhost:4000/geekmonks/ai-ml/llm-engineering/foundaion-and-evolution.html" />
+<meta property="og:url" content="http://localhost:4000/geekmonks/ai-ml/llm-engineering/foundaion-and-evolution.html" />
+<meta property="og:site_name" content="Geekmonks Tech" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-09-16T18:00:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Foundations and Evolution" />
+<meta name="twitter:site" content="@srvivek_" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-09-16T18:00:00+05:30","datePublished":"2025-09-16T18:00:00+05:30","description":"Geekmonks Tech - AI Tutorial, ML Tutorial, Free AI ML tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AI, ML, Introduction to LLM Engineering, llm architecture, llm capabilities, transformers, transformer architecture, neural networks, LSTM, Generative models, Aentic AI etc. for beginners and professionals.","headline":"Foundations and Evolution","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/geekmonks/ai-ml/llm-engineering/foundaion-and-evolution.html"},"url":"http://localhost:4000/geekmonks/ai-ml/llm-engineering/foundaion-and-evolution.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-48XEHMVSEC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-48XEHMVSEC');
+</script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/geekmonks/assets/css/styles.css?v=0.1.0">
+</head>
+
+<body class="container-fluid p-0 m-0">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light text-white content-shadow">
+  <div class="container d-flex justify-content-between">
+    <a href="/geekmonks/" class="navbar-brand d-flex">
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/laptop.svg" height="40"
+        width="34" alt="banner-1 laptop icon"/>
+      <h1 class="fs-3 px-2 fw-bold">Geekmonks</h1>
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/tux.svg" height="40"
+        width="34" alt="banner-2 penguine icon"/>
+    </a>
+    <!-- Toggle Button to expand and collapse the nav links -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBanner"
+      aria-controls="navbarNavBanner" aria-expanded="false" aria-label="Toggle Navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbarNavBanner" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/" class="nav-link fw-bold active"
+            >Home</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/about" class="nav-link fw-bold active"
+            >About</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://github.com/SRVivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">Github</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://www.linkedin.com/in/srvivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+        <nav class="navbar navbar-expand-xl navbar-custom p-0">
+  <div class="container-fluid">
+
+    <!-- Toggler for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible nav items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        
+          
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/ai-ml/llm-engineering/"
+                  >AI-ML</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/cloud/aws/"
+                  >AWS</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/spring/spring-boot/"
+                  >Spring Boot</a>
+              </li>
+            
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+            <!-- Left Sidebar -->
+            <nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column course-topics-list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a class="nav-link course-link active"
+                            href="/geekmonks/ai-ml/llm-engineering" data-course="ai-ml/llm-engineering">
+                            AI/ML
+                        </a>
+                        <!-- Debug - Submenu links are broken -->
+                        
+                        <ul class="nav flex-column ms-2 subtopics" id="topics-ai-ml-llm-engineering">
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="introduction-to-llms.html"
+                                    data-topic="introduction-to-llms.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    LLM Fundamentals
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="ollama-local-setup.html"
+                                    data-topic="ollama-local-setup.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Lab - Ollama Local LLMs
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="b1-t1-hello-world.html"
+                                    data-topic="b1-t1-hello-world.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Lab - Python App Integration
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="ollama-ai-assistant.html"
+                                    data-topic="ollama-ai-assistant.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Lab - Local AI Assistant
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="frontier-models-capabilities-operational-risks.html"
+                                    data-topic="frontier-models-capabilities-operational-risks.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Architecture & capabilities
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small active"
+                                    href="foundaion-and-evolution.html"
+                                    data-topic="foundaion-and-evolution.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Foundation and Evaluation
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="advance-concepts-toknization-and-scaling.html"
+                                    data-topic="advance-concepts-toknization-and-scaling.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Tokens, Scaling
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="scaling-reasoning-inference.html"
+                                    data-topic="scaling-reasoning-inference.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Reasoning, Interference
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="payload-tokenization.html"
+                                    data-topic="payload-tokenization.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Payload Tokenization
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="advance-conectps-models-deployments.html"
+                                    data-topic="advance-conectps-models-deployments.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced Concepts & Deployment
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="advance-prompt-caching.html"
+                                    data-topic="advance-prompt-caching.html"
+                                    data-course-path="/ai-ml/llm-engineering">
+                                    Advanced - Prompt Caching
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        
+                        
+                        
+                        
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Right Content Panel -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Mobile: toggle sidebar button -->
+                <button id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-md-none mb-2"
+                    aria-label="Toggle topics" aria-controls="course-sidebar">
+                    ☰ Topics
+                </button>
+
+                <!-- Topic Contenet -->
+                <div id="topic-content">
+                    <div id="pageTitle">
+                        <h1>Foundations and Evolution</h1>
+                        
+                        
+                            <p style="font-style: italic;">
+                                Updated on: 16 Sep 2025
+
+                                
+                                
+                                - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a>
+                                
+                            </p>
+                        
+
+                        <hr class="stylish-hr" />
+                    </div>
+
+                    <h2 id="-table-of-contents">🧭 Table of Contents</h2>
+
+<ul>
+  <li><a href="#-table-of-contents">🧭 Table of Contents</a></li>
+  <li><a href="#-core-concepts">💡 Core Concepts</a>
+    <ul>
+      <li><a href="#1-transformers">1. Transformers</a></li>
+      <li><a href="#2-neural-networks-the-foundation">2. Neural Networks: The Foundation</a></li>
+    </ul>
+  </li>
+  <li><a href="#-from-lstm-to-transformers-attention-is-all-you-need">📜 From LSTM to Transformers: Attention is All You Need</a>
+    <ul>
+      <li><a href="#summarizing-the-attention-is-all-you-need-seminal-paper">Summarizing the “Attention Is All You Need” Seminal paper</a></li>
+      <li><a href="#the-transformer-architecture">The Transformer Architecture</a></li>
+    </ul>
+  </li>
+  <li><a href="#-the-evolution-of-generative-models-gpt-series">🚀 The Evolution of Generative Models (GPT Series)</a>
+    <ul>
+      <li><a href="#drawbacks-and-capabilities-of-early-models">Drawbacks and Capabilities of Early Models</a></li>
+      <li><a href="#key-milestones-in-the-gpt-series">Key Milestones in the GPT Series</a></li>
+    </ul>
+  </li>
+  <li><a href="#-emergent-intelligence-and-the-worlds-reaction">🌍 Emergent Intelligence and the World’s Reaction</a>
+    <ul>
+      <li><a href="#the-worlds-reaction-timeline">The World’s Reaction Timeline</a></li>
+      <li><a href="#future-directions-agentic-ai">Future Directions: Agentic AI</a></li>
+    </ul>
+  </li>
+  <li><a href="#-key-takeaways">✅ Key Takeaways</a></li>
+</ul>
+
+<hr />
+
+<h2 id="-core-concepts">💡 Core Concepts</h2>
+
+<h3 id="1-transformers">1. Transformers</h3>
+
+<p>The <strong>Transformer</strong> architecture is arguably the most significant innovation enabling the current wave of highly capable Large Language Models (LLMs), including the GPT and BERT families.</p>
+
+<ul>
+  <li><strong>Optimization for Scale:</strong> The Transformer is an ingenious optimization. It provides a <strong>highly clever and efficient approach</strong> that allows researchers and engineers to scale models, train with significantly more data, and manage billions of parameters in a computationally feasible way.</li>
+  <li><strong>The Scaling Effect:</strong> Without the Transformer’s design, reaching models like <strong>GPT-4</strong> or <strong>Claude 4.5 Sonnet</strong> would have been much slower, potentially prohibitively expensive, or even impossible within the current timeline. It dramatically reduced the <em>cost</em> and <em>time</em> required for large-scale training.</li>
+  <li><strong>Alternatives:</strong> While the Transformer dominates, research continues into alternative architectures, such as <strong>State Space Models (SSMs)</strong> and <strong>hybrid architectures</strong>. As of now, the Transformer remains the gold standard, having not been definitively surpassed in general-purpose LLM performance.</li>
+</ul>
+
+<h3 id="2-neural-networks-the-foundation">2. Neural Networks: The Foundation</h3>
+
+<p>A <strong>Neural Network</strong> is the underlying computational structure for models like the Transformer.</p>
+
+<ul>
+  <li><strong>Structure:</strong> It consists of a series of interconnected computational layers, often described as being analogous to biological neurons.</li>
+  <li><strong>Function:</strong> Each layer processes the input, applying a series of transformations and <strong>fine-tuning the information</strong> to extract increasingly relevant features. The goal is to progressively refine the representation of the input until the network can produce the desired output, whether it’s a classification, a prediction, or a generated sequence of text.</li>
+</ul>
+
+<hr />
+
+<h2 id="-from-lstm-to-transformers-attention-is-all-you-need">📜 From LSTM to Transformers: Attention is All You Need</h2>
+
+<h3 id="summarizing-the-attention-is-all-you-need-seminal-paper">Summarizing the “Attention Is All You Need” Seminal paper</h3>
+
+<p>In 2017, a team of Google scientists published the seminal paper, <strong><em>“Attention Is All You Need,”</em></strong> which introduced the <strong>Transformer</strong> architecture.</p>
+
+<blockquote>
+  <p>The core innovation was the complete removal of recurrent layers (like <strong>LSTMs</strong> and <strong>GRUs</strong>) in favor of a purely attention-based mechanism. This parallelized the sequence processing, which had been a bottleneck for training very large models.</p>
+</blockquote>
+
+<p><strong>Key Concepts of the Paper:</strong></p>
+
+<ul>
+  <li><strong>Self-Attention Mechanism:</strong> This is the heart of the Transformer. It allows the model to weigh the importance of different words in the input sequence relative to a given word, regardless of their distance. For example, in the sentence, “The man saw the fire and ran away because <strong>it</strong> was hot,” the attention mechanism helps the model correctly link “<strong>it</strong>” to “<strong>fire</strong>.”</li>
+  <li><strong>Parallelization:</strong> Unlike Recurrent Neural Networks (RNNs) that process tokens sequentially (word-by-word), the Transformer processes the entire input sequence <strong>in parallel</strong>. This is the key enabler for massive-scale training on modern GPUs.</li>
+  <li><strong>Positional Encoding:</strong> Since the model lost the inherent sequential order of RNNs, the authors introduced <strong>Positional Encoding</strong> to inject information about the relative or absolute position of the tokens in the sequence.</li>
+</ul>
+
+<h3 id="the-transformer-architecture">The Transformer Architecture</h3>
+
+<p>The architecture primarily consists of stacked <strong>Encoder</strong> and <strong>Decoder</strong> blocks (though LLMs like GPT use a <strong>Decoder-only</strong> architecture).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Component</th>
+      <th style="text-align: left">Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Multi-Head Attention</strong></td>
+      <td style="text-align: left">Processes input by applying several parallel self-attention mechanisms, allowing the model to focus on different aspects of the sequence simultaneously.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Feed-Forward Networks</strong></td>
+      <td style="text-align: left">Applies a simple, point-wise fully connected layer to the output of the attention sub-layer to introduce non-linearity.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Residual Connections</strong></td>
+      <td style="text-align: left">A structure that allows information to bypass certain layers, helping to prevent the vanishing gradient problem in deep networks.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Layer Normalization</strong></td>
+      <td style="text-align: left">A technique used to stabilize and speed up the training of deep neural networks.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="-the-evolution-of-generative-models-gpt-series">🚀 The Evolution of Generative Models (GPT Series)</h2>
+
+<p>The success of the Transformer led to rapid innovation, exemplified by the evolution of the Generative Pre-trained Transformer (GPT) series from OpenAI.</p>
+
+<h3 id="drawbacks-and-capabilities-of-early-models">Drawbacks and Capabilities of Early Models</h3>
+
+<p>When the Transformer architecture was initially invented by Google in 2017, it quickly led to both <strong>Encoder-only</strong> models (like <strong>BERT</strong>, optimized for understanding/encoding text) and <strong>Decoder-only</strong> models (like <strong>GPT</strong>, optimized for generating text).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Early Models (e.g., GPT-1/2)</th>
+      <th style="text-align: left">Capabilities</th>
+      <th style="text-align: left">Drawbacks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>GPT-1 (2018)</strong></td>
+      <td style="text-align: left">Demonstrated strong performance on simple language understanding tasks; proved the viability of <em>pre-training</em> followed by <em>fine-tuning</em>.</td>
+      <td style="text-align: left">Small context window; limited coherence over long text; required fine-tuning for most tasks.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>GPT-2 (2019)</strong></td>
+      <td style="text-align: left">Showed powerful zero-shot learning; could generate surprisingly coherent long text; the start of “generative AI.”</td>
+      <td style="text-align: left">Still relatively small by today’s standards (up to 1.5B parameters); frequent factual errors (hallucination).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="key-milestones-in-the-gpt-series">Key Milestones in the GPT Series</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Model</th>
+      <th style="text-align: left">Release Year</th>
+      <th style="text-align: left">Key Innovation</th>
+      <th style="text-align: left">Impact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>GPT-3</strong></td>
+      <td style="text-align: left">2020</td>
+      <td style="text-align: left">Massive scaling (175B parameters); pioneered <strong>In-Context Learning</strong> (e.g., <strong>Few-Shot Prompting</strong>).</td>
+      <td style="text-align: left">Demonstrated that scale leads to significantly better performance across many tasks without explicit fine-tuning.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>GPT-3.5 / ChatGPT</strong></td>
+      <td style="text-align: left">2022</td>
+      <td style="text-align: left"><strong>Reinforcement Learning from Human Feedback (RLHF)</strong>; optimized for conversational chat and instruction-following.</td>
+      <td style="text-align: left">Broke into mainstream consciousness; made LLMs highly usable and safety-aligned for general chat applications.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>GPT-4</strong></td>
+      <td style="text-align: left">2023</td>
+      <td style="text-align: left">Multimodality (handling text and images); significant leaps in reasoning, complexity, and instruction adherence.</td>
+      <td style="text-align: left">Established a new benchmark for “emergent intelligence” and advanced reasoning capabilities.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>GPT-4o</strong></td>
+      <td style="text-align: left">2024</td>
+      <td style="text-align: left">“Omni-model” — native multimodality with faster speed and reduced latency, especially for audio and vision processing.</td>
+      <td style="text-align: left">Focus on real-time interaction and better integration across different modalities.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Future (e.g., GPT-5, GPT-4.1)</strong></td>
+      <td style="text-align: left">TBD</td>
+      <td style="text-align: left">Expected to push boundaries in complex reasoning, reliability, context window size, and potentially new modalities.</td>
+      <td style="text-align: left">Continuously seeking better performance and increased reliability/safety.</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="-emergent-intelligence-and-the-worlds-reaction">🌍 Emergent Intelligence and the World’s Reaction</h2>
+
+<p>The release of models like ChatGPT in 2022 sparked a fundamental shift in how the world viewed AI.</p>
+
+<h3 id="the-worlds-reaction-timeline">The World’s Reaction Timeline</h3>
+
+<ol>
+  <li><strong>First, Shock:</strong> The models surprised even experienced AI practitioners. The ability of ChatGPT to generate human-quality, coherent, and functional text on diverse topics instantly demonstrated a leap in capability.</li>
+  <li><strong>Then, Healthy Skepticism:</strong> This phase involved classifying LLMs as simply “predictive text on steroids,” or the “<strong>stochastic parrot</strong>” critique. Critics argued that models merely parrot patterns from their vast training data without true understanding. This led to a focus on the LLM’s limitations, such as <strong>hallucination</strong> and <strong>bias</strong>.</li>
+  <li><strong>Then, Emergent Intelligence:</strong> This is the current consensus. <strong>Emergent capabilities</strong> are skills or performance improvements that are <em>not</em> programmed in but <em>appear</em> as a result of model <strong>scale</strong> (increasing parameters and data). Examples include:
+    <ul>
+      <li><strong>Chain-of-Thought (CoT) Reasoning:</strong> The ability to break down complex problems into intermediate steps, which significantly improves accuracy on logical and arithmetic tasks.</li>
+      <li><strong>In-Context Learning (ICL):</strong> The ability to learn a task from a few examples provided in the prompt, without weight updates (fine-tuning).</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="future-directions-agentic-ai">Future Directions: Agentic AI</h3>
+
+<p>The push continues toward <strong>Agentic AI</strong>—systems that can perceive their environment, execute multi-step plans, and interact with external tools (like code interpreters or search APIs) to achieve complex goals, moving beyond simple single-turn text generation.</p>
+
+<hr />
+
+<h2 id="-key-takeaways">✅ Key Takeaways</h2>
+
+<ul>
+  <li>The <strong>Transformer architecture</strong>, with its <strong>Self-Attention</strong> mechanism, is the fundamental enabler of modern LLMs due to its ability to parallelize training and scale efficiently.</li>
+  <li>The evolution from <strong>GPT-1</strong> to <strong>GPT-4o</strong> demonstrates that <em>scale</em> combined with <strong>RLHF</strong> (for alignment) leads to <strong>emergent intelligence</strong>.</li>
+  <li>The LLM engineering field is now focused on harnessing these <strong>emergent capabilities</strong> through advanced techniques like <strong>Chain-of-Thought</strong> prompting and developing <strong>Agentic AI</strong> systems.</li>
+</ul>
+
+<p>Would you like to refine a specific section of these notes, such as adding examples for prompt engineering techniques, or generate a separate document on LLM evaluation metrics?</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+ <!-- Injects index.md content here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div>
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-4 mx-5 my-5 border-top">
+
+        <div class="col-md-4 d-flex align-items-center"> <a href="/geekmonks/"
+                class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Geekmonks">
+                <svg class="bi me-2" width="40" height="32" aria-hidden="true" viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="gradient" gradientTransform="rotate(145 0.5 0.5)">
+                            <stop offset="0%" stop-color="#f7e625"></stop>
+                            <stop offset="100%" stop-color="#e6a62c"></stop>
+                        </linearGradient>
+                    </defs>
+
+                    <rect width="200" height="200" fill="url('#gradient')"></rect>
+
+                    <g fill="#303e37"
+                        transform="matrix(12.312625250501002,0,0,12.312625250501002,16.825404661093543,187.54701945968048)"
+                        stroke="#3b8349" stroke-width="0.2">
+                        <path
+                            d="M12.71-7.60L12.71-1.76Q11.92-0.88 10.40-0.34Q8.88 0.20 7.06 0.20L7.06 0.20Q4.27 0.20 2.60-1.51Q0.93-3.22 0.81-6.27L0.81-6.27L0.80-7.50Q0.80-9.60 1.54-11.17Q2.29-12.73 3.67-13.58Q5.05-14.42 6.87-14.42L6.87-14.42Q9.52-14.42 10.99-13.21Q12.46-11.99 12.71-9.58L12.71-9.58L9.40-9.58Q9.23-10.77 8.64-11.28Q8.06-11.79 6.98-11.79L6.98-11.79Q5.69-11.79 4.99-10.69Q4.29-9.60 4.28-7.57L4.28-7.57L4.28-6.71Q4.28-4.58 5.00-3.51Q5.73-2.44 7.29-2.44L7.29-2.44Q8.63-2.44 9.29-3.04L9.29-3.04L9.29-5.24L6.90-5.24L6.90-7.60L12.71-7.60Z">
+                        </path>
+                    </g>
+                </svg>
+            </a>
+            <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span>
+        </div>
+
+        <div class="col mb-3"></div>
+        <div class="col mb-3">
+            <h5>Company</h5>
+            <ul class="nav col-md-4">
+                <li class="nav-item"><a href="/geekmonks/"
+                        class="nav-link px-2 text-body-secondary">Home</a></li>
+                <li class="nav-item"><a href="/geekmonks/about"
+                        class="nav-link px-2 text-body-secondary">About</a></li>
+                <li class="nav-item"><a href="https://github.com/SRVivek1/" target="_blank"
+                        class="nav-link px-2 text-body-secondary">Github</a></li>
+                <li class="nav-item"><a href="https://www.linkedin.com/in/srvivek1/" target="_blank"
+                        class="nav-link px-2 text-body-secondary">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="col mb-3">
+            <h5>Tutorials</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="/geekmonks/spring/spring-boot"
+                        class="nav-link p-0 text-body-secondary">Spring Boot</a></li>
+                <li class="nav-item mb-2"><a href="/geekmonks/ai-ml/llm-engineering"
+                        class="nav-link p-0 text-body-secondary">AI / ML</a></li>
+                <li class="nav-item mb-2"><a href="/geekmonks/cloud/aws"
+                        class="nav-link p-0 text-body-secondary">AWS</a></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+    
+    <!-- External scripts -->
+    <!-- bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
+<!-- Mermaid JS: render diagrams client-side. We convert fenced code blocks
+		 with class `language-mermaid` into <div class="mermaid"> so existing
+		 markdown files don't need editing. -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<!-- Include internal JavaScript -->
+ <script src="/geekmonks/assets/js/mermaid-diagram-render.js?v=0.1.0"></script>
+
+
+ <!-- Submenu toggle nav on small screen-->
+<script src="/geekmonks/assets/js/submenu-togle.js?v=0.1.0"></script>
+
+
+</body>
+
+</html>

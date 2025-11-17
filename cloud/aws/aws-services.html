@@ -1,5 +1,368 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="keywords" content="geekmonks, geek, tech, geekmonks tech, free tutorial, free online tutorial"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Geekmonks Tech"><meta name="mobile-web-app-capable" content="yes"><link rel="icon" type="image/png" href="/geekmonks/assets/favicon/favicon-96x96.png" sizes="96x96"/><link rel="icon" type="image/svg+xml" href="/geekmonks/assets/favicon/favicon.svg"/><link rel="shortcut icon" href="/geekmonks/assets/favicon/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/geekmonks/assets/favicon/apple-touch-icon.png"/><link rel="manifest" href="/geekmonks/assets/favicon/site.webmanifest"/><link type="application/atom+xml" rel="alternate" href="https://srvivek1.github.io/geekmonks/feed.xml" title="Geekmonks Tech"/><title>AWS Services Overview | Geekmonks Tech</title><meta name="generator" content="Jekyll v3.10.0"/><meta property="og:title" content="AWS Services Overview"/><meta property="og:locale" content="en_US"/><meta name="description" content="Geekmonks Tech - AWS Tutorial, Free AWS Solution architect tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AWS cloud, AWS infrastructure, aws regions, avaialiility zones AZs, iam, users, groups, ec2, ec2 instance, security groups, ports, classic ports, ec2 instance purchasing options, ec2 placement groups etc. for beginners and professionals."/><meta property="og:description" content="Geekmonks Tech - AWS Tutorial, Free AWS Solution architect tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AWS cloud, AWS infrastructure, aws regions, avaialiility zones AZs, iam, users, groups, ec2, ec2 instance, security groups, ports, classic ports, ec2 instance purchasing options, ec2 placement groups etc. for beginners and professionals."/><link rel="canonical" href="https://srvivek1.github.io/geekmonks/cloud/aws/aws-services.html"/><meta property="og:url" content="https://srvivek1.github.io/geekmonks/cloud/aws/aws-services.html"/><meta property="og:site_name" content="Geekmonks Tech"/><meta property="og:type" content="article"/><meta property="article:published_time" content="2025-06-28T10:00:00+05:30"/><meta name="twitter:card" content="summary"/><meta property="twitter:title" content="AWS Services Overview"/><meta name="twitter:site" content="@srvivek_"/><script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-06-28T10:00:00+05:30","datePublished":"2025-06-28T10:00:00+05:30","description":"Geekmonks Tech - AWS Tutorial, Free AWS Solution architect tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AWS cloud, AWS infrastructure, aws regions, avaialiility zones AZs, iam, users, groups, ec2, ec2 instance, security groups, ports, classic ports, ec2 instance purchasing options, ec2 placement groups etc. for beginners and professionals.","headline":"AWS Services Overview","mainEntityOfPage":{"@type":"WebPage","@id":"https://srvivek1.github.io/geekmonks/cloud/aws/aws-services.html"},"url":"https://srvivek1.github.io/geekmonks/cloud/aws/aws-services.html"}</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-48XEHMVSEC"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date);gtag("config","G-48XEHMVSEC");</script><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"><link rel="stylesheet" href="/geekmonks/assets/css/styles.css?v=0.1.0"></head><body class="container-fluid p-0 m-0"><header><nav class="navbar navbar-expand-md navbar-light bg-light text-white content-shadow"><div class="container d-flex justify-content-between"><a href="/geekmonks/" class="navbar-brand d-flex"><img class="d-inline-block align-top" src="/geekmonks/assets/icons/laptop.svg" height="40" width="34" alt="banner-1 laptop icon"/><h1 class="fs-3 px-2 fw-bold">Geekmonks</h1><img class="d-inline-block align-top" src="/geekmonks/assets/icons/tux.svg" height="40" width="34" alt="banner-2 penguine icon"/></a><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBanner" aria-controls="navbarNavBanner" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggler-icon"></span></button><div id="navbarNavBanner" class="collapse navbar-collapse"><ul class="navbar-nav ms-auto"><li class="nav-item active"><a href="/geekmonks/" class="nav-link fw-bold active">Home</a></li><li class="nav-item active"><a href="/geekmonks/about" class="nav-link fw-bold active">About</a></li><li class="nav-item active"><a href="https://github.com/SRVivek1/" class="nav-link fw-bold active" target="_blank" rel="noopener noreferrer">Github</a></li><li class="nav-item active"><a href="https://www.linkedin.com/in/srvivek1/" class="nav-link fw-bold active" target="_blank" rel="noopener noreferrer">LinkedIn</a></li></ul></div></div></nav><nav class="navbar navbar-expand-xl navbar-custom p-0"><div class="container-fluid"><button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarNav"><ul class="navbar-nav mx-auto"><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/ai-ml/llm-engineering/">AI-ML</a></li><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/cloud/aws/">AWS</a></li><li class="nav-item"><a class="nav-link fw-bold text-white" href="/geekmonks/spring/spring-boot/">Spring Boot</a></li></ul></div></div></nav></header><div class="container-fluid"><div class="row min-vh-100"><nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse"><div class="position-sticky pt-3"><ul class="nav flex-column course-topics-list"><a class="nav-link course-link active" href="/geekmonks/cloud/aws" data-course="cloud/aws"> AWS </a><ul class="nav flex-column ms-2 subtopics" id="topics-cloud-aws"><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="aws-infrastructure.html" data-topic="aws-infrastructure.html" data-course-path="/cloud/aws"> Global Infrastructure </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="aws-regions.html" data-topic="aws-regions.html" data-course-path="/cloud/aws"> Regions & AZs </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small active" href="aws-services.html" data-topic="aws-services.html" data-course-path="/cloud/aws"> Services Overview </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="iam-users-and-groups.html" data-topic="iam-users-and-groups.html" data-course-path="/cloud/aws"> User, Groups and Policies </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="ec2-instance-types.html" data-topic="ec2-instance-types.html" data-course-path="/cloud/aws"> EC2 Instances </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="security-groups-and-classic-ports.html" data-topic="security-groups-and-classic-ports.html" data-course-path="/cloud/aws"> Security Groups & Ports </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="ec2-instances-purchasing-options.html" data-topic="ec2-instances-purchasing-options.html" data-course-path="/cloud/aws"> EC2 Purchasing Options </a></li><li class="nav-item" style="text-align: left"><a class="nav-link topic-link small " href="ec2-placement-groups.html" data-topic="ec2-placement-groups.html" data-course-path="/cloud/aws"> EC2 Placement Groups </a></li></ul></ul></div></nav><main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><button id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-md-none mb-2" aria-label="Toggle topics" aria-controls="course-sidebar"> ☰ Topics </button><div id="topic-content"><div id="pageTitle"><h1>AWS Services Overview</h1><p style="font-style: italic;"> Updated on: 28 Jun 2025 - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a></p><hr class="stylish-hr"/></div><h2 id="concept-overview">Concept Overview</h2><ul><li>Amazon Web Services (AWS) is a comprehensive, on-demand cloud computing platform that offers a wide range of services.</li><li>From an architect’s perspective, AWS provides the fundamental building blocks to design, deploy, and manage scalable, reliable, and secure applications. <ul><li>Instead of owning and maintaining physical data centers and servers, architects leverage these services to build complex systems, focusing on business logic and innovation rather than infrastructure management.</li></ul></li><li><strong>Regional Services:</strong> These services are deployed within a specific AWS Region (e.g., <code class="language-plaintext highlighter-rouge">us-east-1</code>, <code class="language-plaintext highlighter-rouge">eu-west-2</code>). Resources created within a regional service, such as an Amazon EC2 instance or an Amazon S3 bucket, are tied to that region and do not automatically replicate to other regions. This is the default and most common type of AWS service.</li><li><strong>Global Services:</strong> These services are not tied to a specific AWS Region and are accessible from a global endpoint. They are designed to provide a consistent, unified experience across the entire AWS infrastructure, regardless of the user’s or resource’s location.</li></ul><hr/><h2 id="detailed-explanation">Detailed Explanation</h2><ul><li>AWS services can be broadly categorized based on their function. This categorization helps in understanding the immense scope of the platform and selecting the right services for a given task.</li><li>The main categories reflect the core components of any IT infrastructure: <strong><em>compute, storage, databases, networking, and security, with additional categories for modern application development and specialized workloads</em></strong>.</li></ul><p><br/></p><table><thead><tr><th style="text-align: left">Category</th><th style="text-align: left">Description</th><th style="text-align: left">Key Services</th></tr></thead><tbody><tr><td style="text-align: left"><strong>Compute</strong></td><td style="text-align: left">Provides the processing power needed to run applications and code. This is where your application’s logic executes.</td><td style="text-align: left"><strong>Amazon EC2</strong> (Elastic Compute Cloud), <strong>AWS Lambda</strong>, <strong>AWS Elastic Beanstalk</strong>, <strong>Amazon ECS/EKS</strong></td></tr><tr><td style="text-align: left"><strong>Storage</strong></td><td style="text-align: left">Offers different types of storage solutions for various data needs, including objects, files, and blocks.</td><td style="text-align: left"><strong>Amazon S3</strong> (Simple Storage Service), <strong>Amazon EBS</strong> (Elastic Block Store), <strong>Amazon EFS</strong> (Elastic File System), <strong>Amazon S3 Glacier</strong></td></tr><tr><td style="text-align: left"><strong>Databases</strong></td><td style="text-align: left">Provides managed database services, both relational and non-relational, to store and manage application data.</td><td style="text-align: left"><strong>Amazon RDS</strong> (Relational Database Service), <strong>Amazon DynamoDB</strong>, <strong>Amazon Aurora</strong>, <strong>Amazon Redshift</strong></td></tr><tr><td style="text-align: left"><strong>Networking &amp; Content Delivery</strong></td><td style="text-align: left">Manages network connectivity, traffic routing, and content distribution to users globally.</td><td style="text-align: left"><strong>Amazon VPC</strong> (Virtual Private Cloud), <strong>Amazon Route 53</strong>, <strong>Amazon CloudFront</strong>, <strong>Elastic Load Balancing (ELB)</strong></td></tr><tr><td style="text-align: left"><strong>Security, Identity, &amp; Compliance</strong></td><td style="text-align: left">Secures access to AWS resources and applications, ensuring data protection and compliance with regulations.</td><td style="text-align: left"><strong>AWS IAM</strong> (Identity and Access Management), <strong>AWS WAF</strong>, <strong>AWS Shield</strong>, <strong>AWS KMS</strong> (Key Management Service)</td></tr><tr><td style="text-align: left"><strong>Management &amp; Governance</strong></td><td style="text-align: left">Helps you monitor, manage, and govern your AWS environment, ensuring operational efficiency and cost control.</td><td style="text-align: left"><strong>Amazon CloudWatch</strong>, <strong>AWS CloudFormation</strong>, <strong>AWS Config</strong>, <strong>AWS Systems Manager</strong></td></tr><tr><td style="text-align: left"><strong>Application Integration</strong></td><td style="text-align: left">Facilitates communication between different components of a distributed application, promoting a decoupled architecture.</td><td style="text-align: left"><strong>Amazon SQS</strong> (Simple Queue Service), <strong>Amazon SNS</strong> (Simple Notification Service), <strong>AWS Step Functions</strong></td></tr><tr><td style="text-align: left"><strong>Developer Tools</strong></td><td style="text-align: left">Provides services for CI/CD (Continuous Integration/Continuous Delivery) pipelines to automate software development workflows.</td><td style="text-align: left"><strong>AWS CodeCommit</strong>, <strong>AWS CodePipeline</strong>, <strong>AWS CodeBuild</strong>, <strong>AWS CodeDeploy</strong></td></tr><tr><td style="text-align: left"><strong>Analytics &amp; AI/ML</strong></td><td style="text-align: left">Offers services for data processing, real-time analytics, and building and deploying machine learning models.</td><td style="text-align: left"><strong>Amazon SageMaker</strong>, <strong>Amazon Kinesis</strong>, <strong>Amazon Athena</strong>, <strong>Amazon QuickSight</strong></td></tr></tbody></table><hr/><h2 id="code-examples-javaspringmicroservices">Code Examples (Java/Spring/Microservices)</h2><p>Let’s imagine a microservice that processes orders. We’ll use a few services from different categories to illustrate.</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Spring Boot application using AWS SDK for S3 and SQS</span>
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HTML Head-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- keyords tags is deprecated by modern search engines. -->
+    <meta name="keywords" content="geekmonks, geek, tech, geekmonks tech, free tutorial, free online tutorial">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Geekmonks Tech">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- <link rel="apple-touch-icon" href="/geekmonks/assets/images/apple-touch-icon.png"> -->
+    <link rel="icon" type="image/png" href="/geekmonks/assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/geekmonks/assets/favicon/favicon.svg" />
+
+    <link rel="shortcut icon" href="/geekmonks/assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/geekmonks/assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/geekmonks/assets/favicon/site.webmanifest" />
+
+    <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/geekmonks/feed.xml" title="Geekmonks Tech" />
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>AWS Services Overview | Geekmonks Tech</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="AWS Services Overview" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Geekmonks Tech - AWS Tutorial, Free AWS Solution architect tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AWS cloud, AWS infrastructure, aws regions, avaialiility zones AZs, iam, users, groups, ec2, ec2 instance, security groups, ports, classic ports, ec2 instance purchasing options, ec2 placement groups etc. for beginners and professionals." />
+<meta property="og:description" content="Geekmonks Tech - AWS Tutorial, Free AWS Solution architect tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AWS cloud, AWS infrastructure, aws regions, avaialiility zones AZs, iam, users, groups, ec2, ec2 instance, security groups, ports, classic ports, ec2 instance purchasing options, ec2 placement groups etc. for beginners and professionals." />
+<link rel="canonical" href="http://localhost:4000/geekmonks/cloud/aws/aws-services.html" />
+<meta property="og:url" content="http://localhost:4000/geekmonks/cloud/aws/aws-services.html" />
+<meta property="og:site_name" content="Geekmonks Tech" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-06-28T10:00:00+05:30" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="AWS Services Overview" />
+<meta name="twitter:site" content="@srvivek_" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-06-28T10:00:00+05:30","datePublished":"2025-06-28T10:00:00+05:30","description":"Geekmonks Tech - AWS Tutorial, Free AWS Solution architect tutorial, Free Online Tutorials, geekmonks provides tutorials and interview questions for AWS cloud, AWS infrastructure, aws regions, avaialiility zones AZs, iam, users, groups, ec2, ec2 instance, security groups, ports, classic ports, ec2 instance purchasing options, ec2 placement groups etc. for beginners and professionals.","headline":"AWS Services Overview","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/geekmonks/cloud/aws/aws-services.html"},"url":"http://localhost:4000/geekmonks/cloud/aws/aws-services.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-48XEHMVSEC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-48XEHMVSEC');
+</script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/geekmonks/assets/css/styles.css?v=0.1.0">
+</head>
+
+<body class="container-fluid p-0 m-0">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light text-white content-shadow">
+  <div class="container d-flex justify-content-between">
+    <a href="/geekmonks/" class="navbar-brand d-flex">
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/laptop.svg" height="40"
+        width="34" alt="banner-1 laptop icon"/>
+      <h1 class="fs-3 px-2 fw-bold">Geekmonks</h1>
+      <img class="d-inline-block align-top" src="/geekmonks/assets/icons/tux.svg" height="40"
+        width="34" alt="banner-2 penguine icon"/>
+    </a>
+    <!-- Toggle Button to expand and collapse the nav links -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBanner"
+      aria-controls="navbarNavBanner" aria-expanded="false" aria-label="Toggle Navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbarNavBanner" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/" class="nav-link fw-bold active"
+            >Home</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="/geekmonks/about" class="nav-link fw-bold active"
+            >About</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://github.com/SRVivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">Github</a>
+        </li>
+        
+        <li class="nav-item active">
+          <a href="https://www.linkedin.com/in/srvivek1/" class="nav-link fw-bold active"
+            target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+        <nav class="navbar navbar-expand-xl navbar-custom p-0">
+  <div class="container-fluid">
+
+    <!-- Toggler for small screens -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible nav items -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        
+          
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/ai-ml/llm-engineering/"
+                  >AI-ML</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/cloud/aws/"
+                  >AWS</a>
+              </li>
+            
+          
+            
+              <!-- Simple nav item -->
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-white" href="/geekmonks/spring/spring-boot/"
+                  >Spring Boot</a>
+              </li>
+            
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+            <!-- Left Sidebar -->
+            <nav id="course-sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column course-topics-list">
+                        
+                        
+                        <a class="nav-link course-link active"
+                            href="/geekmonks/cloud/aws" data-course="cloud/aws">
+                            AWS
+                        </a>
+                        <!-- Debug - Submenu links are broken -->
+                        
+                        <ul class="nav flex-column ms-2 subtopics" id="topics-cloud-aws">
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="aws-infrastructure.html"
+                                    data-topic="aws-infrastructure.html"
+                                    data-course-path="/cloud/aws">
+                                    Global Infrastructure
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="aws-regions.html"
+                                    data-topic="aws-regions.html"
+                                    data-course-path="/cloud/aws">
+                                    Regions & AZs
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small active"
+                                    href="aws-services.html"
+                                    data-topic="aws-services.html"
+                                    data-course-path="/cloud/aws">
+                                    Services Overview
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="iam-users-and-groups.html"
+                                    data-topic="iam-users-and-groups.html"
+                                    data-course-path="/cloud/aws">
+                                    User, Groups and Policies
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="ec2-instance-types.html"
+                                    data-topic="ec2-instance-types.html"
+                                    data-course-path="/cloud/aws">
+                                    EC2 Instances
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="security-groups-and-classic-ports.html"
+                                    data-topic="security-groups-and-classic-ports.html"
+                                    data-course-path="/cloud/aws">
+                                    Security Groups & Ports
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="ec2-instances-purchasing-options.html"
+                                    data-topic="ec2-instances-purchasing-options.html"
+                                    data-course-path="/cloud/aws">
+                                    EC2 Purchasing Options
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item" style="text-align: left">
+                                <a class="nav-link topic-link small "
+                                    href="ec2-placement-groups.html"
+                                    data-topic="ec2-placement-groups.html"
+                                    data-course-path="/cloud/aws">
+                                    EC2 Placement Groups
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Right Content Panel -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Mobile: toggle sidebar button -->
+                <button id="sidebarToggle" class="btn btn-sm btn-outline-secondary d-md-none mb-2"
+                    aria-label="Toggle topics" aria-controls="course-sidebar">
+                    ☰ Topics
+                </button>
+
+                <!-- Topic Contenet -->
+                <div id="topic-content">
+                    <div id="pageTitle">
+                        <h1>AWS Services Overview</h1>
+                        
+                        
+                            <p style="font-style: italic;">
+                                Updated on: 28 Jun 2025
+
+                                
+                                
+                                - <a href="/geekmonks/authors/srvivek/">Vivek Singh</a>
+                                
+                            </p>
+                        
+
+                        <hr class="stylish-hr" />
+                    </div>
+
+                    <h2 id="concept-overview">Concept Overview</h2>
+
+<ul>
+  <li>Amazon Web Services (AWS) is a comprehensive, on-demand cloud computing platform that offers a wide range of services.</li>
+  <li>From an architect’s perspective, AWS provides the fundamental building blocks to design, deploy, and manage scalable, reliable, and secure applications.
+    <ul>
+      <li>Instead of owning and maintaining physical data centers and servers, architects leverage these services to build complex systems, focusing on business logic and innovation rather than infrastructure management.</li>
+    </ul>
+  </li>
+  <li><strong>Regional Services:</strong> These services are deployed within a specific AWS Region (e.g., <code class="language-plaintext highlighter-rouge">us-east-1</code>, <code class="language-plaintext highlighter-rouge">eu-west-2</code>). Resources created within a regional service, such as an Amazon EC2 instance or an Amazon S3 bucket, are tied to that region and do not automatically replicate to other regions. This is the default and most common type of AWS service.</li>
+  <li><strong>Global Services:</strong> These services are not tied to a specific AWS Region and are accessible from a global endpoint. They are designed to provide a consistent, unified experience across the entire AWS infrastructure, regardless of the user’s or resource’s location.</li>
+</ul>
+
+<hr />
+
+<h2 id="detailed-explanation">Detailed Explanation</h2>
+
+<ul>
+  <li>AWS services can be broadly categorized based on their function. This categorization helps in understanding the immense scope of the platform and selecting the right services for a given task.</li>
+  <li>The main categories reflect the core components of any IT infrastructure: <strong><em>compute, storage, databases, networking, and security, with additional categories for modern application development and specialized workloads</em></strong>.</li>
+</ul>
+
+<p><br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Category</th>
+      <th style="text-align: left">Description</th>
+      <th style="text-align: left">Key Services</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Compute</strong></td>
+      <td style="text-align: left">Provides the processing power needed to run applications and code. This is where your application’s logic executes.</td>
+      <td style="text-align: left"><strong>Amazon EC2</strong> (Elastic Compute Cloud), <strong>AWS Lambda</strong>, <strong>AWS Elastic Beanstalk</strong>, <strong>Amazon ECS/EKS</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Storage</strong></td>
+      <td style="text-align: left">Offers different types of storage solutions for various data needs, including objects, files, and blocks.</td>
+      <td style="text-align: left"><strong>Amazon S3</strong> (Simple Storage Service), <strong>Amazon EBS</strong> (Elastic Block Store), <strong>Amazon EFS</strong> (Elastic File System), <strong>Amazon S3 Glacier</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Databases</strong></td>
+      <td style="text-align: left">Provides managed database services, both relational and non-relational, to store and manage application data.</td>
+      <td style="text-align: left"><strong>Amazon RDS</strong> (Relational Database Service), <strong>Amazon DynamoDB</strong>, <strong>Amazon Aurora</strong>, <strong>Amazon Redshift</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Networking &amp; Content Delivery</strong></td>
+      <td style="text-align: left">Manages network connectivity, traffic routing, and content distribution to users globally.</td>
+      <td style="text-align: left"><strong>Amazon VPC</strong> (Virtual Private Cloud), <strong>Amazon Route 53</strong>, <strong>Amazon CloudFront</strong>, <strong>Elastic Load Balancing (ELB)</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Security, Identity, &amp; Compliance</strong></td>
+      <td style="text-align: left">Secures access to AWS resources and applications, ensuring data protection and compliance with regulations.</td>
+      <td style="text-align: left"><strong>AWS IAM</strong> (Identity and Access Management), <strong>AWS WAF</strong>, <strong>AWS Shield</strong>, <strong>AWS KMS</strong> (Key Management Service)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Management &amp; Governance</strong></td>
+      <td style="text-align: left">Helps you monitor, manage, and govern your AWS environment, ensuring operational efficiency and cost control.</td>
+      <td style="text-align: left"><strong>Amazon CloudWatch</strong>, <strong>AWS CloudFormation</strong>, <strong>AWS Config</strong>, <strong>AWS Systems Manager</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Application Integration</strong></td>
+      <td style="text-align: left">Facilitates communication between different components of a distributed application, promoting a decoupled architecture.</td>
+      <td style="text-align: left"><strong>Amazon SQS</strong> (Simple Queue Service), <strong>Amazon SNS</strong> (Simple Notification Service), <strong>AWS Step Functions</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Developer Tools</strong></td>
+      <td style="text-align: left">Provides services for CI/CD (Continuous Integration/Continuous Delivery) pipelines to automate software development workflows.</td>
+      <td style="text-align: left"><strong>AWS CodeCommit</strong>, <strong>AWS CodePipeline</strong>, <strong>AWS CodeBuild</strong>, <strong>AWS CodeDeploy</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Analytics &amp; AI/ML</strong></td>
+      <td style="text-align: left">Offers services for data processing, real-time analytics, and building and deploying machine learning models.</td>
+      <td style="text-align: left"><strong>Amazon SageMaker</strong>, <strong>Amazon Kinesis</strong>, <strong>Amazon Athena</strong>, <strong>Amazon QuickSight</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="code-examples-javaspringmicroservices">Code Examples (Java/Spring/Microservices)</h2>
+
+<p>Let’s imagine a microservice that processes orders. We’ll use a few services from different categories to illustrate.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Spring Boot application using AWS SDK for S3 and SQS</span>
 <span class="nd">@SpringBootApplication</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">OrderProcessorApplication</span> <span class="o">{</span>
 
@@ -40,7 +403,15 @@
         <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</code></pre></div></div><hr/><h2 id="single-region-architecture">Single Region architecture</h2><p>Here’s a simple diagram illustrating a basic web application architecture using different AWS service categories.</p><pre><code class="language-mermaid">graph TD
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="single-region-architecture">Single Region architecture</h2>
+
+<p>Here’s a simple diagram illustrating a basic web application architecture using different AWS service categories.</p>
+
+<pre><code class="language-mermaid">graph TD
     A[User] --&gt; B(Route 53);
     B --&gt; C(CloudFront CDN);
     C --&gt; D(Application Load Balancer);
@@ -62,7 +433,13 @@
     end
     F
     G
-</code></pre><p><br/></p><h2 id="multi-region-architecture">Multi Region architecture</h2><pre><code class="language-mermaid">graph TD
+</code></pre>
+
+<p><br /></p>
+
+<h2 id="multi-region-architecture">Multi Region architecture</h2>
+
+<pre><code class="language-mermaid">graph TD
     subgraph "Global Services"
         IAM[AWS IAM]
         Route53[Amazon Route 53]
@@ -102,4 +479,279 @@
 
     IAM --&gt; |Manages Access to All| EC2_US_1
     IAM --&gt; |Manages Access to All| S3_EU_2
-</code></pre><hr/><h2 id="real-world-applications">Real-World Applications</h2><ul><li><strong>E-commerce Platform:</strong><ul><li>An e-commerce site uses EC2 instances for the front-end, RDS for product data, S3 for product images, and SQS for decoupled order processing.</li></ul></li><li><strong>Media Streaming Service:</strong><ul><li>A service like Netflix uses S3 for video storage, CloudFront for global content delivery, and DynamoDB for real-time user data and personalization.</li></ul></li><li><strong>Big Data Analytics:</strong><ul><li>A financial firm uses Kinesis to ingest real-time stock data, S3 to store it in a data lake, and Amazon Redshift for complex analytics and reporting.</li></ul></li></ul><hr/><h2 id="advantages--drawbacks">Advantages &amp; Drawbacks</h2><p><strong>Advantages:</strong></p><ul><li><strong>Scalability &amp; Elasticity:</strong><ul><li>Services can scale up or down automatically based on demand, reducing the need for manual capacity planning.</li></ul></li><li><strong>Cost-Effectiveness:</strong><ul><li>The pay-as-you-go model eliminates large upfront capital expenditures.</li></ul></li><li><strong>Global Reach:</strong><ul><li>AWS’s global infrastructure allows for deploying applications closer to users, reducing latency.</li></ul></li><li><strong>Rich Ecosystem:</strong><ul><li>A massive number of services and integrations simplifies building complex solutions.</li></ul></li></ul><p><br/></p><p><strong>Drawbacks:</strong></p><ul><li><strong>Complexity:</strong><ul><li>The sheer number of services can be overwhelming for newcomers.</li></ul></li><li><strong>Vendor Lock-in:</strong><ul><li>It can be difficult and costly to migrate away from AWS once deeply integrated.</li></ul></li><li><strong>Cost Management:</strong><ul><li>Without proper monitoring, costs can easily spiral out of control due to usage-based pricing.</li></ul></li></ul><hr/><h2 id="trade-offs">Trade-offs</h2><ul><li><strong>EC2 vs. Lambda:</strong><ul><li>Use <strong>EC2</strong> for long-running, stateful applications that require fine-grained control over the underlying server.</li><li>Use <strong>Lambda</strong> for short-lived, event-driven, stateless functions, trading control for simplified management and a pay-per-invocation cost model.</li></ul></li><li><strong>RDS vs. DynamoDB:</strong><ul><li>Choose <strong>RDS</strong> for applications requiring a fixed schema, complex joins, and strong transactional integrity (ACID properties).</li><li>Use <strong>DynamoDB</strong> for high-performance, flexible-schema workloads that need massive scalability and low-latency key-value or document access.</li></ul></li></ul><hr/><h2 id="best-practices">Best Practices</h2><ol><li><strong>Use Infrastructure as Code (IaC):</strong> Use tools like <strong>AWS CloudFormation</strong> or <strong>Terraform</strong> to define your infrastructure, making it repeatable and version-controlled.</li><li><strong>Follow the Principle of Least Privilege:</strong> Use <strong>IAM</strong> to grant only the necessary permissions to users and services.</li><li><strong>Monitor Everything:</strong> Use <strong>CloudWatch</strong> to set up alarms and dashboards to proactively monitor the health and performance of your applications.</li><li><strong>Embrace Serverless:</strong> Where possible, leverage services like Lambda, S3, and DynamoDB to reduce operational overhead.</li><li><strong>Cost Optimization:</strong> Regularly review your spending using <strong>AWS Cost Explorer</strong> and implement cost-saving measures like Reserved Instances or Savings Plans.</li></ol><hr/><h2 id="interview-angle">Interview Angle</h2><ul><li><strong>“Explain the core categories of AWS services.”</strong><ul><li>Start with the fundamental triad: Compute, Storage, and Networking.</li><li>Then, expand on how other categories like Databases, Security, and Application Integration support and enhance the core services to build a complete solution.</li></ul></li><li><strong>“When would you choose EC2 over Lambda?”</strong><ul><li>Talk about workload characteristics: long-running processes, stateful applications, or specific OS/software dependencies that aren’t well-suited for a serverless model.</li><li>Mention cost as a factor, where a constant workload might be cheaper on a Reserved EC2 instance.</li></ul></li><li><strong>“How do you ensure security in an AWS environment?”</strong><ul><li>Discuss the shared responsibility model.</li><li>Explain key services like IAM for access control, VPC for network isolation, and AWS WAF/Shield for protection against common attacks.</li><li>Highlight the importance of encryption for data at rest (e.g., S3, EBS) and in transit (SSL/TLS).</li></ul></li></ul><hr/><h2 id="online-references">Online References</h2><ul><li><a href="https://aws.amazon.com/documentation/">AWS Official Documentation</a></li><li><a href="https://aws.amazon.com/architecture/well-architected/">AWS Well-Architected Framework</a></li><li><a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/">AWS Global Infrastructure</a></li></ul><hr/><h2 id="summary">Summary</h2><p>AWS services are the building blocks of modern cloud architecture. They are organized into logical categories—Compute, Storage, Databases, Networking, and more—to provide all the necessary components for building scalable, resilient, and cost-effective applications. Understanding these categories and the key services within them is crucial for any cloud architect.</p><hr/><h2 id="extra-insights">Extra Insights</h2><ul><li><strong>Analogy:</strong> Think of AWS as a massive, well-stocked hardware store. You don’t buy the entire store; you rent the specific tools (services) you need for your project (application). The Compute aisle has tools to run things (EC2, Lambda). The Storage aisle holds various boxes and shelves for your data (S3, EBS). The Plumbing aisle connects everything (VPC, Route 53). And the Security office (IAM) gives out the keys to different parts of the store.</li><li><strong>Mind Map:</strong> You can visualize the categories with <strong>Compute</strong> in the center, surrounded by <strong>Storage</strong>, <strong>Databases</strong>, and <strong>Networking</strong>. Branching off from these are services like S3 under Storage or EC2 under Compute. The “outer ring” can include <strong>Security</strong> and <strong>Management</strong> services that interact with everything.</li></ul><hr/><h2 id="for-aws-certification-exam-perspective">For AWS Certification Exam Perspective</h2><ul><li><strong>AWS Certified Solutions Architect - Associate:</strong><ul><li>Focus on the core services and their interconnections. Know the use cases for EC2, S3, RDS, DynamoDB, VPC, SQS, SNS, and IAM. Understand the shared responsibility model and the AWS Well-Architected Framework. <ul><li><strong>Key Notes:</strong><ul><li><strong>Shared Responsibility Model:</strong> AWS is responsible for “security <em>of</em> the cloud” (physical infrastructure), and the customer is responsible for “security <em>in</em> the cloud” (data, OS, configurations).</li><li><strong>High Availability:</strong> Know how to use services like Elastic Load Balancing, Auto Scaling Groups, and Multi-AZ deployments for resilience.</li><li><strong>Cost Management:</strong> Remember that pay-as-you-go, Reserved Instances, and Savings Plans are key cost optimization strategies.</li><li><strong>Statelessness:</strong> Understand why designing stateless applications is a best practice for scalability in the cloud.</li></ul></li></ul></li><li>This is a heavily tested topic. Be prepared to identify which services are global and which are regional. You will likely see scenario-based questions that test your understanding of how to use these services together to build a multi-region, highly available, and fault-tolerant architecture. <ul><li><strong>Key Notes:</strong><ul><li><strong>IAM, Route 53, CloudFront, and WAF</strong> are the most commonly cited global services.</li><li><strong>S3</strong> is a global service from a management perspective (bucket names are globally unique), but the data itself is stored in a specific region, making it a regional resource. This is a common trick question.</li><li>Most services are <strong>regional</strong> and should be the default choice unless a global function is explicitly needed.</li><li>When designing for multi-region disaster recovery, you use <strong>regional services</strong> in a second region and use <strong>global services</strong> (like Route 53) to manage the failover.</li></ul></li></ul></li></ul></li></ul><hr/></div></main></div></div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><script src="/geekmonks/assets/js/mermaid-diagram-render.js?v=0.1.0"></script><script src="/geekmonks/assets/js/submenu-togle.js?v=0.1.0"></script></body></html>
+</code></pre>
+
+<hr />
+
+<h2 id="real-world-applications">Real-World Applications</h2>
+
+<ul>
+  <li><strong>E-commerce Platform:</strong>
+    <ul>
+      <li>An e-commerce site uses EC2 instances for the front-end, RDS for product data, S3 for product images, and SQS for decoupled order processing.</li>
+    </ul>
+  </li>
+  <li><strong>Media Streaming Service:</strong>
+    <ul>
+      <li>A service like Netflix uses S3 for video storage, CloudFront for global content delivery, and DynamoDB for real-time user data and personalization.</li>
+    </ul>
+  </li>
+  <li><strong>Big Data Analytics:</strong>
+    <ul>
+      <li>A financial firm uses Kinesis to ingest real-time stock data, S3 to store it in a data lake, and Amazon Redshift for complex analytics and reporting.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="advantages--drawbacks">Advantages &amp; Drawbacks</h2>
+
+<p><strong>Advantages:</strong></p>
+
+<ul>
+  <li><strong>Scalability &amp; Elasticity:</strong>
+    <ul>
+      <li>Services can scale up or down automatically based on demand, reducing the need for manual capacity planning.</li>
+    </ul>
+  </li>
+  <li><strong>Cost-Effectiveness:</strong>
+    <ul>
+      <li>The pay-as-you-go model eliminates large upfront capital expenditures.</li>
+    </ul>
+  </li>
+  <li><strong>Global Reach:</strong>
+    <ul>
+      <li>AWS’s global infrastructure allows for deploying applications closer to users, reducing latency.</li>
+    </ul>
+  </li>
+  <li><strong>Rich Ecosystem:</strong>
+    <ul>
+      <li>A massive number of services and integrations simplifies building complex solutions.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<p><strong>Drawbacks:</strong></p>
+
+<ul>
+  <li><strong>Complexity:</strong>
+    <ul>
+      <li>The sheer number of services can be overwhelming for newcomers.</li>
+    </ul>
+  </li>
+  <li><strong>Vendor Lock-in:</strong>
+    <ul>
+      <li>It can be difficult and costly to migrate away from AWS once deeply integrated.</li>
+    </ul>
+  </li>
+  <li><strong>Cost Management:</strong>
+    <ul>
+      <li>Without proper monitoring, costs can easily spiral out of control due to usage-based pricing.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="trade-offs">Trade-offs</h2>
+
+<ul>
+  <li><strong>EC2 vs. Lambda:</strong>
+    <ul>
+      <li>Use <strong>EC2</strong> for long-running, stateful applications that require fine-grained control over the underlying server.</li>
+      <li>Use <strong>Lambda</strong> for short-lived, event-driven, stateless functions, trading control for simplified management and a pay-per-invocation cost model.</li>
+    </ul>
+  </li>
+  <li><strong>RDS vs. DynamoDB:</strong>
+    <ul>
+      <li>Choose <strong>RDS</strong> for applications requiring a fixed schema, complex joins, and strong transactional integrity (ACID properties).</li>
+      <li>Use <strong>DynamoDB</strong> for high-performance, flexible-schema workloads that need massive scalability and low-latency key-value or document access.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="best-practices">Best Practices</h2>
+
+<ol>
+  <li><strong>Use Infrastructure as Code (IaC):</strong> Use tools like <strong>AWS CloudFormation</strong> or <strong>Terraform</strong> to define your infrastructure, making it repeatable and version-controlled.</li>
+  <li><strong>Follow the Principle of Least Privilege:</strong> Use <strong>IAM</strong> to grant only the necessary permissions to users and services.</li>
+  <li><strong>Monitor Everything:</strong> Use <strong>CloudWatch</strong> to set up alarms and dashboards to proactively monitor the health and performance of your applications.</li>
+  <li><strong>Embrace Serverless:</strong> Where possible, leverage services like Lambda, S3, and DynamoDB to reduce operational overhead.</li>
+  <li><strong>Cost Optimization:</strong> Regularly review your spending using <strong>AWS Cost Explorer</strong> and implement cost-saving measures like Reserved Instances or Savings Plans.</li>
+</ol>
+
+<hr />
+
+<h2 id="interview-angle">Interview Angle</h2>
+
+<ul>
+  <li><strong>“Explain the core categories of AWS services.”</strong>
+    <ul>
+      <li>Start with the fundamental triad: Compute, Storage, and Networking.</li>
+      <li>Then, expand on how other categories like Databases, Security, and Application Integration support and enhance the core services to build a complete solution.</li>
+    </ul>
+  </li>
+  <li><strong>“When would you choose EC2 over Lambda?”</strong>
+    <ul>
+      <li>Talk about workload characteristics: long-running processes, stateful applications, or specific OS/software dependencies that aren’t well-suited for a serverless model.</li>
+      <li>Mention cost as a factor, where a constant workload might be cheaper on a Reserved EC2 instance.</li>
+    </ul>
+  </li>
+  <li><strong>“How do you ensure security in an AWS environment?”</strong>
+    <ul>
+      <li>Discuss the shared responsibility model.</li>
+      <li>Explain key services like IAM for access control, VPC for network isolation, and AWS WAF/Shield for protection against common attacks.</li>
+      <li>Highlight the importance of encryption for data at rest (e.g., S3, EBS) and in transit (SSL/TLS).</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="online-references">Online References</h2>
+
+<ul>
+  <li><a href="https://aws.amazon.com/documentation/">AWS Official Documentation</a></li>
+  <li><a href="https://aws.amazon.com/architecture/well-architected/">AWS Well-Architected Framework</a></li>
+  <li><a href="https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/">AWS Global Infrastructure</a></li>
+</ul>
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<p>AWS services are the building blocks of modern cloud architecture. They are organized into logical categories—Compute, Storage, Databases, Networking, and more—to provide all the necessary components for building scalable, resilient, and cost-effective applications. Understanding these categories and the key services within them is crucial for any cloud architect.</p>
+
+<hr />
+
+<h2 id="extra-insights">Extra Insights</h2>
+
+<ul>
+  <li><strong>Analogy:</strong> Think of AWS as a massive, well-stocked hardware store. You don’t buy the entire store; you rent the specific tools (services) you need for your project (application). The Compute aisle has tools to run things (EC2, Lambda). The Storage aisle holds various boxes and shelves for your data (S3, EBS). The Plumbing aisle connects everything (VPC, Route 53). And the Security office (IAM) gives out the keys to different parts of the store.</li>
+  <li><strong>Mind Map:</strong> You can visualize the categories with <strong>Compute</strong> in the center, surrounded by <strong>Storage</strong>, <strong>Databases</strong>, and <strong>Networking</strong>. Branching off from these are services like S3 under Storage or EC2 under Compute. The “outer ring” can include <strong>Security</strong> and <strong>Management</strong> services that interact with everything.</li>
+</ul>
+
+<hr />
+
+<h2 id="for-aws-certification-exam-perspective">For AWS Certification Exam Perspective</h2>
+
+<ul>
+  <li><strong>AWS Certified Solutions Architect - Associate:</strong>
+    <ul>
+      <li>Focus on the core services and their interconnections. Know the use cases for EC2, S3, RDS, DynamoDB, VPC, SQS, SNS, and IAM. Understand the shared responsibility model and the AWS Well-Architected Framework.
+        <ul>
+          <li><strong>Key Notes:</strong>
+            <ul>
+              <li><strong>Shared Responsibility Model:</strong> AWS is responsible for “security <em>of</em> the cloud” (physical infrastructure), and the customer is responsible for “security <em>in</em> the cloud” (data, OS, configurations).</li>
+              <li><strong>High Availability:</strong> Know how to use services like Elastic Load Balancing, Auto Scaling Groups, and Multi-AZ deployments for resilience.</li>
+              <li><strong>Cost Management:</strong> Remember that pay-as-you-go, Reserved Instances, and Savings Plans are key cost optimization strategies.</li>
+              <li><strong>Statelessness:</strong> Understand why designing stateless applications is a best practice for scalability in the cloud.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>This is a heavily tested topic. Be prepared to identify which services are global and which are regional. You will likely see scenario-based questions that test your understanding of how to use these services together to build a multi-region, highly available, and fault-tolerant architecture.
+        <ul>
+          <li><strong>Key Notes:</strong>
+            <ul>
+              <li><strong>IAM, Route 53, CloudFront, and WAF</strong> are the most commonly cited global services.</li>
+              <li><strong>S3</strong> is a global service from a management perspective (bucket names are globally unique), but the data itself is stored in a specific region, making it a regional resource. This is a common trick question.</li>
+              <li>Most services are <strong>regional</strong> and should be the default choice unless a global function is explicitly needed.</li>
+              <li>When designing for multi-region disaster recovery, you use <strong>regional services</strong> in a second region and use <strong>global services</strong> (like Route 53) to manage the failover.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+ <!-- Injects index.md content here -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <div>
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-4 mx-5 my-5 border-top">
+
+        <div class="col-md-4 d-flex align-items-center"> <a href="/geekmonks/"
+                class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Geekmonks">
+                <svg class="bi me-2" width="40" height="32" aria-hidden="true" viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="gradient" gradientTransform="rotate(145 0.5 0.5)">
+                            <stop offset="0%" stop-color="#f7e625"></stop>
+                            <stop offset="100%" stop-color="#e6a62c"></stop>
+                        </linearGradient>
+                    </defs>
+
+                    <rect width="200" height="200" fill="url('#gradient')"></rect>
+
+                    <g fill="#303e37"
+                        transform="matrix(12.312625250501002,0,0,12.312625250501002,16.825404661093543,187.54701945968048)"
+                        stroke="#3b8349" stroke-width="0.2">
+                        <path
+                            d="M12.71-7.60L12.71-1.76Q11.92-0.88 10.40-0.34Q8.88 0.20 7.06 0.20L7.06 0.20Q4.27 0.20 2.60-1.51Q0.93-3.22 0.81-6.27L0.81-6.27L0.80-7.50Q0.80-9.60 1.54-11.17Q2.29-12.73 3.67-13.58Q5.05-14.42 6.87-14.42L6.87-14.42Q9.52-14.42 10.99-13.21Q12.46-11.99 12.71-9.58L12.71-9.58L9.40-9.58Q9.23-10.77 8.64-11.28Q8.06-11.79 6.98-11.79L6.98-11.79Q5.69-11.79 4.99-10.69Q4.29-9.60 4.28-7.57L4.28-7.57L4.28-6.71Q4.28-4.58 5.00-3.51Q5.73-2.44 7.29-2.44L7.29-2.44Q8.63-2.44 9.29-3.04L9.29-3.04L9.29-5.24L6.90-5.24L6.90-7.60L12.71-7.60Z">
+                        </path>
+                    </g>
+                </svg>
+            </a>
+            <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span>
+        </div>
+
+        <div class="col mb-3"></div>
+        <div class="col mb-3">
+            <h5>Company</h5>
+            <ul class="nav col-md-4">
+                <li class="nav-item"><a href="/geekmonks/"
+                        class="nav-link px-2 text-body-secondary">Home</a></li>
+                <li class="nav-item"><a href="/geekmonks/about"
+                        class="nav-link px-2 text-body-secondary">About</a></li>
+                <li class="nav-item"><a href="https://github.com/SRVivek1/" target="_blank"
+                        class="nav-link px-2 text-body-secondary">Github</a></li>
+                <li class="nav-item"><a href="https://www.linkedin.com/in/srvivek1/" target="_blank"
+                        class="nav-link px-2 text-body-secondary">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="col mb-3">
+            <h5>Tutorials</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="/geekmonks/spring/spring-boot"
+                        class="nav-link p-0 text-body-secondary">Spring Boot</a></li>
+                <li class="nav-item mb-2"><a href="/geekmonks/ai-ml/llm-engineering"
+                        class="nav-link p-0 text-body-secondary">AI / ML</a></li>
+                <li class="nav-item mb-2"><a href="/geekmonks/cloud/aws"
+                        class="nav-link p-0 text-body-secondary">AWS</a></li>
+            </ul>
+        </div>
+    </footer>
+</div>
+    
+    <!-- External scripts -->
+    <!-- bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
+
+<!-- Mermaid JS: render diagrams client-side. We convert fenced code blocks
+		 with class `language-mermaid` into <div class="mermaid"> so existing
+		 markdown files don't need editing. -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<!-- Include internal JavaScript -->
+ <script src="/geekmonks/assets/js/mermaid-diagram-render.js?v=0.1.0"></script>
+
+
+ <!-- Submenu toggle nav on small screen-->
+<script src="/geekmonks/assets/js/submenu-togle.js?v=0.1.0"></script>
+
+
+</body>
+
+</html>
